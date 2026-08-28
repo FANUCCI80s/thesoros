@@ -1,0 +1,13 @@
+
+
+import { requireAuthenticatedPage } from "@/lib/auth/guards";
+import SettingsClient from "./SettingsClient";
+
+export const dynamic = "force-dynamic";
+
+export default async function SettingsPage() {
+  await requireAuthenticatedPage();
+
+  return <SettingsClient />;
+}
+
