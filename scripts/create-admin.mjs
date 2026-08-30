@@ -1,3 +1,4 @@
+
 import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -8,7 +9,9 @@ import readline from "readline";
 const databaseUrl = process.env.DATABASE_URL;
 
 if (!databaseUrl) {
+  console.error("");
   console.error("❌ DATABASE_URL is missing from your .env file.");
+  console.error("");
   process.exit(1);
 }
 
@@ -36,7 +39,7 @@ function question(prompt) {
 async function main() {
   console.log("");
   console.log("======================================");
-  console.log("      EDGE PORTFOLIO ADMIN SETUP");
+  console.log("       THÉSOROS ADMIN SETUP");
   console.log("======================================");
   console.log("");
 
@@ -91,6 +94,10 @@ async function main() {
       },
     });
 
+  /*
+   * Existing user
+   */
+
   if (existingUser) {
     if (existingUser.role === "ADMIN") {
       console.log("");
@@ -98,6 +105,7 @@ async function main() {
         "⚠️ An admin account already exists with this email."
       );
       console.log("");
+
       return;
     }
 
@@ -113,6 +121,7 @@ async function main() {
       console.log("");
       console.log("❌ Operation cancelled.");
       console.log("");
+
       return;
     }
 
@@ -124,6 +133,7 @@ async function main() {
         where: {
           id: existingUser.id,
         },
+
         data: {
           firstName,
           lastName,
@@ -136,22 +146,28 @@ async function main() {
 
     console.log("");
     console.log("======================================");
-    console.log("       ADMIN ACCOUNT CREATED");
+    console.log("       THÉSOROS ADMIN READY");
     console.log("======================================");
     console.log("");
-    console.log(`Name: ${updatedUser.firstName} ${updatedUser.lastName}`);
+    console.log(
+      `Name: ${updatedUser.firstName} ${updatedUser.lastName}`
+    );
     console.log(`Email: ${updatedUser.email}`);
     console.log("Role: ADMIN");
     console.log("Status: ACTIVE");
     console.log("Email verified: YES");
     console.log("");
     console.log(
-      "You can now log in using the admin credentials."
+      "The existing account has been promoted to ADMIN."
     );
     console.log("");
 
     return;
   }
+
+  /*
+   * Create new admin
+   */
 
   const passwordHash =
     await bcrypt.hash(password, 12);
@@ -171,10 +187,12 @@ async function main() {
 
   console.log("");
   console.log("======================================");
-  console.log("       ADMIN ACCOUNT CREATED");
+  console.log("       THÉSOROS ADMIN CREATED");
   console.log("======================================");
   console.log("");
-  console.log(`Name: ${admin.firstName} ${admin.lastName}`);
+  console.log(
+    `Name: ${admin.firstName} ${admin.lastName}`
+  );
   console.log(`Email: ${admin.email}`);
   console.log("Role: ADMIN");
   console.log("Status: ACTIVE");
@@ -197,6 +215,9 @@ main()
   })
   .finally(async () => {
     rl.close();
+
     await prisma.$disconnect();
+
     await pool.end();
   });
+

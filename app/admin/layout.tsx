@@ -9,7 +9,7 @@ export default async function AdminLayout({
   await requireAdmin();
 
   return (
-    <div className="min-h-screen bg-[#080a09] text-white">
+    <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <AdminSidebar />
 
       <main className="min-h-screen lg:pl-72">

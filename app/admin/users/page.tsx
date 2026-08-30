@@ -149,7 +149,7 @@ export default function AdminUsersPage() {
   function getStatusClass(status: string) {
     switch (status) {
       case "ACTIVE":
-        return "bg-emerald-400/10 text-emerald-400";
+        return "bg-gold/10 text-gold";
 
       case "BLOCKED":
       case "SUSPENDED":
@@ -166,7 +166,7 @@ export default function AdminUsersPage() {
   function getKycClass(status?: string) {
     switch (status) {
       case "APPROVED":
-        return "bg-emerald-400/10 text-emerald-400";
+        return "bg-gold/10 text-gold";
 
       case "REJECTED":
         return "bg-red-400/10 text-red-400";
@@ -180,28 +180,28 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050706] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
         {/* Header */}
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <Link
               href="/admin"
-              className="text-sm text-emerald-400 transition hover:text-emerald-300"
+              className="text-sm text-gold transition hover:text-gold-light"
             >
-              ← Admin Dashboard
+              â† Admin Dashboard
             </Link>
 
-            <p className="mt-5 text-sm font-medium text-emerald-400">
+            <p className="mt-5 text-sm font-bold text-gold">
               User management
             </p>
 
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               Users
             </h1>
 
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
-              Manage registered Edge Portfolio users,
+            <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
+              Manage registered Thesoros users,
               account status, KYC status, and balances.
             </p>
           </div>
@@ -210,57 +210,57 @@ export default function AdminUsersPage() {
         {/* Summary */}
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Total users
             </p>
 
-            <p className="mt-3 text-3xl font-semibold">
+            <p className="mt-3 text-3xl font-bold">
               {totalUsers}
             </p>
 
-            <p className="mt-2 text-xs text-zinc-600">
+            <p className="mt-2 text-xs !text-[#FFFFFF]">
               Registered accounts
             </p>
           </div>
 
-          <div className="rounded-3xl border border-emerald-400/20 bg-emerald-400/[0.05] p-6">
-            <p className="text-sm text-zinc-500">
+          <div className="rounded-3xl border border-gold/20 bg-gold/[0.05] p-6">
+            <p className="text-sm !text-[#FFFFFF]">
               Active users
             </p>
 
-            <p className="mt-3 text-3xl font-semibold text-emerald-400">
+            <p className="mt-3 text-3xl font-bold text-gold">
               {activeUsers}
             </p>
 
-            <p className="mt-2 text-xs text-zinc-600">
+            <p className="mt-2 text-xs !text-[#FFFFFF]">
               Currently active accounts
             </p>
           </div>
 
           <div className="rounded-3xl border border-yellow-400/10 bg-yellow-400/[0.03] p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Pending
             </p>
 
-            <p className="mt-3 text-3xl font-semibold text-yellow-400">
+            <p className="mt-3 text-3xl font-bold text-yellow-400">
               {pendingUsers}
             </p>
 
-            <p className="mt-2 text-xs text-zinc-600">
+            <p className="mt-2 text-xs !text-[#FFFFFF]">
               Users requiring attention
             </p>
           </div>
 
           <div className="rounded-3xl border border-red-400/10 bg-red-400/[0.03] p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Blocked
             </p>
 
-            <p className="mt-3 text-3xl font-semibold text-red-400">
+            <p className="mt-3 text-3xl font-bold text-red-400">
               {blockedUsers}
             </p>
 
-            <p className="mt-2 text-xs text-zinc-600">
+            <p className="mt-2 text-xs !text-[#FFFFFF]">
               Restricted accounts
             </p>
           </div>
@@ -271,8 +271,8 @@ export default function AdminUsersPage() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             {/* Search */}
             <div className="relative w-full lg:max-w-xl">
-              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600">
-                ⌕
+              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 !text-[#FFFFFF]">
+                âŒ•
               </span>
 
               <input
@@ -282,7 +282,7 @@ export default function AdminUsersPage() {
                   setSearch(event.target.value)
                 }
                 placeholder="Search by name, email, or user ID..."
-                className="w-full rounded-2xl border border-white/10 bg-black/20 py-3.5 pl-11 pr-4 text-sm text-white outline-none placeholder:text-zinc-600 transition focus:border-emerald-400/40"
+                className="w-full rounded-2xl border border-white/10 bg-black/20 py-3.5 pl-11 pr-4 text-sm text-white outline-none placeholder:!text-[#FFFFFF] transition focus:border-gold/40"
               />
             </div>
 
@@ -302,8 +302,8 @@ export default function AdminUsersPage() {
                   onClick={() => setFilter(value)}
                   className={`rounded-xl px-4 py-2.5 text-sm font-medium transition ${
                     filter === value
-                      ? "bg-emerald-500 text-black"
-                      : "border border-white/10 bg-white/[0.03] text-zinc-400 hover:border-emerald-400/30 hover:text-white"
+                      ? "bg-gold text-white"
+                      : "border border-white/10 bg-white/[0.03] text-zinc-400 hover:border-gold/30 hover:text-white"
                   }`}
                 >
                   {label}
@@ -318,16 +318,16 @@ export default function AdminUsersPage() {
           <div className="border-b border-white/10 px-6 py-5">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm text-zinc-500">
+                <p className="text-sm !text-[#FFFFFF]">
                   Accounts
                 </p>
 
-                <h2 className="mt-1 text-xl font-semibold">
+                <h2 className="mt-1 text-xl font-bold">
                   Registered users
                 </h2>
               </div>
 
-              <span className="rounded-full bg-white/[0.05] px-3 py-1 text-xs text-zinc-500">
+              <span className="rounded-full bg-white/[0.05] px-3 py-1 text-xs !text-[#FFFFFF]">
                 {filteredUsers.length} results
               </span>
             </div>
@@ -335,9 +335,9 @@ export default function AdminUsersPage() {
 
           {loading ? (
             <div className="p-12 text-center">
-              <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
+              <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
 
-              <p className="mt-4 text-sm text-zinc-500">
+              <p className="mt-4 text-sm !text-[#FFFFFF]">
                 Loading users...
               </p>
             </div>
@@ -347,25 +347,25 @@ export default function AdminUsersPage() {
                 !
               </div>
 
-              <h3 className="mt-4 font-medium">
+              <h3 className="mt-4 font-bold">
                 Unable to load users
               </h3>
 
-              <p className="mt-2 text-sm text-zinc-600">
+              <p className="mt-2 text-sm !text-[#FFFFFF]">
                 {error}
               </p>
             </div>
           ) : filteredUsers.length === 0 ? (
             <div className="p-12 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] text-zinc-500">
-                ◌
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
+                â—Œ
               </div>
 
-              <h3 className="mt-4 font-medium">
+              <h3 className="mt-4 font-bold">
                 No users found
               </h3>
 
-              <p className="mt-2 text-sm text-zinc-600">
+              <p className="mt-2 text-sm !text-[#FFFFFF]">
                 Try changing your search or filter.
               </p>
             </div>
@@ -375,28 +375,28 @@ export default function AdminUsersPage() {
               <div className="hidden overflow-x-auto lg:block">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-white/10 text-left text-xs uppercase tracking-wider text-zinc-600">
-                      <th className="px-6 py-4 font-medium">
+                    <tr className="border-b border-white/10 text-left text-xs uppercase tracking-wider !text-[#FFFFFF]">
+                      <th className="px-6 py-4 font-bold">
                         User
                       </th>
 
-                      <th className="px-6 py-4 font-medium">
+                      <th className="px-6 py-4 font-bold">
                         Status
                       </th>
 
-                      <th className="px-6 py-4 font-medium">
+                      <th className="px-6 py-4 font-bold">
                         KYC
                       </th>
 
-                      <th className="px-6 py-4 font-medium">
+                      <th className="px-6 py-4 font-bold">
                         Balance
                       </th>
 
-                      <th className="px-6 py-4 font-medium">
+                      <th className="px-6 py-4 font-bold">
                         Joined
                       </th>
 
-                      <th className="px-6 py-4 text-right font-medium">
+                      <th className="px-6 py-4 text-right font-bold">
                         Action
                       </th>
                     </tr>
@@ -410,7 +410,7 @@ export default function AdminUsersPage() {
                       >
                         <td className="px-6 py-5">
                           <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-400/10 font-semibold text-emerald-400">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gold/20 bg-gold/10 font-bold text-gold">
                               {(
                                 user.firstName ||
                                 user.email ||
@@ -421,11 +421,11 @@ export default function AdminUsersPage() {
                             </div>
 
                             <div className="min-w-0">
-                              <p className="truncate font-medium">
+                              <p className="truncate font-bold">
                                 {getFullName(user)}
                               </p>
 
-                              <p className="mt-1 max-w-[220px] truncate text-xs text-zinc-600">
+                              <p className="mt-1 max-w-[220px] truncate text-xs !text-[#FFFFFF]">
                                 {user.email}
                               </p>
                             </div>
@@ -453,25 +453,25 @@ export default function AdminUsersPage() {
                         </td>
 
                         <td className="px-6 py-5">
-                          <p className="text-sm font-medium">
+                          <p className="text-sm font-bold">
                             {formatCurrency(
                               user.balance?.available || 0
                             )}
                           </p>
 
-                          <p className="mt-1 text-xs text-zinc-600">
+                          <p className="mt-1 text-xs !text-[#FFFFFF]">
                             Available
                           </p>
                         </td>
 
-                        <td className="px-6 py-5 text-sm text-zinc-500">
+                        <td className="px-6 py-5 text-sm !text-[#FFFFFF]">
                           {formatDate(user.createdAt)}
                         </td>
 
                         <td className="px-6 py-5 text-right">
                           <Link
                             href={`/admin/users/${user.id}`}
-                            className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-zinc-300 transition hover:border-emerald-400/30 hover:bg-emerald-400/10 hover:text-emerald-400"
+                            className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm !text-[#FFFFFF] transition hover:border-gold/30 hover:bg-gold/10 hover:text-gold"
                           >
                             View
                           </Link>
@@ -491,7 +491,7 @@ export default function AdminUsersPage() {
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex min-w-0 items-center gap-3">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-400/10 font-semibold text-emerald-400">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold/20 bg-gold/10 font-bold text-gold">
                           {(
                             user.firstName ||
                             user.email ||
@@ -502,11 +502,11 @@ export default function AdminUsersPage() {
                         </div>
 
                         <div className="min-w-0">
-                          <p className="truncate font-medium">
+                          <p className="truncate font-bold">
                             {getFullName(user)}
                           </p>
 
-                          <p className="mt-1 truncate text-xs text-zinc-600">
+                          <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                             {user.email}
                           </p>
                         </div>
@@ -523,7 +523,7 @@ export default function AdminUsersPage() {
 
                     <div className="mt-5 grid grid-cols-2 gap-3">
                       <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-xs text-zinc-600">
+                        <p className="text-xs !text-[#FFFFFF]">
                           KYC
                         </p>
 
@@ -534,11 +534,11 @@ export default function AdminUsersPage() {
                       </div>
 
                       <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-xs text-zinc-600">
+                        <p className="text-xs !text-[#FFFFFF]">
                           Available
                         </p>
 
-                        <p className="mt-2 text-sm font-medium">
+                        <p className="mt-2 text-sm font-bold">
                           {formatCurrency(
                             user.balance?.available || 0
                           )}
@@ -547,14 +547,14 @@ export default function AdminUsersPage() {
                     </div>
 
                     <div className="mt-4 flex items-center justify-between gap-4">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Joined{" "}
                         {formatDate(user.createdAt)}
                       </p>
 
                       <Link
                         href={`/admin/users/${user.id}`}
-                        className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-zinc-300 transition hover:border-emerald-400/30 hover:text-emerald-400"
+                        className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm !text-[#FFFFFF] transition hover:border-gold/30 hover:text-gold"
                       >
                         View user
                       </Link>
@@ -566,8 +566,8 @@ export default function AdminUsersPage() {
           )}
         </section>
 
-        <p className="mt-8 text-center text-xs text-zinc-700">
-          Edge Portfolio • Admin • Users
+        <p className="mt-8 text-center text-xs !text-[#FFFFFF]">
+          Thesoros â€¢ Admin â€¢ Users
         </p>
       </div>
     </main>

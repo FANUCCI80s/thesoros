@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,32 +10,32 @@ const navigation = [
 {
 label: "Admin Dashboard",
 href: "/admin",
-icon: "⌂",
+icon: "âŒ‚",
 },
 {
 label: "Users",
 href: "/admin/users",
-icon: "◉",
+icon: "â—‰",
 },
 {
 label: "KYC",
 href: "/admin/kyc",
-icon: "✓",
+icon: "âœ“",
 },
 {
 label: "Deposit Settings",
 href: "/admin/deposit-settings",
-icon: "↓",
+icon: "â†“",
 },
 {
 label: "Withdrawal Settings",
 href: "/admin/withdrawal-settings",
-icon: "↑",
+icon: "â†‘",
 },
 {
 label: "Transactions",
 href: "/admin/transactions",
-icon: "↔",
+icon: "â†”",
 },
 {
 label: "Balance Management",
@@ -43,12 +45,12 @@ icon: "$",
 {
 label: "Messages",
 href: "/admin/messages",
-icon: "✉",
+icon: "âœ‰",
 },
 {
 label: "Settings",
 href: "/admin/settings",
-icon: "⚙",
+icon: "âš™",
 },
 ];
 
@@ -101,17 +103,17 @@ try {
 
 return (
 <>
-{/* Desktop Sidebar */} <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 flex-col border-r border-white/10 bg-[#080a09] lg:flex">
-{/* Logo / Brand */} <div className="border-b border-white/10 px-6 py-5"> <Link href="/admin" className="flex items-center gap-3"> <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-sm font-bold text-black">
+{/* Desktop Sidebar */} <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 flex-col border-r border-white/10 bg-[#050505] lg:flex">
+{/* Logo / Brand */} <div className="border-b border-white/10 px-6 py-5"> <Link href="/admin" className="flex items-center gap-3"> <div className="flex items-center justify-center">
 E </div>
 
 
         <div>
-          <p className="font-semibold tracking-tight text-white">
-            Edge Portfolio
+          <p className="font-bold tracking-tight !text-[#FFFFFF]">
+            Thesoros
           </p>
 
-          <p className="mt-0.5 text-xs text-zinc-500">
+          <p className="mt-0.5 text-xs !text-[#FFFFFF]">
             Administration
           </p>
         </div>
@@ -120,7 +122,7 @@ E </div>
 
     {/* Navigation */}
     <nav className="flex-1 overflow-y-auto px-4 py-6">
-      <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-600">
+      <p className="mb-3 px-3 text-[10px] font-bold uppercase tracking-[0.2em] !text-[#FFFFFF]">
         Administration
       </p>
 
@@ -134,14 +136,14 @@ E </div>
               href={item.href}
               className={`group flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-all ${
                 active
-                  ? "bg-emerald-500/10 font-medium text-emerald-400"
+                  ? "bg-gold/10 font-medium text-gold"
                   : "text-zinc-400 hover:bg-white/[0.04] hover:text-white"
               }`}
             >
               <span
                 className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-base transition ${
                   active
-                    ? "bg-emerald-500/10 text-emerald-400"
+                    ? "bg-gold/10 text-gold"
                     : "text-zinc-500 group-hover:text-zinc-300"
                 }`}
               >
@@ -151,7 +153,7 @@ E </div>
               <span>{item.label}</span>
 
               {active && (
-                <span className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="ml-auto h-1.5 w-1.5 rounded-full bg-gold" />
               )}
             </Link>
           );
@@ -165,7 +167,7 @@ E </div>
           className="group mt-3 flex w-full items-center gap-3 rounded-xl border-t border-white/10 px-4 py-4 pt-5 text-left text-sm text-red-400 transition-all hover:bg-red-500/10 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-red-500/10 text-base text-red-400 transition group-hover:bg-red-500/15 group-hover:text-red-300">
-            ↪
+            â†ª
           </span>
 
           <span>{loggingOut ? "Logging out..." : "Logout"}</span>
@@ -177,16 +179,16 @@ E </div>
     <div className="border-t border-white/10 p-4">
       <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/10 text-sm font-semibold text-emerald-400">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/10 text-sm font-bold text-gold">
             A
           </div>
 
           <div className="min-w-0">
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs !text-[#FFFFFF]">
               Administrator
             </p>
 
-            <p className="mt-0.5 truncate text-sm font-medium text-zinc-300">
+            <p className="mt-0.5 truncate text-sm font-bold !text-[#FFFFFF]">
               Admin Panel
             </p>
           </div>
@@ -195,7 +197,7 @@ E </div>
 
       <Link
         href="/dashboard"
-        className="mt-3 block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-500 transition hover:bg-white/[0.04] hover:text-white"
+        className="mt-3 block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-500 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
       >
         User Dashboard
       </Link>
@@ -203,28 +205,26 @@ E </div>
   </aside>
 
   {/* Mobile Header */}
-  <div className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080a09]/95 backdrop-blur-xl lg:hidden">
+  <div className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#050505]/95 backdrop-blur-xl lg:hidden">
     <div className="flex items-center justify-between px-4 py-3">
       <Link
         href="/admin"
         className="flex items-center gap-3"
       >
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500 text-sm font-bold text-black">
-          E
-        </div>
+        <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-9 w-auto object-contain" />
 
         <div>
-          <p className="text-sm font-semibold text-white">
-            Edge Portfolio
+          <p className="text-sm font-bold !text-[#FFFFFF]">
+            Thesoros
           </p>
 
-          <p className="text-[10px] text-zinc-600">
+          <p className="text-[10px] !text-[#FFFFFF]">
             Administration
           </p>
         </div>
       </Link>
 
-      <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-[10px] font-medium text-emerald-400">
+      <span className="rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-[10px] font-bold text-gold">
         ADMIN
       </span>
     </div>
@@ -241,7 +241,7 @@ E </div>
               href={item.href}
               className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs transition ${
                 active
-                  ? "bg-emerald-500/10 font-medium text-emerald-400"
+                  ? "bg-gold/10 font-medium text-gold"
                   : "text-zinc-500 hover:bg-white/[0.04] hover:text-white"
               }`}
             >
@@ -258,7 +258,7 @@ E </div>
           disabled={loggingOut}
           className="flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs text-red-400 transition hover:bg-red-500/10 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <span>↪</span>
+          <span>â†ª</span>
           <span>{loggingOut ? "Logging out..." : "Logout"}</span>
         </button>
       </nav>
@@ -269,4 +269,5 @@ E </div>
 
 );
 }
+
 

@@ -104,7 +104,7 @@ function formatDate(date: string) {
 function getStatusClass(status: TransactionStatus) {
   switch (status) {
     case "COMPLETED":
-      return "border-emerald-400/20 bg-emerald-400/10 text-emerald-300";
+      return "border-gold/20 bg-gold/10 text-gold-light";
     case "PENDING":
       return "border-yellow-400/20 bg-yellow-400/10 text-yellow-300";
     case "FAILED":
@@ -119,17 +119,17 @@ function getStatusClass(status: TransactionStatus) {
 function getTypeIcon(type: TransactionType) {
   switch (type) {
     case "DEPOSIT":
-      return "↓";
+      return "â†“";
     case "WITHDRAWAL":
-      return "↑";
+      return "â†‘";
     case "TRADE":
-      return "↗";
+      return "â†—";
     case "REFUND":
-      return "↩";
+      return "â†©";
     case "ADJUSTMENT":
-      return "↔";
+      return "â†”";
     default:
-      return "•";
+      return "â€¢";
   }
 }
 
@@ -139,7 +139,7 @@ function getAmountClass(type: TransactionType) {
     type === "REFUND" ||
     type === "ADJUSTMENT"
   ) {
-    return "text-emerald-400";
+    return "text-gold";
   }
 
   if (type === "WITHDRAWAL") {
@@ -204,28 +204,26 @@ export default function TransactionsClient() {
   }, [transactions, filter]);
 
   return (
-    <div className="min-h-screen bg-[#050706] text-white">
+    <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="flex min-h-screen">
 
         {/* Sidebar */}
-        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#080a09] lg:flex lg:flex-col">
+        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col">
           <div className="border-b border-white/10 p-5">
             <Link
               href="/dashboard"
               className="flex items-center gap-3"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/10">
-                <span className="font-bold text-emerald-400">
-                  E
-                </span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
               </div>
 
               <div>
-                <p className="font-semibold tracking-tight">
-                  Edge Portfolio
+                <p className="font-bold tracking-tight">
+                  Thesoros
                 </p>
 
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs !text-[#FFFFFF]">
                   Trading platform
                 </p>
               </div>
@@ -235,41 +233,41 @@ export default function TransactionsClient() {
           <nav className="flex-1 space-y-1 p-4">
             <Link
               href="/dashboard"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>⌂</span>
+              <span>âŒ‚</span>
               Dashboard
             </Link>
 
             <Link
               href="/trade"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↗</span>
+              <span>â†—</span>
               Trade
             </Link>
 
             <Link
               href="/deposit"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↓</span>
+              <span>â†“</span>
               Deposit
             </Link>
 
             <Link
               href="/withdraw"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↑</span>
+              <span>â†‘</span>
               Withdraw
             </Link>
 
             <Link
               href="/transactions"
-              className="flex items-center gap-3 rounded-xl bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-400"
+              className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
             >
-              <span>↔</span>
+              <span>â†”</span>
               Transactions
             </Link>
 
@@ -277,17 +275,17 @@ export default function TransactionsClient() {
 
             <Link
               href="/notifications"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>●</span>
+              <span>â—</span>
               Notifications
             </Link>
 
             <Link
               href="/settings"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>⚙</span>
+              <span>âš™</span>
               Settings
             </Link>
           </nav>
@@ -295,7 +293,7 @@ export default function TransactionsClient() {
           <div className="border-t border-white/10 p-4">
             <Link
               href="/dashboard"
-              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:text-white"
+              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
             >
               Back to dashboard
             </Link>
@@ -306,26 +304,24 @@ export default function TransactionsClient() {
         <section className="min-w-0 flex-1">
 
           {/* Mobile header */}
-          <header className="border-b border-white/10 bg-[#080a09] px-5 py-4 lg:hidden">
+          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
             <div className="flex items-center justify-between">
               <Link
                 href="/dashboard"
                 className="flex items-center gap-3"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-400/30 bg-emerald-400/10">
-                  <span className="font-bold text-emerald-400">
-                    E
-                  </span>
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
+                  <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
                 </div>
 
-                <span className="font-semibold">
-                  Edge Portfolio
+                <span className="font-bold">
+                  Thesoros
                 </span>
               </Link>
 
               <Link
                 href="/dashboard"
-                className="text-sm text-zinc-500 hover:text-white"
+                className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
               >
                 Dashboard
               </Link>
@@ -336,15 +332,15 @@ export default function TransactionsClient() {
 
             {/* Header */}
             <div className="mb-8">
-              <p className="mb-2 text-sm font-medium text-emerald-400">
+              <p className="mb-2 text-sm font-bold text-gold">
                 Account activity
               </p>
 
-              <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Transactions
               </h1>
 
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+              <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
                 View your deposits, withdrawals, trades,
                 refunds, and other account transactions.
               </p>
@@ -355,11 +351,11 @@ export default function TransactionsClient() {
               <div className="mb-6 rounded-2xl border border-red-400/20 bg-red-400/5 p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-sm font-medium text-red-300">
+                    <p className="text-sm font-bold text-red-300">
                       Unable to load transactions
                     </p>
 
-                    <p className="mt-1 text-sm text-zinc-500">
+                    <p className="mt-1 text-sm !text-[#FFFFFF]">
                       {error}
                     </p>
                   </div>
@@ -367,7 +363,7 @@ export default function TransactionsClient() {
                   <button
                     type="button"
                     onClick={loadTransactions}
-                    className="rounded-lg border border-white/10 px-3 py-2 text-xs text-zinc-300 transition hover:border-white/20 hover:text-white"
+                    className="rounded-lg border border-white/10 px-3 py-2 text-xs text-zinc-300 transition hover:border-white/20 hover:!text-[#FFFFFF]"
                   >
                     Retry
                   </button>
@@ -388,7 +384,7 @@ export default function TransactionsClient() {
                       onClick={() => setFilter(item.value)}
                       className={`shrink-0 rounded-xl px-4 py-2.5 text-sm transition ${
                         selected
-                          ? "bg-emerald-400/10 font-medium text-emerald-400"
+                          ? "bg-gold/10 font-medium text-gold"
                           : "text-zinc-500 hover:bg-white/[0.04] hover:text-white"
                       }`}
                     >
@@ -406,11 +402,11 @@ export default function TransactionsClient() {
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
 
                   <div>
-                    <h2 className="font-semibold">
+                    <h2 className="font-bold">
                       Transaction history
                     </h2>
 
-                    <p className="mt-1 text-xs text-zinc-600">
+                    <p className="mt-1 text-xs !text-[#FFFFFF]">
                       {loading
                         ? "Loading..."
                         : `${filteredTransactions.length} transaction${
@@ -425,7 +421,7 @@ export default function TransactionsClient() {
                     type="button"
                     onClick={loadTransactions}
                     disabled={loading}
-                    className="rounded-xl border border-white/10 px-4 py-2 text-xs font-medium text-zinc-400 transition hover:border-white/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-xl border border-white/10 px-4 py-2 text-xs font-bold text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Refresh
                   </button>
@@ -434,23 +430,23 @@ export default function TransactionsClient() {
 
               {loading ? (
                 <div className="px-6 py-16 text-center sm:px-8">
-                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
+                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
 
-                  <p className="mt-4 text-sm text-zinc-500">
+                  <p className="mt-4 text-sm !text-[#FFFFFF]">
                     Loading transaction history...
                   </p>
                 </div>
               ) : filteredTransactions.length === 0 ? (
                 <div className="px-6 py-16 text-center sm:px-8">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-xl text-zinc-500">
-                    ↔
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-xl !text-[#FFFFFF]">
+                    â†”
                   </div>
 
-                  <h3 className="mt-5 font-medium">
+                  <h3 className="mt-5 font-bold">
                     No transactions found
                   </h3>
 
-                  <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-zinc-600">
+                  <p className="mx-auto mt-2 max-w-md text-sm leading-6 !text-[#FFFFFF]">
                     Your transaction history will appear here
                     after you make a deposit, withdrawal,
                     trade, or other account transaction.
@@ -459,14 +455,14 @@ export default function TransactionsClient() {
                   <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
                     <Link
                       href="/deposit"
-                      className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400"
+                      className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
                     >
                       Make a deposit
                     </Link>
 
                     <Link
                       href="/withdraw"
-                      className="rounded-xl border border-white/10 px-5 py-3 text-sm font-medium text-zinc-300 transition hover:border-white/20 hover:text-white"
+                      className="rounded-xl border border-white/10 px-5 py-3 text-sm font-bold text-zinc-300 transition hover:border-white/20 hover:!text-[#FFFFFF]"
                     >
                       Request withdrawal
                     </Link>
@@ -478,20 +474,20 @@ export default function TransactionsClient() {
                   <div className="hidden overflow-x-auto md:block">
                     <table className="w-full">
                       <thead>
-                        <tr className="border-b border-white/10 text-left text-xs uppercase tracking-wider text-zinc-600">
-                          <th className="px-6 py-4 font-medium sm:px-8">
+                        <tr className="border-b border-white/10 text-left text-xs uppercase tracking-wider !text-[#FFFFFF]">
+                          <th className="px-6 py-4 font-bold sm:px-8">
                             Transaction
                           </th>
 
-                          <th className="px-6 py-4 font-medium">
+                          <th className="px-6 py-4 font-bold">
                             Status
                           </th>
 
-                          <th className="px-6 py-4 text-right font-medium">
+                          <th className="px-6 py-4 text-right font-bold">
                             Amount
                           </th>
 
-                          <th className="px-6 py-4 text-right font-medium sm:px-8">
+                          <th className="px-6 py-4 text-right font-bold sm:px-8">
                             Date
                           </th>
                         </tr>
@@ -505,16 +501,16 @@ export default function TransactionsClient() {
                           >
                             <td className="px-6 py-5 sm:px-8">
                               <div className="flex items-center gap-3">
-                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-sm text-zinc-400">
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-sm !text-[#FFFFFF]">
                                   {getTypeIcon(transaction.type)}
                                 </div>
 
                                 <div className="min-w-0">
-                                  <p className="font-medium">
+                                  <p className="font-bold">
                                     {formatType(transaction.type)}
                                   </p>
 
-                                  <p className="mt-1 max-w-sm truncate text-xs text-zinc-600">
+                                  <p className="mt-1 max-w-sm truncate text-xs !text-[#FFFFFF]">
                                     {transaction.description ||
                                       transaction.reference ||
                                       "Account transaction"}
@@ -553,18 +549,18 @@ export default function TransactionsClient() {
                                 )}
                               </p>
 
-                              <p className="mt-1 text-xs text-zinc-600">
+                              <p className="mt-1 text-xs !text-[#FFFFFF]">
                                 {transaction.currency}
                               </p>
                             </td>
 
                             <td className="px-6 py-5 text-right sm:px-8">
-                              <p className="text-sm text-zinc-300">
+                              <p className="text-sm !text-[#FFFFFF]">
                                 {formatDate(transaction.createdAt)}
                               </p>
 
                               {transaction.reference && (
-                                <p className="mt-1 max-w-40 truncate text-xs text-zinc-600">
+                                <p className="mt-1 max-w-40 truncate text-xs !text-[#FFFFFF]">
                                   Ref: {transaction.reference}
                                 </p>
                               )}
@@ -584,16 +580,16 @@ export default function TransactionsClient() {
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex min-w-0 items-center gap-3">
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-sm text-zinc-400">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-sm !text-[#FFFFFF]">
                               {getTypeIcon(transaction.type)}
                             </div>
 
                             <div className="min-w-0">
-                              <p className="font-medium">
+                              <p className="font-bold">
                                 {formatType(transaction.type)}
                               </p>
 
-                              <p className="mt-1 truncate text-xs text-zinc-600">
+                              <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                                 {transaction.description ||
                                   transaction.reference ||
                                   "Account transaction"}
@@ -630,13 +626,13 @@ export default function TransactionsClient() {
                             {formatStatus(transaction.status)}
                           </span>
 
-                          <span className="text-xs text-zinc-600">
+                          <span className="text-xs !text-[#FFFFFF]">
                             {formatDate(transaction.createdAt)}
                           </span>
                         </div>
 
                         {transaction.reference && (
-                          <p className="mt-3 text-xs text-zinc-600">
+                          <p className="mt-3 text-xs !text-[#FFFFFF]">
                             Reference: {transaction.reference}
                           </p>
                         )}

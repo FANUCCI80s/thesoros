@@ -5,17 +5,24 @@ interface SendEmailOptions {
   text?: string;
 }
 
+const HOSTINGER_API_URL = "https://api.mail.hostinger.com";
+
 export async function sendEmail({
   to,
   subject,
   html,
   text,
 }: SendEmailOptions): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiToken = process.env.HOSTINGER_MAIL_API_TOKEN;
+  const mailboxId = process.env.HOSTINGER_MAILBOX_ID;
   const fromEmail = process.env.EMAIL_FROM;
 
-  if (!apiKey) {
-    throw new Error("RESEND_API_KEY is not configured.");
+  if (!apiToken) {
+    throw new Error("HOSTINGER_MAIL_API_TOKEN is not configured.");
+  }
+
+  if (!mailboxId) {
+    throw new Error("HOSTINGER_MAILBOX_ID is not configured.");
   }
 
   if (!fromEmail) {
@@ -23,12 +30,15 @@ export async function sendEmail({
   }
 
   const response = await fetch(
-    "https://api.resend.com/emails",
+    `${HOSTINGER_API_URL}/api/v1/mailboxes/${encodeURIComponent(
+      mailboxId
+    )}/send`,
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiToken}`,
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         from: fromEmail,
@@ -44,7 +54,7 @@ export async function sendEmail({
     const errorText = await response.text();
 
     throw new Error(
-      `Email provider error: ${errorText}`
+      `Hostinger Mail API error (${response.status}): ${errorText}`
     );
   }
 }

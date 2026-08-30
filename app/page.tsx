@@ -2,7 +2,7 @@ import Navbar from "@/components/navigation/Navbar";
 import Hero from "@/components/landing/Hero";
 import MarketsPreview from "@/components/landing/MarketsPreview";
 import PerformanceSection from "@/components/landing/PerformanceSection";
-import WhyEdgePortfolio from "@/components/landing/WhyEdgePortfolio";
+import WhyThesoros from "@/components/landing/WhyThesoros";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
 import FAQ from "@/components/landing/FAQ";
@@ -13,7 +13,7 @@ import Footer from "@/components/landing/Footer";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#050806] text-white">
+    <main className="min-h-screen bg-[#080808] !text-[#FFFFFF]">
       <Navbar />
 
       <Hero />
@@ -25,7 +25,7 @@ export default function HomePage() {
 
       <PerformanceSection />
 
-      <WhyEdgePortfolio />
+      <WhyThesoros />
 
       <HowItWorks />
 

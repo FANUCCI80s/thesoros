@@ -130,7 +130,7 @@ function statusClass(
       return "border-yellow-500/20 bg-yellow-500/10 text-yellow-400";
 
     case "APPROVED":
-      return "border-green-500/20 bg-green-500/10 text-green-400";
+      return "border-gold/20 bg-gold/10 text-gold";
 
     case "DECLINED":
       return "border-red-500/20 bg-red-500/10 text-red-400";
@@ -198,10 +198,10 @@ export default function AdminDepositsPage() {
   }, [loadDeposits]);
 
   return (
-    <main className="min-h-screen bg-[#050806] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-8">
-          <p className="text-sm font-medium text-green-400">
+          <p className="text-sm font-bold text-gold">
             Admin
           </p>
 
@@ -211,7 +211,7 @@ export default function AdminDepositsPage() {
                 Deposit Requests
               </h1>
 
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm !text-[#FFFFFF]">
                 Review and approve or decline user deposit
                 requests.
               </p>
@@ -221,7 +221,7 @@ export default function AdminDepositsPage() {
               type="button"
               onClick={loadDeposits}
               disabled={loading}
-              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-white/10 disabled:opacity-50"
+              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold !text-[#FFFFFF] transition hover:bg-white/10 disabled:opacity-50"
             >
               {loading
                 ? "Refreshing..."
@@ -232,7 +232,7 @@ export default function AdminDepositsPage() {
 
         <div className="mb-6 grid gap-4 sm:grid-cols-4">
           <div className="rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-5">
-            <p className="text-xs uppercase tracking-wider text-gray-500">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Pending
             </p>
 
@@ -243,12 +243,12 @@ export default function AdminDepositsPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-green-500/20 bg-green-500/5 p-5">
-            <p className="text-xs uppercase tracking-wider text-gray-500">
+          <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Approved
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-green-400">
+            <p className="mt-2 text-3xl font-bold text-gold">
               {status === "APPROVED"
                 ? deposits.length
                 : "—"}
@@ -256,7 +256,7 @@ export default function AdminDepositsPage() {
           </div>
 
           <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5">
-            <p className="text-xs uppercase tracking-wider text-gray-500">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Declined
             </p>
 
@@ -268,7 +268,7 @@ export default function AdminDepositsPage() {
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="text-xs uppercase tracking-wider text-gray-500">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Showing
             </p>
 
@@ -295,7 +295,7 @@ export default function AdminDepositsPage() {
               }
               className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
                 status === value
-                  ? "bg-green-500 text-black"
+                  ? "bg-gold text-white"
                   : "border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
               }`}
             >
@@ -311,7 +311,7 @@ export default function AdminDepositsPage() {
         )}
 
         {loading ? (
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center text-gray-500">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center !text-[#FFFFFF]">
             Loading deposit requests...
           </div>
         ) : deposits.length === 0 ? (
@@ -320,11 +320,11 @@ export default function AdminDepositsPage() {
               ✓
             </div>
 
-            <h2 className="mt-5 text-lg font-semibold">
+            <h2 className="mt-5 text-lg font-bold">
               No deposit requests found
             </h2>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm !text-[#FFFFFF]">
               There are currently no deposits in the
               selected category.
             </p>
@@ -334,7 +334,7 @@ export default function AdminDepositsPage() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[1000px]">
                 <thead className="border-b border-white/10 bg-black/20">
-                  <tr className="text-left text-xs uppercase tracking-wider text-gray-500">
+                  <tr className="text-left text-xs uppercase tracking-wider !text-[#FFFFFF]">
                     <th className="px-5 py-4">
                       User
                     </th>
@@ -373,39 +373,39 @@ export default function AdminDepositsPage() {
                     >
                       <td className="px-5 py-5">
                         <div>
-                          <p className="font-medium text-white">
+                          <p className="font-bold !text-[#FFFFFF]">
                             {deposit.user.firstName}{" "}
                             {deposit.user.lastName}
                           </p>
 
-                          <p className="mt-1 text-xs text-gray-500">
+                          <p className="mt-1 text-xs !text-[#FFFFFF]">
                             {deposit.user.email}
                           </p>
                         </div>
                       </td>
 
                       <td className="px-5 py-5">
-                        <span className="font-semibold text-white">
+                        <span className="font-bold !text-[#FFFFFF]">
                           {formatAmount(
                             deposit.amount
                           )}
                         </span>
                       </td>
 
-                      <td className="px-5 py-5 text-sm text-gray-300">
+                      <td className="px-5 py-5 text-sm !text-[#FFFFFF]">
                         {methodLabel(
                           deposit.method
                         )}
                       </td>
 
                       <td className="px-5 py-5">
-                        <span className="block max-w-[180px] truncate text-sm text-gray-400">
+                        <span className="block max-w-[180px] truncate text-sm !text-[#FFFFFF]">
                           {deposit.reference ||
                             "—"}
                         </span>
                       </td>
 
-                      <td className="px-5 py-5 text-sm text-gray-500">
+                      <td className="px-5 py-5 text-sm !text-[#FFFFFF]">
                         {formatDate(
                           deposit.createdAt
                         )}
@@ -424,7 +424,7 @@ export default function AdminDepositsPage() {
                       <td className="px-5 py-5 text-right">
                         <Link
                           href={`/admin/deposits/${deposit.id}`}
-                          className="inline-flex rounded-xl bg-green-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-green-400"
+                          className="inline-flex rounded-xl bg-gold px-4 py-2 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
                         >
                           Review
                         </Link>

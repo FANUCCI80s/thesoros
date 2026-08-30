@@ -9,17 +9,17 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="border-b border-white/[0.06] bg-[#050806]/90 backdrop-blur-xl">
+    <header className="border-b border-white/[0.06] bg-[#050505]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
           className="flex items-center"
-          aria-label="Edge Portfolio home"
+          aria-label="Thesoros home"
         >
           <Image
-            src="/branding/edge-portfolio-logo.png"
-            alt="Edge Portfolio"
+            src="/branding/thesoros-logo.png"
+            alt="Thesoros"
             width={180}
             height={52}
             priority
@@ -31,21 +31,21 @@ export default function Navbar() {
         <nav className="hidden items-center gap-8 lg:flex">
           <a
             href="#markets"
-            className="text-sm text-zinc-400 transition hover:text-white"
+            className="text-sm text-zinc-400 transition hover:!text-[#FFFFFF]"
           >
             Markets
           </a>
 
           <a
-            href="#why-edge"
-            className="text-sm text-zinc-400 transition hover:text-white"
+            href="#why-thésoros"
+            className="text-sm text-zinc-400 transition hover:!text-[#FFFFFF]"
           >
-            Why Edge
+            Why THÉSOROS
           </a>
 
           <a
             href="#how-it-works"
-            className="text-sm text-zinc-400 transition hover:text-white"
+            className="text-sm text-zinc-400 transition hover:!text-[#FFFFFF]"
           >
             How It Works
           </a>
@@ -55,14 +55,14 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           <Link
             href="/login"
-            className="rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-300 transition hover:bg-white/[0.05] hover:text-white"
+            className="rounded-xl px-4 py-2.5 text-sm font-bold text-zinc-300 transition hover:bg-white/[0.05] hover:!text-[#FFFFFF]"
           >
             Log In
           </Link>
 
           <Link
             href="/signup"
-            className="rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-emerald-400"
+            className="rounded-xl bg-gold px-5 py-2.5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
           >
             Get Started
           </Link>
@@ -72,40 +72,68 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-zinc-300 transition hover:bg-white/[0.05] lg:hidden"
-          aria-label="Toggle menu"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 !text-[#FFFFFF] transition hover:border-gold/40 hover:bg-gold/[0.06] lg:hidden"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
-          <span className="text-xl">
-            {mobileOpen ? "×" : "☰"}
-          </span>
+          {mobileOpen ? (
+            /* Close Icon */
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              className="h-6 w-6"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6 6 18"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+              />
+            </svg>
+          ) : (
+            /* Hamburger Icon */
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              className="h-6 w-6"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 7h16M4 12h16M4 17h16"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
         </button>
       </div>
 
       {/* Mobile Navigation */}
       {mobileOpen && (
-        <div className="border-t border-white/[0.06] bg-[#070908] px-6 py-5 lg:hidden">
+        <div className="border-t border-white/[0.06] bg-[#050505] px-6 py-5 lg:hidden">
           <nav className="flex flex-col gap-2">
             <a
               href="#markets"
               onClick={() => setMobileOpen(false)}
-              className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
               Markets
             </a>
 
             <a
-              href="#why-edge"
+              href="#why-thésoros"
               onClick={() => setMobileOpen(false)}
-              className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              Why Edge
+              Why THÉSOROS
             </a>
 
             <a
               href="#how-it-works"
               onClick={() => setMobileOpen(false)}
-              className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
               How It Works
             </a>
@@ -114,7 +142,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-300 transition hover:bg-white/[0.04] hover:text-white"
+                className="rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-300 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
               >
                 Log In
               </Link>
@@ -122,7 +150,7 @@ export default function Navbar() {
               <Link
                 href="/signup"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-xl bg-emerald-500 px-4 py-3 text-center text-sm font-semibold text-black transition hover:bg-emerald-400"
+                className="rounded-xl bg-gold px-4 py-3 text-center text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
               >
                 Get Started
               </Link>

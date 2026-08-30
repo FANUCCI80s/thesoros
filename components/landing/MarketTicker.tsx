@@ -13,7 +13,7 @@ const markets = [
 ];
 
 export default function MarketTicker() {
-return ( <section className="border-y border-white/5 bg-[#080a09]"> <div className="overflow-hidden">
+return ( <section className="border-y border-white/5 bg-[#050505]"> <div className="overflow-hidden">
 <motion.div
 animate={{ x: ["0%", "-50%"] }}
 transition={{
@@ -27,16 +27,16 @@ className="flex w-max"
 <div
 key={`${symbol}-${index}`}
 className="flex min-w-[190px] items-center gap-3 border-r border-white/5 px-6 py-4"
-> <TrendingUp className="h-3.5 w-3.5 text-emerald-400" />
+> <TrendingUp className="h-3.5 w-3.5 text-gold" />
 
 
-          <span className="text-xs font-semibold text-zinc-300">
+          <span className="text-xs font-bold !text-[#FFFFFF]">
             {symbol}
           </span>
 
-          <span className="text-xs text-zinc-500">{price}</span>
+          <span className="text-xs !text-[#FFFFFF]">{price}</span>
 
-          <span className="text-xs font-medium text-emerald-400">
+          <span className="text-xs font-bold text-gold">
             {change}
           </span>
         </div>
@@ -48,3 +48,4 @@ className="flex min-w-[190px] items-center gap-3 border-r border-white/5 px-6 py
 
 );
 }
+

@@ -327,7 +327,7 @@ function getStatusClass(
 ): string {
   switch (status) {
     case "COMPLETED":
-      return "border-green-500/20 bg-green-500/10 text-green-400";
+      return "border-gold/20 bg-gold/10 text-gold";
 
     case "PENDING":
       return "border-yellow-500/20 bg-yellow-500/10 text-yellow-400";
@@ -348,7 +348,7 @@ function getTypeClass(
 ): string {
   switch (type) {
     case "DEPOSIT":
-      return "text-green-400";
+      return "text-gold";
 
     case "WITHDRAWAL":
       return "text-red-400";
@@ -386,12 +386,12 @@ function PendingDepositCard({
     "USD";
 
   return (
-    <div className="rounded-2xl border border-green-500/20 bg-green-500/[0.035] p-5 transition hover:border-green-500/30">
+    <div className="rounded-2xl border border-gold/20 bg-gold/[0.035] p-5 transition hover:border-gold/30">
       <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
         {/* Information */}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-xs font-bold text-green-400">
+            <span className="rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-xs font-bold text-gold">
               DEPOSIT REQUEST
             </span>
 
@@ -403,7 +403,7 @@ function PendingDepositCard({
           <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {/* User */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 User
               </p>
 
@@ -411,18 +411,18 @@ function PendingDepositCard({
                 <>
                   <Link
                     href={`/admin/users/${user.id}`}
-                    className="mt-1 block text-sm font-semibold text-white hover:text-green-400"
+                    className="mt-1 block text-sm font-bold !text-[#FFFFFF] hover:text-gold"
                   >
                     {user.firstName}{" "}
                     {user.lastName}
                   </Link>
 
-                  <p className="mt-1 truncate text-xs text-gray-500">
+                  <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                     {user.email}
                   </p>
                 </>
               ) : (
-                <p className="mt-1 text-sm text-gray-400">
+                <p className="mt-1 text-sm !text-[#FFFFFF]">
                   User information unavailable
                 </p>
               )}
@@ -430,33 +430,33 @@ function PendingDepositCard({
 
             {/* Amount */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Amount
               </p>
 
-              <p className="mt-1 text-lg font-bold text-green-400">
+              <p className="mt-1 text-lg font-bold text-gold">
                 {formatAmount(amount, currency)}
               </p>
             </div>
 
             {/* Method */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Method
               </p>
 
-              <p className="mt-1 text-sm font-semibold text-white">
+              <p className="mt-1 text-sm font-bold !text-[#FFFFFF]">
                 {getMethodLabel(deposit.method)}
               </p>
             </div>
 
             {/* Submitted */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Submitted
               </p>
 
-              <p className="mt-1 text-sm text-gray-300">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 {formatDate(deposit.createdAt)}
               </p>
             </div>
@@ -466,16 +466,16 @@ function PendingDepositCard({
             deposit.description) && (
             <div className="mt-5 rounded-xl border border-white/5 bg-black/20 p-3">
               {deposit.reference && (
-                <p className="text-xs text-gray-400">
+                <p className="text-xs !text-[#FFFFFF]">
                   Reference:{" "}
-                  <span className="font-medium text-gray-200">
+                  <span className="font-bold !text-[#FFFFFF]">
                     {deposit.reference}
                   </span>
                 </p>
               )}
 
               {deposit.description && (
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-1 text-xs !text-[#FFFFFF]">
                   {deposit.description}
                 </p>
               )}
@@ -487,14 +487,14 @@ function PendingDepositCard({
         <div className="flex shrink-0 flex-col gap-2 sm:flex-row xl:flex-col">
           <Link
             href={`/admin/deposits/${deposit.id}`}
-            className="inline-flex min-w-[175px] items-center justify-center rounded-xl bg-green-500 px-5 py-3 text-sm font-bold text-black transition hover:bg-green-400"
+            className="inline-flex min-w-[175px] items-center justify-center rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
           >
             Review Deposit
           </Link>
 
           <Link
             href={`/admin/deposits/${deposit.id}`}
-            className="inline-flex min-w-[175px] items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/10 hover:text-white"
+            className="inline-flex min-w-[175px] items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-gray-300 transition hover:bg-white/10 hover:!text-[#FFFFFF]"
           >
             View Deposit
           </Link>
@@ -530,26 +530,26 @@ function PendingWithdrawalCard({
           <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {/* User */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 User
               </p>
 
               <Link
                 href={`/admin/users/${transaction.user.id}`}
-                className="mt-1 block text-sm font-semibold text-white hover:text-green-400"
+                className="mt-1 block text-sm font-bold !text-[#FFFFFF] hover:text-gold"
               >
                 {transaction.user.firstName}{" "}
                 {transaction.user.lastName}
               </Link>
 
-              <p className="mt-1 truncate text-xs text-gray-500">
+              <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                 {transaction.user.email}
               </p>
             </div>
 
             {/* Amount */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Amount
               </p>
 
@@ -563,22 +563,22 @@ function PendingWithdrawalCard({
 
             {/* Method */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Method
               </p>
 
-              <p className="mt-1 text-sm font-semibold text-white">
+              <p className="mt-1 text-sm font-bold !text-[#FFFFFF]">
                 {getTransactionMethod(transaction)}
               </p>
             </div>
 
             {/* Submitted */}
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-[11px] font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Submitted
               </p>
 
-              <p className="mt-1 text-sm text-gray-300">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 {formatDate(transaction.createdAt)}
               </p>
             </div>
@@ -588,16 +588,16 @@ function PendingWithdrawalCard({
             transaction.description) && (
             <div className="mt-5 rounded-xl border border-white/5 bg-black/20 p-3">
               {transaction.reference && (
-                <p className="text-xs text-gray-400">
+                <p className="text-xs !text-[#FFFFFF]">
                   Reference:{" "}
-                  <span className="font-medium text-gray-200">
+                  <span className="font-bold !text-[#FFFFFF]">
                     {transaction.reference}
                   </span>
                 </p>
               )}
 
               {transaction.description && (
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-1 text-xs !text-[#FFFFFF]">
                   {transaction.description}
                 </p>
               )}
@@ -609,14 +609,14 @@ function PendingWithdrawalCard({
         <div className="flex shrink-0 flex-col gap-2 sm:flex-row xl:flex-col">
           <Link
             href={`/admin/transactions/${transaction.id}`}
-            className="inline-flex min-w-[175px] items-center justify-center rounded-xl bg-red-500 px-5 py-3 text-sm font-bold text-white transition hover:bg-red-400"
+            className="inline-flex min-w-[175px] items-center justify-center rounded-xl bg-red-500 px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-red-400"
           >
             Review Withdrawal
           </Link>
 
           <Link
             href={`/admin/transactions/${transaction.id}`}
-            className="inline-flex min-w-[175px] items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/10 hover:text-white"
+            className="inline-flex min-w-[175px] items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-gray-300 transition hover:bg-white/10 hover:!text-[#FFFFFF]"
           >
             View Withdrawal
           </Link>
@@ -636,27 +636,27 @@ function PendingDepositSection({
   deposits: DepositRequest[];
 }) {
   return (
-    <section className="mb-6 overflow-hidden rounded-2xl border border-green-500/20 bg-white/[0.02]">
-      <div className="border-b border-green-500/10 bg-green-500/[0.035] px-5 py-5">
+    <section className="mb-6 overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.02]">
+      <div className="border-b border-gold/10 bg-gold/[0.035] px-5 py-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-green-500/10 text-xl text-green-400">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-xl text-gold">
               ↓
             </div>
 
             <div>
-              <h2 className="text-lg font-bold text-white">
+              <h2 className="text-lg font-bold !text-[#FFFFFF]">
                 Pending Deposit Requests
               </h2>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 Deposits submitted by users that require
                 admin review and approval.
               </p>
             </div>
           </div>
 
-          <div className="inline-flex w-fit rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-xs font-bold text-green-400">
+          <div className="inline-flex w-fit rounded-full border border-gold/20 bg-gold/10 px-3 py-1.5 text-xs font-bold text-gold">
             {deposits.length}{" "}
             {deposits.length === 1
               ? "request"
@@ -668,11 +668,11 @@ function PendingDepositSection({
       <div className="space-y-3 p-4">
         {deposits.length === 0 ? (
           <div className="rounded-xl border border-dashed border-white/10 px-5 py-10 text-center">
-            <div className="text-sm font-medium text-gray-400">
+            <div className="text-sm font-bold !text-[#FFFFFF]">
               No pending deposit requests
             </div>
 
-            <p className="mt-1 text-xs text-gray-600">
+            <p className="mt-1 text-xs !text-[#FFFFFF]">
               New deposit requests will appear here.
             </p>
           </div>
@@ -708,11 +708,11 @@ function PendingWithdrawalSection({
             </div>
 
             <div>
-              <h2 className="text-lg font-bold text-white">
+              <h2 className="text-lg font-bold !text-[#FFFFFF]">
                 Pending Withdrawal Requests
               </h2>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 Withdrawals submitted by users that require
                 admin review and approval.
               </p>
@@ -731,11 +731,11 @@ function PendingWithdrawalSection({
       <div className="space-y-3 p-4">
         {withdrawals.length === 0 ? (
           <div className="rounded-xl border border-dashed border-white/10 px-5 py-10 text-center">
-            <div className="text-sm font-medium text-gray-400">
+            <div className="text-sm font-bold !text-[#FFFFFF]">
               No pending withdrawal requests
             </div>
 
-            <p className="mt-1 text-xs text-gray-600">
+            <p className="mt-1 text-xs !text-[#FFFFFF]">
               New withdrawal requests will appear here.
             </p>
           </div>
@@ -1118,7 +1118,7 @@ export default function AdminTransactionsPage() {
   ======================================================= */
 
   return (
-    <main className="min-h-screen bg-[#050806] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* =================================================
             HEADER
@@ -1126,7 +1126,7 @@ export default function AdminTransactionsPage() {
 
         <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-green-400">
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-gold">
               Admin Panel
             </p>
 
@@ -1134,7 +1134,7 @@ export default function AdminTransactionsPage() {
               Transactions
             </h1>
 
-            <p className="mt-2 max-w-2xl text-sm text-gray-400">
+            <p className="mt-2 max-w-2xl text-sm !text-[#FFFFFF]">
               Review incoming deposits, withdrawal
               requests, and monitor all platform
               transactions.
@@ -1150,7 +1150,7 @@ export default function AdminTransactionsPage() {
               loading ||
               refreshing
             }
-            className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {refreshing
               ? "Refreshing..."
@@ -1164,7 +1164,7 @@ export default function AdminTransactionsPage() {
 
         <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm !text-[#FFFFFF]">
               Transactions
             </p>
 
@@ -1174,11 +1174,11 @@ export default function AdminTransactionsPage() {
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm !text-[#FFFFFF]">
               Total Amount
             </p>
 
-            <p className="mt-2 text-2xl font-bold text-green-400">
+            <p className="mt-2 text-2xl font-bold text-gold">
               {formatAmount(
                 totalAmount,
                 "USD"
@@ -1187,7 +1187,7 @@ export default function AdminTransactionsPage() {
           </div>
 
           <div className="rounded-2xl border border-yellow-500/10 bg-yellow-500/[0.03] p-5">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm !text-[#FFFFFF]">
               Pending Reviews
             </p>
 
@@ -1197,12 +1197,12 @@ export default function AdminTransactionsPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-green-500/10 bg-green-500/[0.03] p-5">
-            <p className="text-sm text-gray-400">
+          <div className="rounded-2xl border border-gold/10 bg-gold/[0.03] p-5">
+            <p className="text-sm !text-[#FFFFFF]">
               Pending Deposits
             </p>
 
-            <p className="mt-2 text-2xl font-bold text-green-400">
+            <p className="mt-2 text-2xl font-bold text-gold">
               {pendingDeposits.length}
             </p>
           </div>
@@ -1224,7 +1224,7 @@ export default function AdminTransactionsPage() {
 
         {depositError && (
           <div className="mb-6 rounded-xl border border-orange-500/20 bg-orange-500/10 px-4 py-3 text-sm text-orange-400">
-            <p className="font-semibold">
+            <p className="font-bold">
               Pending deposit requests could not be
               loaded.
             </p>
@@ -1263,11 +1263,11 @@ export default function AdminTransactionsPage() {
 
         <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="mb-4">
-            <h2 className="text-base font-semibold text-white">
+            <h2 className="text-base font-bold !text-[#FFFFFF]">
               Transaction History
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs !text-[#FFFFFF]">
               Search and filter completed, failed,
               reversed, pending, and other platform
               transactions.
@@ -1279,7 +1279,7 @@ export default function AdminTransactionsPage() {
             <div>
               <label
                 htmlFor="transaction-search"
-                className="mb-2 block text-sm font-medium text-gray-300"
+                className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
               >
                 Search transactions
               </label>
@@ -1294,7 +1294,7 @@ export default function AdminTransactionsPage() {
                   )
                 }
                 placeholder="Search user, email, reference, ID..."
-                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-green-500/50"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
               />
             </div>
 
@@ -1302,7 +1302,7 @@ export default function AdminTransactionsPage() {
             <div>
               <label
                 htmlFor="transaction-type"
-                className="mb-2 block text-sm font-medium text-gray-300"
+                className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
               >
                 Type
               </label>
@@ -1318,7 +1318,7 @@ export default function AdminTransactionsPage() {
                       | TransactionType
                   )
                 }
-                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none focus:border-green-500/50"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm !text-[#FFFFFF] outline-none focus:border-gold/50"
               >
                 {TYPE_OPTIONS.map(
                   (option) => (
@@ -1329,7 +1329,7 @@ export default function AdminTransactionsPage() {
                       value={
                         option.value
                       }
-                      className="bg-[#0a0f0c]"
+                      className="bg-[#050505]"
                     >
                       {
                         option.label
@@ -1344,7 +1344,7 @@ export default function AdminTransactionsPage() {
             <div>
               <label
                 htmlFor="transaction-status"
-                className="mb-2 block text-sm font-medium text-gray-300"
+                className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
               >
                 Status
               </label>
@@ -1360,7 +1360,7 @@ export default function AdminTransactionsPage() {
                       | TransactionStatus
                   )
                 }
-                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none focus:border-green-500/50"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm !text-[#FFFFFF] outline-none focus:border-gold/50"
               >
                 {STATUS_OPTIONS.map(
                   (option) => (
@@ -1371,7 +1371,7 @@ export default function AdminTransactionsPage() {
                       value={
                         option.value
                       }
-                      className="bg-[#0a0f0c]"
+                      className="bg-[#050505]"
                     >
                       {
                         option.label
@@ -1391,7 +1391,7 @@ export default function AdminTransactionsPage() {
                   setTypeFilter("");
                   setStatusFilter("");
                 }}
-                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/10 hover:text-white lg:w-auto"
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-gray-300 transition hover:bg-white/10 hover:!text-[#FFFFFF] lg:w-auto"
               >
                 Clear
               </button>
@@ -1405,7 +1405,7 @@ export default function AdminTransactionsPage() {
 
         {loading ? (
           <section className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-16 text-center">
-            <div className="text-sm text-gray-400">
+            <div className="text-sm !text-[#FFFFFF]">
               Loading transactions...
             </div>
           </section>
@@ -1415,17 +1415,17 @@ export default function AdminTransactionsPage() {
             <div className="border-b border-white/10 bg-white/[0.02] px-5 py-5">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h2 className="text-lg font-bold text-white">
+                  <h2 className="text-lg font-bold !text-[#FFFFFF]">
                     All Transactions
                   </h2>
 
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm !text-[#FFFFFF]">
                     Complete transaction history for the
                     platform.
                   </p>
                 </div>
 
-                <div className="text-sm text-gray-500">
+                <div className="text-sm !text-[#FFFFFF]">
                   {
                     filteredTransactions.length
                   }{" "}
@@ -1440,36 +1440,36 @@ export default function AdminTransactionsPage() {
             <div className="overflow-x-auto">
               <table className="min-w-[1100px] w-full">
                 <thead className="border-b border-white/10 bg-white/[0.02]">
-                  <tr className="text-left text-xs uppercase tracking-wider text-gray-500">
-                    <th className="px-5 py-4 font-medium">
+                  <tr className="text-left text-xs uppercase tracking-wider !text-[#FFFFFF]">
+                    <th className="px-5 py-4 font-bold">
                       Transaction
                     </th>
 
-                    <th className="px-5 py-4 font-medium">
+                    <th className="px-5 py-4 font-bold">
                       User
                     </th>
 
-                    <th className="px-5 py-4 font-medium">
+                    <th className="px-5 py-4 font-bold">
                       Type
                     </th>
 
-                    <th className="px-5 py-4 font-medium">
+                    <th className="px-5 py-4 font-bold">
                       Method
                     </th>
 
-                    <th className="px-5 py-4 font-medium">
+                    <th className="px-5 py-4 font-bold">
                       Amount
                     </th>
 
-                    <th className="px-5 py-4 font-medium">
+                    <th className="px-5 py-4 font-bold">
                       Status
                     </th>
 
-                    <th className="px-5 py-4 font-medium">
+                    <th className="px-5 py-4 font-bold">
                       Date
                     </th>
 
-                    <th className="px-5 py-4 text-right font-medium">
+                    <th className="px-5 py-4 text-right font-bold">
                       Action
                     </th>
                   </tr>
@@ -1483,11 +1483,11 @@ export default function AdminTransactionsPage() {
                         colSpan={8}
                         className="px-5 py-16 text-center"
                       >
-                        <div className="text-sm font-medium text-gray-300">
+                        <div className="text-sm font-bold !text-[#FFFFFF]">
                           No transactions found
                         </div>
 
-                        <div className="mt-1 text-sm text-gray-500">
+                        <div className="mt-1 text-sm !text-[#FFFFFF]">
                           Try changing your search or
                           filters.
                         </div>
@@ -1518,14 +1518,14 @@ export default function AdminTransactionsPage() {
                             {/* Transaction */}
                             <td className="px-5 py-5">
                               <div className="max-w-[190px]">
-                                <p className="truncate text-sm font-medium text-white">
+                                <p className="truncate text-sm font-bold !text-[#FFFFFF]">
                                   {transaction.description ||
                                     getTypeLabel(
                                       transaction.type
                                     )}
                                 </p>
 
-                                <p className="mt-1 truncate text-xs text-gray-500">
+                                <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                                   {transaction.reference ||
                                     transaction.id}
                                 </p>
@@ -1536,9 +1536,9 @@ export default function AdminTransactionsPage() {
                             <td className="px-5 py-5">
                               <Link
                                 href={`/admin/users/${transaction.user.id}`}
-                                className="block min-w-[180px] transition hover:text-green-400"
+                                className="block min-w-[180px] transition hover:text-gold"
                               >
-                                <p className="text-sm font-medium text-white">
+                                <p className="text-sm font-bold !text-[#FFFFFF]">
                                   {
                                     transaction
                                       .user
@@ -1551,7 +1551,7 @@ export default function AdminTransactionsPage() {
                                   }
                                 </p>
 
-                                <p className="mt-1 text-xs text-gray-500">
+                                <p className="mt-1 text-xs !text-[#FFFFFF]">
                                   {
                                     transaction
                                       .user
@@ -1576,7 +1576,7 @@ export default function AdminTransactionsPage() {
 
                             {/* Method */}
                             <td className="px-5 py-5">
-                              <span className="text-sm text-gray-300">
+                              <span className="text-sm !text-[#FFFFFF]">
                                 {getTransactionMethod(
                                   transaction
                                 )}
@@ -1585,7 +1585,7 @@ export default function AdminTransactionsPage() {
 
                             {/* Amount */}
                             <td className="px-5 py-5">
-                              <span className="whitespace-nowrap text-sm font-semibold text-white">
+                              <span className="whitespace-nowrap text-sm font-bold !text-[#FFFFFF]">
                                 {formatAmount(
                                   transaction.amount,
                                   transaction.currency
@@ -1608,7 +1608,7 @@ export default function AdminTransactionsPage() {
 
                             {/* Date */}
                             <td className="px-5 py-5">
-                              <span className="whitespace-nowrap text-sm text-gray-400">
+                              <span className="whitespace-nowrap text-sm !text-[#FFFFFF]">
                                 {formatDate(
                                   transaction.createdAt
                                 )}
@@ -1626,7 +1626,7 @@ export default function AdminTransactionsPage() {
                                   }
                                   className={`inline-flex rounded-lg border px-3 py-2 text-xs font-bold transition ${
                                     isDeposit
-                                      ? "border-green-500/20 bg-green-500/10 text-green-400 hover:bg-green-500/20"
+                                      ? "border-gold/20 bg-gold/10 text-gold hover:bg-gold/20"
                                       : "border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20"
                                   }`}
                                 >
@@ -1637,7 +1637,7 @@ export default function AdminTransactionsPage() {
                               ) : (
                                 <Link
                                   href={`/admin/transactions/${transaction.id}`}
-                                  className="inline-flex rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-gray-300 transition hover:bg-white/10 hover:text-white"
+                                  className="inline-flex rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-gray-300 transition hover:bg-white/10 hover:!text-[#FFFFFF]"
                                 >
                                   View Details
                                 </Link>

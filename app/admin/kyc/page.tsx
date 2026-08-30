@@ -4,7 +4,7 @@ import { requireAdmin } from "@/lib/auth/session";
 
 function formatDate(date: Date | null) {
 if (!date) {
-return "—";
+return "â€”";
 }
 
 return new Intl.DateTimeFormat("en-US", {
@@ -19,7 +19,7 @@ minute: "2-digit",
 function getStatusClass(status: string) {
 switch (status) {
 case "APPROVED":
-return "bg-emerald-400/10 text-emerald-400";
+return "bg-gold/10 text-gold";
 
 
 case "DECLINED":
@@ -64,22 +64,22 @@ const declinedKyc = kycRecords.filter(
 (kyc) => kyc.status === "DECLINED"
 ).length;
 
-return ( <main className="min-h-screen bg-[#050706] text-white"> <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10"> <div className="mb-8"> <Link
+return ( <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]"> <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10"> <div className="mb-8"> <Link
          href="/admin"
-         className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-emerald-400"
+         className="inline-flex items-center gap-2 text-sm !text-[#FFFFFF] transition hover:text-gold"
        >
-← Admin Dashboard </Link>
+â† Admin Dashboard </Link>
 
 
-      <p className="mt-6 text-sm font-medium text-emerald-400">
+      <p className="mt-6 text-sm font-bold text-gold">
         Identity verification
       </p>
 
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+      <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
         KYC Management
       </h1>
 
-      <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+      <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
         Review registered users, inspect submitted identity
         information, and manage KYC verification requests.
       </p>
@@ -87,57 +87,57 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
 
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm !text-[#FFFFFF]">
           Total KYC records
         </p>
 
-        <p className="mt-3 text-3xl font-semibold">
+        <p className="mt-3 text-3xl font-bold">
           {totalKyc}
         </p>
 
-        <p className="mt-2 text-xs text-zinc-600">
+        <p className="mt-2 text-xs !text-[#FFFFFF]">
           All verification records
         </p>
       </div>
 
       <div className="rounded-3xl border border-yellow-400/10 bg-yellow-400/[0.03] p-6">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm !text-[#FFFFFF]">
           Pending review
         </p>
 
-        <p className="mt-3 text-3xl font-semibold text-yellow-400">
+        <p className="mt-3 text-3xl font-bold text-yellow-400">
           {pendingKyc}
         </p>
 
-        <p className="mt-2 text-xs text-zinc-600">
+        <p className="mt-2 text-xs !text-[#FFFFFF]">
           Require administrator attention
         </p>
       </div>
 
-      <div className="rounded-3xl border border-emerald-400/20 bg-emerald-400/[0.05] p-6">
-        <p className="text-sm text-zinc-500">
+      <div className="rounded-3xl border border-gold/20 bg-gold/[0.05] p-6">
+        <p className="text-sm !text-[#FFFFFF]">
           Approved
         </p>
 
-        <p className="mt-3 text-3xl font-semibold text-emerald-400">
+        <p className="mt-3 text-3xl font-bold text-gold">
           {approvedKyc}
         </p>
 
-        <p className="mt-2 text-xs text-zinc-600">
+        <p className="mt-2 text-xs !text-[#FFFFFF]">
           Successfully verified users
         </p>
       </div>
 
       <div className="rounded-3xl border border-red-400/10 bg-red-400/[0.03] p-6">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm !text-[#FFFFFF]">
           Declined
         </p>
 
-        <p className="mt-3 text-3xl font-semibold text-red-400">
+        <p className="mt-3 text-3xl font-bold text-red-400">
           {declinedKyc}
         </p>
 
-        <p className="mt-2 text-xs text-zinc-600">
+        <p className="mt-2 text-xs !text-[#FFFFFF]">
           Verification requests declined
         </p>
       </div>
@@ -147,16 +147,16 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
       <div className="border-b border-white/10 px-6 py-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Verification queue
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               KYC submissions
             </h2>
           </div>
 
-          <span className="w-fit rounded-full bg-white/[0.05] px-3 py-1 text-xs text-zinc-500">
+          <span className="w-fit rounded-full bg-white/[0.05] px-3 py-1 text-xs !text-[#FFFFFF]">
             {kycRecords.length} records
           </span>
         </div>
@@ -164,15 +164,15 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
 
       {kycRecords.length === 0 ? (
         <div className="p-12 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] text-zinc-500">
-            ◌
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
+            â—Œ
           </div>
 
-          <h3 className="mt-4 font-medium">
+          <h3 className="mt-4 font-bold">
             No KYC records found
           </h3>
 
-          <p className="mt-2 text-sm text-zinc-600">
+          <p className="mt-2 text-sm !text-[#FFFFFF]">
             KYC submissions will appear here when users submit
             their verification information.
           </p>
@@ -182,28 +182,28 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
           <div className="hidden overflow-x-auto lg:block">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-white/10 text-left text-xs uppercase tracking-wider text-zinc-600">
-                  <th className="px-6 py-4 font-medium">
+                <tr className="border-b border-white/10 text-left text-xs uppercase tracking-wider !text-[#FFFFFF]">
+                  <th className="px-6 py-4 font-bold">
                     User
                   </th>
 
-                  <th className="px-6 py-4 font-medium">
+                  <th className="px-6 py-4 font-bold">
                     Country
                   </th>
 
-                  <th className="px-6 py-4 font-medium">
+                  <th className="px-6 py-4 font-bold">
                     ID Type
                   </th>
 
-                  <th className="px-6 py-4 font-medium">
+                  <th className="px-6 py-4 font-bold">
                     Status
                   </th>
 
-                  <th className="px-6 py-4 font-medium">
+                  <th className="px-6 py-4 font-bold">
                     Submitted
                   </th>
 
-                  <th className="px-6 py-4 text-right font-medium">
+                  <th className="px-6 py-4 text-right font-bold">
                     Action
                   </th>
                 </tr>
@@ -217,7 +217,7 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
                   >
                     <td className="px-6 py-5">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-400/10 font-semibold text-emerald-400">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gold/20 bg-gold/10 font-bold text-gold">
                           {(
                             kyc.user.firstName ||
                             kyc.user.email ||
@@ -228,24 +228,24 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
                         </div>
 
                         <div className="min-w-0">
-                          <p className="truncate font-medium">
+                          <p className="truncate font-bold">
                             {kyc.user.firstName}{" "}
                             {kyc.user.lastName}
                           </p>
 
-                          <p className="mt-1 max-w-[240px] truncate text-xs text-zinc-600">
+                          <p className="mt-1 max-w-[240px] truncate text-xs !text-[#FFFFFF]">
                             {kyc.user.email}
                           </p>
                         </div>
                       </div>
                     </td>
 
-                    <td className="px-6 py-5 text-sm text-zinc-400">
-                      {kyc.countryOfResidence || "—"}
+                    <td className="px-6 py-5 text-sm !text-[#FFFFFF]">
+                      {kyc.countryOfResidence || "â€”"}
                     </td>
 
-                    <td className="px-6 py-5 text-sm text-zinc-400">
-                      {kyc.governmentIdType || "—"}
+                    <td className="px-6 py-5 text-sm !text-[#FFFFFF]">
+                      {kyc.governmentIdType || "â€”"}
                     </td>
 
                     <td className="px-6 py-5">
@@ -258,14 +258,14 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
                       </span>
                     </td>
 
-                    <td className="px-6 py-5 text-sm text-zinc-500">
+                    <td className="px-6 py-5 text-sm !text-[#FFFFFF]">
                       {formatDate(kyc.submittedAt)}
                     </td>
 
                     <td className="px-6 py-5 text-right">
                       <Link
                         href={`/admin/kyc/${kyc.id}`}
-                        className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-zinc-300 transition hover:border-emerald-400/30 hover:bg-emerald-400/10 hover:text-emerald-400"
+                        className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm !text-[#FFFFFF] transition hover:border-gold/30 hover:bg-gold/10 hover:text-gold"
                       >
                         Review
                       </Link>
@@ -284,7 +284,7 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex min-w-0 items-center gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-400/10 font-semibold text-emerald-400">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold/20 bg-gold/10 font-bold text-gold">
                       {(
                         kyc.user.firstName ||
                         kyc.user.email ||
@@ -295,12 +295,12 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
                     </div>
 
                     <div className="min-w-0">
-                      <p className="truncate font-medium">
+                      <p className="truncate font-bold">
                         {kyc.user.firstName}{" "}
                         {kyc.user.lastName}
                       </p>
 
-                      <p className="mt-1 truncate text-xs text-zinc-600">
+                      <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                         {kyc.user.email}
                       </p>
                     </div>
@@ -317,37 +317,37 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
 
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs !text-[#FFFFFF]">
                       Country
                     </p>
 
                     <p className="mt-2 text-sm">
-                      {kyc.countryOfResidence || "—"}
+                      {kyc.countryOfResidence || "â€”"}
                     </p>
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs !text-[#FFFFFF]">
                       ID Type
                     </p>
 
                     <p className="mt-2 text-sm">
-                      {kyc.governmentIdType || "—"}
+                      {kyc.governmentIdType || "â€”"}
                     </p>
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs !text-[#FFFFFF]">
                       Submitted
                     </p>
 
-                    <p className="mt-2 text-sm text-zinc-400">
+                    <p className="mt-2 text-sm !text-[#FFFFFF]">
                       {formatDate(kyc.submittedAt)}
                     </p>
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs !text-[#FFFFFF]">
                       User status
                     </p>
 
@@ -360,7 +360,7 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
                 <div className="mt-4 flex justify-end">
                   <Link
                     href={`/admin/kyc/${kyc.id}`}
-                    className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-zinc-300 transition hover:border-emerald-400/30 hover:text-emerald-400"
+                    className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm !text-[#FFFFFF] transition hover:border-gold/30 hover:text-gold"
                   >
                     Review KYC
                   </Link>
@@ -379,11 +379,11 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
         </div>
 
         <div>
-          <h3 className="font-medium text-yellow-300">
+          <h3 className="font-bold text-yellow-300">
             KYC review
           </h3>
 
-          <p className="mt-2 text-sm leading-6 text-zinc-600">
+          <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
             Review submitted identity information and
             verification documents carefully before making
             a decision.
@@ -392,8 +392,8 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
       </div>
     </section>
 
-    <p className="mt-8 text-center text-xs text-zinc-700">
-      Edge Portfolio • Admin • KYC Management
+    <p className="mt-8 text-center text-xs !text-[#FFFFFF]">
+      Thesoros â€¢ Admin â€¢ KYC Management
     </p>
   </div>
 </main>
@@ -401,3 +401,4 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
 
 );
 }
+

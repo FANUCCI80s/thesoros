@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 export default function Footer() {
@@ -7,43 +8,41 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1fr_auto_auto]">
           <div>
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500 font-black text-black">
-                E
-              </div>
-
-              <span className="font-semibold text-white">
-                Edge Portfolio
-              </span>
+              <img
+                src="/branding/thesoros-logo.png"
+                alt="THÉSOROS"
+                className="h-9 w-auto object-contain"
+              />
             </Link>
 
-            <p className="mt-5 max-w-sm text-sm leading-6 text-zinc-600">
+            <p className="mt-5 max-w-sm text-sm leading-6 !text-[#FFFFFF]">
               A modern trading platform for crypto, forex, and stock markets.
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] !text-[#FFFFFF]">
               Platform
             </p>
 
             <div className="mt-4 flex flex-col gap-3">
               <Link
                 href="/login"
-                className="text-sm text-zinc-600 hover:text-white"
+                className="text-sm text-zinc-600 hover:!text-[#FFFFFF]"
               >
                 Login
               </Link>
 
               <Link
                 href="/signup"
-                className="text-sm text-zinc-600 hover:text-white"
+                className="text-sm text-zinc-600 hover:!text-[#FFFFFF]"
               >
                 Sign Up
               </Link>
 
               <Link
                 href="/dashboard"
-                className="text-sm text-zinc-600 hover:text-white"
+                className="text-sm text-zinc-600 hover:!text-[#FFFFFF]"
               >
                 Dashboard
               </Link>
@@ -51,28 +50,28 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] !text-[#FFFFFF]">
               Account
             </p>
 
             <div className="mt-4 flex flex-col gap-3">
               <Link
-                href="/settings"
-                className="text-sm text-zinc-600 hover:text-white"
+                href="/login?redirect=/settings"
+                className="text-sm text-zinc-600 hover:!text-[#FFFFFF]"
               >
                 Settings
               </Link>
 
               <Link
-                href="/transactions"
-                className="text-sm text-zinc-600 hover:text-white"
+                href="/login?redirect=/transactions"
+                className="text-sm text-zinc-600 hover:!text-[#FFFFFF]"
               >
                 Transactions
               </Link>
 
               <Link
-                href="/notifications"
-                className="text-sm text-zinc-600 hover:text-white"
+                href="/login?redirect=/notifications"
+                className="text-sm text-zinc-600 hover:!text-[#FFFFFF]"
               >
                 Notifications
               </Link>
@@ -80,9 +79,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.06] pt-7 text-xs text-zinc-700 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.06] pt-7 text-xs !text-[#FFFFFF] sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Edge Portfolio. All rights reserved.
+            © {new Date().getFullYear()} Thesoros. All rights reserved.
           </p>
 
           <p>Trading involves risk. Markets can move rapidly.</p>
@@ -91,3 +90,4 @@ export default function Footer() {
     </footer>
   );
 }
+

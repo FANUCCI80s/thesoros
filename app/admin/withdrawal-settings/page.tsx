@@ -37,7 +37,7 @@ const methods: {
     label: "Bank Transfer",
     description:
       "Provide the bank details and withdrawal instructions users should follow.",
-    icon: "🏦",
+    icon: "ðŸ¦",
   },
   {
     value: "CASH_APP",
@@ -285,12 +285,12 @@ export default function WithdrawalSettingsPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#050706] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="flex min-h-screen items-center justify-center">
           <div className="text-center">
-            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-emerald-400/20 border-t-emerald-400" />
+            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-gold/20 border-t-gold" />
 
-            <p className="mt-4 text-sm text-zinc-500">
+            <p className="mt-4 text-sm !text-[#FFFFFF]">
               Loading withdrawal settings...
             </p>
           </div>
@@ -300,33 +300,33 @@ export default function WithdrawalSettingsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050706] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="min-h-screen">
         {/* HEADER */}
-        <header className="border-b border-white/10 bg-[#080a09]">
+        <header className="border-b border-white/10 bg-[#050505]">
           <div className="mx-auto max-w-7xl px-5 py-5 sm:px-8">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-emerald-400">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
                   Administration
                 </p>
 
-                <h1 className="mt-1 text-2xl font-semibold tracking-tight">
+                <h1 className="mt-1 text-2xl font-bold tracking-tight">
                   Withdrawal Settings
                 </h1>
 
-                <p className="mt-1 max-w-2xl text-sm text-zinc-500">
+                <p className="mt-1 max-w-2xl text-sm !text-[#FFFFFF]">
                   Configure the withdrawal methods available
-                  to Edge Portfolio users.
+                  to Thesoros users.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/5 px-4 py-3">
-                <p className="text-xs text-zinc-500">
+              <div className="rounded-xl border border-gold/20 bg-gold/5 px-4 py-3">
+                <p className="text-xs !text-[#FFFFFF]">
                   Active methods
                 </p>
 
-                <p className="mt-1 text-lg font-semibold text-emerald-400">
+                <p className="mt-1 text-lg font-bold text-gold">
                   {
                     configs.filter(
                       (config) => config.isEnabled
@@ -342,7 +342,7 @@ export default function WithdrawalSettingsPage() {
         <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
           {/* MESSAGES */}
           {message && (
-            <div className="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-sm text-emerald-300">
+            <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-4 text-sm text-gold-light">
               {message}
             </div>
           )}
@@ -357,11 +357,11 @@ export default function WithdrawalSettingsPage() {
             {/* METHODS */}
             <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
               <div className="px-2 pb-4">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-400">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold">
                   Withdrawal channels
                 </p>
 
-                <h2 className="mt-1 text-lg font-semibold">
+                <h2 className="mt-1 text-lg font-bold">
                   Available methods
                 </h2>
               </div>
@@ -389,7 +389,7 @@ export default function WithdrawalSettingsPage() {
                       }
                       className={`w-full rounded-2xl border p-4 text-left transition ${
                         active
-                          ? "border-emerald-400/30 bg-emerald-400/10"
+                          ? "border-gold/30 bg-gold/10"
                           : "border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.04]"
                       }`}
                     >
@@ -397,7 +397,7 @@ export default function WithdrawalSettingsPage() {
                         <div
                           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold ${
                             active
-                              ? "bg-emerald-400/15 text-emerald-400"
+                              ? "bg-gold/15 text-gold"
                               : "bg-white/5 text-zinc-400"
                           }`}
                         >
@@ -419,20 +419,20 @@ export default function WithdrawalSettingsPage() {
                             <span
                               className={`h-2 w-2 rounded-full ${
                                 enabled
-                                  ? "bg-emerald-400"
+                                  ? "bg-gold"
                                   : "bg-zinc-700"
                               }`}
                             />
                           </div>
 
-                          <p className="mt-1 text-xs leading-5 text-zinc-600">
+                          <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
                             {method.description}
                           </p>
 
                           <p
                             className={`mt-2 text-[11px] ${
                               enabled
-                                ? "text-emerald-400"
+                                ? "text-gold"
                                 : "text-zinc-600"
                             }`}
                           >
@@ -452,11 +452,11 @@ export default function WithdrawalSettingsPage() {
             <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-400">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold">
                     Method configuration
                   </p>
 
-                  <h2 className="mt-1 text-2xl font-semibold">
+                  <h2 className="mt-1 text-2xl font-bold">
                     {
                       methods.find(
                         (method) =>
@@ -466,7 +466,7 @@ export default function WithdrawalSettingsPage() {
                     }
                   </h2>
 
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+                  <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
                     These settings determine what users
                     see when they select this withdrawal
                     method.
@@ -476,7 +476,7 @@ export default function WithdrawalSettingsPage() {
                 <div
                   className={`rounded-xl border px-4 py-2 text-xs font-medium ${
                     isEnabled
-                      ? "border-emerald-400/20 bg-emerald-400/5 text-emerald-400"
+                      ? "border-gold/20 bg-gold/5 text-gold"
                       : "border-white/10 bg-white/[0.03] text-zinc-500"
                   }`}
                 >
@@ -489,7 +489,7 @@ export default function WithdrawalSettingsPage() {
               <div className="mt-8 space-y-6">
                 {/* DISPLAY NAME */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
+                  <label className="mb-2 block text-sm font-bold !text-[#FFFFFF]">
                     Display name
                   </label>
 
@@ -505,14 +505,14 @@ export default function WithdrawalSettingsPage() {
                     className="admin-input"
                   />
 
-                  <p className="mt-2 text-xs text-zinc-600">
+                  <p className="mt-2 text-xs !text-[#FFFFFF]">
                     This name will be displayed to users.
                   </p>
                 </div>
 
                 {/* INSTRUCTIONS */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
+                  <label className="mb-2 block text-sm font-bold !text-[#FFFFFF]">
                     Withdrawal instructions
                   </label>
 
@@ -534,7 +534,7 @@ export default function WithdrawalSettingsPage() {
                     className="admin-input resize-none"
                   />
 
-                  <div className="mt-2 flex justify-between text-xs text-zinc-600">
+                  <div className="mt-2 flex justify-between text-xs !text-[#FFFFFF]">
                     <span>
                       Users will see these instructions
                       when submitting a withdrawal.
@@ -550,11 +550,11 @@ export default function WithdrawalSettingsPage() {
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-bold !text-[#FFFFFF]">
                         Enable withdrawal method
                       </p>
 
-                      <p className="mt-1 text-xs leading-5 text-zinc-600">
+                      <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
                         Disabled methods will not be available
                         for new withdrawal requests.
                       </p>
@@ -570,7 +570,7 @@ export default function WithdrawalSettingsPage() {
                       }
                       className={`relative h-7 w-12 shrink-0 rounded-full transition ${
                         isEnabled
-                          ? "bg-emerald-500"
+                          ? "bg-gold"
                           : "bg-zinc-700"
                       }`}
                     >
@@ -589,7 +589,7 @@ export default function WithdrawalSettingsPage() {
                 <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     {selectedConfig && (
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Last updated{" "}
                         {new Date(
                           selectedConfig.updatedAt
@@ -602,7 +602,7 @@ export default function WithdrawalSettingsPage() {
                     type="button"
                     disabled={saving}
                     onClick={saveSettings}
-                    className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {saving
                       ? "Saving..."
@@ -617,23 +617,23 @@ export default function WithdrawalSettingsPage() {
           <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-emerald-400">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold">
                   Overview
                 </p>
 
-                <h2 className="mt-1 text-xl font-semibold">
+                <h2 className="mt-1 text-xl font-bold">
                   Withdrawal methods
                 </h2>
               </div>
 
-              <p className="text-xs text-zinc-600">
+              <p className="text-xs !text-[#FFFFFF]">
                 Users can only request withdrawals through
                 enabled methods.
               </p>
             </div>
 
             <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-              <div className="hidden grid-cols-[1fr_160px_120px] border-b border-white/10 bg-black/20 px-5 py-3 text-xs uppercase tracking-wider text-zinc-600 sm:grid">
+              <div className="hidden grid-cols-[1fr_160px_120px] border-b border-white/10 bg-black/20 px-5 py-3 text-xs uppercase tracking-wider !text-[#FFFFFF] sm:grid">
                 <span>Method</span>
                 <span>Status</span>
                 <span className="text-right">
@@ -656,17 +656,17 @@ export default function WithdrawalSettingsPage() {
                       className="grid gap-4 px-5 py-4 sm:grid-cols-[1fr_160px_120px] sm:items-center"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-sm font-bold text-zinc-400">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-sm font-bold !text-[#FFFFFF]">
                           {method.icon}
                         </div>
 
                         <div>
-                          <p className="text-sm font-medium text-zinc-200">
+                          <p className="text-sm font-bold !text-[#FFFFFF]">
                             {config?.displayName ||
                               method.label}
                           </p>
 
-                          <p className="text-xs text-zinc-600">
+                          <p className="text-xs !text-[#FFFFFF]">
                             {method.value}
                           </p>
                         </div>
@@ -676,7 +676,7 @@ export default function WithdrawalSettingsPage() {
                         <span
                           className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${
                             enabled
-                              ? "bg-emerald-400/10 text-emerald-400"
+                              ? "bg-gold/10 text-gold"
                               : "bg-white/5 text-zinc-600"
                           }`}
                         >
@@ -695,7 +695,7 @@ export default function WithdrawalSettingsPage() {
                                 config
                               )
                             }
-                            className="text-xs font-medium text-zinc-500 transition hover:text-white"
+                            className="text-xs font-bold text-zinc-500 transition hover:!text-[#FFFFFF]"
                           >
                             {enabled
                               ? "Disable"
@@ -709,7 +709,7 @@ export default function WithdrawalSettingsPage() {
                                 method.value
                               )
                             }
-                            className="text-xs font-medium text-emerald-400 transition hover:text-emerald-300"
+                            className="text-xs font-bold text-gold transition hover:text-gold-light"
                           >
                             Configure
                           </button>
@@ -725,16 +725,16 @@ export default function WithdrawalSettingsPage() {
           {/* IMPORTANT NOTICE */}
           <section className="mt-6 rounded-3xl border border-yellow-400/10 bg-yellow-400/[0.03] p-6">
             <div className="flex gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-yellow-400/10 font-semibold text-yellow-400">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-yellow-400/10 font-bold text-yellow-400">
                 !
               </div>
 
               <div>
-                <h3 className="font-medium text-yellow-300">
+                <h3 className="font-bold text-yellow-300">
                   Withdrawal approval
                 </h3>
 
-                <p className="mt-1 text-sm leading-6 text-zinc-500">
+                <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                   Enabling a withdrawal method does not
                   automatically approve withdrawals. Every
                   withdrawal request will remain pending until

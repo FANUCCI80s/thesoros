@@ -4,8 +4,8 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Edge Portfolio",
-  description: "Edge Portfolio trading and investment platform",
+  title: "Thesoros",
+  description: "Thesoros trading and investment platform",
 };
 
 export default function RootLayout({
@@ -44,4 +44,5 @@ export default function RootLayout({
     </html>
   );
 }
+
 

@@ -271,7 +271,7 @@ export default function DepositForm() {
             </div>
 
             <div>
-              <p className="font-medium text-red-300">
+              <p className="font-bold text-red-300">
                 Deposit request error
               </p>
 
@@ -284,18 +284,18 @@ export default function DepositForm() {
       )}
 
       {success && (
-        <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-5">
+        <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
           <div className="flex gap-3">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-400">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
               ✓
             </div>
 
             <div>
-              <p className="font-medium text-emerald-300">
+              <p className="font-bold text-gold-light">
                 Deposit request submitted
               </p>
 
-              <p className="mt-1 text-sm leading-6 text-emerald-200/60">
+              <p className="mt-1 text-sm leading-6 text-gold-light/60">
                 {success}
               </p>
             </div>
@@ -305,27 +305,27 @@ export default function DepositForm() {
 
       {/* Step 1 */}
       <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm !text-[#FFFFFF]">
           Step 1
         </p>
 
-        <h2 className="mt-1 text-xl font-semibold">
+        <h2 className="mt-1 text-xl font-bold">
           Deposit details
         </h2>
 
         {loading ? (
           <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Loading available deposit methods...
             </p>
           </div>
         ) : availableMethods.length === 0 ? (
           <div className="mt-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-6">
-            <p className="font-medium text-yellow-300">
+            <p className="font-bold text-yellow-300">
               No deposit methods are currently available.
             </p>
 
-            <p className="mt-2 text-sm leading-6 text-zinc-500">
+            <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
               Please contact the administrator or try
               again later.
             </p>
@@ -336,7 +336,7 @@ export default function DepositForm() {
             <div className="sm:col-span-2">
               <label
                 htmlFor="method"
-                className="mb-2 block text-sm font-medium text-zinc-300"
+                className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
               >
                 Deposit method
               </label>
@@ -352,7 +352,7 @@ export default function DepositForm() {
                   )
                 }
                 required
-                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-400/50"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm !text-[#FFFFFF] outline-none transition focus:border-gold/50"
               >
                 <option
                   value=""
@@ -380,13 +380,13 @@ export default function DepositForm() {
             <div>
               <label
                 htmlFor="amount"
-                className="mb-2 block text-sm font-medium text-zinc-300"
+                className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
               >
                 Amount
               </label>
 
               <div className="relative">
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500">
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 !text-[#FFFFFF]">
                   $
                 </span>
 
@@ -402,7 +402,7 @@ export default function DepositForm() {
                     setAmount(event.target.value)
                   }
                   placeholder="0.00"
-                  className="w-full rounded-xl border border-white/10 bg-black/30 py-3 pl-9 pr-4 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/50"
+                  className="w-full rounded-xl border border-white/10 bg-black/30 py-3 pl-9 pr-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
                 />
               </div>
             </div>
@@ -411,7 +411,7 @@ export default function DepositForm() {
             <div>
               <label
                 htmlFor="reference"
-                className="mb-2 block text-sm font-medium text-zinc-300"
+                className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
               >
                 Transaction reference
               </label>
@@ -425,7 +425,7 @@ export default function DepositForm() {
                   setReference(event.target.value)
                 }
                 placeholder="Optional reference"
-                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/50"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
               />
             </div>
 
@@ -433,7 +433,7 @@ export default function DepositForm() {
             <div className="sm:col-span-2">
               <label
                 htmlFor="notes"
-                className="mb-2 block text-sm font-medium text-zinc-300"
+                className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
               >
                 Additional details
               </label>
@@ -447,7 +447,7 @@ export default function DepositForm() {
                   setNotes(event.target.value)
                 }
                 placeholder="Add any information that may help us identify your deposit."
-                className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/50"
+                className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
               />
             </div>
           </div>
@@ -456,18 +456,18 @@ export default function DepositForm() {
 
       {/* Step 2 */}
       <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm !text-[#FFFFFF]">
           Step 2
         </p>
 
-        <h2 className="mt-1 text-xl font-semibold">
+        <h2 className="mt-1 text-xl font-bold">
           Payment instructions
         </h2>
 
         <div className="mt-6">
           {!method && (
             <div className="rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm !text-[#FFFFFF]">
                 Select a deposit method to view the
                 payment instructions.
               </p>
@@ -476,8 +476,8 @@ export default function DepositForm() {
 
           {method === "BANK_TRANSFER" &&
             selectedBank && (
-              <div className="rounded-2xl border border-emerald-400/10 bg-emerald-400/5 p-6">
-                <p className="font-medium text-emerald-300">
+              <div className="rounded-2xl border border-gold/10 bg-gold/5 p-6">
+                <p className="font-bold text-gold-light">
                   Bank transfer details
                 </p>
 
@@ -524,11 +524,11 @@ export default function DepositForm() {
 
                 {selectedBank.instructions && (
                   <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs font-medium uppercase tracking-wide text-zinc-600">
+                    <p className="text-xs font-bold uppercase tracking-wide !text-[#FFFFFF]">
                       Instructions
                     </p>
 
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-400">
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                       {selectedBank.instructions}
                     </p>
                   </div>
@@ -538,12 +538,12 @@ export default function DepositForm() {
 
           {method === "CARD" &&
             selectedCard && (
-              <div className="rounded-2xl border border-emerald-400/10 bg-emerald-400/5 p-6">
-                <p className="font-medium text-emerald-300">
+              <div className="rounded-2xl border border-gold/10 bg-gold/5 p-6">
+                <p className="font-bold text-gold-light">
                   Card payment
                 </p>
 
-                <p className="mt-2 text-sm leading-6 text-zinc-500">
+                <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
                   Use the secure payment link provided
                   below to complete your card payment.
                 </p>
@@ -552,18 +552,18 @@ export default function DepositForm() {
                   href={selectedCard.paymentLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400"
+                  className="mt-5 inline-flex rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
                 >
                   Open secure payment page
                 </a>
 
                 {selectedCard.instructions && (
                   <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs font-medium uppercase tracking-wide text-zinc-600">
+                    <p className="text-xs font-bold uppercase tracking-wide !text-[#FFFFFF]">
                       Instructions
                     </p>
 
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-400">
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                       {selectedCard.instructions}
                     </p>
                   </div>
@@ -573,8 +573,8 @@ export default function DepositForm() {
 
           {method === "CRYPTOCURRENCY" &&
             selectedCrypto && (
-              <div className="rounded-2xl border border-emerald-400/10 bg-emerald-400/5 p-6">
-                <p className="font-medium text-emerald-300">
+              <div className="rounded-2xl border border-gold/10 bg-gold/5 p-6">
+                <p className="font-bold text-gold-light">
                   Cryptocurrency payment
                 </p>
 
@@ -607,11 +607,11 @@ export default function DepositForm() {
 
                 {selectedCrypto.instructions && (
                   <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs font-medium uppercase tracking-wide text-zinc-600">
+                    <p className="text-xs font-bold uppercase tracking-wide !text-[#FFFFFF]">
                       Instructions
                     </p>
 
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-400">
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                       {selectedCrypto.instructions}
                     </p>
                   </div>
@@ -620,28 +620,28 @@ export default function DepositForm() {
             )}
 
           {selectedPayment && (
-            <div className="rounded-2xl border border-emerald-400/10 bg-emerald-400/5 p-6">
-              <p className="font-medium text-emerald-300">
+            <div className="rounded-2xl border border-gold/10 bg-gold/5 p-6">
+              <p className="font-bold text-gold-light">
                 {METHOD_LABELS[selectedPayment.method]} payment
               </p>
 
               <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
-                <p className="text-xs font-medium uppercase tracking-wide text-zinc-600">
+                <p className="text-xs font-bold uppercase tracking-wide !text-[#FFFFFF]">
                   Payment information
                 </p>
 
-                <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-6 text-zinc-300">
+                <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-6 !text-[#FFFFFF]">
                   {selectedPayment.paymentInformation}
                 </p>
               </div>
 
               {selectedPayment.instructions && (
                 <div className="mt-4 rounded-xl border border-white/10 bg-black/20 p-4">
-                  <p className="text-xs font-medium uppercase tracking-wide text-zinc-600">
+                  <p className="text-xs font-bold uppercase tracking-wide !text-[#FFFFFF]">
                     Instructions
                   </p>
 
-                  <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-400">
+                  <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                     {selectedPayment.instructions}
                   </p>
                 </div>
@@ -678,7 +678,7 @@ export default function DepositForm() {
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
         <Link
           href="/dashboard"
-          className="rounded-xl border border-white/10 px-6 py-3 text-center text-sm font-medium text-zinc-400 transition hover:border-white/20 hover:text-white"
+          className="rounded-xl border border-white/10 px-6 py-3 text-center text-sm font-bold text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
         >
           Cancel
         </Link>
@@ -690,7 +690,7 @@ export default function DepositForm() {
             submitting ||
             availableMethods.length === 0
           }
-          className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting
             ? "Submitting..."
@@ -720,12 +720,12 @@ function InfoItem({
 
   return (
     <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-      <p className="text-xs font-medium uppercase tracking-wide text-zinc-600">
+      <p className="text-xs font-bold uppercase tracking-wide !text-[#FFFFFF]">
         {label}
       </p>
 
       <div className="mt-2 flex items-start justify-between gap-3">
-        <p className="min-w-0 break-words text-sm text-zinc-300">
+        <p className="min-w-0 break-words text-sm !text-[#FFFFFF]">
           {value}
         </p>
 
@@ -733,7 +733,7 @@ function InfoItem({
           <button
             type="button"
             onClick={copyValue}
-            className="shrink-0 text-xs text-emerald-400 transition hover:text-emerald-300"
+            className="shrink-0 text-xs text-gold transition hover:text-gold-light"
           >
             Copy
           </button>
@@ -746,15 +746,16 @@ function InfoItem({
 function UnavailableMessage() {
   return (
     <div className="rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-6">
-      <p className="font-medium text-yellow-300">
+      <p className="font-bold text-yellow-300">
         Payment information unavailable
       </p>
 
-      <p className="mt-2 text-sm leading-6 text-zinc-500">
+      <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
         This deposit method is currently unavailable.
         Please contact the administrator.
       </p>
     </div>
   );
 }
+
 

@@ -80,27 +80,25 @@ export default function ChangePasswordPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050706] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="flex min-h-screen">
         {/* Desktop Sidebar */}
-        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#080a09] lg:flex lg:flex-col">
+        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col">
           <div className="border-b border-white/10 p-5">
             <Link
               href="/dashboard"
               className="flex items-center gap-3"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/10">
-                <span className="font-bold text-emerald-400">
-                  E
-                </span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
               </div>
 
               <div>
-                <p className="font-semibold tracking-tight">
-                  Edge Portfolio
+                <p className="font-bold tracking-tight">
+                  Thesoros
                 </p>
 
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs !text-[#FFFFFF]">
                   Trading platform
                 </p>
               </div>
@@ -110,41 +108,41 @@ export default function ChangePasswordPage() {
           <nav className="flex-1 space-y-1 p-4">
             <Link
               href="/dashboard"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>⌂</span>
+              <span>âŒ‚</span>
               Dashboard
             </Link>
 
             <Link
               href="/trade"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↗</span>
+              <span>â†—</span>
               Trade
             </Link>
 
             <Link
               href="/deposit"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↓</span>
+              <span>â†“</span>
               Deposit
             </Link>
 
             <Link
               href="/withdraw"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↑</span>
+              <span>â†‘</span>
               Withdraw
             </Link>
 
             <Link
               href="/transactions"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↔</span>
+              <span>â†”</span>
               Transactions
             </Link>
 
@@ -152,17 +150,17 @@ export default function ChangePasswordPage() {
 
             <Link
               href="/notifications"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>●</span>
+              <span>â—</span>
               Notifications
             </Link>
 
             <Link
               href="/settings"
-              className="flex items-center gap-3 rounded-xl bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-400"
+              className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
             >
-              <span>⚙</span>
+              <span>âš™</span>
               Settings
             </Link>
           </nav>
@@ -170,7 +168,7 @@ export default function ChangePasswordPage() {
           <div className="border-t border-white/10 p-4">
             <Link
               href="/settings"
-              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:text-white"
+              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
             >
               Back to settings
             </Link>
@@ -180,26 +178,24 @@ export default function ChangePasswordPage() {
         {/* Main */}
         <section className="min-w-0 flex-1">
           {/* Mobile / Tablet Header */}
-          <header className="border-b border-white/10 bg-[#080a09] px-5 py-4 lg:hidden">
+          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
             <div className="flex items-center justify-between gap-4">
               <Link
                 href="/dashboard"
                 className="flex items-center gap-3"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-400/30 bg-emerald-400/10">
-                  <span className="font-bold text-emerald-400">
-                    E
-                  </span>
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
+                  <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
                 </div>
 
-                <span className="font-semibold">
-                  Edge Portfolio
+                <span className="font-bold">
+                  Thesoros
                 </span>
               </Link>
 
               <Link
                 href="/settings"
-                className="text-sm text-zinc-500 transition hover:text-white"
+                className="text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
               >
                 Settings
               </Link>
@@ -209,34 +205,34 @@ export default function ChangePasswordPage() {
           <div className="mx-auto max-w-3xl px-5 py-8 sm:px-8 lg:px-10">
             {/* Header */}
             <div className="mb-8">
-              <p className="text-sm font-medium text-emerald-400">
+              <p className="text-sm font-bold text-gold">
                 Account security
               </p>
 
-              <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
                 Change password
               </h1>
 
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
-                Update your Edge Portfolio account password.
+              <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
+                Update your Thesoros account password.
                 Choose a strong password that you do not use
                 elsewhere.
               </p>
             </div>
 
             {/* Security notice */}
-            <div className="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/[0.05] p-5">
+            <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/[0.05] p-5">
               <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-400/10 text-emerald-400">
-                  🔒
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
+                  ðŸ”’
                 </div>
 
                 <div>
-                  <p className="font-medium">
+                  <p className="font-bold">
                     Keep your account secure
                   </p>
 
-                  <p className="mt-1 text-sm leading-6 text-zinc-500">
+                  <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                     Use at least 8 characters and avoid using
                     passwords that are easy to guess.
                   </p>
@@ -247,15 +243,15 @@ export default function ChangePasswordPage() {
             {/* Form */}
             <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
               <div>
-                <p className="text-sm text-zinc-500">
+                <p className="text-sm !text-[#FFFFFF]">
                   Password
                 </p>
 
-                <h2 className="mt-1 text-xl font-semibold">
+                <h2 className="mt-1 text-xl font-bold">
                   Update your password
                 </h2>
 
-                <p className="mt-2 text-sm leading-6 text-zinc-600">
+                <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
                   Enter your current password, then choose
                   and confirm your new password.
                 </p>
@@ -268,7 +264,7 @@ export default function ChangePasswordPage() {
                 <div>
                   <label
                     htmlFor="currentPassword"
-                    className="mb-2 block text-sm font-medium text-zinc-300"
+                    className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                   >
                     Current password
                   </label>
@@ -282,14 +278,14 @@ export default function ChangePasswordPage() {
                       setCurrentPassword(event.target.value)
                     }
                     placeholder="Enter your current password"
-                    className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-400/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-emerald-400/10"
+                    className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-gold/10"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="newPassword"
-                    className="mb-2 block text-sm font-medium text-zinc-300"
+                    className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                   >
                     New password
                   </label>
@@ -304,14 +300,14 @@ export default function ChangePasswordPage() {
                       setNewPassword(event.target.value)
                     }
                     placeholder="At least 8 characters"
-                    className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-400/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-emerald-400/10"
+                    className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-gold/10"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="confirmPassword"
-                    className="mb-2 block text-sm font-medium text-zinc-300"
+                    className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                   >
                     Confirm new password
                   </label>
@@ -326,7 +322,7 @@ export default function ChangePasswordPage() {
                       setConfirmPassword(event.target.value)
                     }
                     placeholder="Repeat your new password"
-                    className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-400/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-emerald-400/10"
+                    className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-gold/10"
                   />
                 </div>
 
@@ -339,8 +335,8 @@ export default function ChangePasswordPage() {
                 )}
 
                 {success && (
-                  <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/[0.05] px-4 py-3">
-                    <p className="text-sm text-emerald-400">
+                  <div className="rounded-xl border border-gold/20 bg-gold/[0.05] px-4 py-3">
+                    <p className="text-sm text-gold">
                       {success}
                     </p>
                   </div>
@@ -349,7 +345,7 @@ export default function ChangePasswordPage() {
                 <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
                   <Link
                     href="/settings"
-                    className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-center text-sm font-medium text-zinc-300 transition hover:border-white/20 hover:text-white"
+                    className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-center text-sm font-bold text-zinc-300 transition hover:border-white/20 hover:!text-[#FFFFFF]"
                   >
                     Cancel
                   </Link>
@@ -357,7 +353,7 @@ export default function ChangePasswordPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {loading
                       ? "Updating password..."
@@ -369,45 +365,45 @@ export default function ChangePasswordPage() {
 
             {/* Additional security information */}
             <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm !text-[#FFFFFF]">
                 Security
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold">
+              <h2 className="mt-1 text-xl font-bold">
                 Additional protection
               </h2>
 
               <div className="mt-6 space-y-4">
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <p className="text-sm font-medium">
+                  <p className="text-sm font-bold">
                     New-device verification
                   </p>
 
-                  <p className="mt-1 text-sm leading-6 text-zinc-600">
+                  <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                     New devices require email OTP verification
                     before access is granted.
                   </p>
 
-                  <span className="mt-3 inline-block rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                  <span className="mt-3 inline-block rounded-full bg-gold/10 px-3 py-1 text-xs font-bold text-gold">
                     Enabled
                   </span>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <p className="text-sm font-medium">
+                  <p className="text-sm font-bold">
                     Account notifications
                   </p>
 
-                  <p className="mt-1 text-sm leading-6 text-zinc-600">
+                  <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                     Important account and security messages
                     are available in your notifications.
                   </p>
 
                   <Link
                     href="/notifications"
-                    className="mt-3 inline-block text-sm text-emerald-400 transition hover:text-emerald-300"
+                    className="mt-3 inline-block text-sm text-gold transition hover:text-gold-light"
                   >
-                    View notifications →
+                    View notifications â†’
                   </Link>
                 </div>
               </div>
@@ -416,14 +412,14 @@ export default function ChangePasswordPage() {
             <div className="mt-8 flex justify-center">
               <Link
                 href="/settings"
-                className="text-sm text-zinc-500 transition hover:text-white"
+                className="text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
               >
-                ← Back to settings
+                â† Back to settings
               </Link>
             </div>
 
-            <p className="mt-6 text-center text-xs text-zinc-700">
-              Edge Portfolio • Account Security
+            <p className="mt-6 text-center text-xs !text-[#FFFFFF]">
+              Thesoros â€¢ Account Security
             </p>
           </div>
         </section>

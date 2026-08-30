@@ -5,9 +5,9 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "What is Edge Portfolio?",
+    question: "What is Thesoros?",
     answer:
-      "Edge Portfolio is a modern trading platform designed to give users access to crypto, forex, and stock markets through one streamlined account.",
+      "Thesoros is a modern trading platform designed to give users access to crypto, forex, and stock markets through one streamlined account.",
   },
   {
     question: "How do I create an account?",
@@ -22,7 +22,7 @@ const faqs = [
   {
     question: "What markets can I trade?",
     answer:
-      "Edge Portfolio is designed to provide access to cryptocurrency, forex, and stock markets from your trading dashboard.",
+      "Thesoros is designed to provide access to cryptocurrency, forex, and stock markets from your trading dashboard.",
   },
   {
     question: "How can I deposit funds?",
@@ -42,7 +42,7 @@ const faqs = [
   {
     question: "Is my account protected?",
     answer:
-      "Edge Portfolio is designed with account security and verification controls to help protect user accounts and transactions.",
+      "Thesoros is designed with account security and verification controls to help protect user accounts and transactions.",
   },
 ];
 
@@ -52,22 +52,22 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden border-t border-white/5 bg-[#050806] py-24 sm:py-28"
+      className="relative overflow-hidden border-t border-white/5 bg-[#050505] py-24 sm:py-28"
     >
-      <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-green-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]" />
 
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex rounded-full border border-green-500/20 bg-green-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-green-400">
+          <span className="inline-flex rounded-full border border-gold/20 bg-gold/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-gold">
             FAQ
           </span>
 
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-5 text-3xl font-bold tracking-tight !text-[#FFFFFF] sm:text-4xl lg:text-5xl">
             Frequently asked questions
           </h2>
 
-          <p className="mt-5 text-base leading-7 text-gray-400 sm:text-lg">
-            Find answers to some of the most common questions about Edge
+          <p className="mt-5 text-base leading-7 !text-[#FFFFFF] sm:text-lg">
+            Find answers to some of the most common questions about THÉSOROS
             Portfolio.
           </p>
         </div>
@@ -81,7 +81,7 @@ export default function FAQ() {
                 key={faq.question}
                 className={`overflow-hidden rounded-2xl border transition ${
                   isOpen
-                    ? "border-green-500/20 bg-green-500/[0.04]"
+                    ? "border-gold/20 bg-gold/[0.04]"
                     : "border-white/10 bg-white/[0.02]"
                 }`}
               >
@@ -93,14 +93,14 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left"
                 >
-                  <span className="text-sm font-semibold text-white sm:text-base">
+                  <span className="text-sm font-bold !text-[#FFFFFF] sm:text-base">
                     {faq.question}
                   </span>
 
                   <span
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-lg transition ${
                       isOpen
-                        ? "rotate-45 border-green-500/30 bg-green-500/10 text-green-400"
+                        ? "rotate-45 border-gold/30 bg-gold/10 text-gold"
                         : "border-white/10 bg-white/5 text-gray-400"
                     }`}
                   >
@@ -114,7 +114,7 @@ export default function FAQ() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-6 pb-6 text-sm leading-7 text-gray-400 sm:text-base">
+                    <p className="px-6 pb-6 text-sm leading-7 !text-[#FFFFFF] sm:text-base">
                       {faq.answer}
                     </p>
                   </div>
@@ -127,4 +127,5 @@ export default function FAQ() {
     </section>
   );
 }
+
 

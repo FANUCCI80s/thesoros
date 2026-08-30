@@ -153,62 +153,62 @@ export default function MarketWatchlistClient() {
     <>
       {/* Market Summary */}
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-3xl border border-emerald-400/20 bg-emerald-400/[0.06] p-6">
+        <div className="rounded-3xl border border-gold/20 bg-gold/[0.06] p-6">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Markets tracked
             </p>
 
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-400/10 text-emerald-400">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold/10 text-gold">
               ◈
             </span>
           </div>
 
-          <p className="mt-4 text-3xl font-semibold">
+          <p className="mt-4 text-3xl font-bold">
             {loading ? "—" : markets.length}
           </p>
 
-          <p className="mt-2 text-xs text-zinc-600">
+          <p className="mt-2 text-xs !text-[#FFFFFF]">
             Crypto, stocks and forex instruments
           </p>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Markets rising
             </p>
 
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-400/10 text-emerald-400">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold/10 text-gold">
               ↑
             </span>
           </div>
 
-          <p className="mt-4 text-3xl font-semibold">
+          <p className="mt-4 text-3xl font-bold">
             {loading ? "—" : risingMarkets}
           </p>
 
-          <p className="mt-2 text-xs text-zinc-600">
+          <p className="mt-2 text-xs !text-[#FFFFFF]">
             Instruments currently showing positive movement
           </p>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Market status
             </p>
 
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-400/10 text-emerald-400">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold/10 text-gold">
               ●
             </span>
           </div>
 
-          <p className="mt-4 text-xl font-semibold">
+          <p className="mt-4 text-xl font-bold">
             {error ? "Unavailable" : "Live data"}
           </p>
 
-          <p className="mt-2 text-xs text-zinc-600">
+          <p className="mt-2 text-xs !text-[#FFFFFF]">
             {formatUpdatedAt()}
           </p>
         </div>
@@ -218,11 +218,11 @@ export default function MarketWatchlistClient() {
       <section className="mt-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Markets
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Explore markets
             </h2>
           </div>
@@ -231,7 +231,7 @@ export default function MarketWatchlistClient() {
             type="button"
             onClick={() => loadMarkets(true)}
             disabled={refreshing}
-            className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-300 transition hover:border-emerald-400/30 hover:bg-emerald-400/[0.05] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-bold text-zinc-300 transition hover:border-gold/30 hover:bg-gold/[0.05] hover:!text-[#FFFFFF] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {refreshing ? "Refreshing..." : "↻ Refresh"}
           </button>
@@ -249,8 +249,8 @@ export default function MarketWatchlistClient() {
                 onClick={() => setCategory(item)}
                 className={`rounded-xl px-4 py-2 text-sm font-medium transition ${
                   active
-                    ? "bg-emerald-500 text-black"
-                    : "border border-white/10 bg-white/[0.03] text-zinc-400 hover:border-emerald-400/30 hover:text-white"
+                    ? "bg-gold text-white"
+                    : "border border-white/10 bg-white/[0.03] text-zinc-400 hover:border-gold/30 hover:text-white"
                 }`}
               >
                 {item}
@@ -262,7 +262,7 @@ export default function MarketWatchlistClient() {
         {/* Search */}
         <div className="mt-5">
           <div className="relative">
-            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600">
+            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 !text-[#FFFFFF]">
               ⌕
             </span>
 
@@ -273,7 +273,7 @@ export default function MarketWatchlistClient() {
                 setSearch(event.target.value)
               }
               placeholder="Search markets by name or symbol..."
-              className="w-full rounded-2xl border border-white/10 bg-white/[0.03] py-3.5 pl-11 pr-4 text-sm text-white outline-none placeholder:text-zinc-600 transition focus:border-emerald-400/40 focus:bg-white/[0.04]"
+              className="w-full rounded-2xl border border-white/10 bg-white/[0.03] py-3.5 pl-11 pr-4 text-sm text-white outline-none placeholder:!text-[#FFFFFF] transition focus:border-gold/40 focus:bg-white/[0.04]"
             />
           </div>
         </div>
@@ -281,11 +281,11 @@ export default function MarketWatchlistClient() {
         {/* Error */}
         {error && (
           <div className="mt-5 rounded-2xl border border-red-400/20 bg-red-400/[0.05] p-4">
-            <p className="text-sm font-medium text-red-400">
+            <p className="text-sm font-bold text-red-400">
               Market data unavailable
             </p>
 
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs !text-[#FFFFFF]">
               {error}
             </p>
           </div>
@@ -293,7 +293,7 @@ export default function MarketWatchlistClient() {
 
         {/* Market Table */}
         <div className="mt-5 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-          <div className="hidden border-b border-white/10 px-6 py-4 text-xs font-medium uppercase tracking-wider text-zinc-600 md:grid md:grid-cols-[1.8fr_1fr_1fr_0.8fr_0.7fr]">
+          <div className="hidden border-b border-white/10 px-6 py-4 text-xs font-bold uppercase tracking-wider !text-[#FFFFFF] md:grid md:grid-cols-[1.8fr_1fr_1fr_0.8fr_0.7fr]">
             <div>Market</div>
             <div>Category</div>
             <div>Price</div>
@@ -317,15 +317,15 @@ export default function MarketWatchlistClient() {
             </div>
           ) : filteredMarkets.length === 0 ? (
             <div className="p-12 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] text-zinc-500">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
                 ⌕
               </div>
 
-              <h3 className="mt-4 font-medium">
+              <h3 className="mt-4 font-bold">
                 No markets found
               </h3>
 
-              <p className="mt-2 text-sm text-zinc-600">
+              <p className="mt-2 text-sm !text-[#FFFFFF]">
                 Try another search or market category.
               </p>
             </div>
@@ -348,16 +348,16 @@ export default function MarketWatchlistClient() {
                     <div className="grid gap-4 md:grid-cols-[1.8fr_1fr_1fr_0.8fr_0.7fr] md:items-center">
                       {/* Market */}
                       <div className="flex items-center gap-4">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-black/20 text-sm font-semibold text-emerald-400">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-black/20 text-sm font-bold text-gold">
                           {market.symbol.charAt(0)}
                         </div>
 
                         <div className="min-w-0">
-                          <p className="font-medium">
+                          <p className="font-bold">
                             {market.symbol}
                           </p>
 
-                          <p className="mt-1 truncate text-xs text-zinc-600">
+                          <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                             {market.name}
                           </p>
                         </div>
@@ -365,18 +365,18 @@ export default function MarketWatchlistClient() {
 
                       {/* Category */}
                       <div>
-                        <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-zinc-500">
+                        <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs !text-[#FFFFFF]">
                           {market.category}
                         </span>
                       </div>
 
                       {/* Price */}
                       <div>
-                        <p className="text-sm font-medium">
+                        <p className="text-sm font-bold">
                           {formatPrice(market)}
                         </p>
 
-                        <p className="mt-1 text-xs text-zinc-600">
+                        <p className="mt-1 text-xs !text-[#FFFFFF]">
                           {market.source}
                         </p>
                       </div>
@@ -386,7 +386,7 @@ export default function MarketWatchlistClient() {
                         <span
                           className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
                             positive
-                              ? "bg-emerald-400/10 text-emerald-400"
+                              ? "bg-gold/10 text-gold"
                               : negative
                               ? "bg-red-400/10 text-red-400"
                               : "bg-white/[0.05] text-zinc-500"
@@ -398,7 +398,7 @@ export default function MarketWatchlistClient() {
 
                       {/* Source */}
                       <div className="text-left md:text-right">
-                        <span className="text-xs text-zinc-600">
+                        <span className="text-xs !text-[#FFFFFF]">
                           {market.source}
                         </span>
                       </div>
@@ -416,36 +416,36 @@ export default function MarketWatchlistClient() {
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm !text-[#FFFFFF]">
                 Cryptocurrency
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold">
+              <h2 className="mt-1 text-xl font-bold">
                 Digital asset markets
               </h2>
             </div>
 
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-400/10 text-emerald-400">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold">
               ₿
             </span>
           </div>
 
-          <p className="mt-4 text-sm leading-6 text-zinc-600">
+          <p className="mt-4 text-sm leading-6 !text-[#FFFFFF]">
             Monitor major cryptocurrencies using live
             market information supplied by the configured
             market-data source.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-2">
-            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs text-zinc-500">
+            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs !text-[#FFFFFF]">
               BTC/USD
             </span>
 
-            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs text-zinc-500">
+            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs !text-[#FFFFFF]">
               ETH/USD
             </span>
 
-            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs text-zinc-500">
+            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs !text-[#FFFFFF]">
               SOL/USD
             </span>
           </div>
@@ -454,39 +454,39 @@ export default function MarketWatchlistClient() {
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm !text-[#FFFFFF]">
                 Traditional markets
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold">
+              <h2 className="mt-1 text-xl font-bold">
                 Stocks & forex
               </h2>
             </div>
 
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.05] text-zinc-300">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.05] !text-[#FFFFFF]">
               $
             </span>
           </div>
 
-          <p className="mt-4 text-sm leading-6 text-zinc-600">
+          <p className="mt-4 text-sm leading-6 !text-[#FFFFFF]">
             Follow selected equities and major currency
             pairs from the same market-monitoring interface.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-2">
-            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs text-zinc-500">
+            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs !text-[#FFFFFF]">
               AAPL
             </span>
 
-            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs text-zinc-500">
+            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs !text-[#FFFFFF]">
               TSLA
             </span>
 
-            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs text-zinc-500">
+            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs !text-[#FFFFFF]">
               NVDA
             </span>
 
-            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs text-zinc-500">
+            <span className="rounded-lg bg-black/20 px-3 py-2 text-xs !text-[#FFFFFF]">
               EUR/USD
             </span>
           </div>
@@ -501,11 +501,11 @@ export default function MarketWatchlistClient() {
           </div>
 
           <div>
-            <h3 className="font-medium text-yellow-300">
+            <h3 className="font-bold text-yellow-300">
               Market data information
             </h3>
 
-            <p className="mt-2 text-sm leading-6 text-zinc-600">
+            <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
               Market prices are supplied by external market
               data providers and may be delayed depending on
               the source. This page is for market monitoring
@@ -516,10 +516,11 @@ export default function MarketWatchlistClient() {
         </div>
       </section>
 
-      <p className="mt-8 text-center text-xs text-zinc-700">
-        Edge Portfolio • Market Watchlist
+      <p className="mt-8 text-center text-xs !text-[#FFFFFF]">
+        Thesoros • Market Watchlist
       </p>
     </>
   );
 }
+
 

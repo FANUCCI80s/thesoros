@@ -316,10 +316,10 @@ current[method]?.isEnabled ?? true,
 }
 
 if (loading) {
-return ( <main className="min-h-screen bg-[#050706] text-white"> <div className="flex min-h-screen items-center justify-center"> <div className="text-center"> <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-emerald-400/20 border-t-emerald-400" />
+return ( <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]"> <div className="flex min-h-screen items-center justify-center"> <div className="text-center"> <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-gold/20 border-t-gold" />
 
 
-        <p className="mt-4 text-sm text-zinc-500">
+        <p className="mt-4 text-sm !text-[#FFFFFF]">
           Loading deposit settings...
         </p>
       </div>
@@ -330,20 +330,19 @@ return ( <main className="min-h-screen bg-[#050706] text-white"> <div className=
 
 }
 
-return ( <main className="min-h-screen bg-[#050706] text-white"> <div className="flex min-h-screen">
-{/* ADMIN SIDEBAR */} <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-[#080a09] lg:flex lg:flex-col"> <div className="border-b border-white/10 p-6"> <Link
+return ( <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]"> <div className="flex min-h-screen">
+{/* ADMIN SIDEBAR */} <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col"> <div className="border-b border-white/10 p-6"> <Link
            href="/admin"
            className="flex items-center gap-3"
-         > <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-400 font-bold text-black">
-E </div>
+         > <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-9 w-auto object-contain" />
 
 
           <div>
-            <p className="font-semibold">
-              Edge Portfolio
+            <p className="font-bold">
+              Thesoros
             </p>
 
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs !text-[#FFFFFF]">
               Administration
             </p>
           </div>
@@ -353,52 +352,52 @@ E </div>
       <nav className="flex-1 space-y-1 p-4">
         <Link
           href="/admin"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>⌂</span>
+          <span>âŒ‚</span>
           Admin dashboard
         </Link>
 
         <Link
           href="/admin/users"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>◉</span>
+          <span>â—‰</span>
           Users
         </Link>
 
         <Link
           href="/admin/kyc"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>✓</span>
+          <span>âœ“</span>
           KYC
         </Link>
 
         {/* ACTIVE: DEPOSIT SETTINGS */}
         <Link
           href="/admin/deposit-settings"
-          className="flex items-center gap-3 rounded-xl bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-400"
+          className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
         >
-          <span>↓</span>
+          <span>â†“</span>
           Deposit settings
         </Link>
 
         {/* NEW: WITHDRAWAL SETTINGS */}
         <Link
           href="/admin/withdrawal-settings"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>↑</span>
+          <span>â†‘</span>
           Withdrawal settings
         </Link>
 
         {/* TRANSACTIONS */}
         <Link
           href="/admin/transactions"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>↔</span>
+          <span>â†”</span>
           Transactions
         </Link>
       </nav>
@@ -406,21 +405,21 @@ E </div>
 
     {/* MAIN CONTENT */}
     <section className="min-w-0 flex-1">
-      <header className="border-b border-white/10 bg-[#080a09] px-5 py-4">
+      <header className="border-b border-white/10 bg-[#050505] px-5 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <div>
-            <p className="text-xs uppercase tracking-wider text-emerald-400">
+            <p className="text-xs uppercase tracking-wider text-gold">
               Administration
             </p>
 
-            <h1 className="mt-1 text-xl font-semibold">
+            <h1 className="mt-1 text-xl font-bold">
               Deposit settings
             </h1>
           </div>
 
           <Link
             href="/admin"
-            className="rounded-xl border border-white/10 px-4 py-2 text-sm text-zinc-400 transition hover:border-white/20 hover:text-white"
+            className="rounded-xl border border-white/10 px-4 py-2 text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
           >
             Admin dashboard
           </Link>
@@ -429,11 +428,11 @@ E </div>
 
       <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-semibold tracking-tight">
+          <h2 className="text-3xl font-bold tracking-tight">
             Manage deposit channels
           </h2>
 
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-500">
+          <p className="mt-2 max-w-3xl text-sm leading-6 !text-[#FFFFFF]">
             Configure the payment information your
             users will see when they open the deposit
             page. A method can be disabled without
@@ -442,7 +441,7 @@ E </div>
         </div>
 
         {message && (
-          <div className="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-sm text-emerald-300">
+          <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-4 text-sm text-gold-light">
             {message}
           </div>
         )}
@@ -457,21 +456,21 @@ E </div>
         <section className="mb-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div className="flex flex-col justify-between gap-4 sm:flex-row">
             <div>
-              <p className="text-xs uppercase tracking-wider text-emerald-400">
+              <p className="text-xs uppercase tracking-wider text-gold">
                 Deposit method 01
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold">
+              <h2 className="mt-1 text-xl font-bold">
                 Bank transfer
               </h2>
 
-              <p className="mt-1 text-sm text-zinc-600">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 Bank details shown to users making
                 a bank deposit.
               </p>
             </div>
 
-            <label className="flex cursor-pointer items-center gap-3 text-sm text-zinc-400">
+            <label className="flex cursor-pointer items-center gap-3 text-sm !text-[#FFFFFF]">
               <input
                 type="checkbox"
                 checked={bank.isEnabled}
@@ -482,7 +481,7 @@ E </div>
                       event.target.checked,
                   }))
                 }
-                className="h-4 w-4 accent-emerald-400"
+                className="h-4 w-4 accent-gold"
               />
               Enabled
             </label>
@@ -490,7 +489,7 @@ E </div>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Account name
               </label>
 
@@ -509,7 +508,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Bank name
               </label>
 
@@ -528,7 +527,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Account number
               </label>
 
@@ -547,7 +546,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Routing number
               </label>
 
@@ -566,7 +565,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 SWIFT / BIC
               </label>
 
@@ -585,7 +584,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Bank address
               </label>
 
@@ -604,7 +603,7 @@ E </div>
             </div>
 
             <div className="sm:col-span-2">
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Instructions
               </label>
 
@@ -634,7 +633,7 @@ E </div>
                   ...bank,
                 })
               }
-              className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:opacity-50"
+              className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:opacity-50"
             >
               {saving
                 ? "Saving..."
@@ -663,21 +662,21 @@ E </div>
         <section className="mb-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div className="flex flex-col justify-between gap-4 sm:flex-row">
             <div>
-              <p className="text-xs uppercase tracking-wider text-emerald-400">
+              <p className="text-xs uppercase tracking-wider text-gold">
                 Deposit method 02
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold">
+              <h2 className="mt-1 text-xl font-bold">
                 Card
               </h2>
 
-              <p className="mt-1 text-sm text-zinc-600">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 Provide a secure card payment link or
                 payment information.
               </p>
             </div>
 
-            <label className="flex cursor-pointer items-center gap-3 text-sm text-zinc-400">
+            <label className="flex cursor-pointer items-center gap-3 text-sm !text-[#FFFFFF]">
               <input
                 type="checkbox"
                 checked={card.isEnabled}
@@ -688,7 +687,7 @@ E </div>
                       event.target.checked,
                   }))
                 }
-                className="h-4 w-4 accent-emerald-400"
+                className="h-4 w-4 accent-gold"
               />
               Enabled
             </label>
@@ -696,7 +695,7 @@ E </div>
 
           <div className="mt-6 space-y-5">
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Card payment link / information
               </label>
 
@@ -715,7 +714,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Instructions
               </label>
 
@@ -745,7 +744,7 @@ E </div>
                   ...card,
                 })
               }
-              className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:opacity-50"
+              className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:opacity-50"
             >
               {saving
                 ? "Saving..."
@@ -773,15 +772,15 @@ E </div>
         {/* CRYPTO */}
         <section className="mb-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div>
-            <p className="text-xs uppercase tracking-wider text-emerald-400">
+            <p className="text-xs uppercase tracking-wider text-gold">
               Deposit method 03
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Cryptocurrency
             </h2>
 
-            <p className="mt-1 text-sm text-zinc-600">
+            <p className="mt-1 text-sm !text-[#FFFFFF]">
               Configure the wallet address users
               should send cryptocurrency to.
             </p>
@@ -789,7 +788,7 @@ E </div>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-3">
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Asset
               </label>
 
@@ -808,7 +807,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Symbol
               </label>
 
@@ -827,7 +826,7 @@ E </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Network
               </label>
 
@@ -846,7 +845,7 @@ E </div>
             </div>
 
             <div className="sm:col-span-3">
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Wallet address
               </label>
 
@@ -865,7 +864,7 @@ E </div>
             </div>
 
             <div className="sm:col-span-3">
-              <label className="mb-2 block text-sm text-zinc-400">
+              <label className="mb-2 block text-sm !text-[#FFFFFF]">
                 Instructions
               </label>
 
@@ -886,7 +885,7 @@ E </div>
           </div>
 
           <div className="mt-6 flex items-center gap-3">
-            <label className="flex cursor-pointer items-center gap-3 text-sm text-zinc-400">
+            <label className="flex cursor-pointer items-center gap-3 text-sm !text-[#FFFFFF]">
               <input
                 type="checkbox"
                 checked={crypto.isEnabled}
@@ -897,7 +896,7 @@ E </div>
                       event.target.checked,
                   }))
                 }
-                className="h-4 w-4 accent-emerald-400"
+                className="h-4 w-4 accent-gold"
               />
               Enabled
             </label>
@@ -913,7 +912,7 @@ E </div>
                   ...crypto,
                 })
               }
-              className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:opacity-50"
+              className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:opacity-50"
             >
               {saving
                 ? "Saving..."
@@ -941,15 +940,15 @@ E </div>
         {/* PAYMENT METHODS */}
         <section className="mb-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div>
-            <p className="text-xs uppercase tracking-wider text-emerald-400">
-              Deposit methods 04–07
+            <p className="text-xs uppercase tracking-wider text-gold">
+              Deposit methods 04â€“07
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Payment apps
             </h2>
 
-            <p className="mt-1 text-sm text-zinc-600">
+            <p className="mt-1 text-sm !text-[#FFFFFF]">
               Configure Cash App, PayPal, Zelle,
               and Venmo individually.
             </p>
@@ -972,11 +971,11 @@ E </div>
                 >
                   <div className="flex flex-col justify-between gap-4 sm:flex-row">
                     <div>
-                      <h3 className="font-medium">
+                      <h3 className="font-bold">
                         {paymentMethod.label}
                       </h3>
 
-                      <p className="mt-1 text-xs text-zinc-600">
+                      <p className="mt-1 text-xs !text-[#FFFFFF]">
                         This information will be
                         displayed to users when they
                         choose{" "}
@@ -984,7 +983,7 @@ E </div>
                       </p>
                     </div>
 
-                    <label className="flex cursor-pointer items-center gap-3 text-sm text-zinc-400">
+                    <label className="flex cursor-pointer items-center gap-3 text-sm !text-[#FFFFFF]">
                       <input
                         type="checkbox"
                         checked={current.isEnabled}
@@ -995,7 +994,7 @@ E </div>
                             event.target.checked
                           )
                         }
-                        className="h-4 w-4 accent-emerald-400"
+                        className="h-4 w-4 accent-gold"
                       />
                       Enabled
                     </label>
@@ -1003,7 +1002,7 @@ E </div>
 
                   <div className="mt-5 space-y-5">
                     <div>
-                      <label className="mb-2 block text-sm text-zinc-400">
+                      <label className="mb-2 block text-sm !text-[#FFFFFF]">
                         Payment information
                       </label>
 
@@ -1024,7 +1023,7 @@ E </div>
                     </div>
 
                     <div>
-                      <label className="mb-2 block text-sm text-zinc-400">
+                      <label className="mb-2 block text-sm !text-[#FFFFFF]">
                         Instructions
                       </label>
 
@@ -1062,7 +1061,7 @@ E </div>
                             current.isEnabled,
                         })
                       }
-                      className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:opacity-50"
+                      className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:opacity-50"
                     >
                       {saving
                         ? "Saving..."
@@ -1094,18 +1093,18 @@ E </div>
         </section>
 
         {/* STATUS */}
-        <section className="rounded-3xl border border-emerald-400/10 bg-emerald-400/5 p-6">
+        <section className="rounded-3xl border border-gold/10 bg-gold/5 p-6">
           <div className="flex gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-400">
-              ✓
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+              âœ“
             </div>
 
             <div>
-              <h3 className="font-medium text-emerald-300">
+              <h3 className="font-bold text-gold-light">
                 Deposit configuration
               </h3>
 
-              <p className="mt-1 text-sm leading-6 text-zinc-500">
+              <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                 Enabled methods are automatically
                 available on the user deposit page.
                 Disabled methods will not be available
@@ -1114,9 +1113,9 @@ E </div>
 
               <Link
                 href="/deposit"
-                className="mt-4 inline-block text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                className="mt-4 inline-block text-sm font-bold text-gold hover:text-gold-light"
               >
-                Open user deposit page →
+                Open user deposit page â†’
               </Link>
             </div>
           </div>
@@ -1151,3 +1150,4 @@ E </div>
 
 );
 }
+

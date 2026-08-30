@@ -210,10 +210,10 @@ export async function POST(request: NextRequest) {
         data: {
           userId: recipient.id,
           type: "MESSAGE",
-          title: subject || "New message from Edge Portfolio",
+          title: subject || "New message from Thesoros",
           message:
             subject ||
-            "You have received a new message from Edge Portfolio.",
+            "You have received a new message from Thesoros.",
         },
       });
 

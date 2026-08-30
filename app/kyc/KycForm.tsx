@@ -189,41 +189,41 @@ try {
 }
 
 return (
-<main className="min-h-screen bg-[#050807] text-white">
+<main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
 <div className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
 <header className="mb-10 flex items-center justify-between">
 <div>
 <div className="mb-2 flex items-center gap-3">
-<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 font-bold text-black">
+<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold font-bold !text-[#FFFFFF]">
 EP
 </div>
 
-          <span className="text-xl font-semibold tracking-tight">
-            Edge Portfolio
+          <span className="text-xl font-bold tracking-tight">
+            Thesoros
           </span>
         </div>
 
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm !text-[#FFFFFF]">
           Account verification
         </p>
       </div>
 
-      <div className="hidden rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-400 sm:block">
+      <div className="hidden rounded-full border border-gold/20 bg-gold/10 px-4 py-2 text-sm text-gold sm:block">
         Secure verification
       </div>
     </header>
 
     <section className="mx-auto max-w-4xl">
       <div className="mb-8">
-        <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-emerald-400">
+        <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-gold">
           Identity verification
         </p>
 
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Verify your identity
         </h1>
 
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400 sm:text-base">
+        <p className="mt-3 max-w-2xl text-sm leading-6 !text-[#FFFFFF] sm:text-base">
           Complete the information below and upload
           both sides of your government-issued ID.
           Your documents are stored privately and
@@ -233,43 +233,43 @@ EP
 
       <div className="mb-8 grid gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/10 text-sm font-semibold text-emerald-400">
+          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-gold/10 text-sm font-bold text-gold">
             1
           </div>
 
-          <p className="font-medium">
+          <p className="font-bold">
             Personal details
           </p>
 
-          <p className="mt-1 text-xs text-zinc-500">
+          <p className="mt-1 text-xs !text-[#FFFFFF]">
             Tell us about yourself
           </p>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/10 text-sm font-semibold text-emerald-400">
+          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-gold/10 text-sm font-bold text-gold">
             2
           </div>
 
-          <p className="font-medium">
+          <p className="font-bold">
             Upload ID
           </p>
 
-          <p className="mt-1 text-xs text-zinc-500">
+          <p className="mt-1 text-xs !text-[#FFFFFF]">
             Upload both sides
           </p>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/10 text-sm font-semibold text-emerald-400">
+          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-gold/10 text-sm font-bold text-gold">
             3
           </div>
 
-          <p className="font-medium">
+          <p className="font-bold">
             Review
           </p>
 
-          <p className="mt-1 text-xs text-zinc-500">
+          <p className="mt-1 text-xs !text-[#FFFFFF]">
             Our team verifies your account
           </p>
         </div>
@@ -281,11 +281,11 @@ EP
       >
         <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-8">
           <div className="mb-6">
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-bold">
               Personal information
             </h2>
 
-            <p className="mt-1 text-sm text-zinc-500">
+            <p className="mt-1 text-sm !text-[#FFFFFF]">
               Enter your information exactly as it
               appears on your identification document.
             </p>
@@ -359,7 +359,7 @@ EP
             />
 
             <div className="sm:col-span-2">
-              <label className="mb-2 block text-sm font-medium text-zinc-300">
+              <label className="mb-2 block text-sm font-bold !text-[#FFFFFF]">
                 Residential address
               </label>
 
@@ -373,7 +373,7 @@ EP
                 }
                 placeholder="Enter your full residential address"
                 rows={3}
-                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-500/60"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60"
               />
             </div>
           </div>
@@ -381,11 +381,11 @@ EP
 
         <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-8">
           <div className="mb-6">
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-bold">
               Government identification
             </h2>
 
-            <p className="mt-1 text-sm text-zinc-500">
+            <p className="mt-1 text-sm !text-[#FFFFFF]">
               Provide the identification details and
               upload clear copies of both sides.
             </p>
@@ -393,7 +393,7 @@ EP
 
           <div className="mb-6 grid gap-5 sm:grid-cols-2">
             <div>
-              <label className="mb-2 block text-sm font-medium text-zinc-300">
+              <label className="mb-2 block text-sm font-bold !text-[#FFFFFF]">
                 ID type
               </label>
 
@@ -405,7 +405,7 @@ EP
                     event.target.value
                   )
                 }
-                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none focus:border-emerald-500/60"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm !text-[#FFFFFF] outline-none focus:border-gold/60"
               >
                 <option value="">
                   Select document type
@@ -456,7 +456,7 @@ EP
             />
           </div>
 
-          <p className="mt-5 text-xs leading-5 text-zinc-500">
+          <p className="mt-5 text-xs leading-5 !text-[#FFFFFF]">
             Accepted formats: JPG, PNG, or PDF.
             Maximum file size: 10 MB per document.
           </p>
@@ -469,19 +469,19 @@ EP
         )}
 
         {message && (
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+          <div className="rounded-2xl border border-gold/20 bg-gold/10 px-4 py-3 text-sm text-gold-light">
             {message}
           </div>
         )}
 
-        <div className="rounded-3xl border border-emerald-500/10 bg-emerald-500/[0.04] p-5 sm:p-6">
+        <div className="rounded-3xl border border-gold/10 bg-gold/[0.04] p-5 sm:p-6">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="font-medium">
+              <p className="font-bold">
                 Ready to submit?
               </p>
 
-              <p className="mt-1 text-sm text-zinc-500">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 Make sure all information and both
                 documents are correct.
               </p>
@@ -490,7 +490,7 @@ EP
             <button
               type="submit"
               disabled={submitting}
-              className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
             >
               {submitting
                 ? "Submitting..."
@@ -521,7 +521,7 @@ type?: string;
 }) {
 return (
 <div>
-<label className="mb-2 block text-sm font-medium text-zinc-300">
+<label className="mb-2 block text-sm font-bold !text-[#FFFFFF]">
 {label}
 </label>
 
@@ -532,7 +532,7 @@ return (
     onChange={(event) =>
       onChange(event.target.value)
     }
-    className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-500/60"
+    className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60"
   />
 </div>
 
@@ -558,41 +558,41 @@ side: UploadSide
 return (
 <div className="rounded-2xl border border-dashed border-white/15 bg-black/20 p-5">
 <div className="mb-4">
-<h3 className="font-medium">
+<h3 className="font-bold">
 {title}
 </h3>
 
-    <p className="mt-1 text-xs text-zinc-500">
+    <p className="mt-1 text-xs !text-[#FFFFFF]">
       {description}
     </p>
   </div>
 
-  <label className="flex min-h-36 cursor-pointer flex-col items-center justify-center rounded-xl border border-white/10 bg-white/[0.02] px-4 text-center transition hover:border-emerald-500/40 hover:bg-emerald-500/[0.03]">
-    <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400">
-      ↑
+  <label className="flex min-h-36 cursor-pointer flex-col items-center justify-center rounded-xl border border-white/10 bg-white/[0.02] px-4 text-center transition hover:border-gold/40 hover:bg-gold/[0.03]">
+    <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-gold/10 text-gold">
+      â†‘
     </div>
 
     {state.uploading ? (
-      <p className="text-sm text-emerald-400">
+      <p className="text-sm text-gold">
         Uploading...
       </p>
     ) : state.uploaded ? (
       <>
-        <p className="text-sm font-medium text-emerald-400">
+        <p className="text-sm font-bold text-gold">
           Upload complete
         </p>
 
-        <p className="mt-1 max-w-full truncate text-xs text-zinc-500">
+        <p className="mt-1 max-w-full truncate text-xs !text-[#FFFFFF]">
           {state.file?.name}
         </p>
       </>
     ) : (
       <>
-        <p className="text-sm font-medium text-zinc-300">
+        <p className="text-sm font-bold !text-[#FFFFFF]">
           Choose file
         </p>
 
-        <p className="mt-1 text-xs text-zinc-600">
+        <p className="mt-1 text-xs !text-[#FFFFFF]">
           JPG, PNG or PDF
         </p>
       </>

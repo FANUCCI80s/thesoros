@@ -205,15 +205,15 @@ export default function AdminBalancesPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#080a09] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <AdminSidebar />
 
         <div className="min-h-screen lg:pl-[280px]">
           <div className="flex min-h-screen items-center justify-center px-6">
             <div className="text-center">
-              <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
+              <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
 
-              <p className="mt-4 text-sm text-zinc-500">
+              <p className="mt-4 text-sm !text-[#FFFFFF]">
                 Loading balance management...
               </p>
             </div>
@@ -224,23 +224,23 @@ export default function AdminBalancesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#080a09] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <AdminSidebar />
 
       <div className="min-h-screen lg:pl-[280px]">
         <section className="min-w-0">
           {/* PAGE HEADER */}
-          <header className="border-b border-white/10 bg-[#080a09] px-5 py-6 sm:px-8 lg:px-10">
+          <header className="border-b border-white/10 bg-[#050505] px-5 py-6 sm:px-8 lg:px-10">
             <div className="mx-auto max-w-6xl">
-              <p className="text-xs uppercase tracking-[0.2em] text-emerald-400">
+              <p className="text-xs uppercase tracking-[0.2em] text-gold">
                 Administration
               </p>
 
-              <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
                 Balance Management
               </h1>
 
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-500">
+              <p className="mt-2 max-w-3xl text-sm leading-6 !text-[#FFFFFF]">
                 Manage user account balances securely. Every
                 adjustment is recorded in the transaction history
                 and account activity log.
@@ -251,7 +251,7 @@ export default function AdminBalancesPage() {
           <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8 lg:px-10">
             {/* ALERTS */}
             {message && (
-              <div className="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-sm text-emerald-300">
+              <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-4 text-sm text-gold-light">
                 {message}
               </div>
             )}
@@ -265,15 +265,15 @@ export default function AdminBalancesPage() {
             {/* USER SELECTION */}
             <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-400">
+                <p className="text-xs uppercase tracking-[0.2em] text-gold">
                   Step 01
                 </p>
 
-                <h2 className="mt-2 text-xl font-semibold">
+                <h2 className="mt-2 text-xl font-bold">
                   Select User
                 </h2>
 
-                <p className="mt-1 text-sm text-zinc-600">
+                <p className="mt-1 text-sm !text-[#FFFFFF]">
                   Select the customer whose available balance
                   you want to modify.
                 </p>
@@ -292,7 +292,7 @@ export default function AdminBalancesPage() {
 
               <div className="mt-4 max-h-80 overflow-y-auto rounded-2xl border border-white/10">
                 {filteredUsers.length === 0 ? (
-                  <div className="p-6 text-center text-sm text-zinc-600">
+                  <div className="p-6 text-center text-sm !text-[#FFFFFF]">
                     No users found.
                   </div>
                 ) : (
@@ -309,28 +309,28 @@ export default function AdminBalancesPage() {
                         }
                         className={`flex w-full items-center justify-between border-b border-white/5 px-5 py-4 text-left transition last:border-b-0 ${
                           isSelected
-                            ? "bg-emerald-400/10"
+                            ? "bg-gold/10"
                             : "hover:bg-white/[0.04]"
                         }`}
                       >
                         <div className="min-w-0">
-                          <p className="font-medium">
+                          <p className="font-bold">
                             {user.firstName} {user.lastName}
                           </p>
 
-                          <p className="mt-1 truncate text-xs text-zinc-600">
+                          <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                             {user.email}
                           </p>
                         </div>
 
                         <div className="ml-4 text-right">
-                          <p className="text-sm font-semibold text-emerald-400">
+                          <p className="text-sm font-bold text-gold">
                             {formatMoney(
                               user.balance?.available
                             )}
                           </p>
 
-                          <p className="mt-1 text-xs text-zinc-600">
+                          <p className="mt-1 text-xs !text-[#FFFFFF]">
                             Available
                           </p>
                         </div>
@@ -343,35 +343,35 @@ export default function AdminBalancesPage() {
 
             {/* CURRENT BALANCE */}
             {selectedUser && (
-              <section className="mt-6 rounded-3xl border border-emerald-400/20 bg-emerald-400/[0.04] p-6 sm:p-8">
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-400">
+              <section className="mt-6 rounded-3xl border border-gold/20 bg-gold/[0.04] p-6 sm:p-8">
+                <p className="text-xs uppercase tracking-[0.2em] text-gold">
                   Selected Account
                 </p>
 
                 <div className="mt-4 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <h2 className="text-2xl font-semibold">
+                    <h2 className="text-2xl font-bold">
                       {selectedUser.firstName}{" "}
                       {selectedUser.lastName}
                     </h2>
 
-                    <p className="mt-1 text-sm text-zinc-500">
+                    <p className="mt-1 text-sm !text-[#FFFFFF]">
                       {selectedUser.email}
                     </p>
                   </div>
 
                   <div className="sm:text-right">
-                    <p className="text-xs uppercase tracking-wider text-zinc-600">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Available Balance
                     </p>
 
-                    <p className="mt-1 text-3xl font-semibold text-emerald-400">
+                    <p className="mt-1 text-3xl font-bold text-gold">
                       {formatMoney(
                         selectedUser.balance?.available
                       )}
                     </p>
 
-                    <p className="mt-1 text-xs text-zinc-600">
+                    <p className="mt-1 text-xs !text-[#FFFFFF]">
                       Locked:{" "}
                       {formatMoney(
                         selectedUser.balance?.locked
@@ -385,15 +385,15 @@ export default function AdminBalancesPage() {
             {/* BALANCE ADJUSTMENT */}
             <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-400">
+                <p className="text-xs uppercase tracking-[0.2em] text-gold">
                   Step 02
                 </p>
 
-                <h2 className="mt-2 text-xl font-semibold">
+                <h2 className="mt-2 text-xl font-bold">
                   Balance Adjustment
                 </h2>
 
-                <p className="mt-1 text-sm text-zinc-600">
+                <p className="mt-1 text-sm !text-[#FFFFFF]">
                   All balance changes require a reason and are
                   permanently recorded.
                 </p>
@@ -402,7 +402,7 @@ export default function AdminBalancesPage() {
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 {/* TYPE */}
                 <div>
-                  <label className="mb-2 block text-sm text-zinc-400">
+                  <label className="mb-2 block text-sm !text-[#FFFFFF]">
                     Adjustment Type
                   </label>
 
@@ -412,7 +412,7 @@ export default function AdminBalancesPage() {
                       onClick={() => setType("CREDIT")}
                       className={`rounded-xl border px-4 py-3 text-sm font-semibold transition ${
                         type === "CREDIT"
-                          ? "border-emerald-400/40 bg-emerald-400/10 text-emerald-400"
+                          ? "border-gold/40 bg-gold/10 text-gold"
                           : "border-white/10 text-zinc-500 hover:text-white"
                       }`}
                     >
@@ -435,7 +435,7 @@ export default function AdminBalancesPage() {
 
                 {/* AMOUNT */}
                 <div>
-                  <label className="mb-2 block text-sm text-zinc-400">
+                  <label className="mb-2 block text-sm !text-[#FFFFFF]">
                     Amount
                   </label>
 
@@ -454,7 +454,7 @@ export default function AdminBalancesPage() {
 
                 {/* REASON */}
                 <div className="sm:col-span-2">
-                  <label className="mb-2 block text-sm text-zinc-400">
+                  <label className="mb-2 block text-sm !text-[#FFFFFF]">
                     Reason
                   </label>
 
@@ -469,7 +469,7 @@ export default function AdminBalancesPage() {
                     className="admin-input resize-none"
                   />
 
-                  <p className="mt-2 text-xs text-zinc-600">
+                  <p className="mt-2 text-xs !text-[#FFFFFF]">
                     {reason.length}/2000
                   </p>
                 </div>
@@ -483,7 +483,7 @@ export default function AdminBalancesPage() {
                   onClick={submitAdjustment}
                   className={`rounded-xl px-6 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${
                     type === "CREDIT"
-                      ? "bg-emerald-500 text-black hover:bg-emerald-400"
+                      ? "bg-gold text-white hover:bg-gold"
                       : "bg-red-500 text-white hover:bg-red-400"
                   }`}
                 >
@@ -503,7 +503,7 @@ export default function AdminBalancesPage() {
                     setError("");
                     setMessage("");
                   }}
-                  className="rounded-xl border border-white/10 px-6 py-3 text-sm text-zinc-400 transition hover:border-white/20 hover:text-white disabled:opacity-50"
+                  className="rounded-xl border border-white/10 px-6 py-3 text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF] disabled:opacity-50"
                 >
                   Clear
                 </button>
@@ -518,11 +518,11 @@ export default function AdminBalancesPage() {
                 </div>
 
                 <div>
-                  <h3 className="font-medium text-yellow-300">
+                  <h3 className="font-bold text-yellow-300">
                     Balance Adjustment Audit
                   </h3>
 
-                  <p className="mt-1 text-sm leading-6 text-zinc-500">
+                  <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                     Every credit or debit should be permanently
                     recorded with the administrator, amount,
                     reason, transaction ID and timestamp. The
@@ -559,4 +559,5 @@ export default function AdminBalancesPage() {
     </main>
   );
 }
+
 

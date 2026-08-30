@@ -44,3 +44,12 @@ next-env.d.ts
 
 # Private uploaded files
 /private-storage/
+.neon
+
+# Local backups and development scripts
+/app.backup/
+/components.backup/
+*.bak
+/rebrand.ps1
+/rebrand-v2.ps1
+/recolor.ps1

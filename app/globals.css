@@ -1,26 +1,464 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* =========================================================
+     THÉSOROS — CLASSIC GOLD / DARK LUXURY
+     ========================================================= */
+
+  /* ===== Brand Gold ===== */
+  --gold:        #D4AF37;
+  --gold-warm:   #C9A227;
+  --gold-light:  #E8C766;
+  --gold-deep:   #A6862B;
+  --gold-glow:   rgba(212, 175, 55, 0.25);
+
+  /* ===== Global Dark Backgrounds ===== */
+  --black:       #050505;
+  --black-soft:  #080808;
+  --charcoal:    #0B0B0B;
+  --charcoal-2:  #101010;
+
+  /* ===== Cards / Elevated Surfaces ===== */
+  --card:        #141414;
+  --card-2:      #181818;
+  --card-hover:  #1B1B1B;
+
+  /* ===== Text ===== */
+  --white:       #FFFFFF;
+  --off-white:   #F8F5EC;
+  --off-white-2: #F2EEE3;
+  --cream:       #E8E1D0;
+
+  --ink:         #FFFFFF;
+  --ink-soft:    #D0CCC2;
+  --muted:       #8C877C;
+
+  /* ===== Borders ===== */
+  --border:        rgba(255, 255, 255, 0.09);
+  --border-soft:   rgba(255, 255, 255, 0.06);
+  --border-gold:   rgba(212, 175, 55, 0.30);
+  --border-gold-strong: rgba(212, 175, 55, 0.50);
+
+  /* ===== Semantic ===== */
+  --bg:           var(--black);
+  --bg-elevated:  var(--charcoal);
+  --bg-section:   var(--black-soft);
+
+  --text:         var(--white);
+  --text-soft:    var(--ink-soft);
+
+  --accent:       var(--gold);
+  --accent-hover: var(--gold-light);
+
+  /*
+   * Gold is the primary positive/brand treatment.
+   * Red remains reserved for destructive/error states.
+   */
+  --success:      var(--gold);
+  --danger:       #C94A4A;
+  --warning:      var(--gold-warm);
+
+  /* ===== Gradients ===== */
+  --gradient-gold:
+    linear-gradient(
+      135deg,
+      #A6862B 0%,
+      #D4AF37 45%,
+      #E8C766 72%,
+      #C9A227 100%
+    );
+
+  --gradient-dark:
+    linear-gradient(
+      180deg,
+      #050505 0%,
+      #0B0B0B 55%,
+      #050505 100%
+    );
+
+  --gradient-card:
+    linear-gradient(
+      145deg,
+      #171717 0%,
+      #0D0D0D 100%
+    );
+
+  --gradient-hero:
+    radial-gradient(
+      circle at 50% -15%,
+      rgba(212, 175, 55, 0.055),
+      transparent 42%
+    );
+
+  /* ===== Backwards-Compatible Aliases ===== */
+  --background: var(--black);
+  --foreground: var(--white);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* =========================================================
+     TAILWIND TOKENS
+     ========================================================= */
+
+  /* ===== Global ===== */
+  --color-background: var(--black);
+  --color-foreground: var(--white);
+
+  /* ===== Brand ===== */
+  --color-gold:       var(--gold);
+  --color-gold-warm:  var(--gold-warm);
+  --color-gold-light: var(--gold-light);
+  --color-gold-deep:  var(--gold-deep);
+
+  /* ===== Dark Surfaces ===== */
+  --color-black:      var(--black);
+  --color-black-soft: var(--black-soft);
+  --color-charcoal:   var(--charcoal);
+  --color-charcoal-2: var(--charcoal-2);
+  --color-card:       var(--card);
+  --color-card-2:     var(--card-2);
+  --color-card-hover: var(--card-hover);
+
+  /* ===== Light / Text ===== */
+  --color-white:      var(--white);
+  --color-offwhite:   var(--off-white);
+  --color-offwhite-2: var(--off-white-2);
+  --color-cream:      var(--cream);
+
+  --color-ink:        var(--ink);
+  --color-ink-soft:   var(--ink-soft);
+  --color-muted:      var(--muted);
+
+  /* ===== Borders ===== */
+  --color-border:      var(--border);
+  --color-border-gold: var(--border-gold);
+
+  /* ===== Semantic / shadcn ===== */
+  --color-primary:              var(--gold);
+  --color-primary-foreground:  #050505;
+
+  --color-secondary:            var(--charcoal-2);
+  --color-secondary-foreground: var(--white);
+
+  --color-muted-foreground:     var(--muted);
+
+  --color-accent:               var(--gold-light);
+  --color-accent-foreground:   #050505;
+
+  --color-destructive:          var(--danger);
+
+  --color-ring:                 var(--gold);
+
+  /* ===== Fonts ===== */
+  --font-sans:  var(--font-geist-sans);
+  --font-mono:  var(--font-geist-mono);
+  --font-serif: Georgia, "Times New Roman", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================
+   GLOBAL DARK CANVAS
+   ========================================================= */
+
+/*
+ * Deliberately no prefers-color-scheme override here.
+ * THÉSOROS is always dark.
+ */
+
+html {
+  min-height: 100%;
+  background: var(--black);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+
+  background:
+    var(--gradient-hero),
+    var(--black);
+
+  color: var(--white);
+
+  font-family:
+    var(--font-sans),
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * Next.js root containers should inherit the dark canvas.
+ * This prevents an otherwise-white wrapper from exposing
+ * a light page behind the application.
+ */
+#__next {
+  min-height: 100vh;
+  background: var(--black);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: var(--gold);
+
+  text-decoration: none;
+
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+a:hover {
+  color: var(--gold-light);
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--white);
+
+  font-family:
+    var(--font-serif),
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--gold);
+  color: #050505;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-deep);
+  border-radius: 5px;
+  border: 2px solid var(--black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+/*
+ * Keep controls dark. These rules intentionally do not
+ * impose a new layout or spacing system on your forms.
+ */
+
+input,
+textarea,
+select {
+  color: var(--white);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6F6A61;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline-color: var(--gold);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  font-family: inherit;
+}
+
+/* =========================================================
+   THÉSOROS CARD UTILITIES
+   ========================================================= */
+
+.thesoros-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.008)
+    ),
+    var(--card);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.thesoros-card:hover {
+  border-color: var(--border-gold);
+}
+
+.thesoros-card-gold {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(212, 175, 55, 0.045),
+      rgba(255, 255, 255, 0.008)
+    ),
+    var(--card);
+
+  border: 1px solid var(--border-gold);
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(212, 175, 55, 0.035);
+}
+
+/* =========================================================
+   GOLD TYPOGRAPHY
+   ========================================================= */
+
+.thesoros-gold {
+  color: var(--gold);
+}
+
+.thesoros-gold-gradient {
+  background: var(--gradient-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* =========================================================
+   GOLD BUTTON
+   ========================================================= */
+
+.thesoros-button {
+  background: var(--gold);
+  color: #050505;
+
+  font-weight: 600;
+
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.thesoros-button:hover {
+  background: var(--gold-light);
+
+  box-shadow:
+    0 8px 30px rgba(212, 175, 55, 0.18);
+}
+
+.thesoros-button:active {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   GOLD OUTLINE BUTTON
+   ========================================================= */
+
+.thesoros-button-outline {
+  background: var(--charcoal);
+
+  color: var(--white);
+
+  border: 1px solid var(--border-gold);
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.thesoros-button-outline:hover {
+  background: rgba(212, 175, 55, 0.06);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+/* =========================================================
+   GOLD DIVIDER
+   ========================================================= */
+
+.thesoros-divider {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(212, 175, 55, 0.50),
+      transparent
+    );
+}
+
+/* =========================================================
+   DARK PAGE UTILITY
+   ========================================================= */
+
+.thesoros-page {
+  min-height: 100vh;
+
+  background:
+    var(--gradient-hero),
+    var(--black);
+
+  color: var(--white);
+}
+
+/* =========================================================
+   DARK SECTION UTILITY
+   ========================================================= */
+
+.thesoros-section {
+  background: var(--black-soft);
+  color: var(--white);
+}
+
+/* =========================================================
+   GOLD FOCUS
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }

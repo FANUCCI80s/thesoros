@@ -236,7 +236,7 @@ export default function AdminKycReviewPage() {
   function statusClass(status: string) {
     switch (status) {
       case "APPROVED":
-        return "bg-emerald-400/10 text-emerald-400 border-emerald-400/20";
+        return "bg-gold/10 text-gold border-gold/20";
 
       case "DECLINED":
         return "bg-red-400/10 text-red-400 border-red-400/20";
@@ -251,13 +251,13 @@ export default function AdminKycReviewPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-black px-6 py-12 text-white">
+      <main className="min-h-screen bg-black px-6 py-12 !text-[#FFFFFF]">
         <div className="mx-auto max-w-6xl">
           <div className="flex min-h-[50vh] items-center justify-center">
             <div className="text-center">
-              <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
+              <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
 
-              <p className="mt-4 text-sm text-zinc-500">
+              <p className="mt-4 text-sm !text-[#FFFFFF]">
                 Loading KYC application...
               </p>
             </div>
@@ -269,11 +269,11 @@ export default function AdminKycReviewPage() {
 
   if (error && !kyc) {
     return (
-      <main className="min-h-screen bg-black px-6 py-12 text-white">
+      <main className="min-h-screen bg-black px-6 py-12 !text-[#FFFFFF]">
         <div className="mx-auto max-w-4xl">
           <Link
             href="/admin/kyc"
-            className="text-sm text-zinc-500 transition hover:text-emerald-400"
+            className="text-sm !text-[#FFFFFF] transition hover:text-gold"
           >
             ← Back to KYC
           </Link>
@@ -283,18 +283,18 @@ export default function AdminKycReviewPage() {
               !
             </div>
 
-            <h1 className="mt-5 text-xl font-semibold">
+            <h1 className="mt-5 text-xl font-bold">
               Unable to load KYC application
             </h1>
 
-            <p className="mt-3 text-sm text-zinc-500">
+            <p className="mt-3 text-sm !text-[#FFFFFF]">
               {error}
             </p>
 
             <button
               type="button"
               onClick={loadKyc}
-              className="mt-6 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400"
+              className="mt-6 rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
             >
               Try again
             </button>
@@ -311,12 +311,12 @@ export default function AdminKycReviewPage() {
   const isPending = kyc.status === "PENDING";
 
   return (
-    <main className="min-h-screen bg-black px-4 py-8 text-white sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-black px-4 py-8 !text-[#FFFFFF] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Back */}
         <Link
           href="/admin/kyc"
-          className="inline-flex items-center text-sm text-zinc-500 transition hover:text-emerald-400"
+          className="inline-flex items-center text-sm !text-[#FFFFFF] transition hover:text-gold"
         >
           ← Back to KYC applications
         </Link>
@@ -324,16 +324,16 @@ export default function AdminKycReviewPage() {
         {/* Header */}
         <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-sm font-medium text-emerald-400">
+            <p className="text-sm font-bold text-gold">
               KYC Review
             </p>
 
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               {kyc.user.firstName}{" "}
               {kyc.user.lastName}
             </h1>
 
-            <p className="mt-2 text-sm text-zinc-500">
+            <p className="mt-2 text-sm !text-[#FFFFFF]">
               Review the customer's identity
               verification information.
             </p>
@@ -350,20 +350,20 @@ export default function AdminKycReviewPage() {
         </div>
 
         {/* IMPORTANT: ACTION BAR */}
-        <section className="mt-8 rounded-3xl border border-emerald-400/20 bg-emerald-400/[0.04] p-5 sm:p-6">
+        <section className="mt-8 rounded-3xl border border-gold/20 bg-gold/[0.04] p-5 sm:p-6">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-zinc-600">
+              <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Review decision
               </p>
 
-              <h2 className="mt-2 text-lg font-semibold">
+              <h2 className="mt-2 text-lg font-bold">
                 {isPending
                   ? "This application is awaiting review"
                   : `KYC application ${kyc.status.toLowerCase()}`}
               </h2>
 
-              <p className="mt-1 text-sm text-zinc-500">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 {isPending
                   ? "Verify the submitted information before approving or declining the application."
                   : "This application has already been processed."}
@@ -377,7 +377,7 @@ export default function AdminKycReviewPage() {
                   type="button"
                   disabled={processing}
                   onClick={approveKyc}
-                  className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {processing
                     ? "Processing..."
@@ -393,7 +393,7 @@ export default function AdminKycReviewPage() {
                       !showDeclineBox
                     )
                   }
-                  className="rounded-xl border border-red-400/30 bg-red-400/10 px-6 py-3 text-sm font-semibold text-red-400 transition hover:bg-red-400/20 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-xl border border-red-400/30 bg-red-400/10 px-6 py-3 text-sm font-bold text-red-400 transition hover:bg-red-400/20 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   ✕ Decline KYC
                 </button>
@@ -404,7 +404,7 @@ export default function AdminKycReviewPage() {
           {/* DECLINE FORM */}
           {isPending && showDeclineBox && (
             <div className="mt-6 border-t border-white/10 pt-6">
-              <label className="text-sm font-medium text-zinc-300">
+              <label className="text-sm font-bold !text-[#FFFFFF]">
                 Reason for declining
               </label>
 
@@ -418,11 +418,11 @@ export default function AdminKycReviewPage() {
                 placeholder="Explain why this KYC application is being declined..."
                 rows={5}
                 maxLength={2000}
-                className="mt-3 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-700 transition focus:border-red-400/40"
+                className="mt-3 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none placeholder:!text-[#FFFFFF] transition focus:border-red-400/40"
               />
 
               <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-xs text-zinc-600">
+                <p className="text-xs !text-[#FFFFFF]">
                   {declineReason.length}/2000
                 </p>
 
@@ -434,7 +434,7 @@ export default function AdminKycReviewPage() {
                       setDeclineReason("");
                       setError("");
                     }}
-                    className="rounded-xl border border-white/10 px-5 py-2.5 text-sm text-zinc-400 transition hover:text-white"
+                    className="rounded-xl border border-white/10 px-5 py-2.5 text-sm text-zinc-400 transition hover:!text-[#FFFFFF]"
                   >
                     Cancel
                   </button>
@@ -446,7 +446,7 @@ export default function AdminKycReviewPage() {
                       !declineReason.trim()
                     }
                     onClick={declineKyc}
-                    className="rounded-xl bg-red-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-xl bg-red-500 px-5 py-2.5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {processing
                       ? "Declining..."
@@ -468,11 +468,11 @@ export default function AdminKycReviewPage() {
         {/* USER INFORMATION */}
         <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
           <div className="border-b border-white/10 pb-5">
-            <p className="text-xs uppercase tracking-wider text-zinc-600">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Applicant
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Personal information
             </h2>
           </div>
@@ -515,11 +515,11 @@ export default function AdminKycReviewPage() {
         {/* KYC INFORMATION */}
         <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
           <div className="border-b border-white/10 pb-5">
-            <p className="text-xs uppercase tracking-wider text-zinc-600">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Verification
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Identity information
             </h2>
           </div>
@@ -571,11 +571,11 @@ export default function AdminKycReviewPage() {
         {/* ADDRESS */}
         <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
           <div className="border-b border-white/10 pb-5">
-            <p className="text-xs uppercase tracking-wider text-zinc-600">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Residence
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Residential address
             </h2>
           </div>
@@ -611,11 +611,11 @@ export default function AdminKycReviewPage() {
         {/* DOCUMENTS */}
         <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
           <div className="border-b border-white/10 pb-5">
-            <p className="text-xs uppercase tracking-wider text-zinc-600">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Documents
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Government ID
             </h2>
           </div>
@@ -638,11 +638,11 @@ export default function AdminKycReviewPage() {
         {/* REVIEW RESULT */}
         {!isPending && (
           <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="text-xs uppercase tracking-wider text-zinc-600">
+            <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
               Review result
             </p>
 
-            <h2 className="mt-2 text-xl font-semibold">
+            <h2 className="mt-2 text-xl font-bold">
               {kyc.status === "APPROVED"
                 ? "KYC approved"
                 : "KYC declined"}
@@ -667,8 +667,8 @@ export default function AdminKycReviewPage() {
           </section>
         )}
 
-        <p className="mt-10 pb-8 text-center text-xs text-zinc-700">
-          Edge Portfolio • Admin • KYC Review
+        <p className="mt-10 pb-8 text-center text-xs !text-[#FFFFFF]">
+          Thesoros • Admin • KYC Review
         </p>
       </div>
     </main>
@@ -684,11 +684,11 @@ function InfoItem({
 }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-      <p className="text-xs text-zinc-600">
+      <p className="text-xs !text-[#FFFFFF]">
         {label}
       </p>
 
-      <p className="mt-2 break-words text-sm text-zinc-200">
+      <p className="mt-2 break-words text-sm !text-[#FFFFFF]">
         {value}
       </p>
     </div>
@@ -714,18 +714,18 @@ function DocumentCard({
     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="text-sm font-medium">
+          <p className="text-sm font-bold">
             {title}
           </p>
 
-          <p className="mt-1 text-xs text-zinc-600">
+          <p className="mt-1 text-xs !text-[#FFFFFF]">
             {file
               ? file.originalName
               : "No document uploaded"}
           </p>
         </div>
 
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.05] text-zinc-500">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.05] !text-[#FFFFFF]">
           ID
         </div>
       </div>
@@ -733,21 +733,21 @@ function DocumentCard({
       {file && (
         <div className="mt-5 grid grid-cols-2 gap-3">
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-            <p className="text-[11px] text-zinc-600">
+            <p className="text-[11px] !text-[#FFFFFF]">
               Type
             </p>
 
-            <p className="mt-1 truncate text-xs text-zinc-400">
+            <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
               {file.mimeType}
             </p>
           </div>
 
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-            <p className="text-[11px] text-zinc-600">
+            <p className="text-[11px] !text-[#FFFFFF]">
               Size
             </p>
 
-            <p className="mt-1 text-xs text-zinc-400">
+            <p className="mt-1 text-xs !text-[#FFFFFF]">
               {formatFileSize(file.sizeBytes)}
             </p>
           </div>

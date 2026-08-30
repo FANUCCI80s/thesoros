@@ -30,7 +30,7 @@ function formatDate(value: Date | string) {
 function statusClass(status: string) {
   switch (status) {
     case "ACTIVE":
-      return "bg-emerald-400/10 text-emerald-400";
+      return "bg-gold/10 text-gold";
 
     case "BLOCKED":
     case "SUSPENDED":
@@ -47,7 +47,7 @@ function statusClass(status: string) {
 function kycClass(status?: string | null) {
   switch (status) {
     case "APPROVED":
-      return "bg-emerald-400/10 text-emerald-400";
+      return "bg-gold/10 text-gold";
 
     case "REJECTED":
       return "bg-red-400/10 text-red-400";
@@ -118,12 +118,12 @@ export default async function AdminUserDetailsPage({
   const kycStatus = user.kyc?.status || "NOT SUBMITTED";
 
   return (
-    <main className="min-h-screen bg-[#050706] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
         {/* Back */}
         <Link
           href="/admin/users"
-          className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-white"
+          className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
         >
           ← Back to Users
         </Link>
@@ -132,13 +132,13 @@ export default async function AdminUserDetailsPage({
         <section className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-emerald-400/20 bg-emerald-400/10 text-xl font-semibold text-emerald-400">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-gold/20 bg-gold/10 text-xl font-bold text-gold">
                 {initials}
               </div>
 
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-3">
-                  <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                  <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
                     {fullName}
                   </h1>
 
@@ -151,11 +151,11 @@ export default async function AdminUserDetailsPage({
                   </span>
                 </div>
 
-                <p className="mt-2 break-all text-sm text-zinc-500">
+                <p className="mt-2 break-all text-sm !text-[#FFFFFF]">
                   {user.email}
                 </p>
 
-                <p className="mt-2 text-xs text-zinc-700">
+                <p className="mt-2 text-xs !text-[#FFFFFF]">
                   User ID: {user.id}
                 </p>
               </div>
@@ -164,7 +164,7 @@ export default async function AdminUserDetailsPage({
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/admin/users"
-                className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-zinc-300 transition hover:border-emerald-400/30 hover:text-white"
+                className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-zinc-300 transition hover:border-gold/30 hover:!text-[#FFFFFF]"
               >
                 All Users
               </Link>
@@ -175,21 +175,21 @@ export default async function AdminUserDetailsPage({
         {/* Summary */}
         <section className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Available balance
             </p>
 
-            <p className="mt-3 text-3xl font-semibold text-emerald-400">
+            <p className="mt-3 text-3xl font-bold text-gold">
               {formatCurrency(availableBalance)}
             </p>
 
-            <p className="mt-2 text-xs text-zinc-600">
+            <p className="mt-2 text-xs !text-[#FFFFFF]">
               Current available funds
             </p>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Account status
             </p>
 
@@ -201,13 +201,13 @@ export default async function AdminUserDetailsPage({
               {user.status}
             </span>
 
-            <p className="mt-3 text-xs text-zinc-600">
+            <p className="mt-3 text-xs !text-[#FFFFFF]">
               Current account state
             </p>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               KYC status
             </p>
 
@@ -219,21 +219,21 @@ export default async function AdminUserDetailsPage({
               {kycStatus}
             </span>
 
-            <p className="mt-3 text-xs text-zinc-600">
+            <p className="mt-3 text-xs !text-[#FFFFFF]">
               Identity verification
             </p>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Account role
             </p>
 
-            <p className="mt-4 text-xl font-semibold">
+            <p className="mt-4 text-xl font-bold">
               {user.role}
             </p>
 
-            <p className="mt-2 text-xs text-zinc-600">
+            <p className="mt-2 text-xs !text-[#FFFFFF]">
               User permission level
             </p>
           </div>
@@ -243,52 +243,52 @@ export default async function AdminUserDetailsPage({
         <section className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
             <div>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm !text-[#FFFFFF]">
                 Account information
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold">
+              <h2 className="mt-1 text-xl font-bold">
                 User profile
               </h2>
             </div>
 
             <div className="mt-6 space-y-4">
               <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                <p className="text-xs text-zinc-600">
+                <p className="text-xs !text-[#FFFFFF]">
                   Full name
                 </p>
 
-                <p className="mt-2 text-sm font-medium">
+                <p className="mt-2 text-sm font-bold">
                   {fullName}
                 </p>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                <p className="text-xs text-zinc-600">
+                <p className="text-xs !text-[#FFFFFF]">
                   Email address
                 </p>
 
-                <p className="mt-2 break-all text-sm font-medium">
+                <p className="mt-2 break-all text-sm font-bold">
                   {user.email}
                 </p>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                <p className="text-xs text-zinc-600">
+                <p className="text-xs !text-[#FFFFFF]">
                   User ID
                 </p>
 
-                <p className="mt-2 break-all font-mono text-xs text-zinc-400">
+                <p className="mt-2 break-all font-mono text-xs !text-[#FFFFFF]">
                   {user.id}
                 </p>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                <p className="text-xs text-zinc-600">
+                <p className="text-xs !text-[#FFFFFF]">
                   Registered
                 </p>
 
-                <p className="mt-2 text-sm font-medium">
+                <p className="mt-2 text-sm font-bold">
                   {formatDate(user.createdAt)}
                 </p>
               </div>
@@ -298,11 +298,11 @@ export default async function AdminUserDetailsPage({
           {/* Account Management */}
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
             <div>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm !text-[#FFFFFF]">
                 Administration
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold">
+              <h2 className="mt-1 text-xl font-bold">
                 Account management
               </h2>
             </div>
@@ -311,11 +311,11 @@ export default async function AdminUserDetailsPage({
               <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm font-medium">
+                    <p className="text-sm font-bold">
                       Account status
                     </p>
 
-                    <p className="mt-1 text-xs text-zinc-600">
+                    <p className="mt-1 text-xs !text-[#FFFFFF]">
                       Current status of this account
                     </p>
                   </div>
@@ -333,11 +333,11 @@ export default async function AdminUserDetailsPage({
               <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm font-medium">
+                    <p className="text-sm font-bold">
                       KYC verification
                     </p>
 
-                    <p className="mt-1 text-xs text-zinc-600">
+                    <p className="mt-1 text-xs !text-[#FFFFFF]">
                       Identity verification status
                     </p>
                   </div>
@@ -353,11 +353,11 @@ export default async function AdminUserDetailsPage({
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                <p className="text-sm font-medium">
+                <p className="text-sm font-bold">
                   Available balance
                 </p>
 
-                <p className="mt-2 text-2xl font-semibold text-emerald-400">
+                <p className="mt-2 text-2xl font-bold text-gold">
                   {formatCurrency(availableBalance)}
                 </p>
               </div>
@@ -373,11 +373,11 @@ export default async function AdminUserDetailsPage({
             </div>
 
             <div>
-              <h2 className="font-semibold text-yellow-300">
+              <h2 className="font-bold text-yellow-300">
                 Admin controls
               </h2>
 
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-500">
+              <p className="mt-2 max-w-3xl text-sm leading-6 !text-[#FFFFFF]">
                 This user profile is now connected to the
                 registered user database. Additional
                 administrative controls such as editing
@@ -389,8 +389,8 @@ export default async function AdminUserDetailsPage({
           </div>
         </section>
 
-        <p className="mt-8 text-center text-xs text-zinc-700">
-          Edge Portfolio • Admin • User Details
+        <p className="mt-8 text-center text-xs !text-[#FFFFFF]">
+          Thesoros • Admin • User Details
         </p>
       </div>
     </main>

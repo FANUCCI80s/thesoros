@@ -156,7 +156,7 @@ export default function ActivityNotifications() {
   const activity = activities[currentIndex];
 
   return (
-    <section className="relative overflow-hidden border-t border-white/5 bg-[#050806] py-10">
+    <section className="relative overflow-hidden border-t border-white/5 bg-[#050505] py-10">
       <div className="mx-auto flex max-w-6xl justify-center px-6 lg:px-8">
         <div
           className={`w-full max-w-md transition-all duration-500 ${
@@ -167,33 +167,33 @@ export default function ActivityNotifications() {
         >
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 shadow-xl shadow-black/20 backdrop-blur-xl">
             <div className="flex items-center gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-green-500/20 bg-green-500/10">
-                <span className="text-lg text-green-400">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/20 bg-gold/10">
+                <span className="text-lg text-gold">
                   ✓
                 </span>
               </div>
 
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="truncate text-sm font-semibold text-white">
+                  <p className="truncate text-sm font-bold !text-[#FFFFFF]">
                     {activity.name}
                   </p>
 
-                  <span className="shrink-0 text-xs text-gray-600">
+                  <span className="shrink-0 text-xs !text-[#FFFFFF]">
                     Just now
                   </span>
                 </div>
 
-                <p className="mt-1 text-sm text-gray-400">
+                <p className="mt-1 text-sm !text-[#FFFFFF]">
                   {activity.action}
                 </p>
 
                 <div className="mt-2 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-green-500/10 px-2.5 py-1 text-xs font-semibold text-green-400">
+                  <span className="rounded-full bg-gold/10 px-2.5 py-1 text-xs font-bold text-gold">
                     {activity.amount}
                   </span>
 
-                  <span className="text-xs text-gray-600">
+                  <span className="text-xs !text-[#FFFFFF]">
                     {activity.method}
                   </span>
                 </div>
@@ -201,7 +201,7 @@ export default function ActivityNotifications() {
             </div>
           </div>
 
-          <p className="mt-3 text-center text-[11px] text-gray-700">
+          <p className="mt-3 text-center text-[11px] !text-[#FFFFFF]">
             Recent platform activity
           </p>
         </div>
@@ -209,4 +209,5 @@ export default function ActivityNotifications() {
     </section>
   );
 }
+
 

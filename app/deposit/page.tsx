@@ -257,20 +257,19 @@ try {
 
 }
 
-return ( <main className="min-h-screen bg-[#050706] text-white"> <div className="flex min-h-screen">
-{/* Sidebar */} <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#080a09] lg:flex lg:flex-col"> <div className="border-b border-white/10 p-5"> <Link
+return ( <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]"> <div className="flex min-h-screen">
+{/* Sidebar */} <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col"> <div className="border-b border-white/10 p-5"> <Link
            href="/dashboard"
            className="flex items-center gap-3"
-         > <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/10"> <span className="font-bold text-emerald-400">
-E </span> </div>
+         > <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10"> <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" /> </div>
 
 
           <div>
-            <p className="font-semibold tracking-tight">
-              Edge Portfolio
+            <p className="font-bold tracking-tight">
+              Thesoros
             </p>
 
-            <p className="text-xs text-zinc-500">
+            <p className="text-xs !text-[#FFFFFF]">
               Trading platform
             </p>
           </div>
@@ -280,41 +279,41 @@ E </span> </div>
       <nav className="flex-1 space-y-1 p-4">
         <Link
           href="/dashboard"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>⌂</span>
+          <span>âŒ‚</span>
           Dashboard
         </Link>
 
         <Link
           href="/trade"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>↗</span>
+          <span>â†—</span>
           Trade
         </Link>
 
         <Link
           href="/deposit"
-          className="flex items-center gap-3 rounded-xl bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-400"
+          className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
         >
-          <span>↓</span>
+          <span>â†“</span>
           Deposit
         </Link>
 
         <Link
           href="/withdraw"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>↑</span>
+          <span>â†‘</span>
           Withdraw
         </Link>
 
         <Link
           href="/transactions"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>↔</span>
+          <span>â†”</span>
           Transactions
         </Link>
 
@@ -322,17 +321,17 @@ E </span> </div>
 
         <Link
           href="/notifications"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>●</span>
+          <span>â—</span>
           Notifications
         </Link>
 
         <Link
           href="/settings"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
         >
-          <span>⚙</span>
+          <span>âš™</span>
           Settings
         </Link>
       </nav>
@@ -340,7 +339,7 @@ E </span> </div>
       <div className="border-t border-white/10 p-4">
         <Link
           href="/dashboard"
-          className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:text-white"
+          className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
         >
           Back to dashboard
         </Link>
@@ -350,26 +349,24 @@ E </span> </div>
     {/* Main */}
     <section className="min-w-0 flex-1">
       {/* Mobile header */}
-      <header className="border-b border-white/10 bg-[#080a09] px-5 py-4 lg:hidden">
+      <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
         <div className="flex items-center justify-between">
           <Link
             href="/dashboard"
             className="flex items-center gap-3"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-400/30 bg-emerald-400/10">
-              <span className="font-bold text-emerald-400">
-                E
-              </span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
+              <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
             </div>
 
-            <span className="font-semibold">
-              Edge Portfolio
+            <span className="font-bold">
+              Thesoros
             </span>
           </Link>
 
           <Link
             href="/dashboard"
-            className="text-sm text-zinc-500 hover:text-white"
+            className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
           >
             Dashboard
           </Link>
@@ -378,15 +375,15 @@ E </span> </div>
 
       <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 lg:px-10">
         <div className="mb-8">
-          <p className="mb-2 text-sm font-medium text-emerald-400">
+          <p className="mb-2 text-sm font-bold text-gold">
             Fund your account
           </p>
 
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Make a deposit
           </h1>
 
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+          <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
             Choose your preferred deposit method,
             follow the payment instructions, and
             submit your deposit for administrator
@@ -402,11 +399,11 @@ E </span> </div>
             </div>
 
             <div>
-              <p className="font-medium text-yellow-300">
+              <p className="font-bold text-yellow-300">
                 Important
               </p>
 
-              <p className="mt-1 text-sm leading-6 text-zinc-500">
+              <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                 Only send funds using the payment
                 information displayed on this page.
                 Your deposit will remain pending until
@@ -420,9 +417,9 @@ E </span> </div>
         {loadingConfig && (
           <div className="mb-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
             <div className="flex items-center gap-3">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-emerald-400/30 border-t-emerald-400" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gold/30 border-t-gold" />
 
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm !text-[#FFFFFF]">
                 Loading available deposit methods...
               </p>
             </div>
@@ -432,7 +429,7 @@ E </span> </div>
         {/* Error */}
         {error && (
           <div className="mb-6 rounded-2xl border border-red-400/20 bg-red-400/5 p-5">
-            <p className="text-sm font-medium text-red-300">
+            <p className="text-sm font-bold text-red-300">
               {error}
             </p>
           </div>
@@ -440,26 +437,26 @@ E </span> </div>
 
         {/* Success */}
         {message && (
-          <div className="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-5">
+          <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-5">
             <div className="flex items-start gap-3">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-400">
-                ✓
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+                âœ“
               </div>
 
               <div>
-                <p className="font-medium text-emerald-300">
+                <p className="font-bold text-gold-light">
                   Deposit request submitted
                 </p>
 
-                <p className="mt-1 text-sm leading-6 text-zinc-500">
+                <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                   {message}
                 </p>
 
                 <Link
                   href="/transactions"
-                  className="mt-3 inline-block text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                  className="mt-3 inline-block text-sm font-bold text-gold hover:text-gold-light"
                 >
-                  View transactions →
+                  View transactions â†’
                 </Link>
               </div>
             </div>
@@ -472,11 +469,11 @@ E </span> </div>
         >
           {/* Step 1 */}
           <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Step 1
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Choose deposit method
             </h2>
 
@@ -497,7 +494,7 @@ E </span> </div>
                       }
                       className={`rounded-2xl border p-4 text-left transition ${
                         selected
-                          ? "border-emerald-400/40 bg-emerald-400/10"
+                          ? "border-gold/40 bg-gold/10"
                           : "border-white/10 bg-black/20 hover:border-white/20"
                       }`}
                     >
@@ -506,14 +503,14 @@ E </span> </div>
                           <p
                             className={`font-medium ${
                               selected
-                                ? "text-emerald-300"
+                                ? "text-gold-light"
                                 : "text-white"
                             }`}
                           >
                             {depositMethod.label}
                           </p>
 
-                          <p className="mt-1 text-xs leading-5 text-zinc-600">
+                          <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
                             {
                               depositMethod.description
                             }
@@ -523,13 +520,13 @@ E </span> </div>
                         <div
                           className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
                             selected
-                              ? "border-emerald-400 bg-emerald-400 text-black"
+                              ? "border-gold bg-gold text-white"
                               : "border-white/20"
                           }`}
                         >
                           {selected && (
                             <span className="text-xs font-bold">
-                              ✓
+                              âœ“
                             </span>
                           )}
                         </div>
@@ -543,17 +540,17 @@ E </span> </div>
 
           {/* Step 2 */}
           <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Step 2
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               {formatMethod(method)} instructions
             </h2>
 
             {!config ? (
               <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-                <p className="text-sm text-zinc-500">
+                <p className="text-sm !text-[#FFFFFF]">
                   Deposit instructions are currently
                   unavailable.
                 </p>
@@ -561,23 +558,23 @@ E </span> </div>
             ) : method === "BANK_TRANSFER" ? (
               config.bankAccount ? (
                 <div className="mt-6 space-y-4">
-                  <div className="rounded-2xl border border-emerald-400/10 bg-emerald-400/5 p-5">
-                    <p className="text-xs uppercase tracking-wider text-zinc-600">
+                  <div className="rounded-2xl border border-gold/10 bg-gold/5 p-5">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Bank name
                     </p>
 
-                    <p className="mt-1 font-medium text-white">
+                    <p className="mt-1 font-bold !text-[#FFFFFF]">
                       {config.bankAccount.bankName}
                     </p>
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Account name
                       </p>
 
-                      <p className="mt-1 break-words text-sm font-medium">
+                      <p className="mt-1 break-words text-sm font-bold">
                         {
                           config.bankAccount
                             .accountName
@@ -586,11 +583,11 @@ E </span> </div>
                     </div>
 
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Account number
                       </p>
 
-                      <p className="mt-1 break-all text-sm font-medium">
+                      <p className="mt-1 break-all text-sm font-bold">
                         {
                           config.bankAccount
                             .accountNumber
@@ -601,11 +598,11 @@ E </span> </div>
                     {config.bankAccount
                       .routingNumber && (
                       <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                        <p className="text-xs text-zinc-600">
+                        <p className="text-xs !text-[#FFFFFF]">
                           Routing number
                         </p>
 
-                        <p className="mt-1 text-sm font-medium">
+                        <p className="mt-1 text-sm font-bold">
                           {
                             config.bankAccount
                               .routingNumber
@@ -617,11 +614,11 @@ E </span> </div>
                     {config.bankAccount
                       .swiftBic && (
                       <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                        <p className="text-xs text-zinc-600">
+                        <p className="text-xs !text-[#FFFFFF]">
                           SWIFT / BIC
                         </p>
 
-                        <p className="mt-1 text-sm font-medium">
+                        <p className="mt-1 text-sm font-bold">
                           {
                             config.bankAccount
                               .swiftBic
@@ -634,11 +631,11 @@ E </span> </div>
                   {config.bankAccount
                     .bankAddress && (
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Bank address
                       </p>
 
-                      <p className="mt-1 text-sm leading-6 text-zinc-300">
+                      <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                         {
                           config.bankAccount
                             .bankAddress
@@ -650,11 +647,11 @@ E </span> </div>
                   {config.bankAccount
                     .instructions && (
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Instructions
                       </p>
 
-                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-400">
+                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                         {
                           config.bankAccount
                             .instructions
@@ -665,7 +662,7 @@ E </span> </div>
                 </div>
               ) : (
                 <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-                  <p className="text-sm text-zinc-500">
+                  <p className="text-sm !text-[#FFFFFF]">
                     Bank transfer deposits are
                     currently unavailable.
                   </p>
@@ -676,42 +673,42 @@ E </span> </div>
                 <div className="mt-6 space-y-4">
                   <div className="grid gap-4 sm:grid-cols-3">
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Asset
                       </p>
 
-                      <p className="mt-1 font-medium">
+                      <p className="mt-1 font-bold">
                         {selectedCryptoOption.asset}
                       </p>
                     </div>
 
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Symbol
                       </p>
 
-                      <p className="mt-1 font-medium">
+                      <p className="mt-1 font-bold">
                         {selectedCryptoOption.symbol}
                       </p>
                     </div>
 
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Network
                       </p>
 
-                      <p className="mt-1 font-medium">
+                      <p className="mt-1 font-bold">
                         {selectedCryptoOption.network}
                       </p>
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-5">
-                    <p className="text-xs text-zinc-600">
+                  <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
+                    <p className="text-xs !text-[#FFFFFF]">
                       Wallet address
                     </p>
 
-                    <p className="mt-2 break-all font-mono text-sm leading-6 text-emerald-300">
+                    <p className="mt-2 break-all font-mono text-sm leading-6 text-gold-light">
                       {
                         selectedCryptoOption.walletAddress
                       }
@@ -721,11 +718,11 @@ E </span> </div>
                   {selectedCryptoOption
                     .instructions && (
                     <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs !text-[#FFFFFF]">
                         Instructions
                       </p>
 
-                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-400">
+                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                         {
                           selectedCryptoOption.instructions
                         }
@@ -735,7 +732,7 @@ E </span> </div>
                 </div>
               ) : (
                 <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-                  <p className="text-sm text-zinc-500">
+                  <p className="text-sm !text-[#FFFFFF]">
                     Cryptocurrency deposits are
                     currently unavailable.
                   </p>
@@ -743,13 +740,13 @@ E </span> </div>
               )
             ) : selectedPaymentConfig ? (
               <div className="mt-6 space-y-4">
-                <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-5">
-                  <p className="text-xs uppercase tracking-wider text-zinc-600">
+                <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
+                  <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                     {formatMethod(method)} payment
                     information
                   </p>
 
-                  <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-7 text-emerald-300">
+                  <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-7 text-gold-light">
                     {
                       selectedPaymentConfig.paymentInformation
                     }
@@ -759,11 +756,11 @@ E </span> </div>
                 {selectedPaymentConfig
                   .instructions && (
                   <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs !text-[#FFFFFF]">
                       Instructions
                     </p>
 
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-zinc-400">
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                       {
                         selectedPaymentConfig.instructions
                       }
@@ -773,7 +770,7 @@ E </span> </div>
               </div>
             ) : (
               <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-                <p className="text-sm text-zinc-500">
+                <p className="text-sm !text-[#FFFFFF]">
                   {formatMethod(method)} deposits
                   are currently unavailable.
                 </p>
@@ -783,11 +780,11 @@ E </span> </div>
 
           {/* Step 3 */}
           <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm !text-[#FFFFFF]">
               Step 3
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold">
+            <h2 className="mt-1 text-xl font-bold">
               Submit deposit details
             </h2>
 
@@ -795,13 +792,13 @@ E </span> </div>
               <div>
                 <label
                   htmlFor="amount"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
+                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                 >
                   Deposit amount
                 </label>
 
                 <div className="relative">
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500">
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 !text-[#FFFFFF]">
                     $
                   </span>
 
@@ -817,7 +814,7 @@ E </span> </div>
                     }
                     required
                     placeholder="0.00"
-                    className="w-full rounded-xl border border-white/10 bg-black/30 py-3 pl-9 pr-4 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/50"
+                    className="w-full rounded-xl border border-white/10 bg-black/30 py-3 pl-9 pr-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
                   />
                 </div>
               </div>
@@ -825,7 +822,7 @@ E </span> </div>
               <div>
                 <label
                   htmlFor="reference"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
+                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                 >
                   Transaction reference
                 </label>
@@ -840,14 +837,14 @@ E </span> </div>
                   }
                   placeholder="Optional transaction ID"
                   maxLength={200}
-                  className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/50"
+                  className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
                 />
               </div>
 
               <div className="sm:col-span-2">
                 <label
                   htmlFor="notes"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
+                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                 >
                   Additional details
                 </label>
@@ -862,7 +859,7 @@ E </span> </div>
                   }
                   maxLength={2000}
                   placeholder="Add any information that may help us identify your deposit."
-                  className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/50"
+                  className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
                 />
               </div>
             </div>
@@ -871,16 +868,16 @@ E </span> </div>
           {/* Approval notice */}
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
             <div className="flex gap-3">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/[0.05] text-zinc-400">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
                 i
               </div>
 
               <div>
-                <p className="text-sm font-medium">
+                <p className="text-sm font-bold">
                   Administrator approval required
                 </p>
 
-                <p className="mt-1 text-xs leading-5 text-zinc-600">
+                <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
                   Submitting this form creates a
                   pending deposit request. Your
                   account balance will not change
@@ -895,7 +892,7 @@ E </span> </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
             <Link
               href="/dashboard"
-              className="rounded-xl border border-white/10 px-6 py-3 text-center text-sm font-medium text-zinc-400 transition hover:border-white/20 hover:text-white"
+              className="rounded-xl border border-white/10 px-6 py-3 text-center text-sm font-bold text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
             >
               Cancel
             </Link>
@@ -905,7 +902,7 @@ E </span> </div>
               disabled={
                 submitting || loadingConfig
               }
-              className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
             >
               {submitting
                 ? "Submitting..."
@@ -921,3 +918,4 @@ E </span> </div>
 
 );
 }
+

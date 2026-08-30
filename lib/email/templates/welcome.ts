@@ -1,40 +1,39 @@
 
-export function loginOtpEmail(
-  firstName: string,
-  code: string
-) {
+interface WelcomeEmailOptions {
+  firstName: string;
+  loginUrl: string;
+  logoUrl?: string;
+}
+
+export function getWelcomeEmail({
+  firstName,
+  loginUrl,
+  logoUrl,
+}: WelcomeEmailOptions) {
+  const subject = "Welcome to THÉSOROS";
+
   const safeFirstName = escapeHtml(firstName);
-  const safeCode = escapeHtml(code);
+  const safeLoginUrl = escapeHtml(loginUrl);
 
   /*
-   * The logo must use a publicly accessible URL.
+   * Email clients cannot reliably load local paths such as:
+   * /branding/thesoros-logo.png
    *
-   * Set this in your .env:
+   * Use a complete public URL when sending the email.
    *
-   * NEXT_PUBLIC_APP_URL=https://your-domain.com
-   *
-   * The logo will then load from:
-   *
+   * Example:
    * https://your-domain.com/branding/thesoros-logo.png
    *
-   * During local development you can also use:
-   *
-   * NEXT_PUBLIC_APP_URL=http://localhost:3000
-   *
-   * but email clients outside your computer will not be
-   * able to load a localhost image.
+   * You can also pass logoUrl directly when calling this function.
    */
-  const appUrl =
-    process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "");
-
-  const logoUrl = appUrl
-    ? `${appUrl}/branding/thesoros-logo.png`
+  const safeLogoUrl = logoUrl
+    ? escapeHtml(logoUrl)
     : "";
 
-  const logoMarkup = logoUrl
+  const logoMarkup = safeLogoUrl
     ? `
       <img
-        src="${escapeHtml(logoUrl)}"
+        src="${safeLogoUrl}"
         alt="THÉSOROS"
         width="190"
         style="
@@ -42,20 +41,19 @@ export function loginOtpEmail(
           width:190px;
           max-width:100%;
           height:auto;
-          margin:0 auto;
           border:0;
           outline:none;
           text-decoration:none;
+          margin:0 auto;
         "
       />
     `
     : `
       <div
         style="
-          font-family:Georgia,'Times New Roman',serif;
-          font-size:30px;
+          font-size:29px;
           line-height:1;
-          letter-spacing:7px;
+          letter-spacing:8px;
           font-weight:700;
           color:#d4af37;
         "
@@ -64,46 +62,19 @@ export function loginOtpEmail(
       </div>
     `;
 
-  return {
-    subject: "Your THÉSOROS verification code",
-
-    text: `Hello ${firstName},
-
-Your THÉSOROS verification code is:
-
-${code}
-
-This code expires in 10 minutes.
-
-For your security, never share this code with anyone. THÉSOROS will never ask you to provide your verification code by phone, email, or message.
-
-If you did not attempt to sign in, please secure your account immediately.
-
-THÉSOROS
-Wealth • Legacy • Security`,
-
-    html: `
+  const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   />
+  <meta name="color-scheme" content="dark" />
+  <meta name="supported-color-schemes" content="dark" />
 
-  <meta
-    name="color-scheme"
-    content="dark"
-  />
-
-  <meta
-    name="supported-color-schemes"
-    content="dark"
-  />
-
-  <title>THÉSOROS Verification</title>
+  <title>Welcome to THÉSOROS</title>
 </head>
 
 <body
@@ -137,9 +108,9 @@ Wealth • Legacy • Security`,
         "
       >
 
-        <!-- ==========================================
-             MAIN EMAIL CONTAINER
-             ========================================== -->
+        <!-- ================================================
+             MAIN CONTAINER
+             ================================================ -->
 
         <table
           width="100%"
@@ -155,9 +126,9 @@ Wealth • Legacy • Security`,
           "
         >
 
-          <!-- ========================================
-               LOGO HEADER
-               ======================================== -->
+          <!-- ==============================================
+               BRAND HEADER
+               ============================================== -->
 
           <tr>
             <td
@@ -176,6 +147,7 @@ Wealth • Legacy • Security`,
                   font-size:10px;
                   line-height:1.5;
                   letter-spacing:3px;
+                  font-weight:400;
                   color:#777777;
                   text-transform:uppercase;
                 "
@@ -186,9 +158,9 @@ Wealth • Legacy • Security`,
             </td>
           </tr>
 
-          <!-- ========================================
+          <!-- ==============================================
                GOLD ACCENT
-               ======================================== -->
+               ============================================== -->
 
           <tr>
             <td
@@ -203,15 +175,14 @@ Wealth • Legacy • Security`,
             </td>
           </tr>
 
-          <!-- ========================================
-               MAIN CONTENT
-               ======================================== -->
+          <!-- ==============================================
+               HERO CONTENT
+               ============================================== -->
 
           <tr>
             <td
-              align="center"
               style="
-                padding:52px 42px 20px;
+                padding:52px 46px 20px;
               "
             >
 
@@ -226,27 +197,31 @@ Wealth • Legacy • Security`,
                   text-transform:uppercase;
                 "
               >
-                Secure Sign In
+                Your journey begins
               </p>
 
               <h1
                 style="
-                  margin:0 0 22px;
+                  margin:0 0 26px;
                   font-family:Georgia,'Times New Roman',serif;
-                  font-size:34px;
-                  line-height:1.25;
+                  font-size:38px;
+                  line-height:1.18;
                   font-weight:400;
+                  letter-spacing:-0.5px;
                   color:#ffffff;
                 "
               >
-                Verify Your Identity
+                Welcome to<br />
+                <span style="color:#d4af37;">
+                  THÉSOROS.
+                </span>
               </h1>
 
               <p
                 style="
-                  margin:0 0 18px;
-                  font-size:16px;
-                  line-height:1.7;
+                  margin:0 0 22px;
+                  font-size:17px;
+                  line-height:1.8;
                   color:#d0d0d0;
                 "
               >
@@ -255,105 +230,74 @@ Wealth • Legacy • Security`,
 
               <p
                 style="
-                  margin:0 auto;
-                  max-width:470px;
+                  margin:0 0 20px;
                   font-size:15px;
-                  line-height:1.8;
-                  color:#999999;
+                  line-height:1.85;
+                  color:#a8a8a8;
                 "
               >
-                Use the verification code below to
-                securely complete your THÉSOROS sign-in.
+                Welcome to THÉSOROS. Your account has been
+                successfully created, giving you access to a wealth
+                experience built around thoughtful investing,
+                long-term planning, and protecting what matters most.
+              </p>
+
+              <p
+                style="
+                  margin:0 0 34px;
+                  font-size:15px;
+                  line-height:1.85;
+                  color:#a8a8a8;
+                "
+              >
+                Your next step is simple. Sign in to your account
+                and begin your THÉSOROS experience.
               </p>
 
             </td>
           </tr>
 
-          <!-- ========================================
-               OTP CODE
-               ======================================== -->
+          <!-- ==============================================
+               CTA
+               ============================================== -->
 
           <tr>
             <td
-              align="center"
               style="
-                padding:28px 42px 36px;
+                padding:0 46px 44px;
               "
             >
 
               <table
-                width="100%"
                 cellpadding="0"
                 cellspacing="0"
                 border="0"
                 role="presentation"
-                style="
-                  max-width:460px;
-                  background:#111111;
-                  border:1px solid #3a321d;
-                "
               >
                 <tr>
                   <td
                     align="center"
                     style="
-                      padding:30px 20px 28px;
+                      background:#d4af37;
+                      border-radius:4px;
                     "
                   >
-
-                    <p
+                    <a
+                      href="${safeLoginUrl}"
                       style="
-                        margin:0 0 14px;
-                        font-size:10px;
-                        line-height:1.5;
-                        letter-spacing:3px;
+                        display:inline-block;
+                        padding:17px 32px;
+                        color:#ffffff;
+                        text-decoration:none;
+                        font-size:13px;
+                        line-height:1;
                         font-weight:700;
-                        color:#777777;
+                        letter-spacing:1.5px;
                         text-transform:uppercase;
                       "
                     >
-                      Your Verification Code
-                    </p>
-
-                    <!-- LARGE WHITE OTP -->
-
-                    <div
-                      style="
-                        margin:0;
-                        padding:16px 12px;
-                        font-family:Arial,Helvetica,sans-serif;
-                        font-size:40px;
-                        line-height:1.2;
-                        font-weight:700;
-                        letter-spacing:10px;
-                        color:#ffffff;
-                      "
-                    >
-                      ${safeCode}
-                    </div>
-
-                    <!-- GOLD ACCENT -->
-
-                    <div
-                      style="
-                        width:80px;
-                        height:2px;
-                        margin:16px auto 18px;
-                        background:#d4af37;
-                      "
-                    ></div>
-
-                    <p
-                      style="
-                        margin:0;
-                        font-size:12px;
-                        line-height:1.6;
-                        color:#777777;
-                      "
-                    >
-                      Expires in 10 minutes
-                    </p>
-
+                      Enter THÉSOROS
+                    </a>
                   </td>
                 </tr>
               </table>
@@ -361,14 +305,14 @@ Wealth • Legacy • Security`,
             </td>
           </tr>
 
-          <!-- ========================================
-               TIME SENSITIVE NOTICE
-               ======================================== -->
+          <!-- ==============================================
+               DIVIDER
+               ============================================== -->
 
           <tr>
             <td
               style="
-                padding:0 42px 38px;
+                padding:0 46px;
               "
             >
 
@@ -378,46 +322,17 @@ Wealth • Legacy • Security`,
                 cellspacing="0"
                 border="0"
                 role="presentation"
-                style="
-                  width:100%;
-                  background:#0d0d0d;
-                  border-left:2px solid #d4af37;
-                "
               >
                 <tr>
                   <td
                     style="
-                      padding:18px 20px;
+                      height:1px;
+                      background:#292929;
+                      font-size:0;
+                      line-height:0;
                     "
                   >
-
-                    <p
-                      style="
-                        margin:0 0 7px;
-                        font-size:11px;
-                        line-height:1.5;
-                        font-weight:700;
-                        letter-spacing:1.5px;
-                        color:#d4af37;
-                        text-transform:uppercase;
-                      "
-                    >
-                      Time Sensitive
-                    </p>
-
-                    <p
-                      style="
-                        margin:0;
-                        font-size:13px;
-                        line-height:1.7;
-                        color:#888888;
-                      "
-                    >
-                      This verification code is valid for
-                      10 minutes. Once it expires, you will
-                      need to request a new code.
-                    </p>
-
+                    &nbsp;
                   </td>
                 </tr>
               </table>
@@ -425,14 +340,59 @@ Wealth • Legacy • Security`,
             </td>
           </tr>
 
-          <!-- ========================================
+          <!-- ==============================================
+               BRAND MESSAGE
+               ============================================== -->
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:38px 46px 42px;
+              "
+            >
+
+              <p
+                style="
+                  margin:0 0 12px;
+                  font-family:Georgia,'Times New Roman',serif;
+                  font-size:21px;
+                  line-height:1.4;
+                  font-weight:400;
+                  color:#ffffff;
+                "
+              >
+                Your wealth.<br />
+                Your strategy.<br />
+                <span style="color:#d4af37;">
+                  Your legacy.
+                </span>
+              </p>
+
+              <p
+                style="
+                  margin:18px 0 0;
+                  font-size:12px;
+                  line-height:1.7;
+                  letter-spacing:0.5px;
+                  color:#666666;
+                "
+              >
+                Built for the wealth you create today<br />
+                and the legacy you leave tomorrow.
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- ==============================================
                SECURITY NOTICE
-               ======================================== -->
+               ============================================== -->
 
           <tr>
             <td
               style="
-                padding:0 30px 42px;
+                padding:0 30px 38px;
               "
             >
 
@@ -443,7 +403,6 @@ Wealth • Legacy • Security`,
                 border="0"
                 role="presentation"
                 style="
-                  width:100%;
                   background:#101010;
                   border:1px solid #242424;
                 "
@@ -477,23 +436,10 @@ Wealth • Legacy • Security`,
                         color:#777777;
                       "
                     >
-                      If you did not attempt to sign in to
-                      your THÉSOROS account, please secure
-                      your account immediately.
-                    </p>
-
-                    <p
-                      style="
-                        margin:12px 0 0;
-                        font-size:12px;
-                        line-height:1.75;
-                        color:#777777;
-                      "
-                    >
-                      Never share this verification code with
-                      anyone. THÉSOROS will never ask you to
-                      provide your verification code by phone,
-                      email, or message.
+                      If you did not create this account, please
+                      contact our support team immediately. Never
+                      share your password or verification codes
+                      with anyone.
                     </p>
 
                   </td>
@@ -503,9 +449,9 @@ Wealth • Legacy • Security`,
             </td>
           </tr>
 
-          <!-- ========================================
-               FOOTER LOGO
-               ======================================== -->
+          <!-- ==============================================
+               FOOTER
+               ============================================== -->
 
           <tr>
             <td
@@ -521,13 +467,13 @@ Wealth • Legacy • Security`,
 
               <p
                 style="
-                  margin:14px 0 7px;
+                  margin:16px 0 8px;
                   font-size:11px;
                   line-height:1.6;
                   color:#666666;
                 "
               >
-                Wealth &nbsp;•&nbsp; Legacy &nbsp;•&nbsp; Security
+                A modern approach to structured wealth and legacy.
               </p>
 
               <p
@@ -538,8 +484,8 @@ Wealth • Legacy • Security`,
                   color:#444444;
                 "
               >
-                This is an automated security message from
-                THÉSOROS. Please do not reply to this email.
+                This is an automated message from THÉSOROS.
+                Please do not reply to this email.
               </p>
 
             </td>
@@ -547,9 +493,9 @@ Wealth • Legacy • Security`,
 
         </table>
 
-        <!-- ==========================================
+        <!-- ================================================
              COPYRIGHT
-             ========================================== -->
+             ================================================ -->
 
         <table
           width="100%"
@@ -582,7 +528,46 @@ Wealth • Legacy • Security`,
   </table>
 </body>
 </html>
-`,
+`;
+
+  const text = `
+WELCOME TO THÉSOROS
+
+Hello ${firstName},
+
+Welcome to THÉSOROS.
+
+Your account has been successfully created, giving you access
+to a wealth experience built around thoughtful investing,
+long-term planning, and protecting what matters most.
+
+Your next step is simple. Sign in to your account and begin
+your THÉSOROS experience:
+
+${loginUrl}
+
+YOUR WEALTH.
+YOUR STRATEGY.
+YOUR LEGACY.
+
+Built for the wealth you create today and the legacy you leave tomorrow.
+
+SECURITY NOTICE
+
+If you did not create this account, please contact our support
+team immediately. Never share your password or verification
+codes with anyone.
+
+This is an automated message from THÉSOROS.
+Please do not reply to this email.
+
+© ${new Date().getFullYear()} THÉSOROS. All rights reserved.
+`;
+
+  return {
+    subject,
+    html,
+    text,
   };
 }
 

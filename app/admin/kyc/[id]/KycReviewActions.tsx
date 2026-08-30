@@ -88,15 +88,15 @@ processKyc("DECLINE");
 return (
 <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
 <div className="mb-6">
-<p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-400">
+<p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
 Review decision
 </p>
 
-    <h2 className="mt-2 text-xl font-semibold">
+    <h2 className="mt-2 text-xl font-bold">
       Process application
     </h2>
 
-    <p className="mt-2 text-sm leading-6 text-zinc-500">
+    <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
       Approve the verification if everything
       matches. If you decline it, provide a clear
       reason that the user can act on.
@@ -113,7 +113,7 @@ Review decision
     type="button"
     disabled={processing}
     onClick={() => processKyc("APPROVE")}
-    className="w-full rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+    className="w-full rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
   >
     {processing
       ? "Processing..."
@@ -125,7 +125,7 @@ Review decision
   <form onSubmit={handleDecline}>
     <label
       htmlFor="declineReason"
-      className="mb-2 block text-sm font-medium text-zinc-300"
+      className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
     >
       Decline reason
     </label>
@@ -140,17 +140,17 @@ Review decision
       rows={5}
       maxLength={2000}
       placeholder="Explain what the applicant needs to correct before resubmitting."
-      className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-zinc-600 focus:border-red-500/50 disabled:opacity-50"
+      className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-red-500/50 disabled:opacity-50"
     />
 
-    <div className="mt-2 flex justify-end text-xs text-zinc-600">
+    <div className="mt-2 flex justify-end text-xs !text-[#FFFFFF]">
       {declineReason.length}/2000
     </div>
 
     <button
       type="submit"
       disabled={processing}
-      className="mt-4 w-full rounded-xl border border-red-500/30 bg-red-500/10 px-5 py-3 text-sm font-semibold text-red-300 transition hover:bg-red-500/15 disabled:cursor-not-allowed disabled:opacity-50"
+      className="mt-4 w-full rounded-xl border border-red-500/30 bg-red-500/10 px-5 py-3 text-sm font-bold text-red-300 transition hover:bg-red-500/15 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {processing
         ? "Processing..."

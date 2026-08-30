@@ -365,8 +365,8 @@ export async function PATCH(request: Request) {
                 : "Balance adjusted",
             message:
               type === "CREDIT"
-                ? `Your Edge Portfolio account has been credited with $${amount.toFixed(2)}. Your new available balance is $${newBalance.toFixed(2)}.`
-                : `Your Edge Portfolio account has been debited by $${amount.toFixed(2)}. Your new available balance is $${newBalance.toFixed(2)}.`,
+                ? `Your Thesoros account has been credited with $${amount.toFixed(2)}. Your new available balance is $${newBalance.toFixed(2)}.`
+                : `Your Thesoros account has been debited by $${amount.toFixed(2)}. Your new available balance is $${newBalance.toFixed(2)}.`,
           },
         });
 

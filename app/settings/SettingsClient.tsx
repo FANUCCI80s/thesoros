@@ -114,12 +114,12 @@ export default function SettingsClient() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#050706] text-white">
+      <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="flex min-h-screen items-center justify-center px-5">
           <div className="text-center">
-            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
+            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
 
-            <p className="mt-4 text-sm text-zinc-500">
+            <p className="mt-4 text-sm !text-[#FFFFFF]">
               Loading settings...
             </p>
           </div>
@@ -129,27 +129,25 @@ export default function SettingsClient() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050706] text-white">
+    <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="flex min-h-screen">
         {/* Sidebar */}
-        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#080a09] lg:flex lg:flex-col">
+        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col">
           <div className="border-b border-white/10 p-5">
             <Link
               href="/dashboard"
               className="flex items-center gap-3"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/10">
-                <span className="font-bold text-emerald-400">
-                  E
-                </span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
               </div>
 
               <div>
-                <p className="font-semibold tracking-tight">
-                  Edge Portfolio
+                <p className="font-bold tracking-tight">
+                  Thesoros
                 </p>
 
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs !text-[#FFFFFF]">
                   Trading platform
                 </p>
               </div>
@@ -159,41 +157,41 @@ export default function SettingsClient() {
           <nav className="flex-1 space-y-1 p-4">
             <Link
               href="/dashboard"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>⌂</span>
+              <span>âŒ‚</span>
               Dashboard
             </Link>
 
             <Link
               href="/trade"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↗</span>
+              <span>â†—</span>
               Trade
             </Link>
 
             <Link
               href="/deposit"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↓</span>
+              <span>â†“</span>
               Deposit
             </Link>
 
             <Link
               href="/withdraw"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↑</span>
+              <span>â†‘</span>
               Withdraw
             </Link>
 
             <Link
               href="/transactions"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>↔</span>
+              <span>â†”</span>
               Transactions
             </Link>
 
@@ -201,17 +199,17 @@ export default function SettingsClient() {
 
             <Link
               href="/notifications"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>●</span>
+              <span>â—</span>
               Notifications
             </Link>
 
             <Link
               href="/settings"
-              className="flex items-center gap-3 rounded-xl bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-400"
+              className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
             >
-              <span>⚙</span>
+              <span>âš™</span>
               Settings
             </Link>
           </nav>
@@ -219,7 +217,7 @@ export default function SettingsClient() {
           <div className="border-t border-white/10 p-4">
             <Link
               href="/dashboard"
-              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:text-white"
+              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
             >
               Back to dashboard
             </Link>
@@ -229,26 +227,24 @@ export default function SettingsClient() {
         {/* Main */}
         <section className="min-w-0 flex-1">
           {/* Mobile header */}
-          <header className="border-b border-white/10 bg-[#080a09] px-5 py-4 lg:hidden">
+          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
             <div className="flex items-center justify-between">
               <Link
                 href="/dashboard"
                 className="flex items-center gap-3"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-400/30 bg-emerald-400/10">
-                  <span className="font-bold text-emerald-400">
-                    E
-                  </span>
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
+                  <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
                 </div>
 
-                <span className="font-semibold">
-                  Edge Portfolio
+                <span className="font-bold">
+                  Thesoros
                 </span>
               </Link>
 
               <Link
                 href="/dashboard"
-                className="text-sm text-zinc-500 hover:text-white"
+                className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
               >
                 Dashboard
               </Link>
@@ -258,15 +254,15 @@ export default function SettingsClient() {
           <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 lg:px-10">
             {/* Header */}
             <div className="mb-8">
-              <p className="mb-2 text-sm font-medium text-emerald-400">
+              <p className="mb-2 text-sm font-bold text-gold">
                 Account
               </p>
 
-              <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Settings
               </h1>
 
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+              <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
                 Manage your account information and
                 security preferences.
               </p>
@@ -275,18 +271,18 @@ export default function SettingsClient() {
             {/* Error */}
             {error && (
               <div className="mb-6 rounded-2xl border border-red-400/20 bg-red-400/5 p-5">
-                <p className="text-sm font-medium text-red-300">
+                <p className="text-sm font-bold text-red-300">
                   Something went wrong
                 </p>
 
-                <p className="mt-1 text-sm text-zinc-500">
+                <p className="mt-1 text-sm !text-[#FFFFFF]">
                   {error}
                 </p>
 
                 <button
                   type="button"
                   onClick={loadProfile}
-                  className="mt-4 rounded-xl border border-white/10 px-4 py-2 text-xs font-medium text-zinc-300 transition hover:border-white/20 hover:text-white"
+                  className="mt-4 rounded-xl border border-white/10 px-4 py-2 text-xs font-bold text-zinc-300 transition hover:border-white/20 hover:!text-[#FFFFFF]"
                 >
                   Retry
                 </button>
@@ -295,12 +291,12 @@ export default function SettingsClient() {
 
             {/* Success */}
             {message && (
-              <div className="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-5">
-                <p className="text-sm font-medium text-emerald-300">
+              <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-5">
+                <p className="text-sm font-bold text-gold-light">
                   Settings updated
                 </p>
 
-                <p className="mt-1 text-sm text-zinc-500">
+                <p className="mt-1 text-sm !text-[#FFFFFF]">
                   {message}
                 </p>
               </div>
@@ -310,11 +306,11 @@ export default function SettingsClient() {
               {/* Personal information */}
               <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
                 <div className="border-b border-white/10 px-6 py-5 sm:px-8">
-                  <h2 className="font-semibold">
+                  <h2 className="font-bold">
                     Personal information
                   </h2>
 
-                  <p className="mt-1 text-xs text-zinc-600">
+                  <p className="mt-1 text-xs !text-[#FFFFFF]">
                     Your registered name cannot be changed.
                   </p>
                 </div>
@@ -322,7 +318,7 @@ export default function SettingsClient() {
                 <div className="p-6 sm:p-8">
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label className="mb-2 block text-xs font-medium text-zinc-500">
+                      <label className="mb-2 block text-xs font-bold !text-[#FFFFFF]">
                         First name
                       </label>
 
@@ -330,12 +326,12 @@ export default function SettingsClient() {
                         type="text"
                         value={user?.firstName || ""}
                         disabled
-                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-zinc-500 outline-none"
+                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm !text-[#FFFFFF] outline-none"
                       />
                     </div>
 
                     <div>
-                      <label className="mb-2 block text-xs font-medium text-zinc-500">
+                      <label className="mb-2 block text-xs font-bold !text-[#FFFFFF]">
                         Last name
                       </label>
 
@@ -343,12 +339,12 @@ export default function SettingsClient() {
                         type="text"
                         value={user?.lastName || ""}
                         disabled
-                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-zinc-500 outline-none"
+                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm !text-[#FFFFFF] outline-none"
                       />
                     </div>
                   </div>
 
-                  <p className="mt-4 text-xs text-zinc-600">
+                  <p className="mt-4 text-xs !text-[#FFFFFF]">
                     Your legal name is tied to your account and
                     KYC information. Contact support if it needs
                     to be corrected.
@@ -362,11 +358,11 @@ export default function SettingsClient() {
                 className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]"
               >
                 <div className="border-b border-white/10 px-6 py-5 sm:px-8">
-                  <h2 className="font-semibold">
+                  <h2 className="font-bold">
                     Contact information
                   </h2>
 
-                  <p className="mt-1 text-xs text-zinc-600">
+                  <p className="mt-1 text-xs !text-[#FFFFFF]">
                     Update the email address and phone number
                     connected to your account.
                   </p>
@@ -377,7 +373,7 @@ export default function SettingsClient() {
                     <div>
                       <label
                         htmlFor="email"
-                        className="mb-2 block text-xs font-medium text-zinc-500"
+                        className="mb-2 block text-xs font-bold !text-[#FFFFFF]"
                       >
                         Email address
                       </label>
@@ -391,14 +387,14 @@ export default function SettingsClient() {
                         }
                         required
                         autoComplete="email"
-                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/40 focus:ring-1 focus:ring-emerald-400/20"
+                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/40 focus:ring-1 focus:ring-gold/20"
                       />
                     </div>
 
                     <div>
                       <label
                         htmlFor="phone"
-                        className="mb-2 block text-xs font-medium text-zinc-500"
+                        className="mb-2 block text-xs font-bold !text-[#FFFFFF]"
                       >
                         Phone number
                       </label>
@@ -412,7 +408,7 @@ export default function SettingsClient() {
                         }
                         autoComplete="tel"
                         placeholder="+1 555 000 0000"
-                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-400/40 focus:ring-1 focus:ring-emerald-400/20"
+                        className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/40 focus:ring-1 focus:ring-gold/20"
                       />
                     </div>
                   </div>
@@ -421,7 +417,7 @@ export default function SettingsClient() {
                     <button
                       type="submit"
                       disabled={saving}
-                      className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {saving
                         ? "Saving..."
@@ -434,11 +430,11 @@ export default function SettingsClient() {
               {/* Security */}
               <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
                 <div className="border-b border-white/10 px-6 py-5 sm:px-8">
-                  <h2 className="font-semibold">
+                  <h2 className="font-bold">
                     Security
                   </h2>
 
-                  <p className="mt-1 text-xs text-zinc-600">
+                  <p className="mt-1 text-xs !text-[#FFFFFF]">
                     Manage your account password and security.
                   </p>
                 </div>
@@ -446,11 +442,11 @@ export default function SettingsClient() {
                 <div className="divide-y divide-white/[0.06]">
                   <div className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
                     <div>
-                      <p className="text-sm font-medium">
+                      <p className="text-sm font-bold">
                         Password
                       </p>
 
-                      <p className="mt-1 text-xs text-zinc-600">
+                      <p className="mt-1 text-xs !text-[#FFFFFF]">
                         Change the password used to access your
                         account.
                       </p>
@@ -458,7 +454,7 @@ export default function SettingsClient() {
 
                     <Link
                       href="/settings/password"
-                      className="inline-flex shrink-0 items-center justify-center rounded-xl border border-white/10 px-4 py-2.5 text-xs font-medium text-zinc-300 transition hover:border-white/20 hover:text-white"
+                      className="inline-flex shrink-0 items-center justify-center rounded-xl border border-white/10 px-4 py-2.5 text-xs font-bold text-zinc-300 transition hover:border-white/20 hover:!text-[#FFFFFF]"
                     >
                       Change password
                     </Link>
@@ -466,11 +462,11 @@ export default function SettingsClient() {
 
                   <div className="flex flex-col gap-4 p-6 sm:px-8">
                     <div>
-                      <p className="text-sm font-medium">
+                      <p className="text-sm font-bold">
                         Login verification
                       </p>
 
-                      <p className="mt-1 text-xs leading-5 text-zinc-600">
+                      <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
                         New devices may require an OTP sent to
                         your registered email address before
                         access is granted.
@@ -478,9 +474,9 @@ export default function SettingsClient() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                      <span className="h-2 w-2 rounded-full bg-gold" />
 
-                      <span className="text-xs text-emerald-300">
+                      <span className="text-xs text-gold-light">
                         Email verification enabled
                       </span>
                     </div>
@@ -491,22 +487,22 @@ export default function SettingsClient() {
               {/* Account */}
               <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
                 <div className="border-b border-white/10 px-6 py-5 sm:px-8">
-                  <h2 className="font-semibold">
+                  <h2 className="font-bold">
                     Account
                   </h2>
 
-                  <p className="mt-1 text-xs text-zinc-600">
+                  <p className="mt-1 text-xs !text-[#FFFFFF]">
                     Additional account information.
                   </p>
                 </div>
 
                 <div className="p-6 sm:p-8">
                   <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs !text-[#FFFFFF]">
                       Account ID
                     </p>
 
-                    <p className="mt-2 break-all font-mono text-sm text-zinc-300">
+                    <p className="mt-2 break-all font-mono text-sm !text-[#FFFFFF]">
                       {user?.id || "Unavailable"}
                     </p>
                   </div>
@@ -519,4 +515,5 @@ export default function SettingsClient() {
     </div>
   );
 }
+
 

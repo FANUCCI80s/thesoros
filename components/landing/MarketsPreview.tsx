@@ -24,17 +24,17 @@ export default function MarketsPreview() {
     <section id="markets" className="border-t border-white/[0.06] py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
             Markets
           </p>
 
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight !text-[#FFFFFF] sm:text-5xl">
             One platform.
             <br />
             Multiple markets.
           </h2>
 
-          <p className="mt-5 leading-7 text-zinc-500">
+          <p className="mt-5 leading-7 !text-[#FFFFFF]">
             Keep your market activity in one streamlined environment built
             around speed, clarity, and control.
           </p>
@@ -44,21 +44,21 @@ export default function MarketsPreview() {
           {markets.map((market) => (
             <div
               key={market.name}
-              className="group rounded-3xl border border-white/[0.07] bg-white/[0.025] p-7 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-emerald-500/[0.025]"
+              className="group rounded-3xl border border-white/[0.07] bg-white/[0.025] p-7 transition duration-300 hover:-translate-y-1 hover:border-gold/20 hover:bg-gold/[0.025]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 font-bold text-emerald-400">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 font-bold text-gold">
                 {market.symbol}
               </div>
 
-              <h3 className="mt-7 text-xl font-semibold text-white">
+              <h3 className="mt-7 text-xl font-bold !text-[#FFFFFF]">
                 {market.name}
               </h3>
 
-              <p className="mt-3 text-sm leading-6 text-zinc-500">
+              <p className="mt-3 text-sm leading-6 !text-[#FFFFFF]">
                 {market.description}
               </p>
 
-              <div className="mt-7 border-t border-white/[0.06] pt-5 text-xs font-medium text-zinc-400">
+              <div className="mt-7 border-t border-white/[0.06] pt-5 text-xs font-bold !text-[#FFFFFF]">
                 {market.examples}
               </div>
             </div>

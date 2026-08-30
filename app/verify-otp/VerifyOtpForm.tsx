@@ -17,7 +17,7 @@ const [message, setMessage] = useState("");
 
 useEffect(() => {
 const storedEmail = sessionStorage.getItem(
-"edgePortfolioLoginEmail"
+"ThesorosLoginEmail"
 );
 
 if (!storedEmail) {
@@ -69,7 +69,7 @@ try {
   }
 
   
-sessionStorage.removeItem("edgePortfolioLoginEmail");
+sessionStorage.removeItem("ThesorosLoginEmail");
 
 router.replace(data.redirectTo || "/kyc");
 
@@ -124,25 +124,25 @@ try {
 }
 
 return (
-<main className="min-h-screen bg-[#050807] text-white">
+<main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
 <div className="flex min-h-screen items-center justify-center px-5 py-12">
 <div className="w-full max-w-md">
 <div className="mb-10 text-center">
 <Link href="/" className="mb-8 inline-flex items-center gap-3" >
-<div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500 font-bold text-black">
+<div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold font-bold !text-[#FFFFFF]">
 EP
 </div>
 
-          <span className="text-xl font-semibold">
-            Edge Portfolio
+          <span className="text-xl font-bold">
+            Thesoros
           </span>
         </Link>
 
-        <div className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-500/20 bg-emerald-500/10">
+        <div className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-gold/20 bg-gold/10">
           <svg
             viewBox="0 0 24 24"
             fill="none"
-            className="h-7 w-7 text-emerald-400"
+            className="h-7 w-7 text-gold"
             aria-hidden="true"
           >
             <path
@@ -155,14 +155,14 @@ EP
           </svg>
         </div>
 
-        <h1 className="mt-6 text-3xl font-semibold">
+        <h1 className="mt-6 text-3xl font-bold">
           Verify your login
         </h1>
 
-        <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-zinc-500">
+        <p className="mx-auto mt-3 max-w-sm text-sm leading-6 !text-[#FFFFFF]">
           Enter the 6-digit verification code sent to
           {" "}
-          <span className="text-zinc-300">
+          <span className="!text-[#FFFFFF]">
             {email || "your email address"}
           </span>
           .
@@ -175,7 +175,7 @@ EP
       >
         <label
           htmlFor="code"
-          className="mb-2 block text-sm font-medium text-zinc-300"
+          className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
         >
           Verification code
         </label>
@@ -197,7 +197,7 @@ EP
             setCode(value);
           }}
           placeholder="000000"
-          className="h-14 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-center text-2xl font-semibold tracking-[0.5em] text-white outline-none transition placeholder:text-zinc-700 focus:border-emerald-500/60 focus:bg-white/[0.06]"
+          className="h-14 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-center text-2xl font-bold tracking-[0.5em] text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06]"
         />
 
         {error && (
@@ -207,7 +207,7 @@ EP
         )}
 
         {message && (
-          <div className="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400">
+          <div className="mt-4 rounded-xl border border-gold/20 bg-gold/10 px-4 py-3 text-sm text-gold">
             {message}
           </div>
         )}
@@ -215,7 +215,7 @@ EP
         <button
           type="submit"
           disabled={loading || code.length !== 6}
-          className="mt-5 h-12 w-full rounded-xl bg-emerald-500 px-5 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-5 h-12 w-full rounded-xl bg-gold px-5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
         >
           {loading ? "Verifying..." : "Verify and continue"}
         </button>
@@ -225,7 +225,7 @@ EP
             type="button"
             onClick={handleResend}
             disabled={resending}
-            className="text-sm font-medium text-emerald-400 transition hover:text-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
+            className="text-sm font-bold text-gold transition hover:text-gold-light disabled:cursor-not-allowed disabled:opacity-50"
           >
             {resending
               ? "Sending..."
@@ -237,13 +237,13 @@ EP
       <div className="mt-6 text-center">
         <Link
           href="/login"
-          className="text-sm text-zinc-500 transition hover:text-zinc-300"
+          className="text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
         >
-          ← Back to sign in
+          â† Back to sign in
         </Link>
       </div>
 
-      <p className="mt-8 text-center text-xs leading-5 text-zinc-600">
+      <p className="mt-8 text-center text-xs leading-5 !text-[#FFFFFF]">
         Never share your verification code with anyone.
       </p>
     </div>

@@ -14,11 +14,11 @@ accentColor: string;
 export default function AdminSettingsPage() {
 const [settings, setSettings] = useState<PlatformSettings | null>(null);
 
-const [platformName, setPlatformName] = useState("Edge Portfolio");
+const [platformName, setPlatformName] = useState("Thesoros");
 const [logoUrl, setLogoUrl] = useState("");
-const [primaryColor, setPrimaryColor] = useState("#22c55e");
-const [secondaryColor, setSecondaryColor] = useState("#050806");
-const [accentColor, setAccentColor] = useState("#16a34a");
+const [primaryColor, setPrimaryColor] = useState("#E8C766");
+const [secondaryColor, setSecondaryColor] = useState("#FAF7F0");
+const [accentColor, setAccentColor] = useState("#D4AF37");
 
 const [loading, setLoading] = useState(true);
 const [saving, setSaving] = useState(false);
@@ -79,11 +79,11 @@ setError("");
   }
 
   setSettings(loaded);
-  setPlatformName(loaded.platformName || "Edge Portfolio");
+  setPlatformName(loaded.platformName || "Thesoros");
   setLogoUrl(loaded.logoUrl || "");
-  setPrimaryColor(loaded.primaryColor || "#22c55e");
-  setSecondaryColor(loaded.secondaryColor || "#050806");
-  setAccentColor(loaded.accentColor || "#16a34a");
+  setPrimaryColor(loaded.primaryColor || "#E8C766");
+  setSecondaryColor(loaded.secondaryColor || "#FAF7F0");
+  setAccentColor(loaded.accentColor || "#D4AF37");
 } catch (err) {
   console.error("Admin settings load error:", err);
 
@@ -140,11 +140,11 @@ try {
 
   setSettings(data.settings);
 
-  setPlatformName(data.settings.platformName || "Edge Portfolio");
+  setPlatformName(data.settings.platformName || "Thesoros");
   setLogoUrl(data.settings.logoUrl || "");
-  setPrimaryColor(data.settings.primaryColor || "#22c55e");
-  setSecondaryColor(data.settings.secondaryColor || "#050806");
-  setAccentColor(data.settings.accentColor || "#16a34a");
+  setPrimaryColor(data.settings.primaryColor || "#E8C766");
+  setSecondaryColor(data.settings.secondaryColor || "#FAF7F0");
+  setAccentColor(data.settings.accentColor || "#D4AF37");
 
   setSuccess("Platform settings saved successfully.");
 } catch (err) {
@@ -163,12 +163,12 @@ try {
 }
 
 if (loading) {
-return ( <main className="min-h-screen bg-[#050806] text-white"> <div className="flex min-h-screen items-center justify-center"> <div className="text-center"> <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-green-500/20 border-t-green-500" /> <p className="text-sm text-gray-400">
+return ( <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]"> <div className="flex min-h-screen items-center justify-center"> <div className="text-center"> <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-gold/20 border-t-gold" /> <p className="text-sm !text-[#FFFFFF]">
 Loading platform settings... </p> </div> </div> </main>
 );
 }
 
-return ( <main className="min-h-screen bg-[#050806] text-white"> <div className="mx-auto max-w-6xl px-6 py-10"> <div className="mb-8"> <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-green-500">
+return ( <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]"> <div className="mx-auto max-w-6xl px-6 py-10"> <div className="mb-8"> <p className="mb-2 text-sm font-bold uppercase tracking-wider text-gold">
 Admin Panel </p>
 
 
@@ -176,8 +176,8 @@ Admin Panel </p>
         Platform Settings
       </h1>
 
-      <p className="mt-2 text-sm text-gray-400">
-        Manage the basic branding settings for Edge Portfolio.
+      <p className="mt-2 text-sm !text-[#FFFFFF]">
+        Manage the basic branding settings for Thesoros.
       </p>
     </div>
 
@@ -188,7 +188,7 @@ Admin Panel </p>
     )}
 
     {success && (
-      <div className="mb-6 rounded-xl border border-green-500/20 bg-green-500/10 px-4 py-3 text-sm text-green-400">
+      <div className="mb-6 rounded-xl border border-gold/20 bg-gold/10 px-4 py-3 text-sm text-gold">
         {success}
       </div>
     )}
@@ -196,11 +196,11 @@ Admin Panel </p>
     <form onSubmit={handleSubmit} className="space-y-6">
       <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-bold">
             Platform Branding
           </h2>
 
-          <p className="mt-1 text-sm text-gray-400">
+          <p className="mt-1 text-sm !text-[#FFFFFF]">
             Update the name, logo, and colors used by the platform.
           </p>
         </div>
@@ -209,7 +209,7 @@ Admin Panel </p>
           <div>
             <label
               htmlFor="platformName"
-              className="mb-2 block text-sm font-medium text-gray-300"
+              className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
             >
               Platform Name
             </label>
@@ -221,15 +221,15 @@ Admin Panel </p>
               onChange={(event) =>
                 setPlatformName(event.target.value)
               }
-              placeholder="Edge Portfolio"
-              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none placeholder:text-gray-600 focus:border-green-500/50"
+              placeholder="Thesoros"
+              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none placeholder:!text-[#FFFFFF] focus:border-gold/50"
             />
           </div>
 
           <div>
             <label
               htmlFor="logoUrl"
-              className="mb-2 block text-sm font-medium text-gray-300"
+              className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
             >
               Logo URL
             </label>
@@ -242,7 +242,7 @@ Admin Panel </p>
                 setLogoUrl(event.target.value)
               }
               placeholder="https://example.com/logo.png"
-              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none placeholder:text-gray-600 focus:border-green-500/50"
+              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none placeholder:!text-[#FFFFFF] focus:border-gold/50"
             />
           </div>
         </div>
@@ -250,11 +250,11 @@ Admin Panel </p>
 
       <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-bold">
             Platform Colors
           </h2>
 
-          <p className="mt-1 text-sm text-gray-400">
+          <p className="mt-1 text-sm !text-[#FFFFFF]">
             Select the primary, secondary, and accent colors.
           </p>
         </div>
@@ -282,11 +282,11 @@ Admin Panel </p>
 
       <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-bold">
             Preview
           </h2>
 
-          <p className="mt-1 text-sm text-gray-400">
+          <p className="mt-1 text-sm !text-[#FFFFFF]">
             Preview your current branding settings.
           </p>
         </div>
@@ -307,7 +307,7 @@ Admin Panel </p>
                 />
               ) : (
                 <div
-                  className="flex h-10 w-10 items-center justify-center rounded-xl font-bold text-black"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl font-bold !text-[#FFFFFF]"
                   style={{
                     backgroundColor: primaryColor,
                   }}
@@ -316,13 +316,13 @@ Admin Panel </p>
                 </div>
               )}
 
-              <span className="font-semibold">
-                {platformName || "Edge Portfolio"}
+              <span className="font-bold">
+                {platformName || "Thesoros"}
               </span>
             </div>
 
             <div
-              className="rounded-lg px-4 py-2 text-sm font-semibold text-black"
+              className="rounded-lg px-4 py-2 text-sm font-bold !text-[#FFFFFF]"
               style={{
                 backgroundColor: primaryColor,
               }}
@@ -338,7 +338,7 @@ Admin Panel </p>
                 borderColor: `${accentColor}55`,
               }}
             >
-              <p className="text-sm text-gray-400">
+              <p className="text-sm !text-[#FFFFFF]">
                 Available Balance
               </p>
 
@@ -348,7 +348,7 @@ Admin Panel </p>
 
               <button
                 type="button"
-                className="mt-5 rounded-lg px-4 py-2 text-sm font-semibold text-black"
+                className="mt-5 rounded-lg px-4 py-2 text-sm font-bold !text-[#FFFFFF]"
                 style={{
                   backgroundColor: accentColor,
                 }}
@@ -364,7 +364,7 @@ Admin Panel </p>
         <button
           type="submit"
           disabled={saving}
-          className="rounded-xl bg-green-500 px-6 py-3 text-sm font-bold text-black transition hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
         >
           {saving ? "Saving..." : "Save Settings"}
         </button>
@@ -372,18 +372,18 @@ Admin Panel </p>
     </form>
 
     <section className="mt-8 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-6">
-      <h2 className="text-lg font-semibold text-yellow-400">
+      <h2 className="text-lg font-bold text-yellow-400">
         Admin Password
       </h2>
 
-      <p className="mt-2 text-sm leading-6 text-gray-400">
+      <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
         Change your administrator password from the secure
         password management page.
       </p>
 
       <a
         href="/settings/password"
-        className="mt-4 inline-flex rounded-xl border border-yellow-500/20 bg-yellow-500/10 px-4 py-2 text-sm font-semibold text-yellow-400 transition hover:bg-yellow-500/20"
+        className="mt-4 inline-flex rounded-xl border border-yellow-500/20 bg-yellow-500/10 px-4 py-2 text-sm font-bold text-yellow-400 transition hover:bg-yellow-500/20"
       >
         Reset Admin Password
       </a>
@@ -406,9 +406,9 @@ onChange: (value: string) => void;
 }) {
 const validColor = /^#[0-9A-Fa-f]{6}$/.test(value)
 ? value
-: "#22c55e";
+: "#E8C766";
 
-return ( <div> <label className="mb-2 block text-sm font-medium text-gray-300">
+return ( <div> <label className="mb-2 block text-sm font-bold !text-[#FFFFFF]">
 {label} </label>
 
 
@@ -424,8 +424,8 @@ return ( <div> <label className="mb-2 block text-sm font-medium text-gray-300">
       type="text"
       value={value}
       onChange={(event) => onChange(event.target.value)}
-      placeholder="#22c55e"
-      className="min-w-0 flex-1 rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none focus:border-green-500/50"
+      placeholder="#E8C766"
+      className="min-w-0 flex-1 rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm !text-[#FFFFFF] outline-none focus:border-gold/50"
     />
   </div>
 </div>
@@ -433,3 +433,4 @@ return ( <div> <label className="mb-2 block text-sm font-medium text-gray-300">
 
 );
 }
+

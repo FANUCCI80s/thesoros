@@ -1,6 +1,9 @@
+
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/auth/password";
+import { sendEmail } from "@/lib/email/send";
+import { getWelcomeEmail } from "@/lib/email/templates/welcome";
 
 export async function POST(request: Request) {
   try {
@@ -154,6 +157,45 @@ export async function POST(request: Request) {
       throw setupError;
     }
 
+    console.log("[SIGNUP] Account setup complete");
+
+    /*
+     * Send welcome email.
+     *
+     * This is intentionally outside the account setup rollback block.
+     * If email delivery fails, the user's successfully created account
+     * should NOT be deleted.
+     */
+    const appUrl =
+      process.env.NEXT_PUBLIC_APP_URL ||
+      process.env.AUTH_URL ||
+      "http://localhost:3000";
+
+    const loginUrl = `${appUrl}/login`;
+
+    const welcomeEmail = getWelcomeEmail({
+      firstName: newUser.firstName,
+      loginUrl,
+    });
+
+    try {
+      console.log("[SIGNUP] Sending welcome email");
+
+      await sendEmail({
+        to: newUser.email,
+        subject: welcomeEmail.subject,
+        html: welcomeEmail.html,
+        text: welcomeEmail.text,
+      });
+
+      console.log("[SIGNUP] Welcome email sent");
+    } catch (emailError) {
+      console.error(
+        "[SIGNUP] Welcome email failed, but account remains created:",
+        emailError
+      );
+    }
+
     console.log("[SIGNUP] SUCCESS");
 
     return NextResponse.json(
@@ -176,3 +218,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

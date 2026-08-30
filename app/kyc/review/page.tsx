@@ -68,12 +68,12 @@ export default function KycReviewPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#050505] px-5 py-10 text-white">
+      <main className="min-h-screen bg-[#050505] px-5 py-10 !text-[#FFFFFF]">
         <div className="mx-auto flex min-h-[80vh] max-w-2xl items-center justify-center">
           <div className="text-center">
-            <div className="mx-auto mb-5 h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
+            <div className="mx-auto mb-5 h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
 
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm !text-[#FFFFFF]">
               Loading verification status...
             </p>
           </div>
@@ -84,25 +84,25 @@ export default function KycReviewPage() {
 
   if (error) {
     return (
-      <main className="min-h-screen bg-[#050505] px-5 py-10 text-white">
+      <main className="min-h-screen bg-[#050505] px-5 py-10 !text-[#FFFFFF]">
         <div className="mx-auto flex min-h-[80vh] max-w-2xl items-center justify-center">
           <div className="w-full rounded-3xl border border-red-500/20 bg-red-500/5 p-8 text-center">
             <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-red-500/10 text-xl text-red-400">
               !
             </div>
 
-            <h1 className="text-2xl font-semibold">
+            <h1 className="text-2xl font-bold">
               Unable to load verification
             </h1>
 
-            <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-zinc-400">
+            <p className="mx-auto mt-3 max-w-md text-sm leading-6 !text-[#FFFFFF]">
               {error}
             </p>
 
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="mt-6 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400"
+              className="mt-6 rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
             >
               Try again
             </button>
@@ -118,30 +118,30 @@ export default function KycReviewPage() {
 
   if (kyc.status === "APPROVED") {
     return (
-      <main className="min-h-screen bg-[#050505] px-5 py-10 text-white">
+      <main className="min-h-screen bg-[#050505] px-5 py-10 !text-[#FFFFFF]">
         <div className="mx-auto flex min-h-[80vh] max-w-2xl items-center justify-center">
-          <div className="w-full rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center sm:p-12">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-2xl text-emerald-400">
-              ✓
+          <div className="w-full rounded-3xl border border-gold/20 bg-gold/5 p-8 text-center sm:p-12">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gold/10 text-2xl text-gold">
+              âœ“
             </div>
 
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-emerald-400">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold">
               Verification approved
             </p>
 
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight">
+            <h1 className="mt-3 text-3xl font-bold tracking-tight">
               Your identity is verified
             </h1>
 
-            <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-zinc-400">
-              Your Edge Portfolio account has successfully
+            <p className="mx-auto mt-4 max-w-md text-sm leading-6 !text-[#FFFFFF]">
+              Your Thesoros account has successfully
               completed identity verification.
             </p>
 
             <button
               type="button"
               onClick={() => router.push("/dashboard")}
-              className="mt-8 rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400"
+              className="mt-8 rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
             >
               Go to dashboard
             </button>
@@ -152,7 +152,7 @@ export default function KycReviewPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050505] px-5 py-10 text-white sm:px-8">
+    <main className="min-h-screen bg-[#050505] px-5 py-10 !text-[#FFFFFF] sm:px-8">
       <div className="mx-auto max-w-3xl">
         <header className="mb-16 flex items-center justify-between">
           <button
@@ -160,36 +160,34 @@ export default function KycReviewPage() {
             onClick={() => router.push("/dashboard")}
             className="flex items-center gap-3"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/10">
-              <span className="text-lg font-bold text-emerald-400">
-                E
-              </span>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+              <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
             </div>
 
-            <span className="text-xl font-semibold tracking-tight">
-              Edge Portfolio
+            <span className="text-xl font-bold tracking-tight">
+              Thesoros
             </span>
           </button>
 
-          <span className="hidden text-sm text-zinc-500 sm:block">
+          <span className="hidden text-sm !text-[#FFFFFF] sm:block">
             Identity verification
           </span>
         </header>
 
         <div className="text-center">
-          <div className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-500/10">
-            <div className="h-9 w-9 animate-pulse rounded-full border-2 border-emerald-400/30 border-t-emerald-400" />
+          <div className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-gold/20 bg-gold/10">
+            <div className="h-9 w-9 animate-pulse rounded-full border-2 border-gold/30 border-t-gold" />
           </div>
 
-          <p className="text-sm font-medium uppercase tracking-[0.25em] text-emerald-400">
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-gold">
             Verification submitted
           </p>
 
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
             Your KYC is under review
           </h1>
 
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-zinc-400 sm:text-base">
+          <p className="mx-auto mt-5 max-w-xl text-sm leading-7 !text-[#FFFFFF] sm:text-base">
             We have received your identity verification
             documents and information. Our verification team
             will review your submission.
@@ -199,16 +197,16 @@ export default function KycReviewPage() {
         <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-6">
             <div>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm !text-[#FFFFFF]">
                 Verification status
               </p>
 
-              <p className="mt-1 text-lg font-semibold">
+              <p className="mt-1 text-lg font-bold">
                 Pending review
               </p>
             </div>
 
-            <div className="rounded-full border border-amber-400/20 bg-amber-400/10 px-4 py-2 text-xs font-medium text-amber-300">
+            <div className="rounded-full border border-amber-400/20 bg-amber-400/10 px-4 py-2 text-xs font-bold text-amber-300">
               UNDER REVIEW
             </div>
           </div>
@@ -245,7 +243,7 @@ export default function KycReviewPage() {
 
         {kyc.submittedAt && (
           <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4 text-center">
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs !text-[#FFFFFF]">
               Submitted on{" "}
               {new Date(kyc.submittedAt).toLocaleString()}
             </p>
@@ -253,11 +251,11 @@ export default function KycReviewPage() {
         )}
 
         <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.02] p-5">
-          <p className="text-sm font-medium text-zinc-300">
+          <p className="text-sm font-bold !text-[#FFFFFF]">
             What happens next?
           </p>
 
-          <p className="mt-2 text-sm leading-6 text-zinc-500">
+          <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
             Please allow our team time to review your
             information. You do not need to submit your KYC
             again while it is under review.
@@ -268,7 +266,7 @@ export default function KycReviewPage() {
           <button
             type="button"
             onClick={() => router.push("/dashboard")}
-            className="rounded-xl border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-zinc-200 transition hover:bg-white/[0.08]"
+            className="rounded-xl border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-white/[0.08]"
           >
             Return to dashboard
           </button>
@@ -297,13 +295,13 @@ function StatusItem({
         <div
           className={`flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold ${
             complete
-              ? "bg-emerald-500/10 text-emerald-400"
+              ? "bg-gold/10 text-gold"
               : active
                 ? "bg-amber-400/10 text-amber-300"
                 : "bg-white/5 text-zinc-500"
           }`}
         >
-          {complete ? "✓" : number}
+          {complete ? "âœ“" : number}
         </div>
 
         <p
@@ -319,7 +317,7 @@ function StatusItem({
         </p>
       </div>
 
-      <p className="text-xs leading-5 text-zinc-500">
+      <p className="text-xs leading-5 !text-[#FFFFFF]">
         {description}
       </p>
     </div>

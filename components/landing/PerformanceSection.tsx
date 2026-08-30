@@ -47,15 +47,15 @@ export default function PerformanceSection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
               Market Performance
             </p>
 
-            <h2 className="mt-5 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <h2 className="mt-5 text-4xl font-bold tracking-tight !text-[#FFFFFF] sm:text-5xl">
               Stay close to the markets that matter.
             </h2>
 
-            <p className="mt-6 max-w-lg leading-7 text-zinc-500">
+            <p className="mt-6 max-w-lg leading-7 !text-[#FFFFFF]">
               Monitor market movement and keep important price information
               visible through a clean, focused trading environment.
             </p>
@@ -66,11 +66,11 @@ export default function PerformanceSection() {
                   key={stat.label}
                   className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5"
                 >
-                  <p className="text-xl font-bold text-white">
+                  <p className="text-xl font-bold !text-[#FFFFFF]">
                     {stat.value}
                   </p>
 
-                  <p className="mt-1 text-xs text-zinc-600">
+                  <p className="mt-1 text-xs !text-[#FFFFFF]">
                     {stat.label}
                   </p>
                 </div>
@@ -78,19 +78,19 @@ export default function PerformanceSection() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#080b09] shadow-2xl shadow-black/30">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#050505] shadow-2xl shadow-black/30">
             <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-5">
               <div>
-                <p className="text-sm font-semibold text-white">
+                <p className="text-sm font-bold !text-[#FFFFFF]">
                   Market Overview
                 </p>
 
-                <p className="mt-1 text-xs text-zinc-600">
+                <p className="mt-1 text-xs !text-[#FFFFFF]">
                   Selected market instruments
                 </p>
               </div>
 
-              <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-medium text-emerald-400">
+              <span className="rounded-full bg-gold/10 px-3 py-1 text-[10px] font-bold text-gold">
                 LIVE
               </span>
             </div>
@@ -102,11 +102,11 @@ export default function PerformanceSection() {
                   className="flex items-center gap-5 px-6 py-6"
                 >
                   <div className="min-w-24">
-                    <p className="text-sm font-medium text-white">
+                    <p className="text-sm font-bold !text-[#FFFFFF]">
                       {market.name}
                     </p>
 
-                    <p className="mt-1 text-xs text-zinc-600">
+                    <p className="mt-1 text-xs !text-[#FFFFFF]">
                       Market
                     </p>
                   </div>
@@ -115,18 +115,18 @@ export default function PerformanceSection() {
                     {market.bars.map((height, index) => (
                       <div
                         key={index}
-                        className="flex-1 rounded-t bg-emerald-500/30"
+                        className="flex-1 rounded-t bg-gold/30"
                         style={{ height: `${height}%` }}
                       />
                     ))}
                   </div>
 
                   <div className="ml-auto text-right">
-                    <p className="text-sm font-semibold text-white">
+                    <p className="text-sm font-bold !text-[#FFFFFF]">
                       {market.price}
                     </p>
 
-                    <p className="mt-1 text-xs font-medium text-emerald-400">
+                    <p className="mt-1 text-xs font-bold text-gold">
                       {market.change}
                     </p>
                   </div>

@@ -223,7 +223,7 @@ function statusClass(
 
     case "APPROVED":
     case "COMPLETED":
-      return "border-green-500/20 bg-green-500/10 text-green-400";
+      return "border-gold/20 bg-gold/10 text-gold";
 
     case "DECLINED":
     case "FAILED":
@@ -247,11 +247,11 @@ function DetailRow({
 }) {
   return (
     <div className="border-b border-white/5 py-4 last:border-b-0">
-      <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+      <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
         {label}
       </p>
 
-      <p className="mt-1 break-words text-sm text-white">
+      <p className="mt-1 break-words text-sm !text-[#FFFFFF]">
         {value === null ||
         value === undefined ||
         value === ""
@@ -395,9 +395,9 @@ export default function AdminDepositReviewPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#050806] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="mx-auto max-w-5xl px-6 py-10">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center text-gray-500">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center !text-[#FFFFFF]">
             Loading deposit request...
           </div>
         </div>
@@ -407,11 +407,11 @@ export default function AdminDepositReviewPage() {
 
   if (error && !deposit) {
     return (
-      <main className="min-h-screen bg-[#050806] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="mx-auto max-w-4xl px-6 py-10">
           <Link
             href="/admin/deposits"
-            className="text-sm text-green-400 hover:text-green-300"
+            className="text-sm text-gold hover:text-gold-light"
           >
             ← Back to deposits
           </Link>
@@ -426,9 +426,9 @@ export default function AdminDepositReviewPage() {
 
   if (!deposit) {
     return (
-      <main className="min-h-screen bg-[#050806] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="mx-auto max-w-4xl px-6 py-10">
-          <p className="text-gray-500">
+          <p className="!text-[#FFFFFF]">
             Deposit request not found.
           </p>
         </div>
@@ -443,19 +443,19 @@ export default function AdminDepositReviewPage() {
     deposit.transactions?.[0] || null;
 
   return (
-    <main className="min-h-screen bg-[#050806] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-8">
           <Link
             href="/admin/deposits"
-            className="text-sm text-green-400 transition hover:text-green-300"
+            className="text-sm text-gold transition hover:text-gold-light"
           >
             ← Back to deposit requests
           </Link>
 
           <div className="mt-5 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
             <div>
-              <p className="text-sm font-medium text-green-400">
+              <p className="text-sm font-bold text-gold">
                 Deposit Review
               </p>
 
@@ -463,7 +463,7 @@ export default function AdminDepositReviewPage() {
                 Deposit Request
               </h1>
 
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm !text-[#FFFFFF]">
                 Review the user's submitted deposit information
                 before approving or declining the request.
               </p>
@@ -488,7 +488,7 @@ export default function AdminDepositReviewPage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
           <div className="space-y-6">
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-lg font-bold">
                 Deposit Information
               </h2>
 
@@ -544,7 +544,7 @@ export default function AdminDepositReviewPage() {
             </section>
 
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-lg font-bold">
                 User Information
               </h2>
 
@@ -577,13 +577,13 @@ export default function AdminDepositReviewPage() {
                 />
 
                 <div className="border-b border-white/5 py-4">
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                     User Profile
                   </p>
 
                   <Link
                     href={`/admin/users/${deposit.user.id}`}
-                    className="mt-1 inline-block text-sm text-green-400 hover:text-green-300"
+                    className="mt-1 inline-block text-sm text-gold hover:text-gold-light"
                   >
                     View user profile →
                   </Link>
@@ -594,7 +594,7 @@ export default function AdminDepositReviewPage() {
             {deposit.method ===
               "BANK_TRANSFER" && (
               <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <h2 className="text-lg font-semibold">
+                <h2 className="text-lg font-bold">
                   Bank Transfer Details
                 </h2>
 
@@ -651,11 +651,11 @@ export default function AdminDepositReviewPage() {
                 {deposit.bankAccount
                   ?.instructions && (
                   <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                    <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                       Admin Bank Instructions
                     </p>
 
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-gray-300">
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                       {
                         deposit.bankAccount
                           .instructions
@@ -669,7 +669,7 @@ export default function AdminDepositReviewPage() {
             {deposit.method ===
               "CRYPTOCURRENCY" && (
               <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <h2 className="text-lg font-semibold">
+                <h2 className="text-lg font-bold">
                   Cryptocurrency Details
                 </h2>
 
@@ -711,11 +711,11 @@ export default function AdminDepositReviewPage() {
                 {deposit.cryptoOption
                   ?.instructions && (
                   <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                    <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                       Crypto Instructions
                     </p>
 
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-gray-300">
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                       {
                         deposit.cryptoOption
                           .instructions
@@ -731,7 +731,7 @@ export default function AdminDepositReviewPage() {
               deposit.method !==
                 "CRYPTOCURRENCY" && (
                 <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-bold">
                     Payment Information
                   </h2>
 
@@ -749,11 +749,11 @@ export default function AdminDepositReviewPage() {
                   {deposit.paymentConfig
                     ?.instructions && (
                     <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
-                      <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                      <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                         Payment Instructions
                       </p>
 
-                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-gray-300">
+                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                         {
                           deposit.paymentConfig
                             .instructions
@@ -765,7 +765,7 @@ export default function AdminDepositReviewPage() {
               )}
 
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-lg font-bold">
                 Submitted Proof
               </h2>
 
@@ -774,18 +774,18 @@ export default function AdminDepositReviewPage() {
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
                     <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
                       <div>
-                        <p className="font-medium text-white">
+                        <p className="font-bold !text-[#FFFFFF]">
                           Deposit Proof
                         </p>
 
-                        <p className="mt-1 break-all text-sm text-gray-500">
+                        <p className="mt-1 break-all text-sm !text-[#FFFFFF]">
                           {
                             deposit.proofFile
                               .originalName
                           }
                         </p>
 
-                        <p className="mt-1 text-xs text-gray-600">
+                        <p className="mt-1 text-xs !text-[#FFFFFF]">
                           {deposit.proofFile.mimeType} ·{" "}
                           {Math.round(
                             deposit.proofFile
@@ -796,29 +796,29 @@ export default function AdminDepositReviewPage() {
                         </p>
                       </div>
 
-                      <span className="rounded-lg border border-green-500/20 bg-green-500/10 px-3 py-2 text-xs font-semibold text-green-400">
+                      <span className="rounded-lg border border-gold/20 bg-gold/10 px-3 py-2 text-xs font-bold text-gold">
                         Uploaded
                       </span>
                     </div>
 
-                    <p className="mt-3 break-all text-xs text-gray-600">
+                    <p className="mt-3 break-all text-xs !text-[#FFFFFF]">
                       File ID:{" "}
                       {deposit.proofFile.id}
                     </p>
                   </div>
                 ) : deposit.proofFileId ? (
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="font-medium text-white">
+                    <p className="font-bold !text-[#FFFFFF]">
                       Deposit Proof
                     </p>
 
-                    <p className="mt-2 break-all text-xs text-gray-500">
+                    <p className="mt-2 break-all text-xs !text-[#FFFFFF]">
                       File ID:{" "}
                       {deposit.proofFileId}
                     </p>
                   </div>
                 ) : (
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm !text-[#FFFFFF]">
                     No deposit proof was uploaded.
                   </p>
                 )}
@@ -827,18 +827,18 @@ export default function AdminDepositReviewPage() {
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
                     <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
                       <div>
-                        <p className="font-medium text-white">
+                        <p className="font-bold !text-[#FFFFFF]">
                           Payment Invoice
                         </p>
 
-                        <p className="mt-1 break-all text-sm text-gray-500">
+                        <p className="mt-1 break-all text-sm !text-[#FFFFFF]">
                           {
                             deposit.invoiceFile
                               .originalName
                           }
                         </p>
 
-                        <p className="mt-1 text-xs text-gray-600">
+                        <p className="mt-1 text-xs !text-[#FFFFFF]">
                           {
                             deposit.invoiceFile
                               .mimeType
@@ -853,23 +853,23 @@ export default function AdminDepositReviewPage() {
                         </p>
                       </div>
 
-                      <span className="rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-2 text-xs font-semibold text-blue-400">
+                      <span className="rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-2 text-xs font-bold text-blue-400">
                         Uploaded
                       </span>
                     </div>
 
-                    <p className="mt-3 break-all text-xs text-gray-600">
+                    <p className="mt-3 break-all text-xs !text-[#FFFFFF]">
                       File ID:{" "}
                       {deposit.invoiceFile.id}
                     </p>
                   </div>
                 ) : deposit.invoiceFileId ? (
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="font-medium text-white">
+                    <p className="font-bold !text-[#FFFFFF]">
                       Payment Invoice
                     </p>
 
-                    <p className="mt-2 break-all text-xs text-gray-500">
+                    <p className="mt-2 break-all text-xs !text-[#FFFFFF]">
                       File ID:{" "}
                       {deposit.invoiceFileId}
                     </p>
@@ -880,11 +880,11 @@ export default function AdminDepositReviewPage() {
 
             {deposit.declineReason && (
               <section className="rounded-2xl border border-red-500/20 bg-red-500/5 p-6">
-                <h2 className="text-lg font-semibold text-red-400">
+                <h2 className="text-lg font-bold text-red-400">
                   Decline Reason
                 </h2>
 
-                <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-gray-300">
+                <p className="mt-3 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                   {deposit.declineReason}
                 </p>
               </section>
@@ -892,7 +892,7 @@ export default function AdminDepositReviewPage() {
 
             {latestTransaction && (
               <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <h2 className="text-lg font-semibold">
+                <h2 className="text-lg font-bold">
                   Related Transaction
                 </h2>
 
@@ -931,28 +931,28 @@ export default function AdminDepositReviewPage() {
 
           <aside className="lg:sticky lg:top-6 lg:self-start">
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Deposit Amount
               </p>
 
-              <p className="mt-2 text-4xl font-bold text-white">
+              <p className="mt-2 text-4xl font-bold !text-[#FFFFFF]">
                 {formatAmount(
                   deposit.amount
                 )}
               </p>
 
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm !text-[#FFFFFF]">
                 {methodLabel(deposit.method)}
               </p>
 
               {isPending ? (
                 <>
                   <div className="mt-6 rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4">
-                    <p className="text-sm font-semibold text-yellow-400">
+                    <p className="text-sm font-bold text-yellow-400">
                       Pending Admin Review
                     </p>
 
-                    <p className="mt-1 text-xs leading-5 text-gray-500">
+                    <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
                       Verify the user's payment information
                       and uploaded proof before approving this
                       deposit.
@@ -968,7 +968,7 @@ export default function AdminDepositReviewPage() {
                           "APPROVE"
                         )
                       }
-                      className="w-full rounded-xl bg-green-500 px-4 py-3 text-sm font-semibold text-black transition hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="w-full rounded-xl bg-gold px-4 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {submitting
                         ? "Processing..."
@@ -985,7 +985,7 @@ export default function AdminDepositReviewPage() {
                           );
                           setError("");
                         }}
-                        className="w-full rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm font-semibold text-red-400 transition hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="w-full rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm font-bold text-red-400 transition hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         Decline Deposit
                       </button>
@@ -996,7 +996,7 @@ export default function AdminDepositReviewPage() {
                     <div className="mt-4 rounded-xl border border-red-500/20 bg-red-500/5 p-4">
                       <label
                         htmlFor="decline-reason"
-                        className="text-sm font-semibold text-gray-300"
+                        className="text-sm font-bold !text-[#FFFFFF]"
                       >
                         Reason for declining
                       </label>
@@ -1012,10 +1012,10 @@ export default function AdminDepositReviewPage() {
                         rows={5}
                         maxLength={1000}
                         placeholder="Explain why this deposit is being declined..."
-                        className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm text-white outline-none placeholder:text-gray-600 focus:border-red-500/40"
+                        className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm text-white outline-none placeholder:!text-[#FFFFFF] focus:border-red-500/40"
                       />
 
-                      <p className="mt-1 text-right text-xs text-gray-600">
+                      <p className="mt-1 text-right text-xs !text-[#FFFFFF]">
                         {declineReason.length}/1000
                       </p>
 
@@ -1032,7 +1032,7 @@ export default function AdminDepositReviewPage() {
                             );
                             setError("");
                           }}
-                          className="rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/10"
+                          className="rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-white/10"
                         >
                           Cancel
                         </button>
@@ -1048,7 +1048,7 @@ export default function AdminDepositReviewPage() {
                               "DECLINE"
                             )
                           }
-                          className="rounded-xl bg-red-500 px-3 py-3 text-sm font-semibold text-white transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="rounded-xl bg-red-500 px-3 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {submitting
                             ? "Processing..."
@@ -1064,7 +1064,7 @@ export default function AdminDepositReviewPage() {
                     deposit.status
                   )}`}
                 >
-                  <p className="text-sm font-semibold">
+                  <p className="text-sm font-bold">
                     This deposit has already been
                     reviewed.
                   </p>

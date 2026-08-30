@@ -72,24 +72,22 @@ export default async function AdminDashboardPage() {
     });
 
   return (
-    <main className="min-h-screen bg-[#050807] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="flex min-h-screen">
         {/* Sidebar */}
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-black/20 lg:flex lg:flex-col">
           <div className="border-b border-white/10 px-6 py-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/10">
-                <span className="font-bold text-emerald-400">
-                  E
-                </span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
               </div>
 
               <div>
-                <p className="font-semibold tracking-tight">
-                  Edge Portfolio
+                <p className="font-bold tracking-tight">
+                  Thesoros
                 </p>
 
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs !text-[#FFFFFF]">
                   Administration
                 </p>
               </div>
@@ -99,14 +97,14 @@ export default async function AdminDashboardPage() {
           <nav className="flex-1 space-y-1 p-4">
             <Link
               href="/admin"
-              className="flex items-center rounded-xl bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-400"
+              className="flex items-center rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
             >
               Dashboard
             </Link>
 
             <Link
               href="/admin/kyc"
-              className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
               <span>KYC verification</span>
 
@@ -119,14 +117,14 @@ export default async function AdminDashboardPage() {
 
             <Link
               href="/admin/users"
-              className="flex items-center rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
               Users
             </Link>
 
             <Link
               href="/admin/deposits"
-              className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
               <span>Deposits</span>
 
@@ -139,7 +137,7 @@ export default async function AdminDashboardPage() {
 
             <Link
               href="/admin/withdrawals"
-              className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
               <span>Withdrawals</span>
 
@@ -153,22 +151,22 @@ export default async function AdminDashboardPage() {
 
           <div className="border-t border-white/10 p-4">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs !text-[#FFFFFF]">
                 Signed in as
               </p>
 
-              <p className="mt-1 truncate text-sm font-medium">
+              <p className="mt-1 truncate text-sm font-bold">
                 {admin.firstName} {admin.lastName}
               </p>
 
-              <p className="mt-1 truncate text-xs text-zinc-600">
+              <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                 {admin.email}
               </p>
             </div>
 
             <Link
               href="/dashboard"
-              className="mt-3 block rounded-xl px-4 py-3 text-center text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+              className="mt-3 block rounded-xl px-4 py-3 text-center text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
               User dashboard
             </Link>
@@ -180,23 +178,23 @@ export default async function AdminDashboardPage() {
           <header className="border-b border-white/10 px-5 py-5 sm:px-8 lg:px-10">
             <div className="mx-auto flex max-w-7xl items-center justify-between">
               <div>
-                <p className="text-sm text-emerald-400">
+                <p className="text-sm text-gold">
                   Administration
                 </p>
 
-                <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
+                <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
                   Admin dashboard
                 </h1>
 
-                <p className="mt-1 text-sm text-zinc-500">
-                  Manage Edge Portfolio accounts and
+                <p className="mt-1 text-sm !text-[#FFFFFF]">
+                  Manage Thesoros accounts and
                   verification requests.
                 </p>
               </div>
 
               <Link
                 href="/admin/kyc"
-                className="hidden rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 sm:inline-flex"
+                className="hidden rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold sm:inline-flex"
               >
                 Review KYC
               </Link>
@@ -208,14 +206,14 @@ export default async function AdminDashboardPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:hidden">
               <Link
                 href="/admin"
-                className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-center text-xs font-medium text-emerald-400"
+                className="rounded-xl border border-gold/20 bg-gold/10 p-3 text-center text-xs font-bold text-gold"
               >
                 Dashboard
               </Link>
 
               <Link
                 href="/admin/kyc"
-                className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center text-xs text-zinc-400"
+                className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center text-xs !text-[#FFFFFF]"
               >
                 KYC
                 {pendingKyc > 0 && ` (${pendingKyc})`}
@@ -223,7 +221,7 @@ export default async function AdminDashboardPage() {
 
               <Link
                 href="/admin/users"
-                className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center text-xs text-zinc-400"
+                className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center text-xs !text-[#FFFFFF]"
               >
                 Users
               </Link>
@@ -284,15 +282,15 @@ export default async function AdminDashboardPage() {
             <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
               <div className="flex flex-col gap-4 border-b border-white/10 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-400">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
                     Verification queue
                   </p>
 
-                  <h2 className="mt-2 text-lg font-semibold">
+                  <h2 className="mt-2 text-lg font-bold">
                     Pending KYC applications
                   </h2>
 
-                  <p className="mt-1 text-sm text-zinc-500">
+                  <p className="mt-1 text-sm !text-[#FFFFFF]">
                     Review submitted identity documents
                     and applicant information.
                   </p>
@@ -300,7 +298,7 @@ export default async function AdminDashboardPage() {
 
                 <Link
                   href="/admin/kyc"
-                  className="inline-flex rounded-xl border border-white/10 px-4 py-2.5 text-sm text-zinc-300 transition hover:bg-white/[0.05] hover:text-white"
+                  className="inline-flex rounded-xl border border-white/10 px-4 py-2.5 text-sm text-zinc-300 transition hover:bg-white/[0.05] hover:!text-[#FFFFFF]"
                 >
                   View all
                 </Link>
@@ -308,17 +306,17 @@ export default async function AdminDashboardPage() {
 
               {recentKyc.length === 0 ? (
                 <div className="p-10 text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10">
-                    <span className="text-xl text-emerald-400">
-                      ✓
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10">
+                    <span className="text-xl text-gold">
+                      âœ“
                     </span>
                   </div>
 
-                  <h3 className="mt-4 font-medium">
+                  <h3 className="mt-4 font-bold">
                     No pending KYC applications
                   </h3>
 
-                  <p className="mt-1 text-sm text-zinc-500">
+                  <p className="mt-1 text-sm !text-[#FFFFFF]">
                     New verification submissions will
                     appear here.
                   </p>
@@ -332,7 +330,7 @@ export default async function AdminDashboardPage() {
                     >
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-3">
-                          <h3 className="font-medium">
+                          <h3 className="font-bold">
                             {kyc.user.firstName}{" "}
                             {kyc.user.lastName}
                           </h3>
@@ -342,11 +340,11 @@ export default async function AdminDashboardPage() {
                           </span>
                         </div>
 
-                        <p className="mt-1 truncate text-sm text-zinc-500">
+                        <p className="mt-1 truncate text-sm !text-[#FFFFFF]">
                           {kyc.user.email}
                         </p>
 
-                        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-zinc-600">
+                        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs !text-[#FFFFFF]">
                           <span>
                             ID: {kyc.governmentIdType || "Not specified"}
                           </span>
@@ -369,7 +367,7 @@ export default async function AdminDashboardPage() {
 
                       <Link
                         href={`/admin/kyc/${kyc.id}`}
-                        className="inline-flex shrink-0 items-center justify-center rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400"
+                        className="inline-flex shrink-0 items-center justify-center rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
                       >
                         Review application
                       </Link>
@@ -405,7 +403,7 @@ function StatCard({
       }`}
     >
       <div className="flex items-start justify-between gap-3">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm !text-[#FFFFFF]">
           {label}
         </p>
 
@@ -424,7 +422,7 @@ function StatCard({
         {value}
       </p>
 
-      <p className="mt-1 text-xs text-zinc-600">
+      <p className="mt-1 text-xs !text-[#FFFFFF]">
         {description}
       </p>
     </div>

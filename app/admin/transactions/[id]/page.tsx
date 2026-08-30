@@ -195,14 +195,14 @@ function getTransactionStatusClass(
       return "border-yellow-500/20 bg-yellow-500/10 text-yellow-400";
 
     case "COMPLETED":
-      return "border-green-500/20 bg-green-500/10 text-green-400";
+      return "border-gold/20 bg-gold/10 text-gold";
 
     case "FAILED":
     case "DECLINED":
       return "border-red-500/20 bg-red-500/10 text-red-400";
 
     case "APPROVED":
-      return "border-green-500/20 bg-green-500/10 text-green-400";
+      return "border-gold/20 bg-gold/10 text-gold";
 
     case "CANCELLED":
     case "REVERSED":
@@ -222,11 +222,11 @@ function DetailRow({
 }) {
   return (
     <div className="border-b border-white/5 py-4 last:border-b-0">
-      <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+      <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
         {label}
       </p>
 
-      <p className="mt-1 break-words text-sm text-white">
+      <p className="mt-1 break-words text-sm !text-[#FFFFFF]">
         {value === null ||
         value === undefined ||
         value === ""
@@ -265,17 +265,17 @@ function SectionHeader({
   return (
     <div className="mb-5">
       {eyebrow && (
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-green-400">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
           {eyebrow}
         </p>
       )}
 
-      <h2 className="mt-1 text-lg font-semibold text-white">
+      <h2 className="mt-1 text-lg font-bold !text-[#FFFFFF]">
         {title}
       </h2>
 
       {description && (
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm !text-[#FFFFFF]">
           {description}
         </p>
       )}
@@ -409,9 +409,9 @@ export default function AdminTransactionReviewPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#050806] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="mx-auto max-w-7xl px-6 py-10">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center text-gray-400">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center !text-[#FFFFFF]">
             Loading transaction review...
           </div>
         </div>
@@ -421,11 +421,11 @@ export default function AdminTransactionReviewPage() {
 
   if (error && !transaction) {
     return (
-      <main className="min-h-screen bg-[#050806] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="mx-auto max-w-4xl px-6 py-10">
           <Link
             href="/admin/transactions"
-            className="text-sm text-green-400 hover:text-green-300"
+            className="text-sm text-gold hover:text-gold-light"
           >
             ← Back to transactions
           </Link>
@@ -440,9 +440,9 @@ export default function AdminTransactionReviewPage() {
 
   if (!transaction) {
     return (
-      <main className="min-h-screen bg-[#050806] text-white">
+      <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
         <div className="mx-auto max-w-4xl px-6 py-10">
-          <p className="text-gray-400">
+          <p className="!text-[#FFFFFF]">
             Transaction not found.
           </p>
         </div>
@@ -475,20 +475,20 @@ export default function AdminTransactionReviewPage() {
     transaction.status;
 
   return (
-    <main className="min-h-screen bg-[#050806] text-white">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-6 py-10">
         {/* HEADER */}
         <div className="mb-8">
           <Link
             href="/admin/transactions"
-            className="text-sm text-green-400 transition hover:text-green-300"
+            className="text-sm text-gold transition hover:text-gold-light"
           >
             ← Back to transactions
           </Link>
 
           <div className="mt-5 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
             <div>
-              <p className="text-sm font-medium text-green-400">
+              <p className="text-sm font-bold text-gold">
                 Admin Transaction Management
               </p>
 
@@ -500,7 +500,7 @@ export default function AdminTransactionReviewPage() {
                   : "Transaction Details"}
               </h1>
 
-              <p className="mt-2 max-w-2xl text-sm text-gray-400">
+              <p className="mt-2 max-w-2xl text-sm !text-[#FFFFFF]">
                 {isDeposit
                   ? "Review the user's deposit request, submitted payment information, proof files, and transaction details before approving or declining it."
                   : isWithdrawal
@@ -544,18 +544,18 @@ export default function AdminTransactionReviewPage() {
             {/* ===================================================== */}
 
             {isDeposit && deposit && (
-              <section className="rounded-2xl border border-green-500/20 bg-green-500/[0.04] p-6">
+              <section className="rounded-2xl border border-gold/20 bg-gold/[0.04] p-6">
                 <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-green-400">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
                       Deposit Request
                     </p>
 
-                    <h2 className="mt-2 text-xl font-bold text-white">
+                    <h2 className="mt-2 text-xl font-bold !text-[#FFFFFF]">
                       Deposit Request Review
                     </h2>
 
-                    <p className="mt-1 text-sm text-gray-400">
+                    <p className="mt-1 text-sm !text-[#FFFFFF]">
                       Deposit request #{deposit.id}
                     </p>
                   </div>
@@ -565,11 +565,11 @@ export default function AdminTransactionReviewPage() {
 
                 <div className="mt-5 grid gap-4 sm:grid-cols-3">
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs uppercase tracking-wider text-gray-500">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Requested Amount
                     </p>
 
-                    <p className="mt-2 text-xl font-bold text-white">
+                    <p className="mt-2 text-xl font-bold !text-[#FFFFFF]">
                       {formatAmount(
                         deposit.amount,
                         transaction.currency
@@ -578,21 +578,21 @@ export default function AdminTransactionReviewPage() {
                   </div>
 
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs uppercase tracking-wider text-gray-500">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Method
                     </p>
 
-                    <p className="mt-2 text-sm font-semibold text-white">
+                    <p className="mt-2 text-sm font-bold !text-[#FFFFFF]">
                       {getMethodLabel(deposit.method)}
                     </p>
                   </div>
 
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs uppercase tracking-wider text-gray-500">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Submitted
                     </p>
 
-                    <p className="mt-2 text-sm font-semibold text-white">
+                    <p className="mt-2 text-sm font-bold !text-[#FFFFFF]">
                       {formatDate(deposit.createdAt)}
                     </p>
                   </div>
@@ -604,15 +604,15 @@ export default function AdminTransactionReviewPage() {
               <section className="rounded-2xl border border-orange-500/20 bg-orange-500/[0.04] p-6">
                 <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-400">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400">
                       Withdrawal Request
                     </p>
 
-                    <h2 className="mt-2 text-xl font-bold text-white">
+                    <h2 className="mt-2 text-xl font-bold !text-[#FFFFFF]">
                       Withdrawal Request Review
                     </h2>
 
-                    <p className="mt-1 text-sm text-gray-400">
+                    <p className="mt-1 text-sm !text-[#FFFFFF]">
                       Withdrawal request #{withdrawal.id}
                     </p>
                   </div>
@@ -622,11 +622,11 @@ export default function AdminTransactionReviewPage() {
 
                 <div className="mt-5 grid gap-4 sm:grid-cols-3">
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs uppercase tracking-wider text-gray-500">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Requested Amount
                     </p>
 
-                    <p className="mt-2 text-xl font-bold text-white">
+                    <p className="mt-2 text-xl font-bold !text-[#FFFFFF]">
                       {formatAmount(
                         withdrawal.amount,
                         transaction.currency
@@ -635,11 +635,11 @@ export default function AdminTransactionReviewPage() {
                   </div>
 
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs uppercase tracking-wider text-gray-500">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Method
                     </p>
 
-                    <p className="mt-2 text-sm font-semibold text-white">
+                    <p className="mt-2 text-sm font-bold !text-[#FFFFFF]">
                       {getMethodLabel(
                         withdrawal.method
                       )}
@@ -647,11 +647,11 @@ export default function AdminTransactionReviewPage() {
                   </div>
 
                   <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-                    <p className="text-xs uppercase tracking-wider text-gray-500">
+                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                       Submitted
                     </p>
 
-                    <p className="mt-2 text-sm font-semibold text-white">
+                    <p className="mt-2 text-sm font-bold !text-[#FFFFFF]">
                       {formatDate(
                         withdrawal.createdAt
                       )}
@@ -759,13 +759,13 @@ export default function AdminTransactionReviewPage() {
                 />
 
                 <div className="border-b border-white/5 py-4">
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                     User Profile
                   </p>
 
                   <Link
                     href={`/admin/users/${transaction.user.id}`}
-                    className="mt-1 inline-block text-sm text-green-400 hover:text-green-300"
+                    className="mt-1 inline-block text-sm text-gold hover:text-gold-light"
                   >
                     View user profile →
                   </Link>
@@ -779,7 +779,7 @@ export default function AdminTransactionReviewPage() {
 
             {deposit && (
               <>
-                <section className="rounded-2xl border border-green-500/20 bg-green-500/[0.025] p-6">
+                <section className="rounded-2xl border border-gold/20 bg-gold/[0.025] p-6">
                   <SectionHeader
                     eyebrow="Deposit Request Review"
                     title="Deposit Request Information"
@@ -947,11 +947,11 @@ export default function AdminTransactionReviewPage() {
                       />
 
                       <div className="rounded-xl border border-white/10 bg-black/20 p-5">
-                        <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                        <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                           Payment Information
                         </p>
 
-                        <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-6 text-white">
+                        <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-6 !text-[#FFFFFF]">
                           {deposit.paymentInformation ||
                             "No payment information was submitted."}
                         </p>
@@ -971,26 +971,26 @@ export default function AdminTransactionReviewPage() {
                       <div className="rounded-xl border border-white/10 bg-black/20 p-5">
                         <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
                           <div>
-                            <p className="font-semibold text-white">
+                            <p className="font-bold !text-[#FFFFFF]">
                               Deposit Proof
                             </p>
 
-                            <p className="mt-1 text-xs text-gray-500">
+                            <p className="mt-1 text-xs !text-[#FFFFFF]">
                               Uploaded proof of payment.
                             </p>
                           </div>
 
-                          <span className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-gray-400">
+                          <span className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs !text-[#FFFFFF]">
                             File uploaded
                           </span>
                         </div>
 
                         <div className="mt-4 rounded-lg border border-white/5 bg-black/30 p-3">
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs !text-[#FFFFFF]">
                             File ID
                           </p>
 
-                          <p className="mt-1 break-all font-mono text-xs text-gray-300">
+                          <p className="mt-1 break-all font-mono text-xs !text-[#FFFFFF]">
                             {deposit.proofFileId}
                           </p>
                         </div>
@@ -1001,26 +1001,26 @@ export default function AdminTransactionReviewPage() {
                       <div className="rounded-xl border border-white/10 bg-black/20 p-5">
                         <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
                           <div>
-                            <p className="font-semibold text-white">
+                            <p className="font-bold !text-[#FFFFFF]">
                               Payment Invoice
                             </p>
 
-                            <p className="mt-1 text-xs text-gray-500">
+                            <p className="mt-1 text-xs !text-[#FFFFFF]">
                               Invoice associated with the payment.
                             </p>
                           </div>
 
-                          <span className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-gray-400">
+                          <span className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs !text-[#FFFFFF]">
                             File uploaded
                           </span>
                         </div>
 
                         <div className="mt-4 rounded-lg border border-white/5 bg-black/30 p-3">
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs !text-[#FFFFFF]">
                             File ID
                           </p>
 
-                          <p className="mt-1 break-all font-mono text-xs text-gray-300">
+                          <p className="mt-1 break-all font-mono text-xs !text-[#FFFFFF]">
                             {deposit.invoiceFileId}
                           </p>
                         </div>
@@ -1030,11 +1030,11 @@ export default function AdminTransactionReviewPage() {
                     {!deposit.proofFileId &&
                       !deposit.invoiceFileId && (
                         <div className="rounded-xl border border-yellow-500/10 bg-yellow-500/5 p-5">
-                          <p className="text-sm font-medium text-yellow-400">
+                          <p className="text-sm font-bold text-yellow-400">
                             No payment files uploaded
                           </p>
 
-                          <p className="mt-1 text-xs text-gray-500">
+                          <p className="mt-1 text-xs !text-[#FFFFFF]">
                             This request does not contain a proof file or invoice.
                           </p>
                         </div>
@@ -1225,11 +1225,11 @@ export default function AdminTransactionReviewPage() {
 
           <aside className="lg:sticky lg:top-6 lg:self-start">
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+              <p className="text-xs font-bold uppercase tracking-wider !text-[#FFFFFF]">
                 Administrative Review
               </p>
 
-              <h2 className="mt-2 text-xl font-bold text-white">
+              <h2 className="mt-2 text-xl font-bold !text-[#FFFFFF]">
                 {isDeposit
                   ? "Review Deposit Request"
                   : isWithdrawal
@@ -1238,18 +1238,18 @@ export default function AdminTransactionReviewPage() {
               </h2>
 
               <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-5">
-                <p className="text-xs uppercase tracking-wider text-gray-500">
+                <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
                   Amount
                 </p>
 
-                <p className="mt-2 text-3xl font-bold text-white">
+                <p className="mt-2 text-3xl font-bold !text-[#FFFFFF]">
                   {formatAmount(
                     transaction.amount,
                     transaction.currency
                   )}
                 </p>
 
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-2 text-sm !text-[#FFFFFF]">
                   {getMethodLabel(
                     deposit?.method ||
                       withdrawal?.method
@@ -1259,7 +1259,7 @@ export default function AdminTransactionReviewPage() {
 
               <div className="mt-4 space-y-3">
                 <div className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3">
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm !text-[#FFFFFF]">
                     Transaction
                   </span>
 
@@ -1270,7 +1270,7 @@ export default function AdminTransactionReviewPage() {
 
                 {(deposit || withdrawal) && (
                   <div className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3">
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm !text-[#FFFFFF]">
                       Request
                     </span>
 
@@ -1284,11 +1284,11 @@ export default function AdminTransactionReviewPage() {
               {isPending ? (
                 <>
                   <div className="mt-6 rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4">
-                    <p className="text-sm font-medium text-yellow-400">
+                    <p className="text-sm font-bold text-yellow-400">
                       Action required
                     </p>
 
-                    <p className="mt-1 text-xs leading-5 text-gray-500">
+                    <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
                       Review the request information carefully before approving or declining it.
                     </p>
                   </div>
@@ -1300,7 +1300,7 @@ export default function AdminTransactionReviewPage() {
                       onClick={() =>
                         reviewTransaction("APPROVE")
                       }
-                      className="w-full rounded-xl bg-green-500 px-4 py-3 text-sm font-semibold text-black transition hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="w-full rounded-xl bg-gold px-4 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {submitting
                         ? "Processing..."
@@ -1319,7 +1319,7 @@ export default function AdminTransactionReviewPage() {
                           setShowDeclineBox(true);
                           setError("");
                         }}
-                        className="w-full rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm font-semibold text-red-400 transition hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="w-full rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm font-bold text-red-400 transition hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         Decline Request
                       </button>
@@ -1330,7 +1330,7 @@ export default function AdminTransactionReviewPage() {
                     <div className="mt-5 rounded-xl border border-red-500/20 bg-red-500/5 p-4">
                       <label
                         htmlFor="decline-reason"
-                        className="text-sm font-medium text-gray-300"
+                        className="text-sm font-bold !text-[#FFFFFF]"
                       >
                         Reason for declining
                       </label>
@@ -1347,10 +1347,10 @@ export default function AdminTransactionReviewPage() {
                         rows={5}
                         maxLength={1000}
                         placeholder="Enter the reason for declining this request..."
-                        className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm text-white outline-none placeholder:text-gray-600 focus:border-red-500/40"
+                        className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm text-white outline-none placeholder:!text-[#FFFFFF] focus:border-red-500/40"
                       />
 
-                      <div className="mt-2 text-right text-xs text-gray-600">
+                      <div className="mt-2 text-right text-xs !text-[#FFFFFF]">
                         {declineReason.length}/1000
                       </div>
 
@@ -1363,7 +1363,7 @@ export default function AdminTransactionReviewPage() {
                             setDeclineReason("");
                             setError("");
                           }}
-                          className="rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/10 disabled:opacity-50"
+                          className="rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-white/10 disabled:opacity-50"
                         >
                           Cancel
                         </button>
@@ -1379,7 +1379,7 @@ export default function AdminTransactionReviewPage() {
                               "DECLINE"
                             )
                           }
-                          className="rounded-xl bg-red-500 px-3 py-3 text-sm font-semibold text-white transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="rounded-xl bg-red-500 px-3 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {submitting
                             ? "Processing..."
@@ -1395,7 +1395,7 @@ export default function AdminTransactionReviewPage() {
                     requestStatus
                   )}`}
                 >
-                  <p className="text-sm font-semibold">
+                  <p className="text-sm font-bold">
                     This request has already been reviewed.
                   </p>
 
@@ -1406,7 +1406,7 @@ export default function AdminTransactionReviewPage() {
 
                   {deposit?.declineReason && (
                     <div className="mt-3 border-t border-white/10 pt-3">
-                      <p className="text-xs font-medium uppercase tracking-wider opacity-60">
+                      <p className="text-xs font-bold uppercase tracking-wider opacity-60">
                         Decline reason
                       </p>
 
@@ -1418,7 +1418,7 @@ export default function AdminTransactionReviewPage() {
 
                   {withdrawal?.declineReason && (
                     <div className="mt-3 border-t border-white/10 pt-3">
-                      <p className="text-xs font-medium uppercase tracking-wider opacity-60">
+                      <p className="text-xs font-bold uppercase tracking-wider opacity-60">
                         Decline reason
                       </p>
 
@@ -1433,7 +1433,7 @@ export default function AdminTransactionReviewPage() {
               <div className="mt-6 border-t border-white/10 pt-5">
                 <Link
                   href={`/admin/users/${transaction.user.id}`}
-                  className="block w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center text-sm font-semibold text-gray-300 transition hover:bg-white/10 hover:text-white"
+                  className="block w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center text-sm font-bold text-gray-300 transition hover:bg-white/10 hover:!text-[#FFFFFF]"
                 >
                   View User Account
                 </Link>

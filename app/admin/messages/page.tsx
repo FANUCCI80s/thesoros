@@ -146,10 +146,10 @@ export default function AdminMessagesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050807] text-white">
+    <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-emerald-400">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-gold">
             Administration
           </p>
 
@@ -157,7 +157,7 @@ export default function AdminMessagesPage() {
             Messages
           </h1>
 
-          <p className="mt-2 text-sm text-gray-400">
+          <p className="mt-2 text-sm !text-[#FFFFFF]">
             Send direct messages to users and notify them in their account.
           </p>
         </div>
@@ -169,20 +169,20 @@ export default function AdminMessagesPage() {
         )}
 
         {success && (
-          <div className="mb-6 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+          <div className="mb-6 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-gold-light">
             {success}
           </div>
         )}
 
         <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
           {/* User selection */}
-          <section className="rounded-2xl border border-white/10 bg-[#0b100e] p-5 shadow-xl">
+          <section className="rounded-2xl border border-white/10 bg-[#050505] p-5 shadow-xl">
             <div className="mb-5">
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-lg font-bold">
                 Select User
               </h2>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 Choose the user who should receive the message.
               </p>
             </div>
@@ -192,16 +192,16 @@ export default function AdminMessagesPage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search name or email..."
-              className="mb-4 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-500"
+              className="mb-4 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold"
             />
 
             <div className="max-h-[500px] space-y-2 overflow-y-auto pr-1">
               {loading ? (
-                <div className="rounded-xl border border-white/5 bg-black/20 p-4 text-sm text-gray-500">
+                <div className="rounded-xl border border-white/5 bg-black/20 p-4 text-sm !text-[#FFFFFF]">
                   Loading users...
                 </div>
               ) : filteredUsers.length === 0 ? (
-                <div className="rounded-xl border border-white/5 bg-black/20 p-4 text-sm text-gray-500">
+                <div className="rounded-xl border border-white/5 bg-black/20 p-4 text-sm !text-[#FFFFFF]">
                   No users found.
                 </div>
               ) : (
@@ -215,17 +215,17 @@ export default function AdminMessagesPage() {
                       onClick={() => setSelectedUserId(user.id)}
                       className={`w-full rounded-xl border p-4 text-left transition ${
                         selected
-                          ? "border-emerald-500/50 bg-emerald-500/10"
+                          ? "border-gold/50 bg-gold/10"
                           : "border-white/5 bg-black/20 hover:border-white/15 hover:bg-white/[0.03]"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
-                          <p className="truncate text-sm font-semibold text-white">
+                          <p className="truncate text-sm font-bold !text-[#FFFFFF]">
                             {user.firstName} {user.lastName}
                           </p>
 
-                          <p className="mt-1 truncate text-xs text-gray-500">
+                          <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
                             {user.email}
                           </p>
                         </div>
@@ -233,7 +233,7 @@ export default function AdminMessagesPage() {
                         <span
                           className={`rounded-full px-2 py-1 text-[10px] font-medium uppercase ${
                             user.status === "ACTIVE"
-                              ? "bg-emerald-500/10 text-emerald-400"
+                              ? "bg-gold/10 text-gold"
                               : user.status === "BLOCKED"
                               ? "bg-red-500/10 text-red-400"
                               : "bg-yellow-500/10 text-yellow-400"
@@ -250,13 +250,13 @@ export default function AdminMessagesPage() {
           </section>
 
           {/* Compose message */}
-          <section className="rounded-2xl border border-white/10 bg-[#0b100e] p-5 shadow-xl">
+          <section className="rounded-2xl border border-white/10 bg-[#050505] p-5 shadow-xl">
             <div className="mb-6">
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-lg font-bold">
                 Send Direct Message
               </h2>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm !text-[#FFFFFF]">
                 The user will receive a notification when the message is
                 sent.
               </p>
@@ -264,7 +264,7 @@ export default function AdminMessagesPage() {
 
             <form onSubmit={handleSendMessage} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-300">
+                <label className="mb-2 block text-sm font-bold !text-[#FFFFFF]">
                   Recipient
                 </label>
 
@@ -277,23 +277,23 @@ export default function AdminMessagesPage() {
 
                       return selectedUser ? (
                         <div>
-                          <p className="font-medium text-white">
+                          <p className="font-bold !text-[#FFFFFF]">
                             {selectedUser.firstName}{" "}
                             {selectedUser.lastName}
                           </p>
 
-                          <p className="mt-1 text-xs text-gray-500">
+                          <p className="mt-1 text-xs !text-[#FFFFFF]">
                             {selectedUser.email}
                           </p>
                         </div>
                       ) : (
-                        <span className="text-gray-500">
+                        <span className="!text-[#FFFFFF]">
                           Select a user
                         </span>
                       );
                     })()
                   ) : (
-                    <span className="text-gray-500">
+                    <span className="!text-[#FFFFFF]">
                       Select a user from the list
                     </span>
                   )}
@@ -303,7 +303,7 @@ export default function AdminMessagesPage() {
               <div>
                 <label
                   htmlFor="subject"
-                  className="mb-2 block text-sm font-medium text-gray-300"
+                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                 >
                   Subject
                 </label>
@@ -315,14 +315,14 @@ export default function AdminMessagesPage() {
                   onChange={(event) => setSubject(event.target.value)}
                   placeholder="Message subject"
                   maxLength={200}
-                  className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-500"
+                  className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="message"
-                  className="mb-2 block text-sm font-medium text-gray-300"
+                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
                 >
                   Message
                 </label>
@@ -334,10 +334,10 @@ export default function AdminMessagesPage() {
                   placeholder="Write your message to the user..."
                   rows={9}
                   maxLength={5000}
-                  className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-500"
+                  className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold"
                 />
 
-                <div className="mt-2 text-right text-xs text-gray-600">
+                <div className="mt-2 text-right text-xs !text-[#FFFFFF]">
                   {message.length}/5000
                 </div>
               </div>
@@ -345,7 +345,7 @@ export default function AdminMessagesPage() {
               <button
                 type="submit"
                 disabled={sending || !selectedUserId}
-                className="w-full rounded-xl bg-emerald-500 px-5 py-3.5 text-sm font-semibold text-black transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
+                className="w-full rounded-xl bg-gold px-5 py-3.5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {sending ? "Sending..." : "Send Message"}
               </button>
@@ -354,23 +354,23 @@ export default function AdminMessagesPage() {
         </div>
 
         {/* Sent messages */}
-        <section className="mt-6 rounded-2xl border border-white/10 bg-[#0b100e] p-5 shadow-xl">
+        <section className="mt-6 rounded-2xl border border-white/10 bg-[#050505] p-5 shadow-xl">
           <div className="mb-5">
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-bold">
               Message History
             </h2>
 
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm !text-[#FFFFFF]">
               Messages sent by administrators.
             </p>
           </div>
 
           {loading ? (
-            <div className="rounded-xl border border-white/5 bg-black/20 p-5 text-sm text-gray-500">
+            <div className="rounded-xl border border-white/5 bg-black/20 p-5 text-sm !text-[#FFFFFF]">
               Loading message history...
             </div>
           ) : messages.length === 0 ? (
-            <div className="rounded-xl border border-white/5 bg-black/20 p-8 text-center text-sm text-gray-500">
+            <div className="rounded-xl border border-white/5 bg-black/20 p-8 text-center text-sm !text-[#FFFFFF]">
               No messages have been sent yet.
             </div>
           ) : (
@@ -382,11 +382,11 @@ export default function AdminMessagesPage() {
                 >
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <p className="font-medium text-white">
+                      <p className="font-bold !text-[#FFFFFF]">
                         {item.subject || "No subject"}
                       </p>
 
-                      <p className="mt-1 text-xs text-gray-500">
+                      <p className="mt-1 text-xs !text-[#FFFFFF]">
                         To: {item.recipient.firstName}{" "}
                         {item.recipient.lastName} (
                         {item.recipient.email})
@@ -397,20 +397,20 @@ export default function AdminMessagesPage() {
                       <span
                         className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase ${
                           item.isRead
-                            ? "bg-emerald-500/10 text-emerald-400"
+                            ? "bg-gold/10 text-gold"
                             : "bg-yellow-500/10 text-yellow-400"
                         }`}
                       >
                         {item.isRead ? "Read" : "Unread"}
                       </span>
 
-                      <span className="text-xs text-gray-600">
+                      <span className="text-xs !text-[#FFFFFF]">
                         {formatDate(item.createdAt)}
                       </span>
                     </div>
                   </div>
 
-                  <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-gray-400">
+                  <p className="mt-4 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
                     {item.message}
                   </p>
                 </div>
