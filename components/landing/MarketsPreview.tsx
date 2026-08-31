@@ -21,8 +21,29 @@ const markets = [
 
 export default function MarketsPreview() {
   return (
-    <section id="markets" className="border-t border-white/[0.06] py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="markets"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-[#050505] py-28"
+    >
+      {/* Background image */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+        style={{
+          backgroundImage:
+            "url('/branding/new-background-mobile-2.jpg')",
+        }}
+      />
+
+      {/* Dark overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-[#050505]/80" />
+
+      {/* Cinematic gradient */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/90 via-transparent to-[#050505]/95" />
+
+      {/* Gold ambient glow */}
+      <div className="pointer-events-none absolute right-[-10rem] top-1/3 h-96 w-96 rounded-full bg-gold/[0.06] blur-[140px]" />
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
             Markets
@@ -44,22 +65,27 @@ export default function MarketsPreview() {
           {markets.map((market) => (
             <div
               key={market.name}
-              className="group rounded-3xl border border-white/[0.07] bg-white/[0.025] p-7 transition duration-300 hover:-translate-y-1 hover:border-gold/20 hover:bg-gold/[0.025]"
+              className="group relative overflow-hidden rounded-3xl border border-white/[0.09] bg-black/40 p-7 shadow-2xl backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-gold/30 hover:bg-gold/[0.04]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 font-bold text-gold">
-                {market.symbol}
-              </div>
+              {/* Card glow */}
+              <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gold/[0.06] opacity-0 blur-[60px] transition duration-500 group-hover:opacity-100" />
 
-              <h3 className="mt-7 text-xl font-bold !text-[#FFFFFF]">
-                {market.name}
-              </h3>
+              <div className="relative">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-gold/20 bg-gold/10 font-bold text-gold transition duration-300 group-hover:scale-105 group-hover:bg-gold/15">
+                  {market.symbol}
+                </div>
 
-              <p className="mt-3 text-sm leading-6 !text-[#FFFFFF]">
-                {market.description}
-              </p>
+                <h3 className="mt-7 text-xl font-bold !text-[#FFFFFF]">
+                  {market.name}
+                </h3>
 
-              <div className="mt-7 border-t border-white/[0.06] pt-5 text-xs font-bold !text-[#FFFFFF]">
-                {market.examples}
+                <p className="mt-3 text-sm leading-6 !text-[#FFFFFF]">
+                  {market.description}
+                </p>
+
+                <div className="mt-7 border-t border-white/[0.08] pt-5 text-xs font-bold !text-[#FFFFFF]">
+                  {market.examples}
+                </div>
               </div>
             </div>
           ))}

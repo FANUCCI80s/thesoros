@@ -20,10 +20,10 @@ export default function Navbar() {
           <Image
             src="/branding/thesoros-logo.png"
             alt="Thesoros"
-            width={180}
-            height={52}
+            width={200}
+            height={58}
             priority
-            className="h-11 w-auto rounded-xl object-contain"
+            className="block h-12 w-auto object-contain sm:h-13"
           />
         </Link>
 
@@ -161,4 +161,5 @@ export default function Navbar() {
     </header>
   );
 }
+
 

@@ -2,15 +2,47 @@ import Link from "next/link";
 
 export default function FinalCta() {
   return (
-    <section className="border-t border-white/[0.06] py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-[2rem] border border-gold/20 bg-gold/[0.05] px-6 py-20 text-center sm:px-12">
-          <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
+    <section className="relative overflow-hidden border-t border-white/[0.06] bg-[#050505] py-28">
+      {/* Section background */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        style={{
+          backgroundImage:
+            "url('/branding/new-background-mobile-2.jpg')",
+        }}
+      />
 
-          <div className="absolute bottom-0 left-1/2 h-48 w-48 -translate-x-1/2 translate-y-1/2 rounded-full bg-gold/[0.07] blur-3xl" />
+      {/* Dark overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-[#050505]/85" />
+
+      {/* Cinematic gradient */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/95 via-transparent to-[#050505]/95" />
+
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-[2rem] border border-gold/20 bg-black/45 px-6 py-20 text-center shadow-2xl backdrop-blur-md sm:px-12">
+          {/* CTA background image */}
+          <div
+            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+            style={{
+              backgroundImage:
+                "url('/branding/new-background-mobile-2.jpg')",
+            }}
+          />
+
+          {/* CTA overlay */}
+          <div className="pointer-events-none absolute inset-0 bg-[#050505]/55" />
+
+          {/* Gold glows */}
+          <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
+
+          <div className="pointer-events-none absolute bottom-0 left-1/2 h-48 w-48 -translate-x-1/2 translate-y-1/2 rounded-full bg-gold/[0.07] blur-3xl" />
 
           <div className="relative">
-            <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-9 w-auto object-contain" />
+            <img
+              src="/branding/thesoros-logo.png"
+              alt="THÉSOROS"
+              className="mx-auto h-9 w-auto object-contain"
+            />
 
             <p className="mt-7 text-xs font-bold uppercase tracking-[0.25em] text-gold">
               Thesoros
@@ -28,14 +60,14 @@ export default function FinalCta() {
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
                 href="/signup"
-                className="rounded-2xl bg-gold px-7 py-4 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
+                className="rounded-2xl bg-gold px-7 py-4 text-sm font-bold !text-[#FFFFFF] transition hover:brightness-110"
               >
                 Create Your Account
               </Link>
 
               <Link
                 href="/login"
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-7 py-4 text-sm font-bold !text-[#FFFFFF] transition hover:bg-white/[0.06]"
+                className="rounded-2xl border border-white/10 bg-white/[0.04] px-7 py-4 text-sm font-bold !text-[#FFFFFF] transition hover:border-gold/30 hover:bg-white/[0.07]"
               >
                 Log In
               </Link>

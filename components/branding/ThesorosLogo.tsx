@@ -8,7 +8,7 @@ interface ThesorosLogoProps {
 }
 
 export default function ThesorosLogo({
-  className = "h-10 w-auto",
+  className = "",
   width = 180,
   height = 52,
   priority = false,
@@ -16,12 +16,11 @@ export default function ThesorosLogo({
   return (
     <Image
       src="/branding/thesoros-logo.png"
-      alt="TH�SOROS"
+      alt="THÉSOROS"
       width={width}
       height={height}
       priority={priority}
-      className={className}
+      className={`block h-auto w-auto max-w-full object-contain ${className}`}
     />
   );
 }
-

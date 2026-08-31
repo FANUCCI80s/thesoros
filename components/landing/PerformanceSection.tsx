@@ -1,139 +1,95 @@
-const stats = [
+const steps = [
   {
-    value: "24/7",
-    label: "Market access",
+    number: "01",
+    title: "Create Your Profile",
+    text: "Join THÉSOROS by creating your account and completing the required verification steps for a secure and seamless onboarding experience.",
   },
   {
-    value: "3+",
-    label: "Market categories",
+    number: "02",
+    title: "Fund Your Portfolio",
+    text: "Choose an available funding method and follow the guided instructions within your account. Your balance is updated once your deposit has been verified and approved.",
   },
   {
-    value: "Real-time",
-    label: "Market monitoring",
+    number: "03",
+    title: "Explore Opportunities",
+    text: "Discover supported markets and investment opportunities through a refined environment designed to help you monitor assets and make informed decisions.",
   },
   {
-    value: "Secure",
-    label: "Account infrastructure",
-  },
-];
-
-const markets = [
-  {
-    name: "BTC/USD",
-    price: "$67,842.21",
-    change: "+2.84%",
-    bars: [25, 35, 28, 45, 38, 55, 42, 65, 58, 72, 64, 82],
-  },
-  {
-    name: "EUR/USD",
-    price: "1.1742",
-    change: "+0.31%",
-    bars: [40, 32, 45, 38, 50, 42, 58, 52, 64, 60, 70, 76],
-  },
-  {
-    name: "S&P 500",
-    price: "6,482.17",
-    change: "+1.08%",
-    bars: [30, 42, 35, 50, 46, 58, 52, 64, 57, 68, 62, 78],
+    number: "04",
+    title: "Manage Your Wealth",
+    text: "Monitor your portfolio, balances, transactions, and investment activity from one integrated dashboard designed around clarity and control.",
   },
 ];
 
-export default function PerformanceSection() {
+export default function HowItWorks() {
   return (
     <section
-      id="performance"
-      className="border-t border-white/[0.06] py-28"
+      id="how-it-works"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-[#050505] py-28"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
-              Market Performance
-            </p>
+      {/* Background image */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25"
+        style={{
+          backgroundImage:
+            "url('/branding/new-background-mobile-2.jpg')",
+        }}
+      />
 
-            <h2 className="mt-5 text-4xl font-bold tracking-tight !text-[#FFFFFF] sm:text-5xl">
-              Stay close to the markets that matter.
-            </h2>
+      {/* Dark overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-[#050505]/80" />
 
-            <p className="mt-6 max-w-lg leading-7 !text-[#FFFFFF]">
-              Monitor market movement and keep important price information
-              visible through a clean, focused trading environment.
-            </p>
+      {/* Cinematic gradient */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/95 via-transparent to-[#050505]/95" />
 
-            <div className="mt-10 grid grid-cols-2 gap-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5"
-                >
-                  <p className="text-xl font-bold !text-[#FFFFFF]">
-                    {stat.value}
-                  </p>
+      {/* Gold ambient glow */}
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-gold/[0.06] blur-[140px]" />
 
-                  <p className="mt-1 text-xs !text-[#FFFFFF]">
-                    {stat.label}
-                  </p>
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+            How It Works
+          </p>
+
+          <h2 className="mt-4 text-4xl font-bold tracking-tight !text-[#FFFFFF] sm:text-5xl">
+            Your journey starts here.
+          </h2>
+
+          <p className="mx-auto mt-5 max-w-xl leading-7 !text-[#FFFFFF]">
+            From your first step to managing your portfolio, THÉSOROS brings
+            your wealth journey together in one refined environment.
+          </p>
+        </div>
+
+        {/* Steps */}
+        <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step) => (
+            <div
+              key={step.number}
+              className="group relative overflow-hidden rounded-3xl border border-white/[0.09] bg-black/40 p-7 shadow-2xl backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-gold/30 hover:bg-gold/[0.04]"
+            >
+              {/* Hover glow */}
+              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gold/[0.07] opacity-0 blur-[70px] transition duration-500 group-hover:opacity-100" />
+
+              <div className="relative">
+                {/* Step number */}
+                <div className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/20 bg-gold/10 text-sm font-bold text-gold transition duration-300 group-hover:scale-105">
+                  {step.number}
                 </div>
-              ))}
-            </div>
-          </div>
 
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#050505] shadow-2xl shadow-black/30">
-            <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-5">
-              <div>
-                <p className="text-sm font-bold !text-[#FFFFFF]">
-                  Market Overview
-                </p>
+                {/* Title */}
+                <h3 className="mt-7 text-lg font-bold !text-[#FFFFFF]">
+                  {step.title}
+                </h3>
 
-                <p className="mt-1 text-xs !text-[#FFFFFF]">
-                  Selected market instruments
+                {/* Description */}
+                <p className="mt-3 text-sm leading-6 !text-[#FFFFFF]">
+                  {step.text}
                 </p>
               </div>
-
-              <span className="rounded-full bg-gold/10 px-3 py-1 text-[10px] font-bold text-gold">
-                LIVE
-              </span>
             </div>
-
-            <div className="divide-y divide-white/[0.06]">
-              {markets.map((market) => (
-                <div
-                  key={market.name}
-                  className="flex items-center gap-5 px-6 py-6"
-                >
-                  <div className="min-w-24">
-                    <p className="text-sm font-bold !text-[#FFFFFF]">
-                      {market.name}
-                    </p>
-
-                    <p className="mt-1 text-xs !text-[#FFFFFF]">
-                      Market
-                    </p>
-                  </div>
-
-                  <div className="hidden h-12 flex-1 items-end gap-1 sm:flex">
-                    {market.bars.map((height, index) => (
-                      <div
-                        key={index}
-                        className="flex-1 rounded-t bg-gold/30"
-                        style={{ height: `${height}%` }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="ml-auto text-right">
-                    <p className="text-sm font-bold !text-[#FFFFFF]">
-                      {market.price}
-                    </p>
-
-                    <p className="mt-1 text-xs font-bold text-gold">
-                      {market.change}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

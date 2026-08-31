@@ -1,19 +1,80 @@
 
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import {
+  ArrowDownToLine,
+  ArrowLeftRight,
+  ArrowUpFromLine,
+  Bell,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  Settings,
+  Star,
+  X,
+} from "lucide-react";
+
+const navItems = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    label: "Market Watchlist",
+    href: "/market-watchlist",
+    icon: Star,
+  },
+  {
+    label: "Deposit",
+    href: "/deposit",
+    icon: ArrowDownToLine,
+  },
+  {
+    label: "Withdraw",
+    href: "/withdraw",
+    icon: ArrowUpFromLine,
+  },
+  {
+    label: "Transactions",
+    href: "/transactions",
+    icon: ArrowLeftRight,
+  },
+];
+
+const secondaryNavItems = [
+  {
+    label: "Notifications",
+    href: "/notifications",
+    icon: Bell,
+  },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: Settings,
+  },
+];
 
 export default function DashboardNav() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
 
   const closeMenu = () => {
     setOpen(false);
+  };
+
+  const isActive = (href: string) => {
+    if (href === "/dashboard") {
+      return pathname === "/dashboard";
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   const handleLogout = async () => {
@@ -33,12 +94,7 @@ export default function DashboardNav() {
         throw new Error("Unable to log out.");
       }
 
-      // Replace the current dashboard history entry
-      // so the user is taken directly to login.
       router.replace("/login");
-
-      // Refresh the router so protected pages immediately
-      // recognize that the session has been destroyed.
       router.refresh();
     } catch (error) {
       console.error("Logout error:", error);
@@ -51,86 +107,75 @@ export default function DashboardNav() {
 
   return (
     <>
-      {/* Desktop Sidebar */}
+      {/* =========================================================
+          DESKTOP SIDEBAR
+      ========================================================= */}
       <aside className="hidden w-72 shrink-0 flex-col border-r border-white/10 bg-[#050505] lg:flex">
         {/* Logo */}
-        <div className="border-b border-white/10 p-6">
-          <Link href="/dashboard" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-              <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-            </div>
-
-            <div>
-              <p className="font-bold tracking-tight">
-                Thesoros
-              </p>
-
-              <p className="text-xs !text-[#FFFFFF]">
-                Trading platform
-              </p>
-            </div>
+        <div className="border-b border-white/10 px-6 py-7">
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center"
+          >
+            <img
+              src="/branding/thesoros-logo.png"
+              alt="THÉSOROS"
+              className="block h-10 w-auto max-w-[190px] object-contain"
+            />
           </Link>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 space-y-1 p-4">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
-          >
-            <span>âŒ‚</span>
-            Dashboard
-          </Link>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const active = isActive(item.href);
 
-          <Link
-            href="/market-watchlist"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†—</span>
-            Market Watchlist
-          </Link>
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
+                  active
+                    ? "bg-gold/10 font-bold text-gold"
+                    : "text-zinc-400 hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
+                }`}
+              >
+                <Icon
+                  className="h-5 w-5 shrink-0"
+                  strokeWidth={1.8}
+                />
 
-          <Link
-            href="/deposit"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†“</span>
-            Deposit
-          </Link>
-
-          <Link
-            href="/withdraw"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†‘</span>
-            Withdraw
-          </Link>
-
-          <Link
-            href="/transactions"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†”</span>
-            Transactions
-          </Link>
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
 
           <div className="my-5 border-t border-white/10" />
 
-          <Link
-            href="/notifications"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â—</span>
-            Notifications
-          </Link>
+          {secondaryNavItems.map((item) => {
+            const Icon = item.icon;
+            const active = isActive(item.href);
 
-          <Link
-            href="/settings"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>âš™</span>
-            Settings
-          </Link>
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
+                  active
+                    ? "bg-gold/10 font-bold text-gold"
+                    : "text-zinc-400 hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
+                }`}
+              >
+                <Icon
+                  className="h-5 w-5 shrink-0"
+                  strokeWidth={1.8}
+                />
+
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Bottom */}
@@ -142,7 +187,7 @@ export default function DashboardNav() {
 
             <Link
               href="/settings"
-              className="mt-1 block text-sm font-bold text-zinc-300 hover:!text-[#FFFFFF]"
+              className="mt-1 block text-sm font-bold text-zinc-300 transition hover:!text-[#FFFFFF]"
             >
               Account settings
             </Link>
@@ -154,13 +199,19 @@ export default function DashboardNav() {
             disabled={loggingOut}
             className="mt-3 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm !text-[#FFFFFF] transition hover:bg-red-400/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <span>â†ª</span>
+            <LogOut
+              className="h-5 w-5 shrink-0"
+              strokeWidth={1.8}
+            />
+
             {loggingOut ? "Logging out..." : "Logout"}
           </button>
         </div>
       </aside>
 
-      {/* Mobile / Tablet Menu Button */}
+      {/* =========================================================
+          MOBILE / TABLET MENU BUTTON
+      ========================================================= */}
       <div className="absolute right-5 top-5 z-30 sm:right-8 lg:hidden">
         <button
           type="button"
@@ -169,13 +220,16 @@ export default function DashboardNav() {
           aria-expanded={open}
           className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-[#050505] !text-[#FFFFFF] shadow-lg transition hover:border-gold/30 hover:bg-gold/10 hover:text-gold"
         >
-          <span className="text-xl leading-none">
-            â˜°
-          </span>
+          <Menu
+            className="h-5 w-5"
+            strokeWidth={1.8}
+          />
         </button>
       </div>
 
-      {/* Overlay */}
+      {/* =========================================================
+          OVERLAY
+      ========================================================= */}
       {open && (
         <button
           type="button"
@@ -185,112 +239,94 @@ export default function DashboardNav() {
         />
       )}
 
-      {/* Mobile / Tablet Drawer */}
+      {/* =========================================================
+          MOBILE / TABLET DRAWER
+      ========================================================= */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r border-white/10 bg-[#050505] shadow-2xl transition-transform duration-300 lg:hidden ${
-          open
-            ? "translate-x-0"
-            : "-translate-x-full"
+          open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between border-b border-white/10 p-6">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-7">
           <Link
             href="/dashboard"
             onClick={closeMenu}
-            className="flex items-center gap-3"
+            className="inline-flex items-center"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-              <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-            </div>
-
-            <div>
-              <p className="font-bold tracking-tight">
-                Thesoros
-              </p>
-
-              <p className="text-xs !text-[#FFFFFF]">
-                Trading platform
-              </p>
-            </div>
+            <img
+              src="/branding/thesoros-logo.png"
+              alt="THÉSOROS"
+              className="block h-10 w-auto max-w-[190px] object-contain"
+            />
           </Link>
 
           <button
             type="button"
             onClick={closeMenu}
             aria-label="Close navigation"
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-xl text-zinc-500 transition hover:bg-white/[0.05] hover:!text-[#FFFFFF]"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 transition hover:bg-white/[0.05] hover:!text-[#FFFFFF]"
           >
-            Ã—
+            <X
+              className="h-5 w-5"
+              strokeWidth={1.8}
+            />
           </button>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 space-y-1 overflow-y-auto p-4">
-          <Link
-            href="/dashboard"
-            onClick={closeMenu}
-            className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
-          >
-            <span>âŒ‚</span>
-            Dashboard
-          </Link>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const active = isActive(item.href);
 
-          <Link
-            href="/market-watchlist"
-            onClick={closeMenu}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†—</span>
-            Market Watchlist
-          </Link>
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMenu}
+                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
+                  active
+                    ? "bg-gold/10 font-bold text-gold"
+                    : "text-zinc-400 hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
+                }`}
+              >
+                <Icon
+                  className="h-5 w-5 shrink-0"
+                  strokeWidth={1.8}
+                />
 
-          <Link
-            href="/deposit"
-            onClick={closeMenu}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†“</span>
-            Deposit
-          </Link>
-
-          <Link
-            href="/withdraw"
-            onClick={closeMenu}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†‘</span>
-            Withdraw
-          </Link>
-
-          <Link
-            href="/transactions"
-            onClick={closeMenu}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â†”</span>
-            Transactions
-          </Link>
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
 
           <div className="my-5 border-t border-white/10" />
 
-          <Link
-            href="/notifications"
-            onClick={closeMenu}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>â—</span>
-            Notifications
-          </Link>
+          {secondaryNavItems.map((item) => {
+            const Icon = item.icon;
+            const active = isActive(item.href);
 
-          <Link
-            href="/settings"
-            onClick={closeMenu}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-          >
-            <span>âš™</span>
-            Settings
-          </Link>
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMenu}
+                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
+                  active
+                    ? "bg-gold/10 font-bold text-gold"
+                    : "text-zinc-400 hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
+                }`}
+              >
+                <Icon
+                  className="h-5 w-5 shrink-0"
+                  strokeWidth={1.8}
+                />
+
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Mobile Logout */}
@@ -301,7 +337,11 @@ export default function DashboardNav() {
             disabled={loggingOut}
             className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm !text-[#FFFFFF] transition hover:bg-red-400/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <span>â†ª</span>
+            <LogOut
+              className="h-5 w-5 shrink-0"
+              strokeWidth={1.8}
+            />
+
             {loggingOut ? "Logging out..." : "Logout"}
           </button>
         </div>
@@ -309,5 +349,4 @@ export default function DashboardNav() {
     </>
   );
 }
-
 

@@ -5,8 +5,8 @@ import PerformanceSection from "@/components/landing/PerformanceSection";
 import WhyThesoros from "@/components/landing/WhyThesoros";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
-import FAQ from "@/components/landing/FAQ";
 import ContactForm from "@/components/landing/ContactForm";
+import FAQ from "@/components/landing/FAQ";
 import ActivityNotifications from "@/components/landing/ActivityNotifications";
 import FinalCta from "@/components/landing/FinalCta";
 import Footer from "@/components/landing/Footer";
@@ -31,9 +31,9 @@ export default function HomePage() {
 
       <Testimonials />
 
-      <FAQ />
-
       <ContactForm />
+
+      <FAQ />
 
       <FinalCta />
 
