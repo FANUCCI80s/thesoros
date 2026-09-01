@@ -1,8 +1,10 @@
 
+
 "use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import DashboardNav from "@/components/dashboard/DashboardNav";
 
 type NotificationType =
   | "INFO"
@@ -60,28 +62,28 @@ function formatDate(date: string) {
 function getNotificationIcon(type: NotificationType) {
   switch (type) {
     case "SUCCESS":
-      return "âœ“";
+      return "✓";
 
     case "WARNING":
       return "!";
 
     case "ERROR":
-      return "Ã—";
+      return "×";
 
     case "SECURITY":
-      return "â—†";
+      return "◆";
 
     case "TRANSACTION":
       return "$";
 
     case "KYC":
-      return "âœ“";
+      return "✓";
 
     case "TRADE":
-      return "â†—";
+      return "↗";
 
     case "SYSTEM":
-      return "âš™";
+      return "⚙";
 
     case "INFO":
     default:
@@ -306,6 +308,7 @@ export default function NotificationsClient() {
   return (
     <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="flex min-h-screen">
+
         {/* Sidebar */}
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col">
           <div className="border-b border-white/10 p-5">
@@ -314,7 +317,11 @@ export default function NotificationsClient() {
               className="flex items-center gap-3"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
+                <img
+                  src="/branding/thesoros-logo.png"
+                  alt="THÉSOROS"
+                  className="h-8 w-auto object-contain"
+                />
               </div>
 
               <div>
@@ -334,7 +341,7 @@ export default function NotificationsClient() {
               href="/dashboard"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>âŒ‚</span>
+              <span>⌂</span>
               Dashboard
             </Link>
 
@@ -342,7 +349,7 @@ export default function NotificationsClient() {
               href="/trade"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†—</span>
+              <span>↗</span>
               Trade
             </Link>
 
@@ -350,7 +357,7 @@ export default function NotificationsClient() {
               href="/deposit"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†“</span>
+              <span>↓</span>
               Deposit
             </Link>
 
@@ -358,7 +365,7 @@ export default function NotificationsClient() {
               href="/withdraw"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†‘</span>
+              <span>↑</span>
               Withdraw
             </Link>
 
@@ -366,7 +373,7 @@ export default function NotificationsClient() {
               href="/transactions"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†”</span>
+              <span>↔</span>
               Transactions
             </Link>
 
@@ -377,7 +384,7 @@ export default function NotificationsClient() {
               className="flex items-center justify-between rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
             >
               <span className="flex items-center gap-3">
-                <span>â—</span>
+                <span>●</span>
                 Notifications
               </span>
 
@@ -392,7 +399,7 @@ export default function NotificationsClient() {
               href="/settings"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>âš™</span>
+              <span>⚙</span>
               Settings
             </Link>
           </nav>
@@ -409,32 +416,12 @@ export default function NotificationsClient() {
 
         {/* Main */}
         <section className="min-w-0 flex-1">
-          {/* Mobile header */}
-          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
-            <div className="flex items-center justify-between gap-4">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-3"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
-                  <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-                </div>
 
-                <span className="font-bold">
-                  Thesoros
-                </span>
-              </Link>
-
-              <Link
-                href="/dashboard"
-                className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
-              >
-                Dashboard
-              </Link>
-            </div>
-          </header>
+          {/* Mobile navigation */}
+          <DashboardNav />
 
           <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8 lg:px-10">
+
             {/* Header */}
             <div className="mb-8">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
@@ -595,7 +582,7 @@ export default function NotificationsClient() {
               ) : filteredNotifications.length === 0 ? (
                 <div className="px-6 py-16 text-center sm:px-8">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-lg !text-[#FFFFFF]">
-                    â—
+                    ●
                   </div>
 
                   <h3 className="mt-5 font-bold">
@@ -623,6 +610,7 @@ export default function NotificationsClient() {
                         }`}
                       >
                         <div className="flex items-start gap-4">
+
                           {/* Icon */}
                           <div
                             className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border text-sm font-semibold ${getNotificationIconClass(
@@ -656,7 +644,7 @@ export default function NotificationsClient() {
                                   </span>
 
                                   <span className="!text-[#FFFFFF]">
-                                    â€¢
+                                    •
                                   </span>
 
                                   <span className="text-xs !text-[#FFFFFF]">
@@ -706,5 +694,4 @@ export default function NotificationsClient() {
     </div>
   );
 }
-
 

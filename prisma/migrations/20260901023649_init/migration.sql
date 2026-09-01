@@ -1,6 +1,3 @@
-ÿþ-- CreateSchema
-CREATE SCHEMA IF NOT EXISTS "public";
-
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('USER', 'ADMIN');
 
@@ -218,6 +215,19 @@ CREATE TABLE "PaymentDepositConfig" (
 );
 
 -- CreateTable
+CREATE TABLE "WithdrawalMethodConfig" (
+    "id" TEXT NOT NULL,
+    "method" "WithdrawalMethod" NOT NULL,
+    "displayName" TEXT NOT NULL,
+    "instructions" TEXT,
+    "isEnabled" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "WithdrawalMethodConfig_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "DepositRequest" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
@@ -372,6 +382,20 @@ CREATE TABLE "AccountActivity" (
     CONSTRAINT "AccountActivity_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "PlatformSettings" (
+    "id" TEXT NOT NULL,
+    "platformName" TEXT NOT NULL DEFAULT 'Edge Portfolio',
+    "logoUrl" TEXT,
+    "primaryColor" TEXT NOT NULL DEFAULT '#22c55e',
+    "secondaryColor" TEXT NOT NULL DEFAULT '#050806',
+    "accentColor" TEXT NOT NULL DEFAULT '#16a34a',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PlatformSettings_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -445,10 +469,16 @@ CREATE INDEX "CryptoDepositOption_symbol_idx" ON "CryptoDepositOption"("symbol")
 CREATE INDEX "CryptoDepositOption_network_idx" ON "CryptoDepositOption"("network");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "PaymentDepositConfig_method_key" ON "PaymentDepositConfig"("method");
+
+-- CreateIndex
 CREATE INDEX "PaymentDepositConfig_isEnabled_idx" ON "PaymentDepositConfig"("isEnabled");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PaymentDepositConfig_method_key" ON "PaymentDepositConfig"("method");
+CREATE UNIQUE INDEX "WithdrawalMethodConfig_method_key" ON "WithdrawalMethodConfig"("method");
+
+-- CreateIndex
+CREATE INDEX "WithdrawalMethodConfig_isEnabled_idx" ON "WithdrawalMethodConfig"("isEnabled");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "DepositRequest_proofFileId_key" ON "DepositRequest"("proofFileId");
@@ -559,10 +589,10 @@ CREATE INDEX "AccountActivity_type_idx" ON "AccountActivity"("type");
 CREATE INDEX "AccountActivity_createdAt_idx" ON "AccountActivity"("createdAt");
 
 -- AddForeignKey
-ALTER TABLE "UserProfile" ADD CONSTRAINT "UserProfile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "UserProfile" ADD CONSTRAINT "UserProfile_avatarFileId_fkey" FOREIGN KEY ("avatarFileId") REFERENCES "FileAsset"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserProfile" ADD CONSTRAINT "UserProfile_avatarFileId_fkey" FOREIGN KEY ("avatarFileId") REFERENCES "FileAsset"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "UserProfile" ADD CONSTRAINT "UserProfile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Balance" ADD CONSTRAINT "Balance_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -577,16 +607,13 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "OtpCode" ADD CONSTRAINT "OtpCode_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FileAsset" ADD CONSTRAINT "FileAsset_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "FileAsset" ADD CONSTRAINT "FileAsset_kycBackForId_fkey" FOREIGN KEY ("kycBackForId") REFERENCES "KycVerification"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "FileAsset" ADD CONSTRAINT "FileAsset_kycFrontForId_fkey" FOREIGN KEY ("kycFrontForId") REFERENCES "KycVerification"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FileAsset" ADD CONSTRAINT "FileAsset_kycBackForId_fkey" FOREIGN KEY ("kycBackForId") REFERENCES "KycVerification"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "FileAsset" ADD CONSTRAINT "FileAsset_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_bankAccountId_fkey" FOREIGN KEY ("bankAccountId") REFERENCES "BankDepositAccount"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -595,22 +622,25 @@ ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_bankAccountId_fkey" 
 ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_cryptoOptionId_fkey" FOREIGN KEY ("cryptoOptionId") REFERENCES "CryptoDepositOption"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_invoiceFileId_fkey" FOREIGN KEY ("invoiceFileId") REFERENCES "FileAsset"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_paymentConfigId_fkey" FOREIGN KEY ("paymentConfigId") REFERENCES "PaymentDepositConfig"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_proofFileId_fkey" FOREIGN KEY ("proofFileId") REFERENCES "FileAsset"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_invoiceFileId_fkey" FOREIGN KEY ("invoiceFileId") REFERENCES "FileAsset"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "DepositRequest" ADD CONSTRAINT "DepositRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "WithdrawalRequest" ADD CONSTRAINT "WithdrawalRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_depositId_fkey" FOREIGN KEY ("depositId") REFERENCES "DepositRequest"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_depositId_fkey" FOREIGN KEY ("depositId") REFERENCES "DepositRequest"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_withdrawalId_fkey" FOREIGN KEY ("withdrawalId") REFERENCES "WithdrawalRequest"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -619,10 +649,10 @@ ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_withdrawalId_fkey" FOREIGN
 ALTER TABLE "AdminApproval" ADD CONSTRAINT "AdminApproval_adminId_fkey" FOREIGN KEY ("adminId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "AdminApproval" ADD CONSTRAINT "AdminApproval_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "AdminApproval" ADD CONSTRAINT "AdminApproval_depositRequestId_fkey" FOREIGN KEY ("depositRequestId") REFERENCES "DepositRequest"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "AdminApproval" ADD CONSTRAINT "AdminApproval_depositRequestId_fkey" FOREIGN KEY ("depositRequestId") REFERENCES "DepositRequest"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "AdminApproval" ADD CONSTRAINT "AdminApproval_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "AdminApproval" ADD CONSTRAINT "AdminApproval_withdrawalRequestId_fkey" FOREIGN KEY ("withdrawalRequestId") REFERENCES "WithdrawalRequest"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -637,11 +667,10 @@ ALTER TABLE "BalanceAdjustment" ADD CONSTRAINT "BalanceAdjustment_userId_fkey" F
 ALTER TABLE "Notification" ADD CONSTRAINT "Notification_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "DirectMessage" ADD CONSTRAINT "DirectMessage_senderId_fkey" FOREIGN KEY ("senderId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "DirectMessage" ADD CONSTRAINT "DirectMessage_recipientId_fkey" FOREIGN KEY ("recipientId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "AccountActivity" ADD CONSTRAINT "AccountActivity_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "DirectMessage" ADD CONSTRAINT "DirectMessage_senderId_fkey" FOREIGN KEY ("senderId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
+-- AddForeignKey
+ALTER TABLE "AccountActivity" ADD CONSTRAINT "AccountActivity_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

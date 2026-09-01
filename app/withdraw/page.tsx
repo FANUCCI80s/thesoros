@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import DashboardNav from "@/components/dashboard/DashboardNav";
 
 type WithdrawalMethod =
   | "BANK_TRANSFER"
@@ -203,135 +204,32 @@ export default function WithdrawPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col">
-          <div className="border-b border-white/10 p-6">
-            <Link href="/dashboard" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-                <img
-  src="/branding/thesoros-logo.png"
-  alt="THÉSOROS"
-  className="h-8 w-auto object-contain"
-  />
-              </div>
+        {/* =====================================================
+            SHARED DASHBOARD NAVIGATION
 
-              <div>
-                <p className="font-bold tracking-tight">
-                  Thesoros
-                </p>
+            Uses the existing DashboardNav component.
 
-                <p className="text-xs !text-[#FFFFFF]">
-                  Trading platform
-                </p>
-              </div>
-            </Link>
-          </div>
+            DashboardNav handles:
+            - Desktop sidebar
+            - Mobile hamburger/menu button
+            - Mobile navigation
+            - Active navigation state
+            - Logout
 
-          <nav className="flex-1 space-y-1 p-4">
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>âŒ‚</span>
-              Dashboard
-            </Link>
+            Do not create another navbar/header here.
+        ===================================================== */}
+        <DashboardNav />
 
-            <Link
-              href="/trade"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â†—</span>
-              Trade
-            </Link>
-
-            <Link
-              href="/deposit"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â†“</span>
-              Deposit
-            </Link>
-
-            <Link
-              href="/withdraw"
-              className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
-            >
-              <span>â†‘</span>
-              Withdraw
-            </Link>
-
-            <Link
-              href="/transactions"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â†”</span>
-              Transactions
-            </Link>
-
-            <div className="my-5 border-t border-white/10" />
-
-            <Link
-              href="/notifications"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â—</span>
-              Notifications
-            </Link>
-
-            <Link
-              href="/settings"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>âš™</span>
-              Settings
-            </Link>
-          </nav>
-
-          <div className="border-t border-white/10 p-4">
-            <Link
-              href="/dashboard"
-              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
-            >
-              Back to dashboard
-            </Link>
-          </div>
-        </aside>
-
-        {/* Main */}
+        {/* =====================================================
+            MAIN CONTENT
+        ===================================================== */}
         <section className="min-w-0 flex-1">
-          {/* Mobile header */}
-          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
-            <div className="flex items-center justify-between">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-3"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
-                  <img
-  src="/branding/thesoros-logo.png"
-  alt="THÉSOROS"
-  className="h-8 w-auto object-contain"
-  />
-                </div>
-
-                <span className="font-bold">
-                  Thesoros
-                </span>
-              </Link>
-
-              <Link
-                href="/dashboard"
-                className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
-              >
-                Dashboard
-              </Link>
-            </div>
-          </header>
-
-          <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 lg:px-10">
-            {/* Header */}
+          <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 lg:px-10 lg:py-8">
+            {/* =================================================
+                PAGE HEADER
+            ================================================= */}
             <div className="mb-8">
               <p className="mb-2 text-sm font-bold text-gold">
                 Withdraw funds
@@ -348,7 +246,9 @@ export default function WithdrawPage() {
               </p>
             </div>
 
-            {/* Important notice */}
+            {/* =================================================
+                IMPORTANT NOTICE
+            ================================================= */}
             <div className="mb-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-5">
               <div className="flex gap-3">
                 <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-yellow-400/10 text-yellow-400">
@@ -369,12 +269,14 @@ export default function WithdrawPage() {
               </div>
             </div>
 
-            {/* Success */}
+            {/* =================================================
+                SUCCESS MESSAGE
+            ================================================= */}
             {message && (
               <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-5">
                 <div className="flex items-start gap-3">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
-                    âœ“
+                    ✓
                   </div>
 
                   <div>
@@ -390,14 +292,16 @@ export default function WithdrawPage() {
                       href="/transactions"
                       className="mt-3 inline-block text-sm font-bold text-gold hover:text-gold-light"
                     >
-                      View transactions â†’
+                      View transactions →
                     </Link>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Error */}
+            {/* =================================================
+                ERROR MESSAGE
+            ================================================= */}
             {error && (
               <div className="mb-6 rounded-2xl border border-red-400/20 bg-red-400/5 p-5">
                 <p className="text-sm font-bold text-red-300">
@@ -406,8 +310,13 @@ export default function WithdrawPage() {
               </div>
             )}
 
+            {/* =================================================
+                WITHDRAWAL FORM
+            ================================================= */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Step 1 */}
+              {/* =================================================
+                  STEP 1
+              ================================================= */}
               <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
                 <p className="text-sm !text-[#FFFFFF]">Step 1</p>
 
@@ -459,7 +368,7 @@ export default function WithdrawPage() {
                           >
                             {selected && (
                               <span className="text-xs font-bold">
-                                âœ“
+                                ✓
                               </span>
                             )}
                           </div>
@@ -470,7 +379,9 @@ export default function WithdrawPage() {
                 </div>
               </section>
 
-              {/* Step 2 */}
+              {/* =================================================
+                  STEP 2
+              ================================================= */}
               <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
                 <p className="text-sm !text-[#FFFFFF]">Step 2</p>
 
@@ -582,7 +493,9 @@ export default function WithdrawPage() {
                 </div>
               </section>
 
-              {/* Step 3 */}
+              {/* =================================================
+                  STEP 3
+              ================================================= */}
               <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
                 <p className="text-sm !text-[#FFFFFF]">Step 3</p>
 
@@ -590,6 +503,9 @@ export default function WithdrawPage() {
                   {formatMethod(method)} information
                 </h2>
 
+                {/* =================================================
+                    BANK TRANSFER
+                ================================================= */}
                 {method === "BANK_TRANSFER" && (
                   <div className="mt-6 space-y-5">
                     <div className="grid gap-5 sm:grid-cols-2">
@@ -713,6 +629,9 @@ export default function WithdrawPage() {
                   </div>
                 )}
 
+                {/* =================================================
+                    CASH APP
+                ================================================= */}
                 {method === "CASH_APP" && (
                   <div className="mt-6">
                     <label
@@ -735,6 +654,9 @@ export default function WithdrawPage() {
                   </div>
                 )}
 
+                {/* =================================================
+                    PAYPAL
+                ================================================= */}
                 {method === "PAYPAL" && (
                   <div className="mt-6">
                     <label
@@ -758,6 +680,9 @@ export default function WithdrawPage() {
                   </div>
                 )}
 
+                {/* =================================================
+                    ZELLE
+                ================================================= */}
                 {method === "ZELLE" && (
                   <div className="mt-6 grid gap-5 sm:grid-cols-2">
                     <div>
@@ -802,6 +727,9 @@ export default function WithdrawPage() {
                   </div>
                 )}
 
+                {/* =================================================
+                    VENMO
+                ================================================= */}
                 {method === "VENMO" && (
                   <div className="mt-6">
                     <label
@@ -825,7 +753,9 @@ export default function WithdrawPage() {
                 )}
               </section>
 
-              {/* Approval notice */}
+              {/* =================================================
+                  APPROVAL NOTICE
+              ================================================= */}
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                 <div className="flex gap-3">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
@@ -847,7 +777,9 @@ export default function WithdrawPage() {
                 </div>
               </div>
 
-              {/* Actions */}
+              {/* =================================================
+                  ACTIONS
+              ================================================= */}
               <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
                 <Link
                   href="/dashboard"
@@ -870,8 +802,7 @@ export default function WithdrawPage() {
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 }
-
 

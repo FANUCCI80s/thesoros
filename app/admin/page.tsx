@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
+import { Check } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -16,10 +17,15 @@ export default async function AdminDashboardPage() {
     pendingDeposits,
     pendingWithdrawals,
   ] = await Promise.all([
-    prisma.user.count(),
+    prisma.user.count({
+      where: {
+        role: "USER",
+      },
+    }),
 
     prisma.user.count({
       where: {
+        role: "USER",
         status: "ACTIVE",
       },
     }),
@@ -76,22 +82,20 @@ export default async function AdminDashboardPage() {
       <div className="flex min-h-screen">
         {/* Sidebar */}
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-black/20 lg:flex lg:flex-col">
+          {/* Logo */}
           <div className="border-b border-white/10 px-6 py-6">
-            <div className="flex items-center gap-3">
+            <Link
+              href="/admin"
+              className="flex items-center"
+            >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
+                <img
+                  src="/branding/thesoros-logo.png"
+                  alt="THÉSOROS"
+                  className="h-8 w-auto object-contain"
+                />
               </div>
-
-              <div>
-                <p className="font-bold tracking-tight">
-                  Thesoros
-                </p>
-
-                <p className="text-xs !text-[#FFFFFF]">
-                  Administration
-                </p>
-              </div>
-            </div>
+            </Link>
           </div>
 
           <nav className="flex-1 space-y-1 p-4">
@@ -178,17 +182,12 @@ export default async function AdminDashboardPage() {
           <header className="border-b border-white/10 px-5 py-5 sm:px-8 lg:px-10">
             <div className="mx-auto flex max-w-7xl items-center justify-between">
               <div>
-                <p className="text-sm text-gold">
-                  Administration
-                </p>
-
-                <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+                <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Admin dashboard
                 </h1>
 
                 <p className="mt-1 text-sm !text-[#FFFFFF]">
-                  Manage Thesoros accounts and
-                  verification requests.
+                  Manage Thesoros accounts and verification requests.
                 </p>
               </div>
 
@@ -224,6 +223,15 @@ export default async function AdminDashboardPage() {
                 className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center text-xs !text-[#FFFFFF]"
               >
                 Users
+              </Link>
+
+              <Link
+                href="/admin/deposits"
+                className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center text-xs !text-[#FFFFFF]"
+              >
+                Deposits
+                {pendingDeposits > 0 &&
+                  ` (${pendingDeposits})`}
               </Link>
             </div>
 
@@ -291,8 +299,7 @@ export default async function AdminDashboardPage() {
                   </h2>
 
                   <p className="mt-1 text-sm !text-[#FFFFFF]">
-                    Review submitted identity documents
-                    and applicant information.
+                    Review submitted identity documents and applicant information.
                   </p>
                 </div>
 
@@ -307,9 +314,10 @@ export default async function AdminDashboardPage() {
               {recentKyc.length === 0 ? (
                 <div className="p-10 text-center">
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10">
-                    <span className="text-xl text-gold">
-                      âœ“
-                    </span>
+                    <Check
+                      className="h-6 w-6 text-gold"
+                      strokeWidth={2}
+                    />
                   </div>
 
                   <h3 className="mt-4 font-bold">
@@ -317,8 +325,7 @@ export default async function AdminDashboardPage() {
                   </h3>
 
                   <p className="mt-1 text-sm !text-[#FFFFFF]">
-                    New verification submissions will
-                    appear here.
+                    New verification submissions will appear here.
                   </p>
                 </div>
               ) : (
@@ -346,7 +353,9 @@ export default async function AdminDashboardPage() {
 
                         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs !text-[#FFFFFF]">
                           <span>
-                            ID: {kyc.governmentIdType || "Not specified"}
+                            ID:{" "}
+                            {kyc.governmentIdType ||
+                              "Not specified"}
                           </span>
 
                           <span>

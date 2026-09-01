@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Link from "next/link";
@@ -27,6 +28,11 @@ const navItems = [
     label: "Market Watchlist",
     href: "/market-watchlist",
     icon: Star,
+  },
+  {
+    label: "Trade",
+    href: "/trade",
+    icon: ArrowLeftRight,
   },
   {
     label: "Deposit",

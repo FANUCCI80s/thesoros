@@ -1,7 +1,9 @@
+
 "use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import DashboardNav from "@/components/dashboard/DashboardNav";
 
 type TransactionType =
   | "DEPOSIT"
@@ -119,17 +121,17 @@ function getStatusClass(status: TransactionStatus) {
 function getTypeIcon(type: TransactionType) {
   switch (type) {
     case "DEPOSIT":
-      return "â†“";
+      return "↓";
     case "WITHDRAWAL":
-      return "â†‘";
+      return "↑";
     case "TRADE":
-      return "â†—";
+      return "↗";
     case "REFUND":
-      return "â†©";
+      return "↩";
     case "ADJUSTMENT":
-      return "â†”";
+      return "↔";
     default:
-      return "â€¢";
+      return "•";
   }
 }
 
@@ -206,131 +208,28 @@ export default function TransactionsClient() {
   return (
     <div className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="flex min-h-screen">
+        {/* =====================================================
+            SHARED DASHBOARD NAVIGATION
 
-        {/* Sidebar */}
-        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col">
-          <div className="border-b border-white/10 p-5">
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-3"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-              </div>
+            DashboardNav handles:
+            - Desktop sidebar
+            - Mobile hamburger/menu
+            - Active navigation
+            - Logout
+            - Responsive behavior
 
-              <div>
-                <p className="font-bold tracking-tight">
-                  Thesoros
-                </p>
+            Do NOT create another sidebar or mobile header here.
+        ===================================================== */}
+        <DashboardNav />
 
-                <p className="text-xs !text-[#FFFFFF]">
-                  Trading platform
-                </p>
-              </div>
-            </Link>
-          </div>
-
-          <nav className="flex-1 space-y-1 p-4">
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>âŒ‚</span>
-              Dashboard
-            </Link>
-
-            <Link
-              href="/trade"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â†—</span>
-              Trade
-            </Link>
-
-            <Link
-              href="/deposit"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â†“</span>
-              Deposit
-            </Link>
-
-            <Link
-              href="/withdraw"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â†‘</span>
-              Withdraw
-            </Link>
-
-            <Link
-              href="/transactions"
-              className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
-            >
-              <span>â†”</span>
-              Transactions
-            </Link>
-
-            <div className="my-5 border-t border-white/10" />
-
-            <Link
-              href="/notifications"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>â—</span>
-              Notifications
-            </Link>
-
-            <Link
-              href="/settings"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-            >
-              <span>âš™</span>
-              Settings
-            </Link>
-          </nav>
-
-          <div className="border-t border-white/10 p-4">
-            <Link
-              href="/dashboard"
-              className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
-            >
-              Back to dashboard
-            </Link>
-          </div>
-        </aside>
-
-        {/* Main */}
+        {/* =====================================================
+            MAIN CONTENT
+        ===================================================== */}
         <section className="min-w-0 flex-1">
-
-          {/* Mobile header */}
-          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
-            <div className="flex items-center justify-between">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-3"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
-                  <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-                </div>
-
-                <span className="font-bold">
-                  Thesoros
-                </span>
-              </Link>
-
-              <Link
-                href="/dashboard"
-                className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
-              >
-                Dashboard
-              </Link>
-            </div>
-          </header>
-
           <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8 lg:px-10">
-
-            {/* Header */}
+            {/* =================================================
+                PAGE HEADER
+            ================================================= */}
             <div className="mb-8">
               <p className="mb-2 text-sm font-bold text-gold">
                 Account activity
@@ -346,7 +245,9 @@ export default function TransactionsClient() {
               </p>
             </div>
 
-            {/* Error */}
+            {/* =================================================
+                ERROR
+            ================================================= */}
             {error && (
               <div className="mb-6 rounded-2xl border border-red-400/20 bg-red-400/5 p-5">
                 <div className="flex items-start justify-between gap-4">
@@ -371,7 +272,9 @@ export default function TransactionsClient() {
               </div>
             )}
 
-            {/* Filters */}
+            {/* =================================================
+                FILTERS
+            ================================================= */}
             <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.03] p-2">
               <div className="flex gap-1 overflow-x-auto">
                 {filters.map((item) => {
@@ -395,12 +298,12 @@ export default function TransactionsClient() {
               </div>
             </section>
 
-            {/* Transactions */}
+            {/* =================================================
+                TRANSACTION HISTORY
+            ================================================= */}
             <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-
               <div className="border-b border-white/10 px-6 py-5 sm:px-8">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-
                   <div>
                     <h2 className="font-bold">
                       Transaction history
@@ -428,6 +331,9 @@ export default function TransactionsClient() {
                 </div>
               </div>
 
+              {/* =================================================
+                  LOADING
+              ================================================= */}
               {loading ? (
                 <div className="px-6 py-16 text-center sm:px-8">
                   <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
@@ -437,9 +343,12 @@ export default function TransactionsClient() {
                   </p>
                 </div>
               ) : filteredTransactions.length === 0 ? (
+                /* =================================================
+                    EMPTY STATE
+                ================================================= */
                 <div className="px-6 py-16 text-center sm:px-8">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-xl !text-[#FFFFFF]">
-                    â†”
+                    →
                   </div>
 
                   <h3 className="mt-5 font-bold">
@@ -470,7 +379,9 @@ export default function TransactionsClient() {
                 </div>
               ) : (
                 <>
-                  {/* Desktop table */}
+                  {/* =================================================
+                      DESKTOP TABLE
+                  ================================================= */}
                   <div className="hidden overflow-x-auto md:block">
                     <table className="w-full">
                       <thead>
@@ -571,7 +482,12 @@ export default function TransactionsClient() {
                     </table>
                   </div>
 
-                  {/* Mobile cards */}
+                  {/* =================================================
+                      MOBILE CARDS
+
+                      DashboardNav now provides the mobile
+                      hamburger/menu. These cards remain unchanged.
+                  ================================================= */}
                   <div className="divide-y divide-white/[0.06] md:hidden">
                     {filteredTransactions.map((transaction) => (
                       <div
@@ -648,3 +564,4 @@ export default function TransactionsClient() {
     </div>
   );
 }
+

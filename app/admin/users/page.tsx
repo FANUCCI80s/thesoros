@@ -182,14 +182,19 @@ export default function AdminUsersPage() {
   return (
     <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
-        {/* Header */}
+
+        {/* HEADER */}
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <Link
               href="/admin"
-              className="text-sm text-gold transition hover:text-gold-light"
+              className="inline-flex items-center gap-2 text-sm text-gold transition hover:text-gold-light"
             >
-              â† Admin Dashboard
+              <span
+                aria-hidden="true"
+                className="inline-block h-2 w-2 rotate-45 border-b border-l border-gold"
+              />
+              Admin Dashboard
             </Link>
 
             <p className="mt-5 text-sm font-bold text-gold">
@@ -207,7 +212,7 @@ export default function AdminUsersPage() {
           </div>
         </div>
 
-        {/* Summary */}
+        {/* SUMMARY */}
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
             <p className="text-sm !text-[#FFFFFF]">
@@ -266,14 +271,16 @@ export default function AdminUsersPage() {
           </div>
         </div>
 
-        {/* Controls */}
+        {/* CONTROLS */}
         <section className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            {/* Search */}
+
+            {/* SEARCH */}
             <div className="relative w-full lg:max-w-xl">
-              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 !text-[#FFFFFF]">
-                âŒ•
-              </span>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border border-zinc-500"
+              />
 
               <input
                 type="text"
@@ -286,7 +293,7 @@ export default function AdminUsersPage() {
               />
             </div>
 
-            {/* Filters */}
+            {/* FILTERS */}
             <div className="flex flex-wrap gap-2">
               {(
                 [
@@ -313,7 +320,7 @@ export default function AdminUsersPage() {
           </div>
         </section>
 
-        {/* Users */}
+        {/* USERS */}
         <section className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
           <div className="border-b border-white/10 px-6 py-5">
             <div className="flex items-center justify-between gap-4">
@@ -358,7 +365,10 @@ export default function AdminUsersPage() {
           ) : filteredUsers.length === 0 ? (
             <div className="p-12 text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
-                â—Œ
+                <span
+                  aria-hidden="true"
+                  className="h-4 w-4 rounded-full border border-zinc-500"
+                />
               </div>
 
               <h3 className="mt-4 font-bold">
@@ -371,7 +381,7 @@ export default function AdminUsersPage() {
             </div>
           ) : (
             <>
-              {/* Desktop table */}
+              {/* DESKTOP TABLE */}
               <div className="hidden overflow-x-auto lg:block">
                 <table className="w-full">
                   <thead>
@@ -448,7 +458,8 @@ export default function AdminUsersPage() {
                               user.kyc?.status
                             )}`}
                           >
-                            {user.kyc?.status || "NOT SUBMITTED"}
+                            {user.kyc?.status ||
+                              "NOT SUBMITTED"}
                           </span>
                         </td>
 
@@ -482,7 +493,7 @@ export default function AdminUsersPage() {
                 </table>
               </div>
 
-              {/* Mobile cards */}
+              {/* MOBILE CARDS */}
               <div className="divide-y divide-white/10 lg:hidden">
                 {filteredUsers.map((user) => (
                   <div
@@ -567,7 +578,7 @@ export default function AdminUsersPage() {
         </section>
 
         <p className="mt-8 text-center text-xs !text-[#FFFFFF]">
-          Thesoros â€¢ Admin â€¢ Users
+          Thesoros · Admin · Users
         </p>
       </div>
     </main>

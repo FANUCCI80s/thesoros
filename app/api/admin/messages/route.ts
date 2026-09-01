@@ -1,8 +1,9 @@
 
-
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth/session";
+import { sendEmail } from "@/lib/email/send";
+import { getAdminMessageEmail } from "@/lib/email/templates/admin-message";
 
 export async function GET() {
   try {
@@ -54,7 +55,10 @@ export async function GET() {
       messages,
     });
   } catch (error) {
-    console.error("GET /api/admin/messages error:", error);
+    console.error(
+      "GET /api/admin/messages error:",
+      error
+    );
 
     if (error instanceof Error) {
       if (error.message === "UNAUTHORIZED") {
@@ -91,9 +95,8 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     /*
-     * IMPORTANT:
-     * The admin is obtained from the authenticated session.
-     * senderId is NOT accepted from the browser.
+     * The administrator is obtained from the authenticated session.
+     * senderId is never accepted from the browser.
      */
     const admin = await requireAdmin();
 
@@ -156,8 +159,6 @@ export async function POST(request: NextRequest) {
 
     /*
      * Make sure the selected recipient is an actual USER.
-     * This prevents an admin from accidentally messaging another admin
-     * through this user messaging panel.
      */
     const recipient = await prisma.user.findFirst({
       where: {
@@ -184,71 +185,150 @@ export async function POST(request: NextRequest) {
 
     /*
      * Create the direct message, notification and activity
-     * together. If one operation fails, none of them are saved.
+     * together.
      */
-    const result = await prisma.$transaction(async (tx) => {
-      const directMessage = await tx.directMessage.create({
-        data: {
-          senderId: admin.id,
-          recipientId: recipient.id,
-          subject: subject || null,
-          message,
-        },
-        include: {
-          recipient: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              email: true,
+    const result = await prisma.$transaction(
+      async (tx) => {
+        const directMessage =
+          await tx.directMessage.create({
+            data: {
+              senderId: admin.id,
+              recipientId: recipient.id,
+              subject: subject || null,
+              message,
             },
-          },
-        },
+            include: {
+              recipient: {
+                select: {
+                  id: true,
+                  firstName: true,
+                  lastName: true,
+                  email: true,
+                },
+              },
+            },
+          });
+
+        const notification =
+          await tx.notification.create({
+            data: {
+              userId: recipient.id,
+              type: "MESSAGE",
+              title:
+                subject ||
+                "New message from THÉSOROS",
+              message:
+                subject ||
+                "You have received a new message from THÉSOROS.",
+            },
+          });
+
+        const activity =
+          await tx.accountActivity.create({
+            data: {
+              userId: recipient.id,
+              type: "ADMIN_MESSAGE_SENT",
+              description: subject
+                ? `Administrator sent you a message: ${subject}`
+                : "Administrator sent you a new direct message.",
+              metadata: {
+                messageId: directMessage.id,
+                adminId: admin.id,
+                subject: subject || null,
+              },
+            },
+          });
+
+        return {
+          directMessage,
+          notification,
+          activity,
+        };
+      }
+    );
+
+    /*
+     * ------------------------------------------------------------
+     * EMAIL DELIVERY
+     * ------------------------------------------------------------
+     *
+     * The recipient email comes directly from the registered
+     * user record in the database.
+     *
+     * Email delivery happens AFTER the database transaction.
+     *
+     * Therefore:
+     *
+     * Message saved       ✓
+     * Notification saved  ✓
+     * Activity saved      ✓
+     * Email attempted     ✓
+     *
+     * If Hostinger fails temporarily, the in-app message is
+     * still preserved.
+     */
+
+    let emailSent = false;
+    let emailError: string | null = null;
+
+    try {
+      const appUrl =
+        process.env.NEXT_PUBLIC_APP_URL?.replace(
+          /\/$/,
+          ""
+        );
+
+      const logoUrl = appUrl
+        ? `${appUrl}/branding/thesoros-logo.png`
+        : undefined;
+
+      const email = getAdminMessageEmail({
+        firstName:
+          recipient.firstName || "there",
+        subject:
+          subject ||
+          "New message from THÉSOROS",
+        message,
+        logoUrl,
       });
 
-      const notification = await tx.notification.create({
-        data: {
-          userId: recipient.id,
-          type: "MESSAGE",
-          title: subject || "New message from Thesoros",
-          message:
-            subject ||
-            "You have received a new message from Thesoros.",
-        },
+      await sendEmail({
+        to: recipient.email,
+        subject: email.subject,
+        html: email.html,
+        text: email.text,
       });
 
-      const activity = await tx.accountActivity.create({
-        data: {
-          userId: recipient.id,
-          type: "ADMIN_MESSAGE_SENT",
-          description: subject
-            ? `Administrator sent you a message: ${subject}`
-            : "Administrator sent you a new direct message.",
-          metadata: {
-            messageId: directMessage.id,
-            adminId: admin.id,
-            subject: subject || null,
-          },
-        },
-      });
+      emailSent = true;
+    } catch (error) {
+      emailError =
+        error instanceof Error
+          ? error.message
+          : "Unable to send email.";
 
-      return {
-        directMessage,
-        notification,
-        activity,
-      };
-    });
+      console.error(
+        "Admin message email delivery error:",
+        error
+      );
+    }
 
     return NextResponse.json(
       {
         success: true,
-        message: "Message sent successfully.",
+        message: emailSent
+          ? "Message sent successfully."
+          : "Message sent successfully, but the email could not be delivered.",
+        emailSent,
+        emailError,
         data: result,
       },
       { status: 201 }
     );
   } catch (error) {
-    console.error("POST /api/admin/messages error:", error);
+    console.error(
+      "POST /api/admin/messages error:",
+      error
+    );
 
     if (error instanceof Error) {
       if (error.message === "UNAUTHORIZED") {
@@ -281,3 +361,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+

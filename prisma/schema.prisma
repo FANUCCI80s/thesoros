@@ -7,19 +7,19 @@ datasource db {
 }
 
 model User {
-  id            String     @id @default(cuid())
-  firstName     String
-  lastName      String
-  email         String     @unique
-  passwordHash  String
-  phone         String?
-  role          UserRole   @default(USER)
-  status        UserStatus @default(PENDING)
-  emailVerified Boolean    @default(false)
-  lastLoginAt   DateTime?
-  lastLoginIp   String?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id                     String              @id @default(cuid())
+  firstName              String
+  lastName               String
+  email                  String              @unique
+  passwordHash           String
+  phone                  String?
+  role                   UserRole            @default(USER)
+  status                 UserStatus          @default(PENDING)
+  emailVerified          Boolean             @default(false)
+  lastLoginAt            DateTime?
+  lastLoginIp            String?
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
 
   accountActivities      AccountActivity[]
   adminApprovalsMade     AdminApproval[]     @relation("AdminApprovalActor")
@@ -39,20 +39,24 @@ model User {
   profile                UserProfile?
   withdrawals            WithdrawalRequest[]
 
+  // Trading
+  holdings               Holding[]
+  trades                 Trade[]
+
   @@index([status])
   @@index([role])
   @@index([createdAt])
 }
 
 model UserProfile {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  avatarFileId String?  @unique
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id           String     @id @default(cuid())
+  userId       String     @unique
+  avatarFileId String?    @unique
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
-  avatarFile FileAsset? @relation("UserAvatar", fields: [avatarFileId], references: [id])
-  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  avatarFile   FileAsset? @relation("UserAvatar", fields: [avatarFileId], references: [id])
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Balance {
@@ -66,10 +70,27 @@ model Balance {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Holding {
+  id           String   @id @default(cuid())
+  userId       String
+  symbol       String
+  assetName    String?
+  quantity     Decimal  @default(0) @db.Decimal(30, 12)
+  averagePrice Decimal  @default(0) @db.Decimal(30, 12)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, symbol])
+  @@index([userId])
+  @@index([symbol])
+}
+
 model KycVerification {
-  id                 String    @id @default(cuid())
-  userId             String    @unique
-  status             KycStatus @default(NOT_STARTED)
+  id                 String     @id @default(cuid())
+  userId             String     @unique
+  status             KycStatus  @default(NOT_STARTED)
   dateOfBirth        DateTime?
   nationality        String?
   countryOfResidence String?
@@ -82,12 +103,12 @@ model KycVerification {
   submittedAt        DateTime?
   reviewedAt         DateTime?
   declineReason      String?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
 
-  idBackFile  FileAsset? @relation("KycIdBack")
-  idFrontFile FileAsset? @relation("KycIdFront")
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  idBackFile         FileAsset? @relation("KycIdBack")
+  idFrontFile        FileAsset? @relation("KycIdFront")
+  user               User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([status])
   @@index([submittedAt])
@@ -128,31 +149,31 @@ model OtpCode {
 }
 
 model FileAsset {
-  id           String   @id @default(cuid())
-  userId       String
-  type         FileType
-  originalName String
-  storageKey   String
-  mimeType     String
-  sizeBytes    Int
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                 String           @id @default(cuid())
+  userId             String
+  type               FileType
+  originalName       String
+  storageKey         String
+  mimeType           String
+  sizeBytes          Int
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  kycFrontForId      String?          @unique
+  kycBackForId       String?          @unique
 
-  kycFrontForId     String?          @unique
-  kycBackForId      String?          @unique
-  paymentInvoiceFor DepositRequest?  @relation("PaymentInvoice")
-  depositsProofFor  DepositRequest?  @relation("DepositProof")
-  kycBackFor        KycVerification? @relation("KycIdBack", fields: [kycBackForId], references: [id])
-  kycFrontFor       KycVerification? @relation("KycIdFront", fields: [kycFrontForId], references: [id])
-  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  avatarFor         UserProfile?     @relation("UserAvatar")
+  paymentInvoiceFor  DepositRequest?  @relation("PaymentInvoice")
+  depositsProofFor   DepositRequest?  @relation("DepositProof")
+  kycBackFor         KycVerification? @relation("KycIdBack", fields: [kycBackForId], references: [id])
+  kycFrontFor        KycVerification? @relation("KycIdFront", fields: [kycFrontForId], references: [id])
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  avatarFor          UserProfile?     @relation("UserAvatar")
 
   @@index([userId])
   @@index([type])
 }
 
 model BankDepositAccount {
-  id            String   @id @default(cuid())
+  id            String           @id @default(cuid())
   accountName   String
   bankName      String
   accountNumber String
@@ -160,9 +181,9 @@ model BankDepositAccount {
   swiftBic      String?
   bankAddress   String?
   instructions  String?
-  isEnabled     Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  isEnabled     Boolean          @default(true)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
 
   deposits DepositRequest[]
 
@@ -179,15 +200,15 @@ model CardDepositConfig {
 }
 
 model CryptoDepositOption {
-  id            String   @id @default(cuid())
-  asset         String
-  symbol        String
-  network       String
+  id           String           @id @default(cuid())
+  asset        String
+  symbol       String
+  network      String
   walletAddress String
-  instructions  String?
-  isEnabled     Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  instructions String?
+  isEnabled    Boolean          @default(true)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
 
   deposits DepositRequest[]
 
@@ -197,13 +218,13 @@ model CryptoDepositOption {
 }
 
 model PaymentDepositConfig {
-  id                 String        @id @default(cuid())
-  method             DepositMethod @unique
+  id                 String         @id @default(cuid())
+  method             DepositMethod  @unique
   paymentInformation String
   instructions       String?
-  isEnabled          Boolean       @default(true)
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @updatedAt
+  isEnabled          Boolean        @default(true)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
 
   deposits DepositRequest[]
 
@@ -223,18 +244,18 @@ model WithdrawalMethodConfig {
 }
 
 model DepositRequest {
-  id                    String        @id @default(cuid())
+  id                    String                @id @default(cuid())
   userId                String
   method                DepositMethod
-  status                DepositStatus @default(PENDING)
-  amount                Decimal       @db.Decimal(20, 8)
+  status                DepositStatus         @default(PENDING)
+  amount                Decimal               @db.Decimal(20, 8)
   reference             String?
   notes                 String?
   bankAccountId         String?
   cryptoOptionId        String?
   paymentConfigId       String?
-  proofFileId           String?       @unique
-  invoiceFileId         String?       @unique
+  proofFileId           String?               @unique
+  invoiceFileId         String?               @unique
   selectedBankName      String?
   selectedAccountName   String?
   selectedAccountNumber String?
@@ -250,17 +271,17 @@ model DepositRequest {
   reviewedById          String?
   reviewAction          ReviewAction?
   declineReason         String?
-  createdAt             DateTime      @default(now())
-  updatedAt             DateTime      @updatedAt
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
 
-  adminApprovals AdminApproval[]
-  bankAccount    BankDepositAccount?   @relation(fields: [bankAccountId], references: [id])
-  cryptoOption   CryptoDepositOption?  @relation(fields: [cryptoOptionId], references: [id])
-  invoiceFile    FileAsset?            @relation("PaymentInvoice", fields: [invoiceFileId], references: [id])
-  paymentConfig  PaymentDepositConfig? @relation(fields: [paymentConfigId], references: [id])
-  proofFile      FileAsset?            @relation("DepositProof", fields: [proofFileId], references: [id])
-  user           User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  transactions   Transaction[]
+  adminApprovals        AdminApproval[]
+  bankAccount           BankDepositAccount?   @relation(fields: [bankAccountId], references: [id])
+  cryptoOption          CryptoDepositOption? @relation(fields: [cryptoOptionId], references: [id])
+  invoiceFile           FileAsset?            @relation("PaymentInvoice", fields: [invoiceFileId], references: [id])
+  paymentConfig         PaymentDepositConfig? @relation(fields: [paymentConfigId], references: [id])
+  proofFile             FileAsset?            @relation("DepositProof", fields: [proofFileId], references: [id])
+  user                  User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions          Transaction[]
 
   @@index([userId])
   @@index([status])
@@ -270,34 +291,31 @@ model DepositRequest {
 }
 
 model WithdrawalRequest {
-  id     String           @id @default(cuid())
-  userId String
-  method WithdrawalMethod
-  status WithdrawalStatus @default(PENDING)
-  amount Decimal          @db.Decimal(20, 8)
-
-  name  String?
-  email String?
-  phone String?
-  tag   String?
-
+  id                String           @id @default(cuid())
+  userId            String
+  method            WithdrawalMethod
+  status            WithdrawalStatus @default(PENDING)
+  amount            Decimal          @db.Decimal(20, 8)
+  name              String?
+  email             String?
+  phone             String?
+  tag               String?
   bankAccountName   String?
   bankAccountNumber String?
   routingNumber     String?
   swiftBic          String?
   bankName          String?
   bankAddress       String?
+  reviewedAt        DateTime?
+  reviewedById      String?
+  reviewAction      ReviewAction?
+  declineReason     String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
 
-  reviewedAt    DateTime?
-  reviewedById  String?
-  reviewAction  ReviewAction?
-  declineReason String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-
-  adminApprovals AdminApproval[]
-  transactions   Transaction[]
-  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  adminApprovals    AdminApproval[]
+  transactions      Transaction[]
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
@@ -307,23 +325,23 @@ model WithdrawalRequest {
 }
 
 model Transaction {
-  id           String            @id @default(cuid())
+  id           String             @id @default(cuid())
   userId       String
   type         TransactionType
-  status       TransactionStatus @default(PENDING)
-  amount       Decimal           @db.Decimal(20, 8)
-  currency     String            @default("USD")
+  status       TransactionStatus  @default(PENDING)
+  amount       Decimal            @db.Decimal(20, 8)
+  currency     String             @default("USD")
   description  String?
   depositId    String?
   withdrawalId String?
   reference    String?
   completedAt  DateTime?
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
 
-  deposit    DepositRequest?    @relation(fields: [depositId], references: [id])
-  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  withdrawal WithdrawalRequest? @relation(fields: [withdrawalId], references: [id])
+  deposit      DepositRequest?    @relation(fields: [depositId], references: [id])
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  withdrawal   WithdrawalRequest? @relation(fields: [withdrawalId], references: [id])
 
   @@index([userId])
   @@index([type])
@@ -333,23 +351,49 @@ model Transaction {
   @@index([withdrawalId])
 }
 
-model AdminApproval {
-  id           String       @id @default(cuid())
-  adminId      String
-  userId       String
-  depositId    String?
-  withdrawalId String?
-  action       ReviewAction
-  reason       String?
-  createdAt    DateTime     @default(now())
+model Trade {
+  id         String      @id @default(cuid())
+  userId     String
+  symbol     String
+  assetName  String?
+  side       TradeSide
+  status     TradeStatus @default(COMPLETED)
 
+  quantity   Decimal     @db.Decimal(30, 12)
+  price      Decimal     @db.Decimal(30, 12)
+  total      Decimal     @db.Decimal(20, 8)
+
+  currency   String      @default("USD")
+  reference  String      @unique
+  executedAt DateTime    @default(now())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([symbol])
+  @@index([side])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AdminApproval {
+  id                  String             @id @default(cuid())
+  adminId             String
+  userId              String
+  depositId           String?
+  withdrawalId        String?
+  action              ReviewAction
+  reason              String?
+  createdAt           DateTime           @default(now())
   depositRequestId    String?
   withdrawalRequestId String?
 
-  admin             User               @relation("AdminApprovalActor", fields: [adminId], references: [id])
-  depositRequest    DepositRequest?    @relation(fields: [depositRequestId], references: [id])
-  user              User               @relation("AdminApprovalTarget", fields: [userId], references: [id], onDelete: Cascade)
-  withdrawalRequest WithdrawalRequest? @relation(fields: [withdrawalRequestId], references: [id])
+  admin               User               @relation("AdminApprovalActor", fields: [adminId], references: [id])
+  depositRequest      DepositRequest?    @relation(fields: [depositRequestId], references: [id])
+  user                User               @relation("AdminApprovalTarget", fields: [userId], references: [id], onDelete: Cascade)
+  withdrawalRequest   WithdrawalRequest? @relation(fields: [withdrawalRequestId], references: [id])
 
   @@index([adminId])
   @@index([userId])
@@ -395,18 +439,18 @@ model Notification {
 }
 
 model DirectMessage {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   senderId    String
   recipientId String
   subject     String?
   message     String
-  isRead      Boolean   @default(false)
+  isRead      Boolean  @default(false)
   readAt      DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   recipient User @relation("DirectMessageRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
-  sender    User @relation("DirectMessageSender", fields: [senderId], references: [id])
+  sender    User      @relation("DirectMessageSender", fields: [senderId], references: [id])
 
   @@index([senderId])
   @@index([recipientId])
@@ -433,11 +477,11 @@ model AccountActivity {
 
 model PlatformSettings {
   id             String   @id @default(cuid())
-  platformName   String   @default("Edge Portfolio")
+  platformName   String   @default("THÉSOROS")
   logoUrl        String?
-  primaryColor   String   @default("#22c55e")
-  secondaryColor String   @default("#050806")
-  accentColor    String   @default("#16a34a")
+  primaryColor   String   @default("#D4AF37")
+  secondaryColor String   @default("#050505")
+  accentColor    String   @default("#F4C542")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
@@ -531,6 +575,16 @@ enum TransactionStatus {
   COMPLETED
   FAILED
   REVERSED
+}
+
+enum TradeSide {
+  BUY
+  SELL
+}
+
+enum TradeStatus {
+  COMPLETED
+  FAILED
 }
 
 enum BalanceAdjustmentType {

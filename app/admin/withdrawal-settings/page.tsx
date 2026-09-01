@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -21,8 +22,8 @@ type WithdrawalConfig = {
 
 type ApiResponse = {
   success: boolean;
-  configs?: WithdrawalConfig[];
-  config?: WithdrawalConfig;
+  settings?: WithdrawalConfig[];
+  setting?: WithdrawalConfig;
   message?: string;
 };
 
@@ -30,47 +31,42 @@ const methods: {
   value: WithdrawalMethod;
   label: string;
   description: string;
-  icon: string;
 }[] = [
   {
     value: "BANK_TRANSFER",
     label: "Bank Transfer",
     description:
       "Provide the bank details and withdrawal instructions users should follow.",
-    icon: "ðŸ¦",
   },
   {
     value: "CASH_APP",
     label: "Cash App",
     description:
       "Configure the Cash App account information used for withdrawals.",
-    icon: "$",
   },
   {
     value: "PAYPAL",
     label: "PayPal",
     description:
       "Configure the PayPal account information used for withdrawals.",
-    icon: "P",
   },
   {
     value: "ZELLE",
     label: "Zelle",
     description:
       "Configure the Zelle account information used for withdrawals.",
-    icon: "Z",
   },
   {
     value: "VENMO",
     label: "Venmo",
     description:
       "Configure the Venmo account information used for withdrawals.",
-    icon: "V",
   },
 ];
 
 export default function WithdrawalSettingsPage() {
   const [configs, setConfigs] = useState<WithdrawalConfig[]>([]);
+
   const [selectedMethod, setSelectedMethod] =
     useState<WithdrawalMethod>("BANK_TRANSFER");
 
@@ -101,16 +97,31 @@ export default function WithdrawalSettingsPage() {
         }
       );
 
-      const result: ApiResponse = await response.json();
+      const text = await response.text();
+
+      let result: ApiResponse;
+
+      try {
+        result = text
+          ? JSON.parse(text)
+          : {
+              success: false,
+              message: "The server returned an empty response.",
+            };
+      } catch {
+        throw new Error(
+          `The server returned an invalid response (${response.status}).`
+        );
+      }
 
       if (!response.ok || !result.success) {
         throw new Error(
           result.message ||
-            "Unable to load withdrawal settings."
+            `Unable to load withdrawal settings. Server returned ${response.status}.`
         );
       }
 
-      setConfigs(result.configs ?? []);
+      setConfigs(result.settings ?? []);
     } catch (err) {
       console.error(
         "Withdrawal settings load error:",
@@ -149,7 +160,7 @@ export default function WithdrawalSettingsPage() {
 
     setDisplayName(method?.label ?? "");
     setInstructions("");
-    setIsEnabled(true);
+    setIsEnabled(false);
   }, [selectedMethod, configs]);
 
   async function saveSettings() {
@@ -181,26 +192,41 @@ export default function WithdrawalSettingsPage() {
       const response = await fetch(
         "/api/admin/withdrawal-settings",
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             method: selectedMethod,
             displayName: displayName.trim(),
-            instructions: instructions.trim() || null,
+            instructions:
+              instructions.trim() || null,
             isEnabled,
           }),
         }
       );
 
-      const result: ApiResponse =
-        await response.json();
+      const text = await response.text();
+
+      let result: ApiResponse;
+
+      try {
+        result = text
+          ? JSON.parse(text)
+          : {
+              success: false,
+              message: `The server returned an empty response (${response.status}).`,
+            };
+      } catch {
+        throw new Error(
+          `The server returned an invalid response (${response.status}).`
+        );
+      }
 
       if (!response.ok || !result.success) {
         throw new Error(
           result.message ||
-            "Unable to save withdrawal settings."
+            `Unable to save withdrawal settings. Server returned ${response.status}.`
         );
       }
 
@@ -233,33 +259,56 @@ export default function WithdrawalSettingsPage() {
     setError("");
 
     try {
+      setSaving(true);
+
       const response = await fetch(
         "/api/admin/withdrawal-settings",
         {
-          method: "PATCH",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: config.id,
+            method: config.method,
+            displayName: config.displayName,
+            instructions:
+              config.instructions ?? null,
             isEnabled: !config.isEnabled,
           }),
         }
       );
 
-      const result: ApiResponse =
-        await response.json();
+      const text = await response.text();
+
+      let result: ApiResponse;
+
+      try {
+        result = text
+          ? JSON.parse(text)
+          : {
+              success: false,
+              message: `The server returned an empty response (${response.status}).`,
+            };
+      } catch {
+        throw new Error(
+          `The server returned an invalid response (${response.status}).`
+        );
+      }
 
       if (!response.ok || !result.success) {
         throw new Error(
           result.message ||
-            "Unable to update withdrawal method."
+            `Unable to update withdrawal method. Server returned ${response.status}.`
         );
       }
 
       setMessage(
         result.message ||
-          "Withdrawal method updated successfully."
+          `Withdrawal method ${
+            config.isEnabled
+              ? "disabled"
+              : "enabled"
+          } successfully.`
       );
 
       await loadSettings();
@@ -274,6 +323,8 @@ export default function WithdrawalSettingsPage() {
           ? err.message
           : "Unable to update withdrawal method."
       );
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -401,7 +452,14 @@ export default function WithdrawalSettingsPage() {
                               : "bg-white/5 text-zinc-400"
                           }`}
                         >
-                          {method.icon}
+                          {method.label
+                            .split(" ")
+                            .map(
+                              (word) =>
+                                word[0]
+                            )
+                            .join("")
+                            .slice(0, 2)}
                         </div>
 
                         <div className="min-w-0 flex-1">
@@ -433,12 +491,14 @@ export default function WithdrawalSettingsPage() {
                             className={`mt-2 text-[11px] ${
                               enabled
                                 ? "text-gold"
-                                : "text-zinc-600"
+                                : "text-zinc-500"
                             }`}
                           >
-                            {enabled
-                              ? "Enabled"
-                              : "Disabled"}
+                            {config
+                              ? enabled
+                                ? "Enabled"
+                                : "Disabled"
+                              : "Not configured"}
                           </p>
                         </div>
                       </div>
@@ -596,6 +656,13 @@ export default function WithdrawalSettingsPage() {
                         ).toLocaleString()}
                       </p>
                     )}
+
+                    {!selectedConfig && (
+                      <p className="text-xs !text-[#FFFFFF]">
+                        This withdrawal method has not
+                        been configured yet.
+                      </p>
+                    )}
                   </div>
 
                   <button
@@ -633,7 +700,8 @@ export default function WithdrawalSettingsPage() {
             </div>
 
             <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-              <div className="hidden grid-cols-[1fr_160px_120px] border-b border-white/10 bg-black/20 px-5 py-3 text-xs uppercase tracking-wider !text-[#FFFFFF] sm:grid">
+              {/* TABLE HEADER */}
+              <div className="hidden grid-cols-[1fr_160px_140px] border-b border-white/10 bg-black/20 px-5 py-3 text-xs uppercase tracking-wider !text-[#FFFFFF] sm:grid">
                 <span>Method</span>
                 <span>Status</span>
                 <span className="text-right">
@@ -641,6 +709,7 @@ export default function WithdrawalSettingsPage() {
                 </span>
               </div>
 
+              {/* TABLE ROWS */}
               <div className="divide-y divide-white/5">
                 {methods.map((method) => {
                   const config = getConfig(
@@ -653,11 +722,19 @@ export default function WithdrawalSettingsPage() {
                   return (
                     <div
                       key={method.value}
-                      className="grid gap-4 px-5 py-4 sm:grid-cols-[1fr_160px_120px] sm:items-center"
+                      className="grid gap-4 px-5 py-4 sm:grid-cols-[1fr_160px_140px] sm:items-center"
                     >
+                      {/* METHOD */}
                       <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-sm font-bold !text-[#FFFFFF]">
-                          {method.icon}
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-xs font-bold !text-[#FFFFFF]">
+                          {method.label
+                            .split(" ")
+                            .map(
+                              (word) =>
+                                word[0]
+                            )
+                            .join("")
+                            .slice(0, 2)}
                         </div>
 
                         <div>
@@ -672,30 +749,43 @@ export default function WithdrawalSettingsPage() {
                         </div>
                       </div>
 
+                      {/* STATUS */}
                       <div>
-                        <span
-                          className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${
-                            enabled
-                              ? "bg-gold/10 text-gold"
-                              : "bg-white/5 text-zinc-600"
-                          }`}
-                        >
-                          {enabled
-                            ? "Enabled"
-                            : "Disabled"}
-                        </span>
+                        {!config ? (
+                          <span className="inline-flex rounded-full bg-white/5 px-2.5 py-1 text-xs font-medium text-zinc-500">
+                            Not configured
+                          </span>
+                        ) : (
+                          <span
+                            className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${
+                              enabled
+                                ? "bg-gold/10 text-gold"
+                                : "bg-white/5 text-zinc-500"
+                            }`}
+                          >
+                            {enabled
+                              ? "Enabled"
+                              : "Disabled"}
+                          </span>
+                        )}
                       </div>
 
+                      {/* ACTION */}
                       <div className="sm:text-right">
                         {config ? (
                           <button
                             type="button"
+                            disabled={saving}
                             onClick={() =>
                               toggleMethod(
                                 config
                               )
                             }
-                            className="text-xs font-bold text-zinc-500 transition hover:!text-[#FFFFFF]"
+                            className={`inline-flex min-w-[82px] items-center justify-center rounded-lg border px-3 py-2 text-xs font-bold transition disabled:cursor-not-allowed disabled:opacity-50 ${
+                              enabled
+                                ? "border-red-400/20 text-red-300 hover:bg-red-400/10"
+                                : "border-gold/20 text-gold hover:bg-gold/10"
+                            }`}
                           >
                             {enabled
                               ? "Disable"
@@ -709,7 +799,7 @@ export default function WithdrawalSettingsPage() {
                                 method.value
                               )
                             }
-                            className="text-xs font-bold text-gold transition hover:text-gold-light"
+                            className="inline-flex min-w-[82px] items-center justify-center rounded-lg border border-gold/20 px-3 py-2 text-xs font-bold text-gold transition hover:bg-gold/10"
                           >
                             Configure
                           </button>
@@ -764,11 +854,11 @@ export default function WithdrawalSettingsPage() {
         }
 
         .admin-input::placeholder {
-          color: rgb(63 63 70);
+          color: rgb(113 113 122);
         }
 
         .admin-input:focus {
-          border-color: rgba(52, 211, 153, 0.5);
+          border-color: rgba(212, 175, 55, 0.5);
           background: rgba(0, 0, 0, 0.4);
         }
 
@@ -780,3 +870,4 @@ export default function WithdrawalSettingsPage() {
     </main>
   );
 }
+

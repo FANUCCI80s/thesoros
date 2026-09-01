@@ -1,921 +1,910 @@
+
 "use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import DashboardNav from "@/components/dashboard/DashboardNav";
 
 type DepositMethod =
-| "BANK_TRANSFER"
-| "CARD"
-| "CRYPTOCURRENCY"
-| "CASH_APP"
-| "PAYPAL"
-| "ZELLE"
-| "VENMO";
+  | "BANK_TRANSFER"
+  | "CARD"
+  | "CRYPTOCURRENCY"
+  | "CASH_APP"
+  | "PAYPAL"
+  | "ZELLE"
+  | "VENMO";
 
 type DepositConfig = {
-bankAccount: {
-id: string;
-accountName: string;
-bankName: string;
-accountNumber: string;
-routingNumber: string | null;
-swiftBic: string | null;
-bankAddress: string | null;
-instructions: string | null;
-} | null;
+  bankAccount: {
+    id: string;
+    accountName: string;
+    bankName: string;
+    accountNumber: string;
+    routingNumber: string | null;
+    swiftBic: string | null;
+    bankAddress: string | null;
+    instructions: string | null;
+  } | null;
 
-cryptoOptions: Array<{
-id: string;
-asset: string;
-symbol: string;
-network: string;
-walletAddress: string;
-instructions: string | null;
-}>;
+  cryptoOptions: Array<{
+    id: string;
+    asset: string;
+    symbol: string;
+    network: string;
+    walletAddress: string;
+    instructions: string | null;
+  }>;
 
-paymentConfigs: Array<{
-id: string;
-method: DepositMethod;
-paymentInformation: string;
-instructions: string | null;
-}>;
+  paymentConfigs: Array<{
+    id: string;
+    method: DepositMethod;
+    paymentInformation: string;
+    instructions: string | null;
+  }>;
 };
 
 const depositMethods: Array<{
-value: DepositMethod;
-label: string;
-description: string;
+  value: DepositMethod;
+  label: string;
+  description: string;
 }> = [
-{
-value: "BANK_TRANSFER",
-label: "Bank Transfer",
-description: "Transfer funds from your bank account.",
-},
-{
-value: "CARD",
-label: "Card",
-description: "Use the card payment information provided.",
-},
-{
-value: "CRYPTOCURRENCY",
-label: "Cryptocurrency",
-description: "Send cryptocurrency to the provided wallet.",
-},
-{
-value: "CASH_APP",
-label: "Cash App",
-description: "Send your payment through Cash App.",
-},
-{
-value: "PAYPAL",
-label: "PayPal",
-description: "Send your payment through PayPal.",
-},
-{
-value: "ZELLE",
-label: "Zelle",
-description: "Send your payment through Zelle.",
-},
-{
-value: "VENMO",
-label: "Venmo",
-description: "Send your payment through Venmo.",
-},
+  {
+    value: "BANK_TRANSFER",
+    label: "Bank Transfer",
+    description: "Transfer funds from your bank account.",
+  },
+  {
+    value: "CARD",
+    label: "Card",
+    description: "Use the card payment information provided.",
+  },
+  {
+    value: "CRYPTOCURRENCY",
+    label: "Cryptocurrency",
+    description: "Send cryptocurrency to the provided wallet.",
+  },
+  {
+    value: "CASH_APP",
+    label: "Cash App",
+    description: "Send your payment through Cash App.",
+  },
+  {
+    value: "PAYPAL",
+    label: "PayPal",
+    description: "Send your payment through PayPal.",
+  },
+  {
+    value: "ZELLE",
+    label: "Zelle",
+    description: "Send your payment through Zelle.",
+  },
+  {
+    value: "VENMO",
+    label: "Venmo",
+    description: "Send your payment through Venmo.",
+  },
 ];
 
 function formatMethod(method: DepositMethod) {
-return (
-depositMethods.find((item) => item.value === method)?.label ??
-method
-);
+  return (
+    depositMethods.find(
+      (item) => item.value === method,
+    )?.label ?? method
+  );
 }
 
 export default function DepositPage() {
-const [method, setMethod] =
-useState<DepositMethod>("BANK_TRANSFER");
+  const [method, setMethod] =
+    useState<DepositMethod>("BANK_TRANSFER");
 
-const [amount, setAmount] = useState("");
-const [reference, setReference] = useState("");
-const [notes, setNotes] = useState("");
+  const [amount, setAmount] = useState("");
+  const [reference, setReference] = useState("");
+  const [notes, setNotes] = useState("");
 
-const [config, setConfig] =
-useState<DepositConfig | null>(null);
+  const [config, setConfig] =
+    useState<DepositConfig | null>(null);
 
-const [loadingConfig, setLoadingConfig] =
-useState(true);
+  const [loadingConfig, setLoadingConfig] =
+    useState(true);
 
-const [submitting, setSubmitting] =
-useState(false);
+  const [submitting, setSubmitting] =
+    useState(false);
 
-const [message, setMessage] = useState("");
-const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-useEffect(() => {
-let cancelled = false;
+  /*
+   * =========================================================
+   * LOAD DEPOSIT CONFIGURATION
+   * =========================================================
+   */
+  useEffect(() => {
+    let cancelled = false;
 
+    async function loadDepositConfig() {
+      try {
+        setLoadingConfig(true);
+        setError("");
 
-async function loadDepositConfig() {
-  try {
-    setLoadingConfig(true);
+        const response = await fetch("/api/deposit", {
+          method: "GET",
+          cache: "no-store",
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(
+            data.message ||
+              "Unable to load deposit instructions.",
+          );
+        }
+
+        if (!cancelled) {
+          setConfig(data.config);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(
+            err instanceof Error
+              ? err.message
+              : "Unable to load deposit instructions.",
+          );
+        }
+      } finally {
+        if (!cancelled) {
+          setLoadingConfig(false);
+        }
+      }
+    }
+
+    loadDepositConfig();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  /*
+   * =========================================================
+   * SELECTED PAYMENT CONFIGURATION
+   * =========================================================
+   */
+  const selectedPaymentConfig = useMemo(() => {
+    if (!config) {
+      return null;
+    }
+
+    return (
+      config.paymentConfigs.find(
+        (item) => item.method === method,
+      ) ?? null
+    );
+  }, [config, method]);
+
+  /*
+   * =========================================================
+   * SELECTED CRYPTO OPTION
+   * =========================================================
+   */
+  const selectedCryptoOption = useMemo(() => {
+    if (
+      !config ||
+      method !== "CRYPTOCURRENCY"
+    ) {
+      return null;
+    }
+
+    return config.cryptoOptions[0] ?? null;
+  }, [config, method]);
+
+  /*
+   * =========================================================
+   * SUBMIT DEPOSIT
+   * =========================================================
+   */
+  async function handleSubmit(
+    event: React.FormEvent<HTMLFormElement>,
+  ) {
+    event.preventDefault();
+
+    setMessage("");
     setError("");
 
-    const response = await fetch("/api/deposit", {
-      method: "GET",
-      cache: "no-store",
-    });
+    const numericAmount = Number(amount);
 
-    const data = await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(
-        data.message ||
-          "Unable to load deposit instructions."
+    if (
+      !amount ||
+      !Number.isFinite(numericAmount) ||
+      numericAmount <= 0
+    ) {
+      setError(
+        "Please enter a valid deposit amount.",
       );
+      return;
     }
 
-    if (!cancelled) {
-      setConfig(data.config);
+    if (numericAmount > 1000000000) {
+      setError(
+        "The deposit amount is too large.",
+      );
+      return;
     }
-  } catch (err) {
-    if (!cancelled) {
+
+    try {
+      setSubmitting(true);
+
+      const response = await fetch("/api/deposit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          method,
+          amount,
+          reference,
+          note: notes,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message ||
+            "Unable to submit deposit request.",
+        );
+      }
+
+      setMessage(
+        data.message ||
+          "Your deposit request has been submitted.",
+      );
+
+      setAmount("");
+      setReference("");
+      setNotes("");
+    } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Unable to load deposit instructions."
+          : "Unable to submit deposit request.",
       );
-    }
-  } finally {
-    if (!cancelled) {
-      setLoadingConfig(false);
+    } finally {
+      setSubmitting(false);
     }
   }
-}
 
-loadDepositConfig();
+  return (
+    <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]">
+      <div className="flex min-h-screen">
 
-return () => {
-  cancelled = true;
-};
+        {/* =====================================================
+            SHARED DASHBOARD NAVIGATION
 
+            This is the SAME navbar used by Trade and
+            Market Watchlist.
 
-}, []);
+            Do NOT create another navbar inside this page.
+            DashboardNav handles desktop, mobile, active
+            navigation, and Logout.
+        ===================================================== */}
+        <DashboardNav />
 
-const selectedPaymentConfig = useMemo(() => {
-if (!config) {
-return null;
-}
+        {/* =====================================================
+            MAIN CONTENT
+        ===================================================== */}
+        <section className="min-w-0 flex-1">
+          <div className="mx-auto max-w-5xl px-5 pt-8 pb-8 sm:px-8 lg:px-10 lg:pt-14 lg:pb-8">
 
-
-return (
-  config.paymentConfigs.find(
-    (item) => item.method === method
-  ) ?? null
-);
-
-
-}, [config, method]);
-
-const selectedCryptoOption = useMemo(() => {
-if (!config || method !== "CRYPTOCURRENCY") {
-return null;
-}
-
-
-return config.cryptoOptions[0] ?? null;
-
-
-}, [config, method]);
-
-async function handleSubmit(
-event: React.FormEvent<HTMLFormElement>
-) {
-event.preventDefault();
-
-
-setMessage("");
-setError("");
-
-const numericAmount = Number(amount);
-
-if (
-  !amount ||
-  !Number.isFinite(numericAmount) ||
-  numericAmount <= 0
-) {
-  setError("Please enter a valid deposit amount.");
-  return;
-}
-
-if (numericAmount > 1000000000) {
-  setError("The deposit amount is too large.");
-  return;
-}
-
-try {
-  setSubmitting(true);
-
-  const response = await fetch("/api/deposit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      method,
-      amount,
-      reference,
-      note: notes,
-    }),
-  });
-
-  const data = await response.json();
-
-  if (!response.ok || !data.success) {
-    throw new Error(
-      data.message ||
-        "Unable to submit deposit request."
-    );
-  }
-
-  setMessage(
-    data.message ||
-      "Your deposit request has been submitted."
-  );
-
-  setAmount("");
-  setReference("");
-  setNotes("");
-} catch (err) {
-  setError(
-    err instanceof Error
-      ? err.message
-      : "Unable to submit deposit request."
-  );
-} finally {
-  setSubmitting(false);
-}
-
-
-}
-
-return ( <main className="min-h-screen bg-[#050505] !text-[#FFFFFF]"> <div className="flex min-h-screen">
-{/* Sidebar */} <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-[#050505] lg:flex lg:flex-col"> <div className="border-b border-white/10 p-5"> <Link
-           href="/dashboard"
-           className="flex items-center gap-3"
-         > <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10"> <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" /> </div>
-
-
-          <div>
-            <p className="font-bold tracking-tight">
-              Thesoros
-            </p>
-
-            <p className="text-xs !text-[#FFFFFF]">
-              Trading platform
-            </p>
-          </div>
-        </Link>
-      </div>
-
-      <nav className="flex-1 space-y-1 p-4">
-        <Link
-          href="/dashboard"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-        >
-          <span>âŒ‚</span>
-          Dashboard
-        </Link>
-
-        <Link
-          href="/trade"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-        >
-          <span>â†—</span>
-          Trade
-        </Link>
-
-        <Link
-          href="/deposit"
-          className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
-        >
-          <span>â†“</span>
-          Deposit
-        </Link>
-
-        <Link
-          href="/withdraw"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-        >
-          <span>â†‘</span>
-          Withdraw
-        </Link>
-
-        <Link
-          href="/transactions"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-        >
-          <span>â†”</span>
-          Transactions
-        </Link>
-
-        <div className="my-5 border-t border-white/10" />
-
-        <Link
-          href="/notifications"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-        >
-          <span>â—</span>
-          Notifications
-        </Link>
-
-        <Link
-          href="/settings"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
-        >
-          <span>âš™</span>
-          Settings
-        </Link>
-      </nav>
-
-      <div className="border-t border-white/10 p-4">
-        <Link
-          href="/dashboard"
-          className="block rounded-xl border border-white/10 px-4 py-3 text-center text-sm text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
-        >
-          Back to dashboard
-        </Link>
-      </div>
-    </aside>
-
-    {/* Main */}
-    <section className="min-w-0 flex-1">
-      {/* Mobile header */}
-      <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
-        <div className="flex items-center justify-between">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-3"
-          >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
-              <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-            </div>
-
-            <span className="font-bold">
-              Thesoros
-            </span>
-          </Link>
-
-          <Link
-            href="/dashboard"
-            className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
-          >
-            Dashboard
-          </Link>
-        </div>
-      </header>
-
-      <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 lg:px-10">
-        <div className="mb-8">
-          <p className="mb-2 text-sm font-bold text-gold">
-            Fund your account
-          </p>
-
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Make a deposit
-          </h1>
-
-          <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
-            Choose your preferred deposit method,
-            follow the payment instructions, and
-            submit your deposit for administrator
-            approval.
-          </p>
-        </div>
-
-        {/* Security notice */}
-        <div className="mb-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-5">
-          <div className="flex gap-3">
-            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-yellow-400/10 text-yellow-400">
-              !
-            </div>
-
-            <div>
-              <p className="font-bold text-yellow-300">
-                Important
+            {/* =================================================
+                PAGE HEADER
+            ================================================= */}
+            <div className="mb-8">
+              <p className="mb-2 text-sm font-bold text-gold">
+                Fund your account
               </p>
 
-              <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
-                Only send funds using the payment
-                information displayed on this page.
-                Your deposit will remain pending until
-                it has been reviewed and approved.
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Make a deposit
+              </h1>
+
+              <p className="mt-2 max-w-2xl text-sm leading-6 !text-[#FFFFFF]">
+                Choose your preferred deposit method,
+                follow the payment instructions, and
+                submit your deposit for administrator
+                approval.
               </p>
             </div>
-          </div>
-        </div>
 
-        {/* Loading */}
-        {loadingConfig && (
-          <div className="mb-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <div className="flex items-center gap-3">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gold/30 border-t-gold" />
+            {/* =================================================
+                SECURITY NOTICE
+            ================================================= */}
+            <div className="mb-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-5">
+              <div className="flex gap-3">
+                <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-yellow-400/10 text-yellow-400">
+                  !
+                </div>
 
-              <p className="text-sm !text-[#FFFFFF]">
-                Loading available deposit methods...
-              </p>
-            </div>
-          </div>
-        )}
+                <div>
+                  <p className="font-bold text-yellow-300">
+                    Important
+                  </p>
 
-        {/* Error */}
-        {error && (
-          <div className="mb-6 rounded-2xl border border-red-400/20 bg-red-400/5 p-5">
-            <p className="text-sm font-bold text-red-300">
-              {error}
-            </p>
-          </div>
-        )}
-
-        {/* Success */}
-        {message && (
-          <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-5">
-            <div className="flex items-start gap-3">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
-                âœ“
-              </div>
-
-              <div>
-                <p className="font-bold text-gold-light">
-                  Deposit request submitted
-                </p>
-
-                <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
-                  {message}
-                </p>
-
-                <Link
-                  href="/transactions"
-                  className="mt-3 inline-block text-sm font-bold text-gold hover:text-gold-light"
-                >
-                  View transactions â†’
-                </Link>
+                  <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
+                    Only send funds using the payment
+                    information displayed on this page.
+                    Your deposit will remain pending until
+                    it has been reviewed and approved.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        )}
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-6"
-        >
-          {/* Step 1 */}
-          <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <p className="text-sm !text-[#FFFFFF]">
-              Step 1
-            </p>
+            {/* =================================================
+                LOADING
+            ================================================= */}
+            {loadingConfig && (
+              <div className="mb-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="flex items-center gap-3">
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-gold/30 border-t-gold" />
 
-            <h2 className="mt-1 text-xl font-bold">
-              Choose deposit method
-            </h2>
+                  <p className="text-sm !text-[#FFFFFF]">
+                    Loading available deposit methods...
+                  </p>
+                </div>
+              </div>
+            )}
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {depositMethods.map(
-                (depositMethod) => {
-                  const selected =
-                    method === depositMethod.value;
+            {/* =================================================
+                ERROR
+            ================================================= */}
+            {error && (
+              <div className="mb-6 rounded-2xl border border-red-400/20 bg-red-400/5 p-5">
+                <p className="text-sm font-bold text-red-300">
+                  {error}
+                </p>
+              </div>
+            )}
 
-                  return (
-                    <button
-                      key={depositMethod.value}
-                      type="button"
-                      onClick={() =>
-                        setMethod(
-                          depositMethod.value
-                        )
-                      }
-                      className={`rounded-2xl border p-4 text-left transition ${
-                        selected
-                          ? "border-gold/40 bg-gold/10"
-                          : "border-white/10 bg-black/20 hover:border-white/20"
-                      }`}
+            {/* =================================================
+                SUCCESS
+            ================================================= */}
+            {message && (
+              <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/5 p-5">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+                    ✓
+                  </div>
+
+                  <div>
+                    <p className="font-bold text-gold-light">
+                      Deposit request submitted
+                    </p>
+
+                    <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
+                      {message}
+                    </p>
+
+                    <Link
+                      href="/transactions"
+                      className="mt-3 inline-block text-sm font-bold text-gold hover:text-gold-light"
                     >
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <p
-                            className={`font-medium ${
-                              selected
-                                ? "text-gold-light"
-                                : "text-white"
-                            }`}
-                          >
-                            {depositMethod.label}
+                      View transactions →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* =================================================
+                FORM
+            ================================================= */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
+
+              {/* =================================================
+                  STEP 1
+              ================================================= */}
+              <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+                <p className="text-sm !text-[#FFFFFF]">
+                  Step 1
+                </p>
+
+                <h2 className="mt-1 text-xl font-bold">
+                  Choose deposit method
+                </h2>
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {depositMethods.map(
+                    (depositMethod) => {
+                      const selected =
+                        method ===
+                        depositMethod.value;
+
+                      return (
+                        <button
+                          key={
+                            depositMethod.value
+                          }
+                          type="button"
+                          onClick={() =>
+                            setMethod(
+                              depositMethod.value,
+                            )
+                          }
+                          className={`rounded-2xl border p-4 text-left transition ${
+                            selected
+                              ? "border-gold/40 bg-gold/10"
+                              : "border-white/10 bg-black/20 hover:border-white/20"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-4">
+                            <div>
+                              <p
+                                className={`font-medium ${
+                                  selected
+                                    ? "text-gold-light"
+                                    : "text-white"
+                                }`}
+                              >
+                                {
+                                  depositMethod.label
+                                }
+                              </p>
+
+                              <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
+                                {
+                                  depositMethod.description
+                                }
+                              </p>
+                            </div>
+
+                            <div
+                              className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
+                                selected
+                                  ? "border-gold bg-gold text-white"
+                                  : "border-white/20"
+                              }`}
+                            >
+                              {selected && (
+                                <span className="text-xs font-bold">
+                                  ✓
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    },
+                  )}
+                </div>
+              </section>
+
+              {/* =================================================
+                  STEP 2
+              ================================================= */}
+              <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+                <p className="text-sm !text-[#FFFFFF]">
+                  Step 2
+                </p>
+
+                <h2 className="mt-1 text-xl font-bold">
+                  {formatMethod(method)} instructions
+                </h2>
+
+                {!config ? (
+                  <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
+                    <p className="text-sm !text-[#FFFFFF]">
+                      Deposit instructions are currently
+                      unavailable.
+                    </p>
+                  </div>
+                ) : method ===
+                  "BANK_TRANSFER" ? (
+                  config.bankAccount ? (
+                    <div className="mt-6 space-y-4">
+
+                      <div className="rounded-2xl border border-gold/10 bg-gold/5 p-5">
+                        <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
+                          Bank name
+                        </p>
+
+                        <p className="mt-1 font-bold !text-[#FFFFFF]">
+                          {
+                            config
+                              .bankAccount
+                              .bankName
+                          }
+                        </p>
+                      </div>
+
+                      <div className="grid gap-4 sm:grid-cols-2">
+
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Account name
                           </p>
 
-                          <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
+                          <p className="mt-1 break-words text-sm font-bold">
                             {
-                              depositMethod.description
+                              config
+                                .bankAccount
+                                .accountName
                             }
                           </p>
                         </div>
 
-                        <div
-                          className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
-                            selected
-                              ? "border-gold bg-gold text-white"
-                              : "border-white/20"
-                          }`}
-                        >
-                          {selected && (
-                            <span className="text-xs font-bold">
-                              âœ“
-                            </span>
-                          )}
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Account number
+                          </p>
+
+                          <p className="mt-1 break-all text-sm font-bold">
+                            {
+                              config
+                                .bankAccount
+                                .accountNumber
+                            }
+                          </p>
                         </div>
+
+                        {config.bankAccount
+                          .routingNumber && (
+                          <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                            <p className="text-xs !text-[#FFFFFF]">
+                              Routing number
+                            </p>
+
+                            <p className="mt-1 text-sm font-bold">
+                              {
+                                config
+                                  .bankAccount
+                                  .routingNumber
+                              }
+                            </p>
+                          </div>
+                        )}
+
+                        {config.bankAccount
+                          .swiftBic && (
+                          <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                            <p className="text-xs !text-[#FFFFFF]">
+                              SWIFT / BIC
+                            </p>
+
+                            <p className="mt-1 text-sm font-bold">
+                              {
+                                config
+                                  .bankAccount
+                                  .swiftBic
+                              }
+                            </p>
+                          </div>
+                        )}
                       </div>
-                    </button>
-                  );
-                }
-              )}
-            </div>
-          </section>
 
-          {/* Step 2 */}
-          <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <p className="text-sm !text-[#FFFFFF]">
-              Step 2
-            </p>
+                      {config.bankAccount
+                        .bankAddress && (
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Bank address
+                          </p>
 
-            <h2 className="mt-1 text-xl font-bold">
-              {formatMethod(method)} instructions
-            </h2>
+                          <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
+                            {
+                              config
+                                .bankAccount
+                                .bankAddress
+                            }
+                          </p>
+                        </div>
+                      )}
 
-            {!config ? (
-              <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-                <p className="text-sm !text-[#FFFFFF]">
-                  Deposit instructions are currently
-                  unavailable.
-                </p>
-              </div>
-            ) : method === "BANK_TRANSFER" ? (
-              config.bankAccount ? (
-                <div className="mt-6 space-y-4">
-                  <div className="rounded-2xl border border-gold/10 bg-gold/5 p-5">
-                    <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
-                      Bank name
-                    </p>
+                      {config.bankAccount
+                        .instructions && (
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Instructions
+                          </p>
 
-                    <p className="mt-1 font-bold !text-[#FFFFFF]">
-                      {config.bankAccount.bankName}
-                    </p>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Account name
-                      </p>
-
-                      <p className="mt-1 break-words text-sm font-bold">
-                        {
-                          config.bankAccount
-                            .accountName
-                        }
+                          <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
+                            {
+                              config
+                                .bankAccount
+                                .instructions
+                            }
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
+                      <p className="text-sm !text-[#FFFFFF]">
+                        Bank transfer deposits are
+                        currently unavailable.
                       </p>
                     </div>
+                  )
+                ) : method ===
+                  "CRYPTOCURRENCY" ? (
+                  selectedCryptoOption ? (
+                    <div className="mt-6 space-y-4">
 
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Account number
-                      </p>
+                      <div className="grid gap-4 sm:grid-cols-3">
 
-                      <p className="mt-1 break-all text-sm font-bold">
-                        {
-                          config.bankAccount
-                            .accountNumber
-                        }
-                      </p>
-                    </div>
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Asset
+                          </p>
 
-                    {config.bankAccount
-                      .routingNumber && (
-                      <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="mt-1 font-bold">
+                            {
+                              selectedCryptoOption.asset
+                            }
+                          </p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Symbol
+                          </p>
+
+                          <p className="mt-1 font-bold">
+                            {
+                              selectedCryptoOption.symbol
+                            }
+                          </p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Network
+                          </p>
+
+                          <p className="mt-1 font-bold">
+                            {
+                              selectedCryptoOption.network
+                            }
+                          </p>
+                        </div>
+
+                      </div>
+
+                      <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
                         <p className="text-xs !text-[#FFFFFF]">
-                          Routing number
+                          Wallet address
                         </p>
 
-                        <p className="mt-1 text-sm font-bold">
+                        <p className="mt-2 break-all font-mono text-sm leading-6 text-gold-light">
                           {
-                            config.bankAccount
-                              .routingNumber
+                            selectedCryptoOption.walletAddress
+                          }
+                        </p>
+                      </div>
+
+                      {selectedCryptoOption
+                        .instructions && (
+                        <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                          <p className="text-xs !text-[#FFFFFF]">
+                            Instructions
+                          </p>
+
+                          <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
+                            {
+                              selectedCryptoOption.instructions
+                            }
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
+                      <p className="text-sm !text-[#FFFFFF]">
+                        Cryptocurrency deposits are
+                        currently unavailable.
+                      </p>
+                    </div>
+                  )
+                ) : selectedPaymentConfig ? (
+                  <div className="mt-6 space-y-4">
+
+                    <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
+                      <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
+                        {formatMethod(method)}{" "}
+                        payment information
+                      </p>
+
+                      <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-7 text-gold-light">
+                        {
+                          selectedPaymentConfig.paymentInformation
+                        }
+                      </p>
+                    </div>
+
+                    {selectedPaymentConfig
+                      .instructions && (
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                        <p className="text-xs !text-[#FFFFFF]">
+                          Instructions
+                        </p>
+
+                        <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
+                          {
+                            selectedPaymentConfig.instructions
                           }
                         </p>
                       </div>
                     )}
-
-                    {config.bankAccount
-                      .swiftBic && (
-                      <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                        <p className="text-xs !text-[#FFFFFF]">
-                          SWIFT / BIC
-                        </p>
-
-                        <p className="mt-1 text-sm font-bold">
-                          {
-                            config.bankAccount
-                              .swiftBic
-                          }
-                        </p>
-                      </div>
-                    )}
                   </div>
-
-                  {config.bankAccount
-                    .bankAddress && (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Bank address
-                      </p>
-
-                      <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
-                        {
-                          config.bankAccount
-                            .bankAddress
-                        }
-                      </p>
-                    </div>
-                  )}
-
-                  {config.bankAccount
-                    .instructions && (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Instructions
-                      </p>
-
-                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
-                        {
-                          config.bankAccount
-                            .instructions
-                        }
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-                  <p className="text-sm !text-[#FFFFFF]">
-                    Bank transfer deposits are
-                    currently unavailable.
-                  </p>
-                </div>
-              )
-            ) : method === "CRYPTOCURRENCY" ? (
-              selectedCryptoOption ? (
-                <div className="mt-6 space-y-4">
-                  <div className="grid gap-4 sm:grid-cols-3">
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Asset
-                      </p>
-
-                      <p className="mt-1 font-bold">
-                        {selectedCryptoOption.asset}
-                      </p>
-                    </div>
-
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Symbol
-                      </p>
-
-                      <p className="mt-1 font-bold">
-                        {selectedCryptoOption.symbol}
-                      </p>
-                    </div>
-
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Network
-                      </p>
-
-                      <p className="mt-1 font-bold">
-                        {selectedCryptoOption.network}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
-                    <p className="text-xs !text-[#FFFFFF]">
-                      Wallet address
-                    </p>
-
-                    <p className="mt-2 break-all font-mono text-sm leading-6 text-gold-light">
-                      {
-                        selectedCryptoOption.walletAddress
-                      }
-                    </p>
-                  </div>
-
-                  {selectedCryptoOption
-                    .instructions && (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                      <p className="text-xs !text-[#FFFFFF]">
-                        Instructions
-                      </p>
-
-                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
-                        {
-                          selectedCryptoOption.instructions
-                        }
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
-                  <p className="text-sm !text-[#FFFFFF]">
-                    Cryptocurrency deposits are
-                    currently unavailable.
-                  </p>
-                </div>
-              )
-            ) : selectedPaymentConfig ? (
-              <div className="mt-6 space-y-4">
-                <div className="rounded-2xl border border-gold/20 bg-gold/5 p-5">
-                  <p className="text-xs uppercase tracking-wider !text-[#FFFFFF]">
-                    {formatMethod(method)} payment
-                    information
-                  </p>
-
-                  <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-7 text-gold-light">
-                    {
-                      selectedPaymentConfig.paymentInformation
-                    }
-                  </p>
-                </div>
-
-                {selectedPaymentConfig
-                  .instructions && (
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                    <p className="text-xs !text-[#FFFFFF]">
-                      Instructions
-                    </p>
-
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-6 !text-[#FFFFFF]">
-                      {
-                        selectedPaymentConfig.instructions
-                      }
+                ) : (
+                  <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
+                    <p className="text-sm !text-[#FFFFFF]">
+                      {formatMethod(method)}{" "}
+                      deposits are currently
+                      unavailable.
                     </p>
                   </div>
                 )}
-              </div>
-            ) : (
-              <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6">
+              </section>
+
+              {/* =================================================
+                  STEP 3
+              ================================================= */}
+              <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
                 <p className="text-sm !text-[#FFFFFF]">
-                  {formatMethod(method)} deposits
-                  are currently unavailable.
+                  Step 3
                 </p>
-              </div>
-            )}
-          </section>
 
-          {/* Step 3 */}
-          <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <p className="text-sm !text-[#FFFFFF]">
-              Step 3
-            </p>
+                <h2 className="mt-1 text-xl font-bold">
+                  Submit deposit details
+                </h2>
 
-            <h2 className="mt-1 text-xl font-bold">
-              Submit deposit details
-            </h2>
+                <div className="mt-6 grid gap-5 sm:grid-cols-2">
 
-            <div className="mt-6 grid gap-5 sm:grid-cols-2">
-              <div>
-                <label
-                  htmlFor="amount"
-                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
-                >
-                  Deposit amount
-                </label>
+                  <div>
+                    <label
+                      htmlFor="amount"
+                      className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                    >
+                      Deposit amount
+                    </label>
 
-                <div className="relative">
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 !text-[#FFFFFF]">
-                    $
-                  </span>
+                    <div className="relative">
+                      <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 !text-[#FFFFFF]">
+                        $
+                      </span>
 
-                  <input
-                    id="amount"
-                    name="amount"
-                    type="number"
-                    min="0.01"
-                    step="0.01"
-                    value={amount}
-                    onChange={(event) =>
-                      setAmount(event.target.value)
-                    }
-                    required
-                    placeholder="0.00"
-                    className="w-full rounded-xl border border-white/10 bg-black/30 py-3 pl-9 pr-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
-                  />
+                      <input
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        value={amount}
+                        onChange={(event) =>
+                          setAmount(
+                            event.target.value,
+                          )
+                        }
+                        required
+                        placeholder="0.00"
+                        className="w-full rounded-xl border border-white/10 bg-black/30 py-3 pl-9 pr-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="reference"
+                      className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                    >
+                      Transaction reference
+                    </label>
+
+                    <input
+                      id="reference"
+                      name="reference"
+                      type="text"
+                      value={reference}
+                      onChange={(event) =>
+                        setReference(
+                          event.target.value,
+                        )
+                      }
+                      placeholder="Optional transaction ID"
+                      maxLength={200}
+                      className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="notes"
+                      className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                    >
+                      Additional details
+                    </label>
+
+                    <textarea
+                      id="notes"
+                      name="notes"
+                      rows={4}
+                      value={notes}
+                      onChange={(event) =>
+                        setNotes(
+                          event.target.value,
+                        )
+                      }
+                      maxLength={2000}
+                      placeholder="Add any information that may help us identify your deposit."
+                      className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
+                    />
+                  </div>
+
+                </div>
+              </section>
+
+              {/* =================================================
+                  APPROVAL NOTICE
+              ================================================= */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="flex gap-3">
+
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
+                    i
+                  </div>
+
+                  <div>
+                    <p className="text-sm font-bold">
+                      Administrator approval required
+                    </p>
+
+                    <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
+                      Submitting this form creates a
+                      pending deposit request. Your
+                      account balance will not change
+                      until an administrator reviews and
+                      approves the request.
+                    </p>
+                  </div>
+
                 </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="reference"
-                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+              {/* =================================================
+                  ACTIONS
+              ================================================= */}
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+
+                <Link
+                  href="/dashboard"
+                  className="rounded-xl border border-white/10 px-6 py-3 text-center text-sm font-bold text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
                 >
-                  Transaction reference
-                </label>
+                  Cancel
+                </Link>
 
-                <input
-                  id="reference"
-                  name="reference"
-                  type="text"
-                  value={reference}
-                  onChange={(event) =>
-                    setReference(event.target.value)
+                <button
+                  type="submit"
+                  disabled={
+                    submitting ||
+                    loadingConfig
                   }
-                  placeholder="Optional transaction ID"
-                  maxLength={200}
-                  className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="notes"
-                  className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                  className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  Additional details
-                </label>
+                  {submitting
+                    ? "Submitting..."
+                    : "Submit deposit request"}
+                </button>
 
-                <textarea
-                  id="notes"
-                  name="notes"
-                  rows={4}
-                  value={notes}
-                  onChange={(event) =>
-                    setNotes(event.target.value)
-                  }
-                  maxLength={2000}
-                  placeholder="Add any information that may help us identify your deposit."
-                  className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/50"
-                />
               </div>
-            </div>
-          </section>
-
-          {/* Approval notice */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <div className="flex gap-3">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
-                i
-              </div>
-
-              <div>
-                <p className="text-sm font-bold">
-                  Administrator approval required
-                </p>
-
-                <p className="mt-1 text-xs leading-5 !text-[#FFFFFF]">
-                  Submitting this form creates a
-                  pending deposit request. Your
-                  account balance will not change
-                  until an administrator reviews and
-                  approves the request.
-                </p>
-              </div>
-            </div>
+            </form>
           </div>
-
-          {/* Actions */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-            <Link
-              href="/dashboard"
-              className="rounded-xl border border-white/10 px-6 py-3 text-center text-sm font-bold text-zinc-400 transition hover:border-white/20 hover:!text-[#FFFFFF]"
-            >
-              Cancel
-            </Link>
-
-            <button
-              type="submit"
-              disabled={
-                submitting || loadingConfig
-              }
-              className="rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {submitting
-                ? "Submitting..."
-                : "Submit deposit request"}
-            </button>
-          </div>
-        </form>
+        </section>
       </div>
-    </section>
-  </div>
-</main>
-
-
-);
+    </main>
+  );
 }
 

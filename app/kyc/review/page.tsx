@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -26,16 +27,20 @@ export default function KycReviewPage() {
   useEffect(() => {
     async function loadKycStatus() {
       try {
-        const response = await fetch("/api/kyc/status", {
-          method: "GET",
-          cache: "no-store",
-        });
+        const response = await fetch(
+          "/api/kyc/status",
+          {
+            method: "GET",
+            cache: "no-store",
+          }
+        );
 
         const data = await response.json();
 
         if (!response.ok || !data.success) {
           throw new Error(
-            data.message || "Unable to load your KYC status."
+            data.message ||
+              "Unable to load your KYC status."
           );
         }
 
@@ -51,7 +56,10 @@ export default function KycReviewPage() {
           return;
         }
       } catch (statusError) {
-        console.error("KYC status request error:", statusError);
+        console.error(
+          "KYC status request error:",
+          statusError
+        );
 
         setError(
           statusError instanceof Error
@@ -101,7 +109,9 @@ export default function KycReviewPage() {
 
             <button
               type="button"
-              onClick={() => window.location.reload()}
+              onClick={() =>
+                window.location.reload()
+              }
               className="mt-6 rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
             >
               Try again
@@ -122,7 +132,7 @@ export default function KycReviewPage() {
         <div className="mx-auto flex min-h-[80vh] max-w-2xl items-center justify-center">
           <div className="w-full rounded-3xl border border-gold/20 bg-gold/5 p-8 text-center sm:p-12">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gold/10 text-2xl text-gold">
-              âœ“
+              ✓
             </div>
 
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold">
@@ -140,7 +150,9 @@ export default function KycReviewPage() {
 
             <button
               type="button"
-              onClick={() => router.push("/dashboard")}
+              onClick={() =>
+                router.push("/dashboard")
+              }
               className="mt-8 rounded-xl bg-gold px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
             >
               Go to dashboard
@@ -157,11 +169,17 @@ export default function KycReviewPage() {
         <header className="mb-16 flex items-center justify-between">
           <button
             type="button"
-            onClick={() => router.push("/dashboard")}
+            onClick={() =>
+              router.push("/dashboard")
+            }
             className="flex items-center gap-3"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-              <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
+            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-gold/30 bg-gold/10">
+              <img
+                src="/branding/thesoros-logo.png"
+                alt="THÉSOROS"
+                className="h-8 w-auto object-contain"
+              />
             </div>
 
             <span className="text-xl font-bold tracking-tight">
@@ -189,8 +207,8 @@ export default function KycReviewPage() {
 
           <p className="mx-auto mt-5 max-w-xl text-sm leading-7 !text-[#FFFFFF] sm:text-base">
             We have received your identity verification
-            documents and information. Our verification team
-            will review your submission.
+            documents and information. Our verification
+            team will review your submission.
           </p>
         </div>
 
@@ -245,7 +263,9 @@ export default function KycReviewPage() {
           <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4 text-center">
             <p className="text-xs !text-[#FFFFFF]">
               Submitted on{" "}
-              {new Date(kyc.submittedAt).toLocaleString()}
+              {new Date(
+                kyc.submittedAt
+              ).toLocaleString()}
             </p>
           </div>
         )}
@@ -257,15 +277,17 @@ export default function KycReviewPage() {
 
           <p className="mt-2 text-sm leading-6 !text-[#FFFFFF]">
             Please allow our team time to review your
-            information. You do not need to submit your KYC
-            again while it is under review.
+            information. You do not need to submit your
+            KYC again while it is under review.
           </p>
         </div>
 
         <div className="mt-8 flex justify-center">
           <button
             type="button"
-            onClick={() => router.push("/dashboard")}
+            onClick={() =>
+              router.push("/dashboard")
+            }
             className="rounded-xl border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-white/[0.08]"
           >
             Return to dashboard
@@ -301,7 +323,7 @@ function StatusItem({
                 : "bg-white/5 text-zinc-500"
           }`}
         >
-          {complete ? "âœ“" : number}
+          {complete ? "✓" : number}
         </div>
 
         <p
@@ -323,3 +345,4 @@ function StatusItem({
     </div>
   );
 }
+

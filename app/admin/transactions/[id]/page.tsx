@@ -366,10 +366,14 @@ export default function AdminTransactionReviewPage() {
       setSubmitting(true);
       setError("");
 
+      /*
+       * IMPORTANT:
+       * The API route uses PATCH, not POST.
+       */
       const response = await fetch(
         `/api/admin/transactions/${transaction.id}`,
         {
-          method: "POST",
+          method: "PATCH",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
@@ -461,7 +465,6 @@ export default function AdminTransactionReviewPage() {
       : null;
 
   const isDeposit = Boolean(deposit);
-
   const isWithdrawal = Boolean(withdrawal);
 
   const isPending =
@@ -539,9 +542,7 @@ export default function AdminTransactionReviewPage() {
 
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
           <div className="space-y-6">
-            {/* ===================================================== */}
             {/* REQUEST REVIEW BANNER */}
-            {/* ===================================================== */}
 
             {isDeposit && deposit && (
               <section className="rounded-2xl border border-gold/20 bg-gold/[0.04] p-6">
@@ -640,9 +641,7 @@ export default function AdminTransactionReviewPage() {
                     </p>
 
                     <p className="mt-2 text-sm font-bold !text-[#FFFFFF]">
-                      {getMethodLabel(
-                        withdrawal.method
-                      )}
+                      {getMethodLabel(withdrawal.method)}
                     </p>
                   </div>
 
@@ -652,18 +651,14 @@ export default function AdminTransactionReviewPage() {
                     </p>
 
                     <p className="mt-2 text-sm font-bold !text-[#FFFFFF]">
-                      {formatDate(
-                        withdrawal.createdAt
-                      )}
+                      {formatDate(withdrawal.createdAt)}
                     </p>
                   </div>
                 </div>
               </section>
             )}
 
-            {/* ===================================================== */}
             {/* TRANSACTION INFORMATION */}
-            {/* ===================================================== */}
 
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
               <SectionHeader
@@ -732,9 +727,7 @@ export default function AdminTransactionReviewPage() {
               </div>
             </section>
 
-            {/* ===================================================== */}
             {/* USER */}
-            {/* ===================================================== */}
 
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
               <SectionHeader
@@ -773,9 +766,7 @@ export default function AdminTransactionReviewPage() {
               </div>
             </section>
 
-            {/* ===================================================== */}
             {/* DEPOSIT REQUEST */}
-            {/* ===================================================== */}
 
             {deposit && (
               <>
@@ -846,6 +837,7 @@ export default function AdminTransactionReviewPage() {
                 </section>
 
                 {/* BANK DEPOSIT */}
+
                 {deposit.method ===
                   "BANK_TRANSFER" && (
                   <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
@@ -899,6 +891,7 @@ export default function AdminTransactionReviewPage() {
                 )}
 
                 {/* CRYPTO DEPOSIT */}
+
                 {deposit.method ===
                   "CRYPTOCURRENCY" && (
                   <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
@@ -933,7 +926,8 @@ export default function AdminTransactionReviewPage() {
                   </section>
                 )}
 
-                {/* CASH APP / PAYPAL / ZELLE / VENMO / CARD */}
+                {/* OTHER PAYMENT METHODS */}
+
                 {deposit.method !==
                   "BANK_TRANSFER" &&
                   deposit.method !==
@@ -960,6 +954,7 @@ export default function AdminTransactionReviewPage() {
                   )}
 
                 {/* FILES */}
+
                 <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
                   <SectionHeader
                     title="Deposit Submitted Files"
@@ -1044,9 +1039,7 @@ export default function AdminTransactionReviewPage() {
               </>
             )}
 
-            {/* ===================================================== */}
             {/* WITHDRAWAL REQUEST */}
-            {/* ===================================================== */}
 
             {withdrawal && (
               <>
@@ -1129,6 +1122,7 @@ export default function AdminTransactionReviewPage() {
                 </section>
 
                 {/* WITHDRAWAL BANK DETAILS */}
+
                 {withdrawal.method ===
                   "BANK_TRANSFER" && (
                   <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
@@ -1182,6 +1176,7 @@ export default function AdminTransactionReviewPage() {
                 )}
 
                 {/* NON-BANK WITHDRAWAL DETAILS */}
+
                 {withdrawal.method !==
                   "BANK_TRANSFER" && (
                   <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
@@ -1219,9 +1214,7 @@ export default function AdminTransactionReviewPage() {
             )}
           </div>
 
-          {/* ===================================================== */}
           {/* RIGHT REVIEW PANEL */}
-          {/* ===================================================== */}
 
           <aside className="lg:sticky lg:top-6 lg:self-start">
             <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">

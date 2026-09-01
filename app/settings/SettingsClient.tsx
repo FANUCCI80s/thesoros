@@ -1,6 +1,6 @@
-
 "use client";
 
+import DashboardNav from "@/components/dashboard/DashboardNav";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -139,7 +139,11 @@ export default function SettingsClient() {
               className="flex items-center gap-3"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
+                <img
+                  src="/branding/thesoros-logo.png"
+                  alt="THÉSOROS"
+                  className="h-8 w-auto object-contain"
+                />
               </div>
 
               <div>
@@ -159,7 +163,7 @@ export default function SettingsClient() {
               href="/dashboard"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>âŒ‚</span>
+              <span>⌂</span>
               Dashboard
             </Link>
 
@@ -167,7 +171,7 @@ export default function SettingsClient() {
               href="/trade"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†—</span>
+              <span>↗</span>
               Trade
             </Link>
 
@@ -175,7 +179,7 @@ export default function SettingsClient() {
               href="/deposit"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†“</span>
+              <span>↓</span>
               Deposit
             </Link>
 
@@ -183,7 +187,7 @@ export default function SettingsClient() {
               href="/withdraw"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†‘</span>
+              <span>↑</span>
               Withdraw
             </Link>
 
@@ -191,7 +195,7 @@ export default function SettingsClient() {
               href="/transactions"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†”</span>
+              <span>↔</span>
               Transactions
             </Link>
 
@@ -201,7 +205,7 @@ export default function SettingsClient() {
               href="/notifications"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â—</span>
+              <span>●</span>
               Notifications
             </Link>
 
@@ -209,7 +213,7 @@ export default function SettingsClient() {
               href="/settings"
               className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
             >
-              <span>âš™</span>
+              <span>⚙</span>
               Settings
             </Link>
           </nav>
@@ -226,30 +230,8 @@ export default function SettingsClient() {
 
         {/* Main */}
         <section className="min-w-0 flex-1">
-          {/* Mobile header */}
-          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
-            <div className="flex items-center justify-between">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-3"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
-                  <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-                </div>
-
-                <span className="font-bold">
-                  Thesoros
-                </span>
-              </Link>
-
-              <Link
-                href="/dashboard"
-                className="text-sm text-zinc-500 hover:!text-[#FFFFFF]"
-              >
-                Dashboard
-              </Link>
-            </div>
-          </header>
+          {/* Shared Dashboard mobile navigation */}
+          <DashboardNav />
 
           <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 lg:px-10">
             {/* Header */}
@@ -419,9 +401,7 @@ export default function SettingsClient() {
                       disabled={saving}
                       className="rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      {saving
-                        ? "Saving..."
-                        : "Save changes"}
+                      {saving ? "Saving..." : "Save changes"}
                     </button>
                   </div>
                 </div>
@@ -515,5 +495,3 @@ export default function SettingsClient() {
     </div>
   );
 }
-
-

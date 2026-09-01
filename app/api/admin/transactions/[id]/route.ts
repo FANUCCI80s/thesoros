@@ -232,9 +232,6 @@ export async function PATCH(
           }
 
           if (action === "APPROVE") {
-            /*
-             * Update the deposit request.
-             */
             await tx.depositRequest.update({
               where: {
                 id: deposit.id,
@@ -248,9 +245,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Update the transaction.
-             */
             const updatedTransaction =
               await tx.transaction.update({
                 where: {
@@ -265,9 +259,6 @@ export async function PATCH(
                 },
               });
 
-            /*
-             * Make sure the user has a balance record.
-             */
             const balance = await tx.balance.upsert({
               where: {
                 userId: transaction.userId,
@@ -284,9 +275,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Record the admin approval.
-             */
             await tx.adminApproval.create({
               data: {
                 adminId: admin.id,
@@ -297,9 +285,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Record account activity.
-             */
             await tx.accountActivity.create({
               data: {
                 userId: transaction.userId,
@@ -315,9 +300,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Create notification for user.
-             */
             await tx.notification.create({
               data: {
                 userId: transaction.userId,
@@ -334,9 +316,6 @@ export async function PATCH(
             };
           }
 
-          /*
-           * Deposit declined.
-           */
           await tx.depositRequest.update({
             where: {
               id: deposit.id,
@@ -422,9 +401,6 @@ export async function PATCH(
           }
 
           if (action === "APPROVE") {
-            /*
-             * Make sure the balance exists.
-             */
             const balance = await tx.balance.findUnique({
               where: {
                 userId: transaction.userId,
@@ -435,17 +411,12 @@ export async function PATCH(
               throw new Error("BALANCE_NOT_FOUND");
             }
 
-            /*
-             * Verify that the user has enough available
-             * balance before approving the withdrawal.
-             */
-            if (balance.available.lt(transaction.amount)) {
+            if (
+              balance.available.lt(transaction.amount)
+            ) {
               throw new Error("INSUFFICIENT_BALANCE");
             }
 
-            /*
-             * Deduct the withdrawal from available balance.
-             */
             const updatedBalance = await tx.balance.update({
               where: {
                 userId: transaction.userId,
@@ -457,9 +428,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Update withdrawal request.
-             */
             await tx.withdrawalRequest.update({
               where: {
                 id: withdrawal.id,
@@ -473,9 +441,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Update transaction.
-             */
             const updatedTransaction =
               await tx.transaction.update({
                 where: {
@@ -490,9 +455,6 @@ export async function PATCH(
                 },
               });
 
-            /*
-             * Record admin approval.
-             */
             await tx.adminApproval.create({
               data: {
                 adminId: admin.id,
@@ -503,9 +465,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Record account activity.
-             */
             await tx.accountActivity.create({
               data: {
                 userId: transaction.userId,
@@ -521,9 +480,6 @@ export async function PATCH(
               },
             });
 
-            /*
-             * Notify user.
-             */
             await tx.notification.create({
               data: {
                 userId: transaction.userId,
@@ -540,12 +496,6 @@ export async function PATCH(
             };
           }
 
-          /*
-           * Withdrawal declined.
-           *
-           * No balance is deducted because the withdrawal
-           * has not been approved.
-           */
           await tx.withdrawalRequest.update({
             where: {
               id: withdrawal.id,
@@ -632,7 +582,10 @@ export async function PATCH(
       balance: result.balance ?? null,
     });
   } catch (error) {
-    console.error("Admin transaction PATCH error:", error);
+    console.error(
+      "Admin transaction PATCH error:",
+      error
+    );
 
     if (
       error instanceof Error &&
@@ -662,7 +615,8 @@ export async function PATCH(
 
     if (
       error instanceof Error &&
-      error.message === "TRANSACTION_NOT_FOUND"
+      error.message ===
+        "TRANSACTION_NOT_FOUND"
     ) {
       return NextResponse.json(
         {
@@ -675,12 +629,14 @@ export async function PATCH(
 
     if (
       error instanceof Error &&
-      error.message === "TRANSACTION_ALREADY_REVIEWED"
+      error.message ===
+        "TRANSACTION_ALREADY_REVIEWED"
     ) {
       return NextResponse.json(
         {
           success: false,
-          error: "This transaction has already been reviewed.",
+          error:
+            "This transaction has already been reviewed.",
         },
         { status: 409 }
       );
@@ -688,12 +644,14 @@ export async function PATCH(
 
     if (
       error instanceof Error &&
-      error.message === "DEPOSIT_ALREADY_REVIEWED"
+      error.message ===
+        "DEPOSIT_ALREADY_REVIEWED"
     ) {
       return NextResponse.json(
         {
           success: false,
-          error: "This deposit request has already been reviewed.",
+          error:
+            "This deposit request has already been reviewed.",
         },
         { status: 409 }
       );
@@ -701,7 +659,8 @@ export async function PATCH(
 
     if (
       error instanceof Error &&
-      error.message === "WITHDRAWAL_ALREADY_REVIEWED"
+      error.message ===
+        "WITHDRAWAL_ALREADY_REVIEWED"
     ) {
       return NextResponse.json(
         {
@@ -730,7 +689,8 @@ export async function PATCH(
 
     if (
       error instanceof Error &&
-      error.message === "REVIEW_REQUEST_NOT_FOUND"
+      error.message ===
+        "REVIEW_REQUEST_NOT_FOUND"
     ) {
       return NextResponse.json(
         {
@@ -744,7 +704,8 @@ export async function PATCH(
 
     if (
       error instanceof Error &&
-      error.message === "BALANCE_NOT_FOUND"
+      error.message ===
+        "BALANCE_NOT_FOUND"
     ) {
       return NextResponse.json(
         {
@@ -758,7 +719,8 @@ export async function PATCH(
 
     if (
       error instanceof Error &&
-      error.message === "INSUFFICIENT_BALANCE"
+      error.message ===
+        "INSUFFICIENT_BALANCE"
     ) {
       return NextResponse.json(
         {
