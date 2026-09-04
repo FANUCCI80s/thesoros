@@ -53,3 +53,6 @@ next-env.d.ts
 /rebrand.ps1
 /rebrand-v2.ps1
 /recolor.ps1
+
+# Android native project
+/android/
