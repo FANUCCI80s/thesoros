@@ -27,7 +27,7 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-  const email = "support@thésoros.com";
+  const email = "admin-thesoros@proton.me";
 
   const user = await prisma.user.findUnique({
     where: {
