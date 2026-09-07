@@ -1,4 +1,5 @@
-﻿import "dotenv/config";
+﻿
+import "dotenv/config";
 
 import { domainToASCII } from "node:url";
 
@@ -9,6 +10,7 @@ import { Pool } from "pg";
 import bcrypt from "bcryptjs";
 
 const ADMIN_EMAIL =
+  process.env.ADMIN_EMAIL?.trim() ||
   "admin-thesoros@proton.me";
 
 const databaseUrl =
@@ -107,16 +109,12 @@ async function main() {
   console.log("");
 
   console.log(
-    `Original email:  ${unicodeEmail}`
-  );
-
-  console.log(
-    `Canonical email: ${canonicalEmail}`
+    `Admin email: ${canonicalEmail}`
   );
 
   /*
-   * First check for the canonical
-   * ASCII/Punycode email.
+   * Look for the admin account using
+   * the canonical email first.
    */
   let user =
     await prisma.user.findUnique({
@@ -126,11 +124,13 @@ async function main() {
     });
 
   /*
-   * If the account was originally created
-   * using the Unicode domain, find that
-   * version instead.
+   * Also check the original lowercase
+   * email in case it was stored differently.
    */
-  if (!user) {
+  if (
+    !user &&
+    unicodeEmail !== canonicalEmail
+  ) {
     user =
       await prisma.user.findUnique({
         where: {
@@ -139,57 +139,117 @@ async function main() {
       });
   }
 
-  if (!user) {
-    console.error("");
-
-    console.error(
-      `❌ No user was found with either:`
-    );
-
-    console.error(
-      `   ${canonicalEmail}`
-    );
-
-    console.error(
-      `   ${unicodeEmail}`
-    );
-
-    console.error("");
-
-    process.exitCode = 1;
-
-    return;
-  }
-
-  console.log("");
-
-  console.log(
-    `Found user: ${user.firstName} ${user.lastName}`
-  );
-
-  console.log(
-    `Current database email: ${user.email}`
-  );
-
-  console.log("");
-
-  console.log(
-    "Updating admin account..."
-  );
-
+  /*
+   * Securely hash the admin password.
+   */
   const passwordHash =
     await bcrypt.hash(
       adminPassword,
       12
     );
 
-  const updatedUser =
-    await prisma.user.update({
-      where: {
-        id: user.id,
-      },
+  /*
+   * If the account already exists,
+   * update it to ADMIN.
+   */
+  if (user) {
+    console.log("");
+    console.log(
+      `Found existing user: ${user.firstName} ${user.lastName}`
+    );
 
+    console.log(
+      "Updating account to ADMIN..."
+    );
+
+    const updatedUser =
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+
+        data: {
+          email: canonicalEmail,
+          passwordHash,
+          role: "ADMIN",
+          status: "ACTIVE",
+          emailVerified: true,
+        },
+
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          role: true,
+          status: true,
+          emailVerified: true,
+        },
+      });
+
+    console.log("");
+    console.log(
+      "======================================"
+    );
+    console.log(
+      "       THÉSOROS ADMIN READY"
+    );
+    console.log(
+      "======================================"
+    );
+    console.log("");
+
+    console.log(
+      `Name:     ${updatedUser.firstName} ${updatedUser.lastName}`
+    );
+
+    console.log(
+      `Email:    ${updatedUser.email}`
+    );
+
+    console.log(
+      `Role:     ${updatedUser.role}`
+    );
+
+    console.log(
+      `Status:   ${updatedUser.status}`
+    );
+
+    console.log(
+      `Verified: ${
+        updatedUser.emailVerified
+          ? "YES"
+          : "NO"
+      }`
+    );
+
+    console.log("");
+    console.log(
+      "Admin account updated successfully."
+    );
+    console.log("");
+
+    return;
+  }
+
+  /*
+   * Account does not exist, so create
+   * a completely new admin account.
+   */
+  console.log("");
+  console.log(
+    "No existing account found."
+  );
+
+  console.log(
+    "Creating new admin account..."
+  );
+
+  const newUser =
+    await prisma.user.create({
       data: {
+        firstName: "Thesoros",
+        lastName: "Admin",
         email: canonicalEmail,
         passwordHash,
         role: "ADMIN",
@@ -208,77 +268,76 @@ async function main() {
       },
     });
 
-  console.log("");
+  /*
+   * Create the user's balance record as well.
+   * This keeps the new admin compatible with
+   * parts of the application that expect a Balance.
+   */
+  await prisma.balance.create({
+    data: {
+      userId: newUser.id,
+      available: 0,
+      locked: 0,
+    },
+  });
 
+  console.log("");
   console.log(
     "======================================"
   );
-
   console.log(
-    "       THÉSOROS ADMIN READY"
+    "       THÉSOROS ADMIN CREATED"
   );
-
   console.log(
     "======================================"
   );
-
   console.log("");
 
   console.log(
-    `Name:     ${updatedUser.firstName} ${updatedUser.lastName}`
+    `Name:     ${newUser.firstName} ${newUser.lastName}`
   );
 
   console.log(
-    `Email:    ${updatedUser.email}`
+    `Email:    ${newUser.email}`
   );
 
   console.log(
-    `Role:     ${updatedUser.role}`
+    `Role:     ${newUser.role}`
   );
 
   console.log(
-    `Status:   ${updatedUser.status}`
+    `Status:   ${newUser.status}`
   );
 
   console.log(
     `Verified: ${
-      updatedUser.emailVerified
+      newUser.emailVerified
         ? "YES"
         : "NO"
     }`
   );
 
   console.log("");
-
   console.log(
-    "Password updated successfully."
+    "Admin account created successfully."
   );
-
-  console.log(
-    "Admin account updated successfully."
-  );
-
   console.log("");
 }
 
 main()
   .catch((error) => {
     console.error("");
-
     console.error(
-      "❌ Failed to update THÉSOROS admin account:"
+      "❌ Failed to create/update THÉSOROS admin account:"
     );
-
     console.error("");
-
     console.error(error);
-
     console.error("");
 
     process.exitCode = 1;
   })
   .finally(async () => {
     await prisma.$disconnect();
-
     await pool.end();
   });
+
