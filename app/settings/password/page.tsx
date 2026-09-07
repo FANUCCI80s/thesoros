@@ -1,7 +1,20 @@
+
 "use client";
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowRightLeft,
+  ArrowUp,
+  Bell,
+  LayoutDashboard,
+  LockKeyhole,
+  Settings,
+  ShieldCheck,
+} from "lucide-react";
 
 export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -90,7 +103,11 @@ export default function ChangePasswordPage() {
               className="flex items-center gap-3"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-                <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
+                <img
+                  src="/branding/thesoros-logo.png"
+                  alt="THÉSOROS"
+                  className="h-8 w-auto object-contain"
+                />
               </div>
 
               <div>
@@ -110,7 +127,7 @@ export default function ChangePasswordPage() {
               href="/dashboard"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>âŒ‚</span>
+              <LayoutDashboard className="h-4 w-4 shrink-0" />
               Dashboard
             </Link>
 
@@ -118,7 +135,7 @@ export default function ChangePasswordPage() {
               href="/trade"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†—</span>
+              <ArrowRightLeft className="h-4 w-4 shrink-0" />
               Trade
             </Link>
 
@@ -126,7 +143,7 @@ export default function ChangePasswordPage() {
               href="/deposit"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†“</span>
+              <ArrowDown className="h-4 w-4 shrink-0" />
               Deposit
             </Link>
 
@@ -134,7 +151,7 @@ export default function ChangePasswordPage() {
               href="/withdraw"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†‘</span>
+              <ArrowUp className="h-4 w-4 shrink-0" />
               Withdraw
             </Link>
 
@@ -142,7 +159,7 @@ export default function ChangePasswordPage() {
               href="/transactions"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â†”</span>
+              <ArrowRightLeft className="h-4 w-4 shrink-0" />
               Transactions
             </Link>
 
@@ -152,7 +169,7 @@ export default function ChangePasswordPage() {
               href="/notifications"
               className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:!text-[#FFFFFF]"
             >
-              <span>â—</span>
+              <Bell className="h-4 w-4 shrink-0" />
               Notifications
             </Link>
 
@@ -160,7 +177,7 @@ export default function ChangePasswordPage() {
               href="/settings"
               className="flex items-center gap-3 rounded-xl bg-gold/10 px-4 py-3 text-sm font-bold text-gold"
             >
-              <span>âš™</span>
+              <Settings className="h-4 w-4 shrink-0" />
               Settings
             </Link>
           </nav>
@@ -177,31 +194,6 @@ export default function ChangePasswordPage() {
 
         {/* Main */}
         <section className="min-w-0 flex-1">
-          {/* Mobile / Tablet Header */}
-          <header className="border-b border-white/10 bg-[#050505] px-5 py-4 lg:hidden">
-            <div className="flex items-center justify-between gap-4">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-3"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/30 bg-gold/10">
-                  <img src="/branding/thesoros-logo.png" alt="THÉSOROS" className="h-8 w-auto object-contain" />
-                </div>
-
-                <span className="font-bold">
-                  Thesoros
-                </span>
-              </Link>
-
-              <Link
-                href="/settings"
-                className="text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
-              >
-                Settings
-              </Link>
-            </div>
-          </header>
-
           <div className="mx-auto max-w-3xl px-5 py-8 sm:px-8 lg:px-10">
             {/* Header */}
             <div className="mb-8">
@@ -224,7 +216,7 @@ export default function ChangePasswordPage() {
             <div className="mb-6 rounded-2xl border border-gold/20 bg-gold/[0.05] p-5">
               <div className="flex gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
-                  ðŸ”’
+                  <LockKeyhole className="h-5 w-5" />
                 </div>
 
                 <div>
@@ -375,9 +367,13 @@ export default function ChangePasswordPage() {
 
               <div className="mt-6 space-y-4">
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <p className="text-sm font-bold">
-                    New-device verification
-                  </p>
+                  <div className="flex items-center gap-3">
+                    <ShieldCheck className="h-5 w-5 text-gold" />
+
+                    <p className="text-sm font-bold">
+                      New-device verification
+                    </p>
+                  </div>
 
                   <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                     New devices require email OTP verification
@@ -390,9 +386,13 @@ export default function ChangePasswordPage() {
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <p className="text-sm font-bold">
-                    Account notifications
-                  </p>
+                  <div className="flex items-center gap-3">
+                    <Bell className="h-5 w-5 text-gold" />
+
+                    <p className="text-sm font-bold">
+                      Account notifications
+                    </p>
+                  </div>
 
                   <p className="mt-1 text-sm leading-6 !text-[#FFFFFF]">
                     Important account and security messages
@@ -401,9 +401,10 @@ export default function ChangePasswordPage() {
 
                   <Link
                     href="/notifications"
-                    className="mt-3 inline-block text-sm text-gold transition hover:text-gold-light"
+                    className="mt-3 inline-flex items-center gap-1 text-sm text-gold transition hover:text-gold-light"
                   >
-                    View notifications â†’
+                    View notifications
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
@@ -412,14 +413,15 @@ export default function ChangePasswordPage() {
             <div className="mt-8 flex justify-center">
               <Link
                 href="/settings"
-                className="text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
+                className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
               >
-                â† Back to settings
+                <ArrowLeft className="h-4 w-4" />
+                Back to settings
               </Link>
             </div>
 
             <p className="mt-6 text-center text-xs !text-[#FFFFFF]">
-              Thesoros â€¢ Account Security
+              Thesoros • Account Security
             </p>
           </div>
         </section>
@@ -427,3 +429,4 @@ export default function ChangePasswordPage() {
     </main>
   );
 }
+
