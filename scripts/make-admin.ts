@@ -9,7 +9,7 @@ import { Pool } from "pg";
 import bcrypt from "bcryptjs";
 
 const ADMIN_EMAIL =
-  "support@thésoros.com";
+  "admin-thesoros@proton.me";
 
 const databaseUrl =
   process.env.DATABASE_URL;
