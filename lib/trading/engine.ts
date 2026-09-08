@@ -480,6 +480,9 @@ export async function executeTrade(
          * We reduce the Holding and credit the USD
          * proceeds to available balance.
          */
+        let realizedPnl =
+          new Prisma.Decimal(0);
+
         if (side === "SELL") {
           const holding =
             await tx.holding.findUnique({
@@ -502,6 +505,11 @@ export async function executeTrade(
               holding.quantity,
             );
 
+          const averagePrice =
+            new Prisma.Decimal(
+              holding.averagePrice,
+            );
+
           if (
             currentQuantity.lessThan(
               tradeQuantity,
@@ -513,6 +521,23 @@ export async function executeTrade(
               )} ${symbol}.`,
             );
           }
+
+          /*
+           * Calculate realized profit/loss using the
+           * weighted-average purchase price of the
+           * position being sold.
+           *
+           * Profit:
+           *   (sell price - average purchase price)
+           *   × quantity sold
+           *
+           * Loss:
+           *   produces a negative value automatically.
+           */
+          realizedPnl =
+            tradePrice
+              .sub(averagePrice)
+              .mul(tradeQuantity);
 
           const remainingQuantity =
             currentQuantity.sub(
@@ -651,6 +676,12 @@ export async function executeTrade(
                 quote.price,
               notional:
                 quote.notional,
+              ...(side === "SELL"
+                ? {
+                    pnl:
+                      realizedPnl.toNumber(),
+                  }
+                : {}),
             },
           },
         });

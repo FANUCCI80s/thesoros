@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { requireAuthenticatedPage } from "@/lib/auth/guards";
 import DashboardNav from "@/components/dashboard/DashboardNav";
@@ -49,6 +50,23 @@ export default async function DashboardPage() {
       description: true,
       metadata: true,
       createdAt: true,
+    },
+  });
+
+  // Load the user's real portfolio holdings from the database.
+  const holdings = await prisma.holding.findMany({
+    where: {
+      userId: user.id,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+    select: {
+      id: true,
+      symbol: true,
+      assetName: true,
+      quantity: true,
+      averagePrice: true,
     },
   });
 
@@ -381,28 +399,115 @@ export default async function DashboardPage() {
                   </Link>
                 </div>
 
-                <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-10 text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
-                    +
+                {holdings.length === 0 ? (
+                  <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-black/20 p-10 text-center">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.05] !text-[#FFFFFF]">
+                      +
+                    </div>
+
+                    <h3 className="mt-4 font-bold">
+                      No holdings yet
+                    </h3>
+
+                    <p className="mx-auto mt-2 max-w-md text-sm leading-6 !text-[#FFFFFF]">
+                      Once you start investing, your
+                      cryptocurrency, forex, and stock
+                      positions will appear here.
+                    </p>
+
+                    <Link
+                      href="/market-watchlist"
+                      className="mt-5 inline-block rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
+                    >
+                      Explore markets
+                    </Link>
                   </div>
+                ) : (
+                  <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-black/20">
+                    <div className="hidden grid-cols-4 gap-4 border-b border-white/10 px-5 py-4 text-xs font-semibold uppercase tracking-wider !text-[#FFFFFF] sm:grid">
+                      <span>Asset</span>
+                      <span>Quantity</span>
+                      <span>Average price</span>
+                      <span className="text-right">Position cost</span>
+                    </div>
 
-                  <h3 className="mt-4 font-bold">
-                    No holdings yet
-                  </h3>
+                    {holdings.map((holding, index) => {
+                      const quantity = Number(holding.quantity);
+                      const averagePrice = Number(holding.averagePrice);
+                      const positionCost = quantity * averagePrice;
 
-                  <p className="mx-auto mt-2 max-w-md text-sm leading-6 !text-[#FFFFFF]">
-                    Once you start investing, your
-                    cryptocurrency, forex, and stock
-                    positions will appear here.
-                  </p>
+                      return (
+                        <div
+                          key={holding.id}
+                          className={`grid gap-4 px-5 py-5 sm:grid-cols-4 sm:items-center ${
+                            index !== holdings.length - 1
+                              ? "border-b border-white/10"
+                              : ""
+                          }`}
+                        >
+                          <div className="min-w-0">
+                            <p className="font-bold">
+                              {holding.symbol}
+                            </p>
 
-                  <Link
-                    href="/market-watchlist"
-                    className="mt-5 inline-block rounded-xl bg-gold px-5 py-3 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold"
-                  >
-                    Explore markets
-                  </Link>
-                </div>
+                            <p className="mt-1 truncate text-xs !text-[#FFFFFF]">
+                              {holding.assetName || holding.symbol}
+                            </p>
+                          </div>
+
+                          <div>
+                            <p className="text-sm font-semibold">
+                              {quantity.toLocaleString(
+                                "en-US",
+                                {
+                                  maximumFractionDigits: 12,
+                                }
+                              )}
+                            </p>
+
+                            <p className="mt-1 text-xs !text-[#FFFFFF]">
+                              Quantity held
+                            </p>
+                          </div>
+
+                          <div>
+                            <p className="text-sm font-semibold">
+                              $
+                              {averagePrice.toLocaleString(
+                                "en-US",
+                                {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 8,
+                                }
+                              )}
+                            </p>
+
+                            <p className="mt-1 text-xs !text-[#FFFFFF]">
+                              Average entry price
+                            </p>
+                          </div>
+
+                          <div className="sm:text-right">
+                            <p className="text-sm font-semibold">
+                              $
+                              {positionCost.toLocaleString(
+                                "en-US",
+                                {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }
+                              )}
+                            </p>
+
+                            <p className="mt-1 text-xs !text-[#FFFFFF]">
+                              Position cost
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </section>
 
               {/* Account status */}
@@ -561,3 +666,4 @@ export default async function DashboardPage() {
     </main>
   );
 }
+

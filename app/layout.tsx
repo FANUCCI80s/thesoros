@@ -6,6 +6,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Thesoros",
   description: "Thesoros trading and investment platform",
+  icons: {
+    icon: "/branding/coin_logo.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -44,5 +47,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
