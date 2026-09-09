@@ -50,7 +50,10 @@ export default function LoginPage() {
         setMessage(
           "A verification code has been sent to your email."
         );
+        return;
       }
+
+      router.push(data.redirectTo || "/admin");
     } catch {
       setError(
         "Unable to connect to THÉSOROS. Please try again."
@@ -499,7 +502,4 @@ export default function LoginPage() {
     </main>
   );
 }
-
-
-
 
