@@ -1,3 +1,4 @@
+
 import { domainToASCII } from "node:url";
 
 import { NextResponse } from "next/server";
@@ -5,6 +6,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { verifyPassword } from "@/lib/auth/password";
 import { createLoginOtp } from "@/lib/auth/otp";
+import { createSession } from "@/lib/auth/session";
 import { sendEmail } from "@/lib/email/send";
 import { loginOtpEmail } from "@/lib/email/templates";
 
@@ -186,6 +188,80 @@ export async function POST(
       );
     }
 
+    /*
+     * ADMIN LOGIN
+     *
+     * Admin accounts do not require OTP.
+     * Once the email and password are verified,
+     * create the authenticated session immediately.
+     */
+    if (user.role === "ADMIN") {
+      console.log(
+        "ADMIN LOGIN: OTP BYPASSED"
+      );
+
+      const userAgent =
+        request.headers.get(
+          "user-agent"
+        ) ?? undefined;
+
+      const forwardedFor =
+        request.headers.get(
+          "x-forwarded-for"
+        );
+
+      const ipAddress =
+        forwardedFor
+          ?.split(",")[0]
+          ?.trim() ?? undefined;
+
+      await createSession(
+        user.id,
+        ipAddress,
+        userAgent
+      );
+
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          lastLoginAt: new Date(),
+          lastLoginIp: ipAddress,
+        },
+      });
+
+      console.log(
+        "ADMIN LOGIN RESULT: SUCCESS"
+      );
+      console.log(
+        "ADMIN REDIRECT: /admin"
+      );
+      console.log(
+        "======================================"
+      );
+
+      return NextResponse.json({
+        success: true,
+        otpRequired: false,
+        redirectTo: "/admin",
+        message:
+          "Admin login successful.",
+        user: {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+        },
+      });
+    }
+
+    /*
+     * USER LOGIN
+     *
+     * Regular users continue to use the existing
+     * email OTP verification flow.
+     */
     console.log(
       "Creating login OTP..."
     );
@@ -224,9 +300,8 @@ export async function POST(
     );
 
     console.log(
-      "LOGIN RESULT: SUCCESS"
+      "LOGIN RESULT: OTP REQUIRED"
     );
-
     console.log(
       "======================================"
     );
@@ -266,3 +341,4 @@ export async function POST(
     );
   }
 }
+
