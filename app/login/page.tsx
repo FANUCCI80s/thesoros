@@ -4,7 +4,12 @@ import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-type Step = "login" | "otp";
+type Step =
+  | "login"
+  | "otp"
+  | "forgot"
+  | "resetOtp"
+  | "resetPassword";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,13 +18,19 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
+  const [newPassword, setNewPassword] =
+    useState("");
+  const [confirmPassword, setConfirmPassword] =
+    useState("");
 
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
     setError("");
@@ -27,21 +38,26 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        "/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        setError(data.message || "Unable to sign in.");
+        setError(
+          data.message || "Unable to sign in."
+        );
         return;
       }
 
@@ -53,7 +69,9 @@ export default function LoginPage() {
         return;
       }
 
-      router.push(data.redirectTo || "/admin");
+      router.push(
+        data.redirectTo || "/admin"
+      );
     } catch {
       setError(
         "Unable to connect to THÉSOROS. Please try again."
@@ -72,34 +90,42 @@ export default function LoginPage() {
     setMessage("");
 
     if (!/^\d{6}$/.test(code)) {
-      setError("Enter the 6-digit verification code.");
+      setError(
+        "Enter the 6-digit verification code."
+      );
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/verify-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          code,
-        }),
-      });
+      const response = await fetch(
+        "/api/auth/verify-otp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            code,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
         setError(
-          data.message || "Unable to verify the code."
+          data.message ||
+            "Unable to verify the code."
         );
         return;
       }
 
-      router.push(data.redirectTo || "/dashboard");
+      router.push(
+        data.redirectTo || "/dashboard"
+      );
     } catch {
       setError(
         "Unable to connect to THÉSOROS. Please try again."
@@ -115,21 +141,25 @@ export default function LoginPage() {
     setResending(true);
 
     try {
-      const response = await fetch("/api/auth/resend-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-        }),
-      });
+      const response = await fetch(
+        "/api/auth/resend-otp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
         setError(
-          data.message || "Unable to resend the code."
+          data.message ||
+            "Unable to resend the code."
         );
         return;
       }
@@ -147,9 +177,204 @@ export default function LoginPage() {
     }
   };
 
+  const handleForgotPassword = () => {
+    setStep("forgot");
+    setPassword("");
+    setCode("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setError("");
+    setMessage("");
+  };
+
+  const handleRequestPasswordReset = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    setError("");
+    setMessage("");
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "/api/auth/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(
+          data.message ||
+            "Unable to process the password reset request."
+        );
+        return;
+      }
+
+      setCode("");
+      setStep("resetOtp");
+      setMessage(
+        "If an account exists for this email, a password reset code has been sent."
+      );
+    } catch {
+      setError(
+        "Unable to connect to THÉSOROS. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleContinueReset = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    setError("");
+    setMessage("");
+
+    if (!/^\d{6}$/.test(code)) {
+      setError(
+        "Enter the 6-digit password reset code."
+      );
+      return;
+    }
+
+    setStep("resetPassword");
+  };
+
+  const handleResendPasswordReset = async () => {
+    setError("");
+    setMessage("");
+    setResending(true);
+
+    try {
+      const response = await fetch(
+        "/api/auth/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(
+          data.message ||
+            "Unable to resend the password reset code."
+        );
+        return;
+      }
+
+      setCode("");
+      setMessage(
+        "A new password reset code has been sent to your email."
+      );
+    } catch {
+      setError(
+        "Unable to connect to THÉSOROS. Please try again."
+      );
+    } finally {
+      setResending(false);
+    }
+  };
+
+  const handleResetPassword = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    setError("");
+    setMessage("");
+
+    if (!/^\d{6}$/.test(code)) {
+      setError(
+        "Enter the 6-digit password reset code."
+      );
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      setError(
+        "Your new password must be at least 8 characters."
+      );
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError(
+        "Your passwords do not match."
+      );
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "/api/auth/reset-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            code,
+            newPassword,
+            confirmPassword,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(
+          data.message ||
+            "Unable to reset your password."
+        );
+        return;
+      }
+
+      setPassword("");
+      setCode("");
+      setNewPassword("");
+      setConfirmPassword("");
+      setStep("login");
+      setMessage(
+        "Your password has been updated successfully. Please sign in with your new password."
+      );
+    } catch {
+      setError(
+        "Unable to connect to THÉSOROS. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleBackToLogin = () => {
     setStep("login");
     setCode("");
+    setPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
     setError("");
     setMessage("");
   };
@@ -346,6 +571,7 @@ export default function LoginPage() {
 
                         <button
                           type="button"
+                          onClick={handleForgotPassword}
                           className="text-xs font-bold text-gold transition hover:text-gold-light"
                         >
                           Forgot password?
@@ -366,6 +592,12 @@ export default function LoginPage() {
                       />
                     </div>
 
+                    {message && (
+                      <div className="rounded-xl border border-gold/20 bg-gold/10 px-4 py-3 text-sm leading-6 text-gold-light">
+                        {message}
+                      </div>
+                    )}
+
                     {error && (
                       <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm leading-6 text-red-300">
                         {error}
@@ -377,7 +609,9 @@ export default function LoginPage() {
                       disabled={loading}
                       className="flex h-13 w-full items-center justify-center rounded-xl bg-gold px-5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      {loading ? "Signing in..." : "Sign in"}
+                      {loading
+                        ? "Signing in..."
+                        : "Sign in"}
                     </button>
                   </form>
 
@@ -391,7 +625,7 @@ export default function LoginPage() {
                     </a>
                   </p>
                 </>
-              ) : (
+              ) : step === "otp" ? (
                 <>
                   <div className="mb-8 text-center">
                     <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-gold">
@@ -489,6 +723,275 @@ export default function LoginPage() {
                     </button>
                   </div>
                 </>
+              ) : step === "forgot" ? (
+                <>
+                  <div className="mb-8 text-center">
+                    <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-gold">
+                      Account recovery
+                    </p>
+
+                    <h2 className="text-3xl font-bold tracking-tight !text-[#FFFFFF] sm:text-4xl">
+                      Reset your password
+                    </h2>
+
+                    <p className="mt-3 text-sm leading-6 !text-[#FFFFFF]">
+                      Enter the email address associated
+                      with your THÉSOROS account.
+                    </p>
+                  </div>
+
+                  <form
+                    onSubmit={
+                      handleRequestPasswordReset
+                    }
+                    className="space-y-5"
+                  >
+                    <div>
+                      <label
+                        htmlFor="reset-email"
+                        className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                      >
+                        Email address
+                      </label>
+
+                      <input
+                        id="reset-email"
+                        type="email"
+                        autoComplete="email"
+                        value={email}
+                        onChange={(event) =>
+                          setEmail(event.target.value)
+                        }
+                        placeholder="you@example.com"
+                        required
+                        className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-gold/10"
+                      />
+                    </div>
+
+                    {error && (
+                      <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm leading-6 text-red-300">
+                        {error}
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="flex h-13 w-full items-center justify-center rounded-xl bg-gold px-5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {loading
+                        ? "Sending code..."
+                        : "Send reset code"}
+                    </button>
+                  </form>
+
+                  <div className="mt-7 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={handleBackToLogin}
+                      className="text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
+                    >
+                      Back to sign in
+                    </button>
+                  </div>
+                </>
+              ) : step === "resetOtp" ? (
+                <>
+                  <div className="mb-8 text-center">
+                    <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-gold">
+                      Account recovery
+                    </p>
+
+                    <h2 className="text-3xl font-bold tracking-tight !text-[#FFFFFF] sm:text-4xl">
+                      Check your email
+                    </h2>
+
+                    <p className="mt-3 text-sm leading-6 !text-[#FFFFFF]">
+                      We sent a 6-digit password reset code
+                      to{" "}
+                      <span className="font-bold !text-[#FFFFFF]">
+                        {email}
+                      </span>
+                      .
+                    </p>
+                  </div>
+
+                  <form
+                    onSubmit={handleContinueReset}
+                    className="space-y-5"
+                  >
+                    <div>
+                      <label
+                        htmlFor="reset-code"
+                        className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                      >
+                        Password reset code
+                      </label>
+
+                      <input
+                        id="reset-code"
+                        type="text"
+                        inputMode="numeric"
+                        autoComplete="one-time-code"
+                        maxLength={6}
+                        value={code}
+                        onChange={(event) =>
+                          setCode(
+                            event.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, 6)
+                          )
+                        }
+                        placeholder="000000"
+                        required
+                        className="h-16 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-center text-2xl font-bold tracking-[0.5em] text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-gold/10"
+                      />
+                    </div>
+
+                    {message && (
+                      <div className="rounded-xl border border-gold/20 bg-gold/10 px-4 py-3 text-sm leading-6 text-gold-light">
+                        {message}
+                      </div>
+                    )}
+
+                    {error && (
+                      <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm leading-6 text-red-300">
+                        {error}
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={
+                        loading || code.length !== 6
+                      }
+                      className="flex h-13 w-full items-center justify-center rounded-xl bg-gold px-5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Continue
+                    </button>
+                  </form>
+
+                  <div className="mt-7 flex flex-col items-center gap-4 text-sm">
+                    <button
+                      type="button"
+                      onClick={
+                        handleResendPasswordReset
+                      }
+                      disabled={resending}
+                      className="font-bold text-gold transition hover:text-gold-light disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {resending
+                        ? "Sending new code..."
+                        : "Resend reset code"}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleBackToLogin}
+                      className="text-zinc-500 transition hover:!text-[#FFFFFF]"
+                    >
+                      Back to sign in
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="mb-8 text-center">
+                    <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-gold">
+                      Account recovery
+                    </p>
+
+                    <h2 className="text-3xl font-bold tracking-tight !text-[#FFFFFF] sm:text-4xl">
+                      Create new password
+                    </h2>
+
+                    <p className="mt-3 text-sm leading-6 !text-[#FFFFFF]">
+                      Choose a new password for your
+                      THÉSOROS account.
+                    </p>
+                  </div>
+
+                  <form
+                    onSubmit={handleResetPassword}
+                    className="space-y-5"
+                  >
+                    <div>
+                      <label
+                        htmlFor="new-password"
+                        className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                      >
+                        New password
+                      </label>
+
+                      <input
+                        id="new-password"
+                        type="password"
+                        autoComplete="new-password"
+                        value={newPassword}
+                        onChange={(event) =>
+                          setNewPassword(
+                            event.target.value
+                          )
+                        }
+                        placeholder="Enter your new password"
+                        required
+                        minLength={8}
+                        className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-gold/10"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="confirm-password"
+                        className="mb-2 block text-sm font-bold !text-[#FFFFFF]"
+                      >
+                        Confirm new password
+                      </label>
+
+                      <input
+                        id="confirm-password"
+                        type="password"
+                        autoComplete="new-password"
+                        value={confirmPassword}
+                        onChange={(event) =>
+                          setConfirmPassword(
+                            event.target.value
+                          )
+                        }
+                        placeholder="Confirm your new password"
+                        required
+                        minLength={8}
+                        className="h-13 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition placeholder:!text-[#FFFFFF] focus:border-gold/60 focus:bg-white/[0.06] focus:ring-4 focus:ring-gold/10"
+                      />
+                    </div>
+
+                    {error && (
+                      <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm leading-6 text-red-300">
+                        {error}
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="flex h-13 w-full items-center justify-center rounded-xl bg-gold px-5 text-sm font-bold !text-[#FFFFFF] transition hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {loading
+                        ? "Updating password..."
+                        : "Update password"}
+                    </button>
+                  </form>
+
+                  <div className="mt-7 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={handleBackToLogin}
+                      className="text-sm text-zinc-500 transition hover:!text-[#FFFFFF]"
+                    >
+                      Back to sign in
+                    </button>
+                  </div>
+                </>
               )}
 
               <div className="mt-10 flex items-center justify-center gap-2 text-xs !text-[#FFFFFF]">
@@ -502,4 +1005,3 @@ export default function LoginPage() {
     </main>
   );
 }
-
