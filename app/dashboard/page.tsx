@@ -3,7 +3,7 @@ import Link from "next/link";
 import { requireAuthenticatedPage } from "@/lib/auth/guards";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 import { prisma } from "@/lib/prisma";
-
+import ChatWithSupport from "@/components/support/ChatWithSupport";
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
@@ -663,7 +663,10 @@ export default async function DashboardPage() {
           </div>
         </section>
       </div>
+       {/* Floating customer support chat */}
+      <ChatWithSupport variant="icon" />
     </main>
   );
 }
+
 

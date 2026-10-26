@@ -7,6 +7,7 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
 import ContactForm from "@/components/landing/ContactForm";
 import FAQ from "@/components/landing/FAQ";
+import ChatWithSupport from "@/components/support/ChatWithSupport";
 import ActivityNotifications from "@/components/landing/ActivityNotifications";
 import FinalCta from "@/components/landing/FinalCta";
 import Footer from "@/components/landing/Footer";
@@ -34,6 +35,10 @@ export default function HomePage() {
       <ContactForm />
 
       <FAQ />
+
+      <ChatWithSupport className="rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700">
+         Chat with Support
+      </ChatWithSupport>
 
       <FinalCta />
 
